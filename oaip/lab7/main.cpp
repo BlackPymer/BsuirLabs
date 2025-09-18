@@ -8,7 +8,7 @@ using namespace std;
 struct Student
 {
     char second_name[100];
-    int group_number;
+    long int group_number;
     int physics_mark;
     int math_mark;
     int informatics_mark;
@@ -91,21 +91,36 @@ void get_excellent_students(Student *students, int n)
     }
 }
 
-void edit_student(Student *students, int n)
+Student edit_student(Student student)
 {
     char sname[100];
-    cout << "Enter second name of student to edit";
+    cout << "Enter new second name (Just press . if you dont want to change it)\n";
     cin >> sname;
-    for (int i = 0; i < n; ++i)
-    {
-        if (strcmp(students[i].second_name, sname) == 0)
-        {
-            Student student = students[i];
-            cout << "Found student with second name " << student.second_name << "His info:\n";
-            get_student_info(student.second_name, students, n);
-            cout << "Enter ";
-        }
-    }
+    if (strcmp(sname, "."))
+        strcpy(student.second_name, sname);
+
+    cout << "Enter new group (Just press . if you dont want to change it)\n";
+    cin >> sname;
+    if (strcmp(sname, "."))
+        student.group_number = strtol(sname, NULL, 10);
+
+    cout << "Enter new math mark (Just press . if you dont want to change it)\n";
+    cin >> sname;
+    if (strcmp(sname, "."))
+        student.math_mark = strtol(sname, NULL, 10);
+
+    cout << "Enter new physics mark (Just press . if you dont want to change it)\n";
+    cin >> sname;
+    if (strcmp(sname, "."))
+        student.group_number = strtol(sname, NULL, 10);
+
+    cout << "Enter new informatics mark (Just press . if you dont want to change it)\n";
+    cin >> sname;
+    if (strcmp(sname, "."))
+        student.group_number = strtol(sname, NULL, 10);
+
+    recalc_avg(&student);
+    return student;
 }
 
 int main()
@@ -167,6 +182,59 @@ int main()
         }
         case 4:
         {
+            char sname[100];
+            cout << "Enter second name of student to edit\n";
+            cin >> sname;
+            for (int i = 0; i < size; ++i)
+            {
+                if (strcmp(students[i].second_name, sname) == 0)
+                {
+                    cout << "Found student with second name " << students[i].second_name << "His info:\n";
+                    get_student_info(students[i].second_name, students, size);
+                    Student student = edit_student(students[i]);
+                    if (check_input())
+                    {
+                        students[i] = student;
+                        cout << "The student edited successfully\n";
+                    }
+                    else
+                        cout << "Failed to edit this student: input error\n";
+                }
+            }
+            break;
+        }
+        case 5:
+        {
+            char sname[100];
+            cout << "Enter second name of student to delete\n";
+            cin >> sname;
+            bool found = false;
+            Student *tmp = new Student[size - 1];
+            for (int i = 0; i < size; ++i, ++students)
+            {
+                if (strcmp(students->second_name, sname) != 0)
+                {
+                    *tmp = *students;
+                    tmp++;
+                }
+                else
+                    found = true;
+            }
+            students -= size;
+            if (found)
+            {
+                tmp -= size - 1;
+                --size;
+                delete[] students;
+                students = tmp;
+                cout << "The student " << sname << " was successfully deleted\n";
+            }
+            else
+            {
+                tmp -= size;
+                delete[] tmp;
+                cout << "The student with second name " << sname << " wasn't found\n";
+            }
             break;
         }
         }
