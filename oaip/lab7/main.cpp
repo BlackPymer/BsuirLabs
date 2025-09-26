@@ -170,12 +170,12 @@ Student edit_student(Student student)
     cout << "Enter new physics mark (Just press . if you dont want to change it)\n";
     cin >> sname;
     if (strcmp(sname, "."))
-        student.group_number = strtol(sname, NULL, 10);
+        student.physics_mark = strtol(sname, NULL, 10);
 
     cout << "Enter new informatics mark (Just press . if you dont want to change it)\n";
     cin >> sname;
     if (strcmp(sname, "."))
-        student.group_number = strtol(sname, NULL, 10);
+        student.informatics_mark = strtol(sname, NULL, 10);
 
     recalc_avg(&student);
     return student;
@@ -186,7 +186,7 @@ bool compare(Student student1, Student student2, int option)
     switch (option)
     {
     case 1:
-        return student1.second_name < student2.second_name;
+        return strcmp(student1.second_name, student2.second_name) < 0;
         break;
     case 2:
         return student1.avg < student2.avg;
@@ -209,41 +209,20 @@ bool compare(Student student1, Student student2, int option)
     return 0;
 }
 
-void sort(Student *start, int n, int option)
+void sort(Student *students, int n, int option)
 {
-    if (n == 2)
+    for (int i = n - 1; i >= 0; --i)
     {
-        if (compare(start[1], start[0], option))
+        for (int j = i - 1; j >= 0; --j)
         {
-            Student tmp = start[0];
-            start[0] = start[1];
-            start[1] = tmp;
+            if (compare(students[i], students[j], option))
+            {
+                Student tmp = students[i];
+                students[i] = students[j];
+                students[j] = tmp;
+            }
         }
-        return;
     }
-    else if (n == 1)
-        return;
-
-    int middle = n / 2;
-    Student *buffer = new Student[n];
-    for (int i = 0; i < n; ++i)
-        buffer[i] = start[i];
-
-    sort(buffer, middle, option);
-    sort(buffer + middle, n - middle, option);
-    int l = 0, r = 0;
-    while (l != middle && middle + r != n)
-    {
-        if (compare(buffer[l], buffer[middle + r], option))
-            start[l + r] = buffer[l++];
-        else
-            start[l + r] = buffer[middle + r++];
-    }
-    while (l != middle)
-        start[l + r] = buffer[l++];
-    while (r + middle != n)
-        start[l + r] = buffer[middle + r++];
-    delete[] buffer;
 }
 
 void save_students(Student *students, int n)
