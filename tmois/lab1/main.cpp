@@ -130,7 +130,7 @@ std::vector<int> dopolnenie(std::vector<int> U, std::vector<int> X)
         while (U[u] < i)
             ++u;
         if (U[u] != i)
-            throw std::invalid_argument("X не является строгим подмножеством U");
+            throw std::invalid_argument("X не является строгим подмножеством U\n");
     }
     return substract(U, X);
 }
@@ -195,7 +195,7 @@ int main()
         int inp = 0;
         if (!(std::cin >> inp).good())
         {
-            std::cout << "Введите число от 1 до 6";
+            std::cout << "Введите число от 1 до\n";
             continue;
         }
         std::vector<int> X, Y;
@@ -223,7 +223,7 @@ int main()
             break;
         case 5:
             if (get_2_vec_inp(X, Y))
-                print_vec(join(X, Y));
+                print_vec(dopolnenie(X, Y));
             break;
         case 6:
             std::cout << "Введите длину множества\n";
