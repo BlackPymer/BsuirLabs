@@ -6,6 +6,17 @@ unsigned long fact(unsigned long num)
         return 1;
     return num * fact(num - 1);
 }
+
+unsigned long fact2(unsigned long num)
+{
+    unsigned long res = 2;
+    if (num == 0 || num == 1)
+        return 1;
+
+    for (unsigned long i = 3; i <= num; ++i)
+        res *= i;
+    return res;
+}
 int main()
 {
     while (true)
@@ -29,6 +40,7 @@ int main()
             continue;
         }
         cout << "The result is " << (fact(n) / (fact(k) * fact(n - k))) << '\n';
+        cout << "The result is " << (fact2(n) / (fact2(k) * fact2(n - k))) << '\n';
     }
     return 0;
 }
