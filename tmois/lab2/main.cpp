@@ -12,11 +12,14 @@ struct pair_hash
     }
 };
 
-inline unordered_set<pair<int, int>, pair_hash> inversion(unordered_set<pair<int, int>, pair_hash> graph)
+inline unordered_set<pair<int, int>, pair_hash> inversion(const unordered_set<pair<int, int>, pair_hash> &graph)
 {
+    unordered_set<pair<int, int>, pair_hash> result;
     for (pair<int, int> tuple : graph)
-        swap(tuple.first, tuple.second);
-    return graph;
+    {
+        result.insert({tuple.second, tuple.first});
+    }
+    return result;
 }
 
 inline unordered_set<pair<int, int>, pair_hash> composition(const unordered_set<pair<int, int>, pair_hash> &graph1,
@@ -25,26 +28,16 @@ inline unordered_set<pair<int, int>, pair_hash> composition(const unordered_set<
     unordered_set<pair<int, int>, pair_hash> result = {};
     vector<pair<int, int>> g1 = vector<pair<int, int>>(graph1.begin(), graph1.end());
     vector<pair<int, int>> g2 = vector<pair<int, int>>(graph2.begin(), graph2.end());
-    for (int i = 0; i < min(g1.size(), g2.size()); ++i)
+    for (int i = 0; i < g1.size(); ++i)
     {
-        if (g1[i].second == g2[i].first)
-            result.insert(pair<int, int>(g1[i].first, g2[i].second));
-        else if (g1[i].second == g2[i].second)
-            result.insert(pair<int, int>(g1[i].first, g2[i].first));
-        else if (g1[i].first == g2[i].first)
-            result.insert(pair<int, int>(g1[i].second, g2[i].second));
-        else if (g1[i].first == g2[i].second)
-            result.insert(pair<int, int>(g1[i].second, g2[i].first));
-        else
+        for (int j = 0; j < g2.size(); ++j)
         {
-            cout << "Impossible to do composition\n";
-            result.clear();
-            break;
+            if (g1[i].second == g2[j].first)
+                result.insert(pair<int, int>(g1[i].first, g2[j].second));
         }
     }
     return result;
 }
-
 inline unordered_set<int> projection1(const unordered_set<pair<int, int>, pair_hash> &graph)
 {
     unordered_set<int> result;
