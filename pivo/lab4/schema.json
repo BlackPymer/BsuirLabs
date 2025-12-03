@@ -1,0 +1,3499 @@
+{
+  "blocks": [
+    {
+      "id": 0,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "CuckooFilter",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 100,
+      "sizeX": 186,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        0
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 1,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: config",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 192,
+      "sizeX": 186,
+      "sizeY": 45,
+      "input_arrows": [
+        0
+      ],
+      "output_arrows": [
+        1
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 2,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_configuration = config",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 284,
+      "sizeX": 301,
+      "sizeY": 45,
+      "input_arrows": [
+        1
+      ],
+      "output_arrows": [
+        2
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 3,
+      "type": "OPERATION",
+      "color": "#00ff00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1 = new size_t[_configuration.filterSize]()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 376,
+      "sizeX": 543,
+      "sizeY": 45,
+      "input_arrows": [
+        2
+      ],
+      "output_arrows": [
+        3
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 4,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2 = new size_t[_configuration.filterSize]()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 468,
+      "sizeX": 543,
+      "sizeY": 45,
+      "input_arrows": [
+        3
+      ],
+      "output_arrows": [
+        4
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 5,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "std::srand(std::time(nullptr))",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 560,
+      "sizeX": 375,
+      "sizeY": 45,
+      "input_arrows": [
+        4
+      ],
+      "output_arrows": [
+        5
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 6,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 200,
+      "posY": 652,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        5
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 7,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "~CuckooFilter",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 971,
+      "posY": 100,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        6
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 8,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Clear()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 971,
+      "posY": 192,
+      "sizeX": 133,
+      "sizeY": 45,
+      "input_arrows": [
+        6
+      ],
+      "output_arrows": [
+        7
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 9,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 971,
+      "posY": 284,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        7
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 10,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Clear",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 1569,
+      "posY": 100,
+      "sizeX": 112,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        8
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 11,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "delete[] row1",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 1569,
+      "posY": 192,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        8
+      ],
+      "output_arrows": [
+        9
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 12,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "delete[] row2",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 1569,
+      "posY": 284,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        9
+      ],
+      "output_arrows": [
+        10
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 13,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "elements.clear()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 1569,
+      "posY": 376,
+      "sizeX": 228,
+      "sizeY": 45,
+      "input_arrows": [
+        10
+      ],
+      "output_arrows": [
+        11
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 14,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 1569,
+      "posY": 468,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        11
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 15,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "GetConfiguration",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2183,
+      "posY": 100,
+      "sizeX": 228,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        12
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 16,
+      "type": 9,
+      "color": "#576CF3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Вывод: {_configuration}",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2183,
+      "posY": 192,
+      "sizeX": 301,
+      "sizeY": 45,
+      "input_arrows": [
+        12
+      ],
+      "output_arrows": [
+        13
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 17,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2183,
+      "posY": 284,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        13
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 18,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Insert",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 100,
+      "sizeX": 123,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        14
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 19,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: element",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 192,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        14
+      ],
+      "output_arrows": [
+        15
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 20,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t hash1 = std::hash<std::string>{}(element)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 284,
+      "sizeX": 564,
+      "sizeY": 45,
+      "input_arrows": [
+        15
+      ],
+      "output_arrows": [
+        16
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 21,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t fingerprint = _Fingerprint(element)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 376,
+      "sizeX": 501,
+      "sizeY": 45,
+      "input_arrows": [
+        16
+      ],
+      "output_arrows": [
+        17
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 22,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Insert(hash1, fingerprint)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 468,
+      "sizeX": 343,
+      "sizeY": 45,
+      "input_arrows": [
+        17
+      ],
+      "output_arrows": [
+        18
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 23,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 2833,
+      "posY": 560,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        18
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 24,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Insert",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 100,
+      "sizeX": 133,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        19
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 25,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: hash1, fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 192,
+      "sizeX": 312,
+      "sizeY": 45,
+      "input_arrows": [
+        19
+      ],
+      "output_arrows": [
+        20
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 26,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "hash1 = hash1 % _configuration.filterSize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 284,
+      "sizeX": 490,
+      "sizeY": 45,
+      "input_arrows": [
+        20
+      ],
+      "output_arrows": [
+        21
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 27,
+      "type": 5,
+      "color": "#FFA500",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "int i = 0; i < _configuration.maxCycles; ++i",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 376,
+      "sizeX": 522,
+      "sizeY": 45,
+      "input_arrows": [
+        21,
+        39
+      ],
+      "output_arrows": [
+        22,
+        40
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 28,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1[hash1] != 0 && row1[hash1] != fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 468,
+      "sizeX": 543,
+      "sizeY": 45,
+      "input_arrows": [
+        22
+      ],
+      "output_arrows": [
+        23,
+        37
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 29,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t hash2 = (hash1 ^ fingerprint) % _configuration.filterSize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 560,
+      "sizeX": 732,
+      "sizeY": 45,
+      "input_arrows": [
+        23
+      ],
+      "output_arrows": [
+        24
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 30,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2[hash2] != 0 && row2[hash2] != fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 652,
+      "sizeX": 543,
+      "sizeY": 45,
+      "input_arrows": [
+        24
+      ],
+      "output_arrows": [
+        25,
+        35
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 31,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_configuration.resizable",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 744,
+      "sizeX": 312,
+      "sizeY": 45,
+      "input_arrows": [
+        25
+      ],
+      "output_arrows": [
+        26
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 32,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "elements.insert(std::make_pair(hash1, fingerprint))",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 836,
+      "sizeX": 595,
+      "sizeY": 45,
+      "input_arrows": [
+        26
+      ],
+      "output_arrows": [
+        27
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 33,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "std::rand() % 2",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 950,
+      "sizeX": 217,
+      "sizeY": 45,
+      "input_arrows": [
+        27
+      ],
+      "output_arrows": [
+        28,
+        32
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 34,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t new_fingerprint = row2[hash2]",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 1042,
+      "sizeX": 438,
+      "sizeY": 45,
+      "input_arrows": [
+        28
+      ],
+      "output_arrows": [
+        29
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 35,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2[hash2] = fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 1134,
+      "sizeX": 322,
+      "sizeY": 45,
+      "input_arrows": [
+        29
+      ],
+      "output_arrows": [
+        30
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 36,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "fingerprint = new_fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 1226,
+      "sizeX": 364,
+      "sizeY": 45,
+      "input_arrows": [
+        30
+      ],
+      "output_arrows": [
+        31
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 37,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "hash1 = (hash2 ^ fingerprint) % _configuration.filterSize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 1318,
+      "sizeX": 658,
+      "sizeY": 45,
+      "input_arrows": [
+        31
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 38,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t new_fingerprint = row1[hash1]",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4620,
+      "posY": 1410,
+      "sizeX": 438,
+      "sizeY": 45,
+      "input_arrows": [
+        32
+      ],
+      "output_arrows": [
+        33
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 39,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1[hash1] = fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4620,
+      "posY": 1502,
+      "sizeX": 322,
+      "sizeY": 45,
+      "input_arrows": [
+        33
+      ],
+      "output_arrows": [
+        34
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 40,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "fingerprint = new_fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4620,
+      "posY": 1594,
+      "sizeX": 364,
+      "sizeY": 45,
+      "input_arrows": [
+        34
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 41,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2[hash2] = fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4020,
+      "posY": 1708,
+      "sizeX": 322,
+      "sizeY": 45,
+      "input_arrows": [
+        35
+      ],
+      "output_arrows": [
+        36
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 42,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "return",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4020,
+      "posY": 1800,
+      "sizeX": 123,
+      "sizeY": 45,
+      "input_arrows": [
+        36
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 43,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1[hash1] = fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4020,
+      "posY": 1914,
+      "sizeX": 322,
+      "sizeY": 45,
+      "input_arrows": [
+        37
+      ],
+      "output_arrows": [
+        38
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 44,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "return",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4020,
+      "posY": 2006,
+      "sizeX": 123,
+      "sizeY": 45,
+      "input_arrows": [
+        38
+      ],
+      "output_arrows": [
+        39
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 45,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_configuration.resizable",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 2212,
+      "sizeX": 312,
+      "sizeY": 45,
+      "input_arrows": [
+        40
+      ],
+      "output_arrows": [
+        41,
+        42
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 46,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Resize()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 2304,
+      "sizeX": 154,
+      "sizeY": 45,
+      "input_arrows": [
+        41
+      ],
+      "output_arrows": [
+        43
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 47,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "else\n        throw FilterOverflowException(\"Filter was overflowed\")",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4020,
+      "posY": 2396,
+      "sizeX": 763,
+      "sizeY": 45,
+      "input_arrows": [
+        42
+      ],
+      "output_arrows": [
+        44
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 48,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 3615,
+      "posY": 2510,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        43,
+        44
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 49,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Resize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 100,
+      "sizeX": 133,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        45
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 50,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_configuration.filterSize *= 2",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 192,
+      "sizeX": 375,
+      "sizeY": 45,
+      "input_arrows": [
+        45
+      ],
+      "output_arrows": [
+        46
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 51,
+      "type": "OPERATION",
+      "color": "#00ff00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "std::unordered_set<std::pair<size_t, size_t>> pairs = elements",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 284,
+      "sizeX": 550,
+      "sizeY": 45,
+      "input_arrows": [
+        46
+      ],
+      "output_arrows": [
+        47
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 52,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Clear()",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 376,
+      "sizeX": 133,
+      "sizeY": 45,
+      "input_arrows": [
+        47
+      ],
+      "output_arrows": [
+        48
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 53,
+      "type": 5,
+      "color": "#FFA500",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "std::pair<size_t, size_t> pair : pairs",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 468,
+      "sizeX": 459,
+      "sizeY": 45,
+      "input_arrows": [
+        48,
+        50
+      ],
+      "output_arrows": [
+        49,
+        51
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 54,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Insert(pair.first, pair.second)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 560,
+      "sizeX": 396,
+      "sizeY": 45,
+      "input_arrows": [
+        49
+      ],
+      "output_arrows": [
+        50
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 55,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 4901,
+      "posY": 744,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        51
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 56,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Check",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 100,
+      "sizeX": 112,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        52
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 57,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: element",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 192,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        52
+      ],
+      "output_arrows": [
+        53
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 58,
+      "type": "OPERATION",
+      "color": "#00ff00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t hash1 = (std::hash<std::string>{}(element)) % _configuration.filterS\nize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 284,
+      "sizeX": 700,
+      "sizeY": 45,
+      "input_arrows": [
+        53
+      ],
+      "output_arrows": [
+        54
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 59,
+      "type": "FUNCTION_CALL",
+      "color": "#00ff00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t fingerprint = _Fingerprint(element)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 376,
+      "sizeX": 501,
+      "sizeY": 45,
+      "input_arrows": [
+        54
+      ],
+      "output_arrows": [
+        55
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 60,
+      "type": "OUTPUT",
+      "color": "#576cf3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Вывод: {row1[hash1] == fingerprint ||\n           row2[hash1 ^ fingerprint] == fingerprint}",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 468,
+      "sizeX": 620,
+      "sizeY": 45,
+      "input_arrows": [
+        55
+      ],
+      "output_arrows": [
+        56
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 61,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 5786,
+      "posY": 560,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        56
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 62,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Delete",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 100,
+      "sizeX": 123,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        57
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 63,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: element",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 192,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        57
+      ],
+      "output_arrows": [
+        58
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 64,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t hash1 = (std::hash<std::string>{}(element)) % _configuration.filterS\nize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 284,
+      "sizeX": 889,
+      "sizeY": 45,
+      "input_arrows": [
+        58
+      ],
+      "output_arrows": [
+        59
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 65,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t fingerprint = _Fingerprint(element)",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 376,
+      "sizeX": 501,
+      "sizeY": 45,
+      "input_arrows": [
+        59
+      ],
+      "output_arrows": [
+        60
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 66,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1[hash1] == fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 468,
+      "sizeX": 333,
+      "sizeY": 45,
+      "input_arrows": [
+        60
+      ],
+      "output_arrows": [
+        61,
+        62
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 67,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row1[hash1] = 0",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 560,
+      "sizeX": 217,
+      "sizeY": 45,
+      "input_arrows": [
+        61
+      ],
+      "output_arrows": [
+        65
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 68,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "size_t hash2 = (hash1 ^ fingerprint) % _configuration.filterSize",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 7193,
+      "posY": 652,
+      "sizeX": 732,
+      "sizeY": 45,
+      "input_arrows": [
+        62
+      ],
+      "output_arrows": [
+        63
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 69,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2[hash2] == fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 7193,
+      "posY": 744,
+      "sizeX": 333,
+      "sizeY": 45,
+      "input_arrows": [
+        63
+      ],
+      "output_arrows": [
+        64
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 70,
+      "type": 2,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "row2[hash2] = 0",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 7193,
+      "posY": 836,
+      "sizeX": 217,
+      "sizeY": 45,
+      "input_arrows": [
+        64
+      ],
+      "output_arrows": [
+        66
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 71,
+      "type": 4,
+      "color": "#FFFF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_configuration.resizable",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 950,
+      "sizeX": 312,
+      "sizeY": 45,
+      "input_arrows": [
+        65,
+        66
+      ],
+      "output_arrows": [
+        67
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 72,
+      "type": 3,
+      "color": "#00FF00",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "elements.erase(std::make_pair(hash1, fingerprint))",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 1042,
+      "sizeX": 585,
+      "sizeY": 45,
+      "input_arrows": [
+        67
+      ],
+      "output_arrows": [
+        68
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 73,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 6788,
+      "posY": 1156,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        68
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 74,
+      "type": 0,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "_Fingerprint",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 8059,
+      "posY": 100,
+      "sizeX": 186,
+      "sizeY": 45,
+      "input_arrows": [],
+      "output_arrows": [
+        69
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 75,
+      "type": 8,
+      "color": "#FFC0CB",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Ввод: element",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 8059,
+      "posY": 192,
+      "sizeX": 196,
+      "sizeY": 45,
+      "input_arrows": [
+        69
+      ],
+      "output_arrows": [
+        70
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 76,
+      "type": 9,
+      "color": "#576CF3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "Вывод: {(std::hash<std::string>{}(element) >> 16) & 0xFFFF}",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 8059,
+      "posY": 284,
+      "sizeX": 679,
+      "sizeY": 45,
+      "input_arrows": [
+        70
+      ],
+      "output_arrows": [
+        71
+      ],
+      "zIndex": 5,
+      "scaleWithText": true
+    },
+    {
+      "id": 77,
+      "type": 1,
+      "color": "#D3D3D3",
+      "borderColor": "#000000",
+      "borderWidth": 2,
+      "text": "end",
+      "textColor": "#000000",
+      "fontSize": 14,
+      "posX": 8059,
+      "posY": 376,
+      "sizeX": 91,
+      "sizeY": 45,
+      "input_arrows": [
+        71
+      ],
+      "output_arrows": [],
+      "zIndex": 5,
+      "scaleWithText": true
+    }
+  ],
+  "arrows": [
+    {
+      "id": 0,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 0,
+      "endBlockID": 1,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 1,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 1,
+      "endBlockID": 2,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 2,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 2,
+      "endBlockID": 3,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 3,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 3,
+      "endBlockID": 4,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 4,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 4,
+      "endBlockID": 5,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 5,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 5,
+      "endBlockID": 6,
+      "posX": [
+        200,
+        200
+      ],
+      "posY": [
+        560,
+        652
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 6,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 7,
+      "endBlockID": 8,
+      "posX": [
+        971,
+        971
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 7,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 8,
+      "endBlockID": 9,
+      "posX": [
+        971,
+        971
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 8,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 10,
+      "endBlockID": 11,
+      "posX": [
+        1569,
+        1569
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 9,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 11,
+      "endBlockID": 12,
+      "posX": [
+        1569,
+        1569
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 10,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 12,
+      "endBlockID": 13,
+      "posX": [
+        1569,
+        1569
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 11,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 13,
+      "endBlockID": 14,
+      "posX": [
+        1569,
+        1569
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 12,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 15,
+      "endBlockID": 16,
+      "posX": [
+        2183,
+        2183
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 13,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 16,
+      "endBlockID": 17,
+      "posX": [
+        2183,
+        2183
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 14,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 18,
+      "endBlockID": 19,
+      "posX": [
+        2833,
+        2833
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 15,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 19,
+      "endBlockID": 20,
+      "posX": [
+        2833,
+        2833
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 16,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 20,
+      "endBlockID": 21,
+      "posX": [
+        2833,
+        2833
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 17,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 21,
+      "endBlockID": 22,
+      "posX": [
+        2833,
+        2833
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 18,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 22,
+      "endBlockID": 23,
+      "posX": [
+        2833,
+        2833
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 19,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 24,
+      "endBlockID": 25,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 20,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 25,
+      "endBlockID": 26,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 21,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 26,
+      "endBlockID": 27,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 22,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 27,
+      "endBlockID": 28,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 23,
+      "label": "Да",
+      "labelX": 3622.5,
+      "labelY": 514,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 28,
+      "endBlockID": 29,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 24,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 29,
+      "endBlockID": 30,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        560,
+        652
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 25,
+      "label": "Да",
+      "labelX": 3622.5,
+      "labelY": 698,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 30,
+      "endBlockID": 31,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        652,
+        744
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 26,
+      "label": "Да",
+      "labelX": 3622.5,
+      "labelY": 790,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 31,
+      "endBlockID": 32,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        744,
+        836
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 27,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 32,
+      "endBlockID": 33,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        836,
+        950
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 28,
+      "label": "Да",
+      "labelX": 3622.5,
+      "labelY": 996,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 33,
+      "endBlockID": 34,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        950,
+        1042
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 29,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 34,
+      "endBlockID": 35,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        1042,
+        1134
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 30,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 35,
+      "endBlockID": 36,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        1134,
+        1226
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 31,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 36,
+      "endBlockID": 37,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        1226,
+        1318
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 32,
+      "label": "Нет",
+      "labelX": 4027.5,
+      "labelY": 1180,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 33,
+      "endBlockID": 38,
+      "posX": [
+        3615,
+        4620,
+        4620
+      ],
+      "posY": [
+        950,
+        950,
+        1410
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 33,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 38,
+      "endBlockID": 39,
+      "posX": [
+        4620,
+        4620
+      ],
+      "posY": [
+        1410,
+        1502
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 34,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 39,
+      "endBlockID": 40,
+      "posX": [
+        4620,
+        4620
+      ],
+      "posY": [
+        1502,
+        1594
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 35,
+      "label": "Нет",
+      "labelX": 4027.5,
+      "labelY": 1180,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 30,
+      "endBlockID": 41,
+      "posX": [
+        3615,
+        4020,
+        4020
+      ],
+      "posY": [
+        652,
+        652,
+        1708
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 36,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 41,
+      "endBlockID": 42,
+      "posX": [
+        4020,
+        4020
+      ],
+      "posY": [
+        1708,
+        1800
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 37,
+      "label": "Нет",
+      "labelX": 4127.5,
+      "labelY": 1191,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 28,
+      "endBlockID": 43,
+      "posX": [
+        3615,
+        4120,
+        4120
+      ],
+      "posY": [
+        468,
+        468,
+        1914
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 38,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 43,
+      "endBlockID": 44,
+      "posX": [
+        4020,
+        4020
+      ],
+      "posY": [
+        1914,
+        2006
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 39,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 44,
+      "endBlockID": 27,
+      "posX": [
+        4020,
+        4269,
+        4269,
+        3615
+      ],
+      "posY": [
+        2006,
+        2006,
+        376,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 40,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 27,
+      "endBlockID": 45,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        376,
+        2212
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 41,
+      "label": "Да",
+      "labelX": 3622.5,
+      "labelY": 2258,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 45,
+      "endBlockID": 46,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        2212,
+        2304
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 42,
+      "label": "Нет",
+      "labelX": 3817,
+      "labelY": 2194,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 45,
+      "endBlockID": 47,
+      "posX": [
+        3615,
+        4020,
+        4020
+      ],
+      "posY": [
+        2212,
+        2212,
+        2396
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 43,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 46,
+      "endBlockID": 48,
+      "posX": [
+        3615,
+        3615
+      ],
+      "posY": [
+        2304,
+        2510
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 44,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 47,
+      "endBlockID": 48,
+      "posX": [
+        4020,
+        3615,
+        3615
+      ],
+      "posY": [
+        2396,
+        2396,
+        2510
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 45,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 49,
+      "endBlockID": 50,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 46,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 50,
+      "endBlockID": 51,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 47,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 51,
+      "endBlockID": 52,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 48,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 52,
+      "endBlockID": 53,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 49,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 53,
+      "endBlockID": 54,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 50,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 54,
+      "endBlockID": 53,
+      "posX": [
+        4901,
+        5286,
+        5286,
+        4901
+      ],
+      "posY": [
+        560,
+        560,
+        468,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 51,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 53,
+      "endBlockID": 55,
+      "posX": [
+        4901,
+        4901
+      ],
+      "posY": [
+        468,
+        744
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 52,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 56,
+      "endBlockID": 57,
+      "posX": [
+        5786,
+        5786
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 53,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 57,
+      "endBlockID": 58,
+      "posX": [
+        5786,
+        5786
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 54,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 58,
+      "endBlockID": 59,
+      "posX": [
+        5786,
+        5786
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 55,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 59,
+      "endBlockID": 60,
+      "posX": [
+        5786,
+        5786
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 56,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 60,
+      "endBlockID": 61,
+      "posX": [
+        5786,
+        5786
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 57,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 62,
+      "endBlockID": 63,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 58,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 63,
+      "endBlockID": 64,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 59,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 64,
+      "endBlockID": 65,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 60,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 65,
+      "endBlockID": 66,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        376,
+        468
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 61,
+      "label": "Да",
+      "labelX": 6795.5,
+      "labelY": 514,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 66,
+      "endBlockID": 67,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        468,
+        560
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 62,
+      "label": "Нет",
+      "labelX": 6990,
+      "labelY": 450,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 66,
+      "endBlockID": 68,
+      "posX": [
+        6788,
+        7193,
+        7193
+      ],
+      "posY": [
+        468,
+        468,
+        652
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 63,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 68,
+      "endBlockID": 69,
+      "posX": [
+        7193,
+        7193
+      ],
+      "posY": [
+        652,
+        744
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 64,
+      "label": "Да",
+      "labelX": 7200.5,
+      "labelY": 790,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 69,
+      "endBlockID": 70,
+      "posX": [
+        7193,
+        7193
+      ],
+      "posY": [
+        744,
+        836
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 65,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 67,
+      "endBlockID": 71,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        560,
+        950
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 66,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 70,
+      "endBlockID": 71,
+      "posX": [
+        7193,
+        6788,
+        6788
+      ],
+      "posY": [
+        836,
+        836,
+        950
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 67,
+      "label": "Да",
+      "labelX": 6795.5,
+      "labelY": 996,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 71,
+      "endBlockID": 72,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        950,
+        1042
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 68,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 72,
+      "endBlockID": 73,
+      "posX": [
+        6788,
+        6788
+      ],
+      "posY": [
+        1042,
+        1156
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 69,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 74,
+      "endBlockID": 75,
+      "posX": [
+        8059,
+        8059
+      ],
+      "posY": [
+        100,
+        192
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 70,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 75,
+      "endBlockID": 76,
+      "posX": [
+        8059,
+        8059
+      ],
+      "posY": [
+        192,
+        284
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    },
+    {
+      "id": 71,
+      "label": "",
+      "labelX": 0,
+      "labelY": 0,
+      "thickness": 3,
+      "labelFontSize": 14,
+      "arrowType": 0,
+      "startBlockID": 76,
+      "endBlockID": 77,
+      "posX": [
+        8059,
+        8059
+      ],
+      "posY": [
+        284,
+        376
+      ],
+      "color": "#000000",
+      "zIndex": 4
+    }
+  ],
+  "functions": [
+    {
+      "id": 0,
+      "blocksID": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "arrowsID": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "maxX": 471,
+      "minX": -71,
+      "maxY": 674,
+      "minY": 78
+    },
+    {
+      "id": 1,
+      "blocksID": [
+        7,
+        7,
+        8,
+        9
+      ],
+      "arrowsID": [
+        6,
+        7
+      ],
+      "maxX": 1069,
+      "minX": 873,
+      "maxY": 306,
+      "minY": 78
+    },
+    {
+      "id": 2,
+      "blocksID": [
+        10,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "arrowsID": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "maxX": 1683,
+      "minX": 1455,
+      "maxY": 490,
+      "minY": 78
+    },
+    {
+      "id": 3,
+      "blocksID": [
+        15,
+        15,
+        16,
+        17
+      ],
+      "arrowsID": [
+        12,
+        13
+      ],
+      "maxX": 2333,
+      "minX": 2033,
+      "maxY": 306,
+      "minY": 78
+    },
+    {
+      "id": 4,
+      "blocksID": [
+        18,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "arrowsID": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "maxX": 3115,
+      "minX": 2551,
+      "maxY": 582,
+      "minY": 78
+    },
+    {
+      "id": 5,
+      "blocksID": [
+        24,
+        24,
+        25,
+        26,
+        29,
+        32,
+        32,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        37,
+        40,
+        41,
+        42,
+        40,
+        42,
+        43,
+        44,
+        42,
+        44,
+        27,
+        46,
+        47,
+        46,
+        47,
+        48
+      ],
+      "arrowsID": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "maxX": 4401,
+      "minX": 3249,
+      "maxY": 2532,
+      "minY": 78
+    },
+    {
+      "id": 6,
+      "blocksID": [
+        49,
+        49,
+        50,
+        51,
+        52,
+        54,
+        53,
+        55
+      ],
+      "arrowsID": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "maxX": 5286,
+      "minX": 4546,
+      "maxY": 766,
+      "minY": 78
+    },
+    {
+      "id": 7,
+      "blocksID": [
+        56,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "arrowsID": [
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "maxX": 6288,
+      "minX": 5284,
+      "maxY": 582,
+      "minY": 78
+    },
+    {
+      "id": 8,
+      "blocksID": [
+        62,
+        62,
+        63,
+        64,
+        65,
+        67,
+        68,
+        70,
+        70,
+        67,
+        70,
+        72,
+        72,
+        73
+      ],
+      "arrowsID": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68
+      ],
+      "maxX": 7559,
+      "minX": 6344,
+      "maxY": 1178,
+      "minY": 78
+    },
+    {
+      "id": 9,
+      "blocksID": [
+        74,
+        74,
+        75,
+        76,
+        77
+      ],
+      "arrowsID": [
+        69,
+        70,
+        71
+      ],
+      "maxX": 8398,
+      "minX": 7720,
+      "maxY": 398,
+      "minY": 78
+    }
+  ],
+  "classes": []
+}
