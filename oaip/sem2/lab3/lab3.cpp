@@ -24,6 +24,8 @@ struct Queue
     {
         head->next = tail;
         tail->prev = head;
+        tail->next = head;
+        head->prev = tail;
     }
     void AddToBegining(int val)
     {
