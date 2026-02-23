@@ -39,6 +39,17 @@ struct Trip
 };
 
 #pragma region FILES WORKING
+long get_struct_num()
+{
+    FILE *file = fopen(DATA_FILENAME, "rb");
+    if (!file)
+        return 0;
+
+    fseek(file, 0, SEEK_END);
+    long size = ftell(file);
+    fclose(file);
+    return size / sizeof(Trip);
+}
 Trip *get_trip(int ind)
 {
     FILE *file = fopen(DATA_FILENAME, "rb");
@@ -84,6 +95,43 @@ void set_trip(int ind, Trip *trip)
     fclose(file);
 }
 #pragma endregion
+
+#pragma region SEARCHES
+Trip *find_by_race_number(int number)
+{
+    long size = get_struct_num();
+    Trip *tmp = nullptr;
+    for (long i = 0; i < size; ++i)
+    {
+        tmp = get_trip(i);
+        if (tmp->number == number)
+            return tmp;
+    }
+    return nullptr;
+}
+
+Trip *find_by_destination(const char *destination)
+{
+    // TODO: check sorted
+    int l = 0;
+    int r = get_struct_num() - 1;
+    Trip *tmp = nullptr;
+    while (l <= r)
+    {
+        int mid = (l + r) / 2;
+        tmp = get_trip(mid);
+        int res = strcmp(tmp->destination, destination);
+        if (res == 0)
+            return tmp;
+        else if (res < 0)
+            l = mid + 1;
+        else
+            r = mid - 1;
+    }
+    return nullptr;
+}
+#pragma endregion
+
 int main()
 {
     Trip *trip = new Trip(1, "bus", "Moscow", "2024-01-01", "10:00", "18:00", 1000, 50, 10);
