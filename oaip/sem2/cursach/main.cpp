@@ -6,49 +6,96 @@ const char *DATA_FILENAME = "data.bin";
 struct Trip
 {
     int number;
-    char bus_type[100];
-    char destination[100];
-    char date_departure[10];
-    char time_departure[5];
-    char time_arrival[5];
+    char bus_type[50];
+    char destination[50];
+    char date_departure[20];
+    char time_departure[10];
+    char time_arrival[10];
     float ticket_cost;
     int tickets_left;
     int tickets_sold;
-};
-#pragma region File working Functions
-void init_file(FILE *file)
-{
-    file = fopen(DATA_FILENAME, "rb");
-    if (file == nullptr)
+
+    Trip() : number(0), ticket_cost(0), tickets_left(0), tickets_sold(0)
     {
-        file = fopen(DATA_FILENAME, "wb");
-        fclose(file);
-        file = fopen(DATA_FILENAME, "rb");
+        bus_type[0] = '\0';
+        destination[0] = '\0';
+        date_departure[0] = '\0';
+        time_departure[0] = '\0';
+        time_arrival[0] = '\0';
     }
-}
 
-int get_size(FILE *file)
-{
-    fseek(file, 0, SEEK_END);
-    return ftell(file);
-}
+    Trip(int number, const char *bus_type, const char *destination,
+         const char *date_departure, const char *time_departure,
+         const char *time_arrival, float ticket_cost, int tickets_left,
+         int tickets_sold) : number(number), ticket_cost(ticket_cost),
+                             tickets_left(tickets_left), tickets_sold(tickets_sold)
+    {
+        strcpy(this->bus_type, bus_type);
+        strcpy(this->destination, destination);
+        strcpy(this->date_departure, date_departure);
+        strcpy(this->time_departure, time_departure);
+        strcpy(this->time_arrival, time_arrival);
+    }
+};
 
-Trip *get_trip(FILE *file, int ind)
+#pragma region FILES WORKING
+Trip *get_trip(int ind)
 {
-    if (sizeof(Trip) * ind >= get_size(file))
+    FILE *file = fopen(DATA_FILENAME, "rb");
+    if (!file)
         return nullptr;
+
+    fseek(file, 0, SEEK_END);
+    long size = ftell(file);
+
+    if (sizeof(Trip) * ind >= size)
+    {
+        fclose(file);
+        return nullptr;
+    }
+
+    Trip *tr = new Trip();
     fseek(file, sizeof(Trip) * ind, SEEK_SET);
-    Trip *tr;
     fread(tr, sizeof(Trip), 1, file);
+    fclose(file);
     return tr;
 }
 
-#pragma endregion
+void set_trip(int ind, Trip *trip)
+{
+    FILE *file = fopen(DATA_FILENAME, "r+b");
+    if (!file)
+        file = fopen(DATA_FILENAME, "wb");
+    if (!file)
+        return;
 
+    fseek(file, 0, SEEK_END);
+    long size = ftell(file);
+
+    if (sizeof(Trip) * ind > size)
+    {
+        std::cout << "index was out of the bounds of array\n";
+        fclose(file);
+        return;
+    }
+
+    fseek(file, sizeof(Trip) * ind, SEEK_SET);
+    fwrite(trip, sizeof(Trip), 1, file);
+    fclose(file);
+}
+#pragma endregion
 int main()
 {
-    FILE *file;
-    init_file(file);
+    Trip *trip = new Trip(1, "bus", "Moscow", "2024-01-01", "10:00", "18:00", 1000, 50, 10);
+    set_trip(0, trip);
+    delete trip;
+
+    trip = get_trip(0);
+    if (trip)
+    {
+        std::cout << "Bus type: " << trip->bus_type << std::endl;
+        delete trip;
+    }
 
     return 0;
 }
