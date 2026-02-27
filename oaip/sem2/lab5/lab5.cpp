@@ -4,8 +4,13 @@ struct Node
 {
     int value;
     char *text;
-    Node *left;
-    Node *right;
+    unsigned char height = 1;
+    Node *left = nullptr;
+    Node *right = nullptr;
+    Node()
+    {
+        text = new char[100];
+    }
 };
 
 struct Tree
@@ -30,44 +35,74 @@ struct Tree
         for (int i = 0; i < size; i++)
             add(vals[i], texts[i]);
     }
-    void add(int val, const char *text)
+
+    int height(Node *node)
     {
-        Node *tmp = new Node;
-        tmp->value = val;
-        tmp->text = new char[strlen(text) + 1];
-        strcpy(tmp->text, text);
-        if (root == nullptr)
+        return node ? node->height : 0;
+    }
+    int bfactor(Node *node)
+    {
+        return height(node->right) - height(node->left);
+    }
+    void fixheight(Node *node)
+    {
+        unsigned char hl = height(node->left);
+        unsigned char hr = height(node->right);
+        node->height = ((hl > hr) ? hl : hr) + 1;
+    }
+    Node *rotateright(Node *node)
+    {
+        Node *l = node->left;
+        node->left = l->right;
+        l->right = node;
+        fixheight(node);
+        fixheight(l);
+
+        return l;
+    }
+    Node *rotateleft(Node *node)
+    {
+        Node *r = node->right;
+        node->right = r->left;
+        r->left = node;
+        fixheight(node);
+        fixheight(r);
+        return r;
+    }
+
+    Node *balance(Node *node)
+    {
+        fixheight(node);
+        if (bfactor(node) == 2)
         {
-            root = tmp;
-            return;
+            if (bfactor(node->right) < 0)
+                node->right = rotateright(node->right);
+            return rotateleft(node);
         }
-        Node *cur_node = root;
-        while (true)
+        if (bfactor(node) == -2)
         {
-            if (cur_node->value > val)
-            {
-                if (cur_node->left == nullptr)
-                {
-                    cur_node->left = tmp;
-                    return;
-                }
-                cur_node = cur_node->left;
-            }
-            else if (cur_node->value < val)
-            {
-                if (cur_node->right == nullptr)
-                {
-                    cur_node->right = tmp;
-                    return;
-                }
-                cur_node = cur_node->right;
-            }
-            else
-            {
-                delete tmp;
-                return;
-            }
+            if (bfactor(node->left) > 0)
+                node->left = rotateleft(node->left);
+            return rotateright(node);
         }
+
+        return node;
+    }
+
+    Node *insert(Node *node, int val, const char *text)
+    {
+        if (!node)
+        {
+            Node *tmp = new Node;
+            tmp->value = val;
+            strcpy(tmp->text, text);
+            return tmp;
+        }
+        if (val < node->value)
+            node->left = insert(node->left, val, text);
+        else if (val > node->value)
+            node->right = insert(node->right, val, text);
+        return balance(node);
     }
     void clear(Node *cur_node)
     {
@@ -83,84 +118,39 @@ struct Tree
         clear(root);
     }
 
-    void remove(Node *node, Node *parent, bool left)
+    Node *findmin(Node *node)
+    {
+        return (node->left) ? findmin(node->left) : node;
+    }
+    Node *removemin(Node *node)
     {
         if (node->left == nullptr)
-        {
-            if (left)
-                parent->left = node->right;
-            else
-                parent->right = node->right;
-            delete[] node->text;
-            delete node;
-            return;
-        }
-        if (node->right == nullptr)
-        {
-            if (left)
-                parent->left = node->left;
-            else
-                parent->right = node->left;
-            delete[] node->text;
-            delete node;
-            return;
-        }
-        Node *cur_parent = node;
-        Node *cur_node = node->right;
-        while (cur_node->left != nullptr)
-        {
-            cur_parent = cur_node;
-            cur_node = cur_node->left;
-        }
-        node->value = cur_node->value;
-        delete[] node->text;
-        node->text = new char[strlen(cur_node->text) + 1];
-        strcpy(node->text, cur_node->text);
-
-        if (cur_parent != node)
-            cur_parent->left = cur_node->right; // update parent not to forget left part of the rightest node
-        else
-            node->right = cur_node->right;
-
-        delete[] cur_node->text;
-        delete cur_node;
+            return node->right;
+        node->left = removemin(node->left);
+        return balance(node);
     }
-
-    void remove(int val)
+    Node *remove(Node *node, int val)
     {
-        if (root->value == val)
+        if (!node)
+            return nullptr;
+        if (val < node->value)
+            node->left = remove(node->left, val);
+        else if (val > node->value)
+            node->right = remove(node->right, val);
+        else
         {
-            Node *tmp = new Node();
-            tmp->right = nullptr;
-            tmp->left = nullptr;
-            remove(root, tmp, 0);
-            if (tmp->right != nullptr)
-                root = tmp->right;
-            delete tmp;
-            return;
+            Node *l = node->left;
+            Node *r = node->right;
+            delete[] node->text;
+            delete node;
+            if (r == nullptr)
+                return l;
+            Node *min = findmin(r);
+            min->right = removemin(r);
+            min->left = l;
+            return balance(min);
         }
-        bool left = 0;
-        Node *parent = root;
-        Node *cur_node = ((root->value < val) ? root->right : root->left);
-        if (parent->left == cur_node)
-            left = 1;
-        while (cur_node != nullptr && cur_node->value != val)
-        {
-            parent = cur_node;
-            if (cur_node->value > val)
-            {
-                left = 1;
-                cur_node = cur_node->left;
-            }
-            else
-            {
-                left = 0;
-                cur_node = cur_node->right;
-            }
-        }
-        if (cur_node == nullptr)
-            return;
-        remove(cur_node, parent, left);
+        return balance(node);
     }
     void print(Node *cur_node = nullptr)
     {
@@ -168,11 +158,12 @@ struct Tree
             cur_node = root;
         if (cur_node == nullptr)
             return;
-        if (cur_node->left != nullptr)
-            print(cur_node->left);
-        std::cout << cur_node->value << " " << cur_node->text << std::endl;
         if (cur_node->right != nullptr)
             print(cur_node->right);
+
+        std::cout << cur_node->value << " " << cur_node->text << std::endl;
+        if (cur_node->left != nullptr)
+            print(cur_node->left);
     }
     void print_prefix(Node *cur_node = nullptr)
     {
@@ -183,9 +174,9 @@ struct Tree
 
         std::cout << cur_node->value << " " << cur_node->text << std::endl;
         if (cur_node->left != nullptr)
-            print(cur_node->left);
+            print_prefix(cur_node->left);
         if (cur_node->right != nullptr)
-            print(cur_node->right);
+            print_prefix(cur_node->right);
     }
     void print_postfix(Node *cur_node = nullptr)
     {
@@ -195,13 +186,35 @@ struct Tree
             return;
 
         if (cur_node->left != nullptr)
-            print(cur_node->left);
+            print_postfix(cur_node->left);
         if (cur_node->right != nullptr)
-            print(cur_node->right);
+            print_postfix(cur_node->right);
 
         std::cout << cur_node->value << " " << cur_node->text << std::endl;
     }
 
+    void print_tree(int layer, Node *cur_node = nullptr)
+    {
+        if (cur_node == nullptr && layer == 0)
+            cur_node = root;
+        if (cur_node == nullptr)
+            return;
+        if (cur_node->right != nullptr)
+            print_tree(layer + 1, cur_node->right);
+        for (int i = 0; i < layer; ++i)
+            std::cout << '-';
+        std::cout << cur_node->value << '\n';
+        if (cur_node->left != nullptr)
+            print_tree(layer + 1, cur_node->left);
+    }
+    void add(int val, const char *text)
+    {
+        root = insert(root, val, text);
+    }
+    void remove_el(int val)
+    {
+        root = remove(root, val);
+    }
     int num_of_words(char c, Node *node = nullptr)
     {
         if (node == nullptr)
@@ -220,7 +233,7 @@ int main()
     while (true)
     {
         std::cout << "--------------------------------------------------\n";
-        std::cout << "1.Add.\n2.Print.\n3.Print prefix.\n4.Print postfix.\n5.Num of words.\n6.Remove.\n7.Clear.\n8.Exit.\n->";
+        std::cout << "1.Add.\n2.Print.\n3.Print prefix.\n4.Print postfix.\n5.Num of words.\n6.Remove.\n7.Clear.\n8.Print formatted\n9.Exit.\n->";
         int num = 0;
         std::cin >> num;
         if (std::cin.fail())
@@ -228,9 +241,9 @@ int main()
             std::cout << "Bad input\n";
             return 1;
         }
-        if (num < 1 || num > 8)
+        if (num < 1 || num > 9)
         {
-            std::cout << "Enter number between 1 and 8!\n";
+            std::cout << "Enter number between 1 and 9!\n";
             continue;
         }
         switch (num)
@@ -277,7 +290,7 @@ int main()
             std::cout << "Enter number to find: ";
             int n;
             std::cin >> n;
-            t.remove(n);
+            t.remove_el(n);
             break;
         }
         case 7:
@@ -286,8 +299,16 @@ int main()
             break;
         }
         case 8:
+        {
+            std::cout << "--------------------------------------------------\n";
+            t.print_tree(0);
+            break;
+        }
+        default:
+        {
             return 0;
             break;
+        }
         }
     }
     return 0;
