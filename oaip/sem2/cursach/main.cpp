@@ -38,6 +38,75 @@ struct Trip
     }
 };
 
+#pragma region STACK
+struct QuicksortData
+{
+    int l;
+    int r;
+    QuicksortData(int left, int right)
+    {
+        l = left;
+        r = right;
+    }
+};
+struct StackData
+{
+    QuicksortData *qsd = nullptr;
+};
+
+struct StackNode
+{
+    StackData data;
+    StackNode *next = nullptr;
+    StackNode() {}
+    StackNode(StackData val) { data = val; }
+};
+struct Stack
+{
+    StackNode *root = nullptr;
+    Stack()
+    {
+    }
+    Stack(StackData val)
+    {
+        push(val);
+    }
+    void push(StackData val)
+    {
+        StackNode *node = new StackNode(val);
+        node->next = root;
+        root = node;
+    }
+    StackData pop()
+    {
+        if (root == nullptr)
+        {
+            std::cerr << "Stack is null";
+            exit(1);
+        }
+        StackNode *tmp = root;
+        root = root->next;
+        StackData res = tmp->data;
+        delete tmp;
+        return res;
+    }
+    StackData top()
+    {
+        return root->data;
+    }
+    ~Stack()
+    {
+        StackNode *tmp = root;
+        while (root != nullptr)
+        {
+            root = root->next;
+            delete tmp;
+            tmp = root;
+        }
+    }
+};
+#pragma endregion
+
 #pragma region FILES WORKING
 long get_struct_num()
 {
@@ -93,6 +162,128 @@ void set_trip(int ind, Trip *trip)
     fseek(file, sizeof(Trip) * ind, SEEK_SET);
     fwrite(trip, sizeof(Trip), 1, file);
     fclose(file);
+}
+#pragma endregion
+
+#pragma region SORTINGS
+void insertion_sort()
+{
+    for (int i = 1; i < get_struct_num(); ++i)
+    {
+        for (int j = i; j > 0; --j)
+        {
+            Trip *t1 = get_trip(j);
+            Trip *t2 = get_trip(j - 1);
+            if (strcmp(t1->time_arrival, t2->time_arrival) >= 0)
+            {
+                delete t1;
+                delete t2;
+                break;
+            }
+            set_trip(j, t2);
+            set_trip(j - 1, t1);
+            delete t1;
+            delete t2;
+        }
+    }
+}
+void selection_sort()
+{
+    for (int i = 0; i < get_struct_num() - 1; ++i)
+    {
+        Trip *min = get_trip(i);
+        int l = i;
+        for (int j = i + 1; j < get_struct_num(); ++j)
+        {
+            Trip *tmp = get_trip(j);
+            if (strcmp(tmp->date_departure, min->date_departure) < 0)
+            {
+                l = j;
+                delete min;
+                min = tmp;
+            }
+            else
+                delete tmp;
+        }
+        if (i != l)
+        {
+            Trip *cur = get_trip(i);
+            set_trip(i, min);
+            set_trip(l, cur);
+            delete cur;
+        }
+        delete min;
+    }
+}
+void quick_sort()
+{
+    Stack st;
+    QuicksortData *q = new QuicksortData(0, get_struct_num() - 1);
+    StackData sd;
+    sd.qsd = q;
+    st.push(sd);
+    while (st.top().qsd != nullptr)
+    {
+        QuicksortData *qsd = st.pop().qsd;
+        int l = qsd->l, r = qsd->r;
+        delete qsd;
+        int mid = (l + r) >> 1;
+        Trip *m = get_trip(mid);
+        char mid_dest[50];
+        strcpy(mid_dest, m->destination);
+        delete m;
+        int i = l, j = r;
+        while (i <= j)
+        {
+            while (true)
+            {
+                Trip *tmp = get_trip(i);
+                if (strcmp(tmp->destination, mid_dest) >= 0)
+                {
+                    delete tmp;
+                    break;
+                }
+                ++i;
+                delete tmp;
+            }
+            while (true)
+            {
+                Trip *tmp = get_trip(j);
+                if (strcmp(tmp->destination, mid_dest) <= 0)
+                {
+                    delete tmp;
+                    break;
+                }
+                --j;
+                delete tmp;
+            }
+            if (i <= j)
+            {
+                Trip *t1 = get_trip(i);
+                Trip *t2 = get_trip(j);
+                set_trip(i, t2);
+                set_trip(j, t1);
+                delete t1;
+                delete t2;
+                ++i;
+                --j;
+            }
+        }
+        if (l < j)
+        {
+            QuicksortData *qsd = new QuicksortData(l, j);
+            StackData sd;
+            sd.qsd = qsd;
+            st.push(sd);
+        }
+        if (i < r)
+        {
+            QuicksortData *qsd = new QuicksortData(i, r);
+            StackData sd;
+            sd.qsd = qsd;
+            st.push(sd);
+        }
+    }
 }
 #pragma endregion
 
