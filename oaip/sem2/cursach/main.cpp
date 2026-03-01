@@ -1,7 +1,9 @@
 #include <iostream>
 #include <cstring>
-
+#include <iomanip>
 const char *DATA_FILENAME = "data.bin";
+
+const int COL_WIDTH = 20;
 
 struct Trip
 {
@@ -39,19 +41,16 @@ struct Trip
 };
 
 #pragma region STACK
-struct QuicksortData
+struct StackData
 {
     int l;
     int r;
-    QuicksortData(int left, int right)
+    StackData(int left, int right)
     {
         l = left;
         r = right;
     }
-};
-struct StackData
-{
-    QuicksortData *qsd = nullptr;
+    StackData() {}
 };
 
 struct StackNode
@@ -64,9 +63,7 @@ struct StackNode
 struct Stack
 {
     StackNode *root = nullptr;
-    Stack()
-    {
-    }
+    Stack() {}
     Stack(StackData val)
     {
         push(val);
@@ -90,9 +87,9 @@ struct Stack
         delete tmp;
         return res;
     }
-    StackData top()
+    StackData *top()
     {
-        return root->data;
+        return (root) ? &root->data : nullptr;
     }
     ~Stack()
     {
@@ -218,15 +215,12 @@ void selection_sort()
 void quick_sort()
 {
     Stack st;
-    QuicksortData *q = new QuicksortData(0, get_struct_num() - 1);
-    StackData sd;
-    sd.qsd = q;
+    StackData sd(0, get_struct_num() - 1);
     st.push(sd);
-    while (st.top().qsd != nullptr)
+    while (st.top() != nullptr)
     {
-        QuicksortData *qsd = st.pop().qsd;
-        int l = qsd->l, r = qsd->r;
-        delete qsd;
+        StackData qsd = st.pop();
+        int l = qsd.l, r = qsd.r;
         int mid = (l + r) >> 1;
         Trip *m = get_trip(mid);
         char mid_dest[50];
@@ -271,16 +265,12 @@ void quick_sort()
         }
         if (l < j)
         {
-            QuicksortData *qsd = new QuicksortData(l, j);
-            StackData sd;
-            sd.qsd = qsd;
+            StackData sd(l, j);
             st.push(sd);
         }
         if (i < r)
         {
-            QuicksortData *qsd = new QuicksortData(i, r);
-            StackData sd;
-            sd.qsd = qsd;
+            StackData sd(i, r);
             st.push(sd);
         }
     }
@@ -303,7 +293,7 @@ Trip *find_by_race_number(int number)
 
 Trip *find_by_destination(const char *destination)
 {
-    // TODO: check sorted
+    quick_sort();
     int l = 0;
     int r = get_struct_num() - 1;
     Trip *tmp = nullptr;
@@ -323,18 +313,49 @@ Trip *find_by_destination(const char *destination)
 }
 #pragma endregion
 
-int main()
+void print_trips()
 {
-    Trip *trip = new Trip(1, "bus", "Moscow", "2024-01-01", "10:00", "18:00", 1000, 50, 10);
-    set_trip(0, trip);
-    delete trip;
-
-    trip = get_trip(0);
-    if (trip)
+    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    std::cout << "\n"
+              << std::left << std::setw(COL_WIDTH) << "Trip number"
+              << std::left << std::setw(COL_WIDTH) << "Bus type"
+              << std::left << std::setw(COL_WIDTH) << "Destination"
+              << std::left << std::setw(COL_WIDTH) << "Date departure"
+              << std::left << std::setw(COL_WIDTH) << "Time departure"
+              << std::left << std::setw(COL_WIDTH) << "Time arrival"
+              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
+              << std::left << std::setw(COL_WIDTH) << "Tickets left"
+              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
+    for (int i = 0; i < get_struct_num(); ++i)
     {
-        std::cout << "Bus type: " << trip->bus_type << std::endl;
+        Trip *trip = get_trip(i);
+        std::cout << std::left << std::setw(COL_WIDTH) << trip->number
+                  << std::left << std::setw(COL_WIDTH) << trip->bus_type
+                  << std::left << std::setw(COL_WIDTH) << trip->destination
+                  << std::left << std::setw(COL_WIDTH) << trip->date_departure
+                  << std::left << std::setw(COL_WIDTH) << trip->time_departure
+                  << std::left << std::setw(COL_WIDTH) << trip->time_arrival
+                  << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
+                  << std::left << std::setw(COL_WIDTH) << trip->tickets_left
+                  << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
         delete trip;
     }
+    std::cout << std::setfill('-') << std::setw(COL_WIDTH * 9) << "\n";
+}
 
+int main()
+{
+    Trip *trip1 = new Trip(1, "bus", "Moscow", "2026-01-01", "10:00", "18:00", 1000, 50, 10);
+    Trip *trip2 = new Trip(2, "bus", "Saint Petersburg", "2026-01-02", "18:00", "21:00", 1500, 20, 7);
+    Trip *trip3 = new Trip(3, "bus", "Minsk", "2026-02-01", "19:00", "20:00", 100, 27, 3);
+    set_trip(0, trip1);
+    set_trip(1, trip2);
+    set_trip(2, trip3);
+    delete trip1;
+    delete trip2;
+    delete trip3;
+    print_trips();
+    quick_sort();
+    print_trips();
     return 0;
 }
