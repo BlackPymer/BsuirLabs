@@ -2,8 +2,11 @@
 #include <cstring>
 #include <iomanip>
 const char *DATA_FILENAME = "data.bin";
+const char *TMP_FILENAME = "tmp.bin";
 
 const int COL_WIDTH = 20;
+
+void print_trips(const char *filename);
 
 struct Trip
 {
@@ -105,9 +108,9 @@ struct Stack
 #pragma endregion
 
 #pragma region FILES WORKING
-long get_struct_num()
+long get_struct_num(const char *filename = DATA_FILENAME)
 {
-    FILE *file = fopen(DATA_FILENAME, "rb");
+    FILE *file = fopen(filename, "rb");
     if (!file)
         return 0;
 
@@ -116,9 +119,9 @@ long get_struct_num()
     fclose(file);
     return size / sizeof(Trip);
 }
-Trip *get_trip(int ind)
+Trip *get_trip(int ind, const char *filename = DATA_FILENAME)
 {
-    FILE *file = fopen(DATA_FILENAME, "rb");
+    FILE *file = fopen(filename, "rb");
     if (!file)
         return nullptr;
 
@@ -138,11 +141,11 @@ Trip *get_trip(int ind)
     return tr;
 }
 
-void set_trip(int ind, Trip *trip)
+void set_trip(int ind, Trip *trip, const char *filename = DATA_FILENAME)
 {
-    FILE *file = fopen(DATA_FILENAME, "r+b");
+    FILE *file = fopen(filename, "r+b");
     if (!file)
-        file = fopen(DATA_FILENAME, "wb");
+        file = fopen(filename, "wb");
     if (!file)
         return;
 
@@ -214,6 +217,8 @@ void selection_sort()
 }
 void quick_sort()
 {
+    if (get_struct_num() < 2)
+        return;
     Stack st;
     StackData sd(0, get_struct_num() - 1);
     st.push(sd);
@@ -275,6 +280,69 @@ void quick_sort()
         }
     }
 }
+void sort_by_time_arrival(const char *filename = DATA_FILENAME)
+{
+    Stack st;
+    StackData sd(0, get_struct_num(filename) - 1);
+    st.push(sd);
+    while (st.top() != nullptr)
+    {
+        StackData qsd = st.pop();
+        int l = qsd.l, r = qsd.r;
+        int mid = (l + r) >> 1;
+        Trip *m = get_trip(mid, filename);
+        char mid_time[50];
+        strcpy(mid_time, m->time_arrival);
+        delete m;
+        int i = l, j = r;
+        while (i <= j)
+        {
+            while (true)
+            {
+                Trip *tmp = get_trip(i, filename);
+                if (strcmp(tmp->time_arrival, mid_time) >= 0)
+                {
+                    delete tmp;
+                    break;
+                }
+                ++i;
+                delete tmp;
+            }
+            while (true)
+            {
+                Trip *tmp = get_trip(j, filename);
+                if (strcmp(tmp->time_arrival, mid_time) <= 0)
+                {
+                    delete tmp;
+                    break;
+                }
+                --j;
+                delete tmp;
+            }
+            if (i <= j)
+            {
+                Trip *t1 = get_trip(i, filename);
+                Trip *t2 = get_trip(j, filename);
+                set_trip(i, t2, filename);
+                set_trip(j, t1, filename);
+                delete t1;
+                delete t2;
+                ++i;
+                --j;
+            }
+        }
+        if (l < j)
+        {
+            StackData sd(l, j);
+            st.push(sd);
+        }
+        if (i < r)
+        {
+            StackData sd(i, r);
+            st.push(sd);
+        }
+    }
+}
 #pragma endregion
 
 #pragma region SEARCHES
@@ -309,11 +377,31 @@ Trip *find_by_destination(const char *destination)
         else
             r = mid - 1;
     }
+    delete tmp;
     return nullptr;
+}
+void print_proper_trips(const char *dest, const char *max_time, int min_ticks)
+{
+    remove(TMP_FILENAME);
+    int j = 0;
+    for (int i = 0; i < get_struct_num(); ++i)
+    {
+        Trip *tr = get_trip(i);
+        if (strcmp(tr->destination, dest) == 0 && strcmp(tr->time_arrival, max_time) <= 0 && tr->tickets_left >= min_ticks)
+            set_trip(j++, tr, TMP_FILENAME);
+        delete tr;
+    }
+    if (j > 0)
+    {
+        sort_by_time_arrival(TMP_FILENAME);
+        print_trips(TMP_FILENAME);
+    }
+    else
+        std::cout << "\nНе найдено записей, удовлетворяющих условиям\n";
 }
 #pragma endregion
 
-void print_trips()
+void print_trips(const char *filename = DATA_FILENAME)
 {
     std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
     std::cout << "\n"
@@ -326,9 +414,9 @@ void print_trips()
               << std::left << std::setw(COL_WIDTH) << "Ticket cost"
               << std::left << std::setw(COL_WIDTH) << "Tickets left"
               << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
-    for (int i = 0; i < get_struct_num(); ++i)
+    for (int i = 0; i < get_struct_num(filename); ++i)
     {
-        Trip *trip = get_trip(i);
+        Trip *trip = get_trip(i, filename);
         std::cout << std::left << std::setw(COL_WIDTH) << trip->number
                   << std::left << std::setw(COL_WIDTH) << trip->bus_type
                   << std::left << std::setw(COL_WIDTH) << trip->destination
@@ -348,14 +436,16 @@ int main()
     Trip *trip1 = new Trip(1, "bus", "Moscow", "2026-01-01", "10:00", "18:00", 1000, 50, 10);
     Trip *trip2 = new Trip(2, "bus", "Saint Petersburg", "2026-01-02", "18:00", "21:00", 1500, 20, 7);
     Trip *trip3 = new Trip(3, "bus", "Minsk", "2026-02-01", "19:00", "20:00", 100, 27, 3);
+    Trip *trip4 = new Trip(56, "bus", "Moscow", "2026-01-01", "11:00", "23:00", 1000, 50, 10);
     set_trip(0, trip1);
     set_trip(1, trip2);
     set_trip(2, trip3);
+    set_trip(3, trip4);
     delete trip1;
     delete trip2;
     delete trip3;
+    delete trip4;
     print_trips();
-    quick_sort();
-    print_trips();
+    print_proper_trips("Moscow", "23:00", 7);
     return 0;
 }
