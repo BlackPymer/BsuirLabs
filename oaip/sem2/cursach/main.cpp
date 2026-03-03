@@ -399,6 +399,37 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks)
     else
         std::cout << "\nНе найдено записей, удовлетворяющих условиям\n";
 }
+void print_by_bus_type(const char *bus_type, const char *min_departure_time)
+{
+    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    std::cout << "\n"
+              << std::left << std::setw(COL_WIDTH) << "Trip number"
+              << std::left << std::setw(COL_WIDTH) << "Bus type"
+              << std::left << std::setw(COL_WIDTH) << "Destination"
+              << std::left << std::setw(COL_WIDTH) << "Date departure"
+              << std::left << std::setw(COL_WIDTH) << "Time departure"
+              << std::left << std::setw(COL_WIDTH) << "Time arrival"
+              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
+              << std::left << std::setw(COL_WIDTH) << "Tickets left"
+              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
+    for (int i = 0; i < get_struct_num(); ++i)
+    {
+        Trip *trip = get_trip(i);
+        if (strcmp(bus_type, trip->bus_type) == 0 && strcmp(trip->time_departure, min_departure_time) > 0)
+        {
+            std::cout << std::left << std::setw(COL_WIDTH) << trip->number
+                      << std::left << std::setw(COL_WIDTH) << trip->bus_type
+                      << std::left << std::setw(COL_WIDTH) << trip->destination
+                      << std::left << std::setw(COL_WIDTH) << trip->date_departure
+                      << std::left << std::setw(COL_WIDTH) << trip->time_departure
+                      << std::left << std::setw(COL_WIDTH) << trip->time_arrival
+                      << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
+                      << std::left << std::setw(COL_WIDTH) << trip->tickets_left
+                      << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
+        }
+        delete trip;
+    }
+}
 #pragma endregion
 
 void print_trips(const char *filename = DATA_FILENAME)
@@ -430,22 +461,79 @@ void print_trips(const char *filename = DATA_FILENAME)
     }
     std::cout << std::setfill('-') << std::setw(COL_WIDTH * 9) << "\n";
 }
+void print_trip(Trip *trip)
+{
+    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    std::cout << "\n"
+              << std::left << std::setw(COL_WIDTH) << "Trip number"
+              << std::left << std::setw(COL_WIDTH) << "Bus type"
+              << std::left << std::setw(COL_WIDTH) << "Destination"
+              << std::left << std::setw(COL_WIDTH) << "Date departure"
+              << std::left << std::setw(COL_WIDTH) << "Time departure"
+              << std::left << std::setw(COL_WIDTH) << "Time arrival"
+              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
+              << std::left << std::setw(COL_WIDTH) << "Tickets left"
+              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
+    std::cout << std::left << std::setw(COL_WIDTH) << trip->number
+              << std::left << std::setw(COL_WIDTH) << trip->bus_type
+              << std::left << std::setw(COL_WIDTH) << trip->destination
+              << std::left << std::setw(COL_WIDTH) << trip->date_departure
+              << std::left << std::setw(COL_WIDTH) << trip->time_departure
+              << std::left << std::setw(COL_WIDTH) << trip->time_arrival
+              << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
+              << std::left << std::setw(COL_WIDTH) << trip->tickets_left
+              << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
+}
 
 int main()
 {
-    Trip *trip1 = new Trip(1, "bus", "Moscow", "2026-01-01", "10:00", "18:00", 1000, 50, 10);
-    Trip *trip2 = new Trip(2, "bus", "Saint Petersburg", "2026-01-02", "18:00", "21:00", 1500, 20, 7);
-    Trip *trip3 = new Trip(3, "bus", "Minsk", "2026-02-01", "19:00", "20:00", 100, 27, 3);
-    Trip *trip4 = new Trip(56, "bus", "Moscow", "2026-01-01", "11:00", "23:00", 1000, 50, 10);
-    set_trip(0, trip1);
-    set_trip(1, trip2);
-    set_trip(2, trip3);
-    set_trip(3, trip4);
-    delete trip1;
-    delete trip2;
-    delete trip3;
-    delete trip4;
-    print_trips();
-    print_proper_trips("Moscow", "23:00", 7);
+    std::cout << "*************************************************************************************************************************************\n\n";
+    std::cout << "                              СИСТЕМА ОТСЛЕЖИВАНИЯ РЕАЛИЗАЦИИ БИЛЕТОВ НА АВТОБУСНЫЕ ПОЕЗДКИ\n\n";
+    std::cout << "*************************************************************************************************************************************\n\n";
+    bool is_app = true;
+    while (is_app)
+    {
+        std::cout << "Выберите операцию:\n"
+                  << "1 - Вывести все рейсы\n"
+                  << "2 - Сортировать по пункту назначения\n"
+                  << "3 - Сортировать по дате отправления\n"
+                  << "4 - Сортировать по времени прибытия\n"
+                  << "5 - Поиск рейса по номеру\n"
+                  << "6 - Поиск по пункту назначения\n"
+                  << "7 - Фильтр по времени прибытия в пункт и оставшимся билетам\n"
+                  << "8 - Фильтр по типу автобуса и времени отправления\n"
+                  << "9 - Выйти из программы\n"
+                  << "-> ";
+        int choise = 0;
+        std::cin >> choise;
+        if (choise == 1)
+            print_trips();
+        if (choise == 2)
+            quick_sort();
+        if (choise == 3)
+            selection_sort();
+        if (choise == 4)
+            insertion_sort();
+        if (choise == 5)
+        {
+            std::cout << "Введите номер рейса:\n-> ";
+            int race_number = 0;
+            std::cin >> race_number;
+            Trip *tr = find_by_race_number(race_number);
+            print_trip(tr);
+            delete tr;
+        }
+        if (choise == 6)
+        {
+            std::cout << "Введите пункт назначения:\n-> ";
+            char dest[50];
+            std::cin >> dest;
+            Trip *tr = find_by_destination(dest);
+            print_trip(tr);
+            delete tr;
+            break;
+        }
+        std::cout << "\n\n-------------------------------------------------------------------------------------------------------------------------------\n\n";
+    }
     return 0;
 }
