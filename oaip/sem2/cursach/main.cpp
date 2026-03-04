@@ -508,13 +508,13 @@ int main()
         std::cin >> choise;
         if (choise == 1)
             print_trips();
-        if (choise == 2)
+        else if (choise == 2)
             quick_sort();
-        if (choise == 3)
+        else if (choise == 3)
             selection_sort();
-        if (choise == 4)
+        else if (choise == 4)
             insertion_sort();
-        if (choise == 5)
+        else if (choise == 5)
         {
             std::cout << "Введите номер рейса:\n-> ";
             int race_number = 0;
@@ -523,7 +523,7 @@ int main()
             print_trip(tr);
             delete tr;
         }
-        if (choise == 6)
+        else if (choise == 6)
         {
             std::cout << "Введите пункт назначения:\n-> ";
             char dest[50];
@@ -532,6 +532,38 @@ int main()
             print_trip(tr);
             delete tr;
             break;
+        }
+        else if (choise == 7)
+        {
+            std::cout << "Введите пункт назначения:\n-> ";
+            char dest[50];
+            std::cin >> dest;
+            std::cout << "Введите максимальное время прибытия (20XX:XX:XX)\n-> ";
+            char max_time[10];
+            std::cin >> max_time;
+            std::cout << "Введите минимальное число некупленных билетов\n-> ";
+            int min_ticks_left = 0;
+            std::cin >> min_ticks_left;
+            print_proper_trips(dest, max_time, min_ticks_left);
+        }
+        else if (choise == 8)
+        {
+            std::cout << "Введите тип автобусов\n-> ";
+            char bus_type[50];
+            std::cin >> bus_type;
+            std::cout << "Введите минимальное время отправления (20XX:XX:XX)\n-> ";
+            char min_time[10];
+            std::cin >> min_time;
+            print_by_bus_type(bus_type, min_time);
+        }
+        else if (choise == 9)
+            is_app = 0;
+        else
+            std::cout << "Неверный ввод\n";
+        if (std::cin.fail())
+        {
+            std::cout << "Неверный ввод\n";
+            return 1;
         }
         std::cout << "\n\n-------------------------------------------------------------------------------------------------------------------------------\n\n";
     }
