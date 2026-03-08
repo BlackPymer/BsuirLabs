@@ -4,7 +4,15 @@
 const char *DATA_FILENAME = "data.bin";
 const char *TMP_FILENAME = "tmp.bin";
 
-const int COL_WIDTH = 20;
+const int COL_NUMBER = 15;
+const int COL_BUS_TYPE = 20;
+const int COL_DESTINATION = 35;
+const int COL_DATE = 15;
+const int COL_TIME = 15;
+const int COL_COST = 15;
+const int COL_LEFT = 15;
+const int COL_SOLD = 15;
+const int ROW_SIZE = COL_NUMBER + COL_BUS_TYPE + COL_DESTINATION + COL_DATE + COL_TIME + COL_COST + COL_LEFT + COL_SOLD;
 
 void print_trips(const char *filename);
 
@@ -401,31 +409,33 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks)
 }
 void print_by_bus_type(const char *bus_type, const char *min_departure_time)
 {
-    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    for (int i = 0; i < ROW_SIZE; ++i)
+        std::cout << std::setfill(' ');
+    std::cout << "\n";
     std::cout << "\n"
-              << std::left << std::setw(COL_WIDTH) << "Trip number"
-              << std::left << std::setw(COL_WIDTH) << "Bus type"
-              << std::left << std::setw(COL_WIDTH) << "Destination"
-              << std::left << std::setw(COL_WIDTH) << "Date departure"
-              << std::left << std::setw(COL_WIDTH) << "Time departure"
-              << std::left << std::setw(COL_WIDTH) << "Time arrival"
-              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
-              << std::left << std::setw(COL_WIDTH) << "Tickets left"
-              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
+              << std::left << std::setw(COL_NUMBER) << "Trip number"
+              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
+              << std::left << std::setw(COL_DESTINATION) << "Destination"
+              << std::left << std::setw(COL_DATE) << "Date departure"
+              << std::left << std::setw(COL_TIME) << "Time departure"
+              << std::left << std::setw(COL_TIME) << "Time arrival"
+              << std::left << std::setw(COL_COST) << "Ticket cost"
+              << std::left << std::setw(COL_LEFT) << "Tickets left"
+              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
     for (int i = 0; i < get_struct_num(); ++i)
     {
         Trip *trip = get_trip(i);
         if (strcmp(bus_type, trip->bus_type) == 0 && strcmp(trip->time_departure, min_departure_time) > 0)
         {
-            std::cout << std::left << std::setw(COL_WIDTH) << trip->number
-                      << std::left << std::setw(COL_WIDTH) << trip->bus_type
-                      << std::left << std::setw(COL_WIDTH) << trip->destination
-                      << std::left << std::setw(COL_WIDTH) << trip->date_departure
-                      << std::left << std::setw(COL_WIDTH) << trip->time_departure
-                      << std::left << std::setw(COL_WIDTH) << trip->time_arrival
-                      << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
-                      << std::left << std::setw(COL_WIDTH) << trip->tickets_left
-                      << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
+            std::cout << std::left << std::setw(COL_NUMBER) << trip->number
+                      << std::left << std::setw(COL_BUS_TYPE) << trip->bus_type
+                      << std::left << std::setw(COL_DESTINATION) << trip->destination
+                      << std::left << std::setw(COL_DATE) << trip->date_departure
+                      << std::left << std::setw(COL_TIME) << trip->time_departure
+                      << std::left << std::setw(COL_TIME) << trip->time_arrival
+                      << std::left << std::setw(COL_COST) << trip->ticket_cost
+                      << std::left << std::setw(COL_LEFT) << trip->tickets_left
+                      << std::left << std::setw(COL_SOLD) << trip->tickets_sold << '\n';
         }
         delete trip;
     }
@@ -434,59 +444,121 @@ void print_by_bus_type(const char *bus_type, const char *min_departure_time)
 
 void print_trips(const char *filename = DATA_FILENAME)
 {
-    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    std::cout << "\n";
     std::cout << "\n"
-              << std::left << std::setw(COL_WIDTH) << "Trip number"
-              << std::left << std::setw(COL_WIDTH) << "Bus type"
-              << std::left << std::setw(COL_WIDTH) << "Destination"
-              << std::left << std::setw(COL_WIDTH) << "Date departure"
-              << std::left << std::setw(COL_WIDTH) << "Time departure"
-              << std::left << std::setw(COL_WIDTH) << "Time arrival"
-              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
-              << std::left << std::setw(COL_WIDTH) << "Tickets left"
-              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
+              << std::left << std::setw(COL_NUMBER) << "Trip number"
+              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
+              << std::left << std::setw(COL_DESTINATION) << "Destination"
+              << std::left << std::setw(COL_DATE) << "Date departure"
+              << std::left << std::setw(COL_TIME) << "Time departure"
+              << std::left << std::setw(COL_TIME) << "Time arrival"
+              << std::left << std::setw(COL_COST) << "Ticket cost"
+              << std::left << std::setw(COL_LEFT) << "Tickets left"
+              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
     for (int i = 0; i < get_struct_num(filename); ++i)
     {
         Trip *trip = get_trip(i, filename);
-        std::cout << std::left << std::setw(COL_WIDTH) << trip->number
-                  << std::left << std::setw(COL_WIDTH) << trip->bus_type
-                  << std::left << std::setw(COL_WIDTH) << trip->destination
-                  << std::left << std::setw(COL_WIDTH) << trip->date_departure
-                  << std::left << std::setw(COL_WIDTH) << trip->time_departure
-                  << std::left << std::setw(COL_WIDTH) << trip->time_arrival
-                  << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
-                  << std::left << std::setw(COL_WIDTH) << trip->tickets_left
-                  << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
+        std::cout << std::left << std::setw(COL_NUMBER) << trip->number
+                  << std::left << std::setw(COL_BUS_TYPE) << trip->bus_type
+                  << std::left << std::setw(COL_DESTINATION) << trip->destination
+                  << std::left << std::setw(COL_DATE) << trip->date_departure
+                  << std::left << std::setw(COL_TIME) << trip->time_departure
+                  << std::left << std::setw(COL_TIME) << trip->time_arrival
+                  << std::left << std::setw(COL_COST) << trip->ticket_cost
+                  << std::left << std::setw(COL_LEFT) << trip->tickets_left
+                  << std::left << std::setw(COL_SOLD) << trip->tickets_sold << '\n';
         delete trip;
     }
-    std::cout << std::setfill('-') << std::setw(COL_WIDTH * 9) << "\n";
+    for (int i = 0; i < ROW_SIZE; ++i)
+        std::cout << "-";
+    std::cout << '\n';
 }
 void print_trip(Trip *trip)
 {
-    std::cout << std::setfill(' ') << std::setw(COL_WIDTH * 9) << "\n";
+    std::cout << "\n";
     std::cout << "\n"
-              << std::left << std::setw(COL_WIDTH) << "Trip number"
-              << std::left << std::setw(COL_WIDTH) << "Bus type"
-              << std::left << std::setw(COL_WIDTH) << "Destination"
-              << std::left << std::setw(COL_WIDTH) << "Date departure"
-              << std::left << std::setw(COL_WIDTH) << "Time departure"
-              << std::left << std::setw(COL_WIDTH) << "Time arrival"
-              << std::left << std::setw(COL_WIDTH) << "Ticket cost"
-              << std::left << std::setw(COL_WIDTH) << "Tickets left"
-              << std::left << std::setw(COL_WIDTH) << "Tickets sold" << '\n';
-    std::cout << std::left << std::setw(COL_WIDTH) << trip->number
-              << std::left << std::setw(COL_WIDTH) << trip->bus_type
-              << std::left << std::setw(COL_WIDTH) << trip->destination
-              << std::left << std::setw(COL_WIDTH) << trip->date_departure
-              << std::left << std::setw(COL_WIDTH) << trip->time_departure
-              << std::left << std::setw(COL_WIDTH) << trip->time_arrival
-              << std::left << std::setw(COL_WIDTH) << trip->ticket_cost
-              << std::left << std::setw(COL_WIDTH) << trip->tickets_left
-              << std::left << std::setw(COL_WIDTH) << trip->tickets_sold << '\n';
+              << std::left << std::setw(COL_NUMBER) << "Trip number"
+              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
+              << std::left << std::setw(COL_DESTINATION) << "Destination"
+              << std::left << std::setw(COL_DATE) << "Date departure"
+              << std::left << std::setw(COL_TIME) << "Time departure"
+              << std::left << std::setw(COL_TIME) << "Time arrival"
+              << std::left << std::setw(COL_COST) << "Ticket cost"
+              << std::left << std::setw(COL_LEFT) << "Tickets left"
+              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
+    std::cout << std::left << std::setw(COL_NUMBER) << trip->number
+              << std::left << std::setw(COL_BUS_TYPE) << trip->bus_type
+              << std::left << std::setw(COL_DESTINATION) << trip->destination
+              << std::left << std::setw(COL_DATE) << trip->date_departure
+              << std::left << std::setw(COL_TIME) << trip->time_departure
+              << std::left << std::setw(COL_TIME) << trip->time_arrival
+              << std::left << std::setw(COL_COST) << trip->ticket_cost
+              << std::left << std::setw(COL_LEFT) << trip->tickets_left
+              << std::left << std::setw(COL_SOLD) << trip->tickets_sold << '\n';
+}
+
+void initialize_data()
+{
+    if (get_struct_num() != 25)
+        remove(DATA_FILENAME);
+    else
+        return;
+
+    Trip t0(101, "Mercedes", "Moscow", "2024-06-01", "08:00", "13:30", 1500.50f, 10, 40);
+    set_trip(0, &t0);
+    Trip t1(102, "Volvo", "Moscow", "2024-06-01", "09:30", "14:45", 1600.00f, 5, 45);
+    set_trip(1, &t1);
+    Trip t2(103, "Scania", "Moscow", "2024-06-02", "10:15", "15:20", 1700.00f, 20, 30);
+    set_trip(2, &t2);
+    Trip t3(104, "MAN", "Saint-Petersburg", "2024-06-02", "11:00", "16:30", 1800.00f, 15, 35);
+    set_trip(3, &t3);
+    Trip t4(105, "Setra", "Saint-Petersburg", "2024-06-03", "07:30", "12:15", 1900.00f, 8, 42);
+    set_trip(4, &t4);
+    Trip t5(106, "Mercedes", "Saint-Petersburg", "2024-06-03", "08:45", "14:00", 2000.00f, 12, 38);
+    set_trip(5, &t5);
+    Trip t6(107, "Volvo", "Kazan", "2024-06-04", "09:15", "17:30", 2100.00f, 18, 32);
+    set_trip(6, &t6);
+    Trip t7(108, "Scania", "Kazan", "2024-06-04", "10:30", "18:45", 2200.00f, 22, 28);
+    set_trip(7, &t7);
+    Trip t8(109, "MAN", "Nizhny-Novgorod", "2024-06-05", "11:45", "15:10", 2300.00f, 7, 43);
+    set_trip(8, &t8);
+    Trip t9(110, "Setra", "Nizhny-Novgorod", "2024-06-05", "12:30", "16:20", 2400.00f, 9, 41);
+    set_trip(9, &t9);
+    Trip t10(111, "Mercedes", "Rostov-on-Don", "2024-06-06", "13:15", "20:00", 2500.00f, 4, 46);
+    set_trip(10, &t10);
+    Trip t11(112, "Volvo", "Rostov-on-Don", "2024-06-06", "14:00", "21:15", 2600.00f, 6, 44);
+    set_trip(11, &t11);
+    Trip t12(113, "Scania", "Krasnodar", "2024-06-07", "08:30", "12:45", 2700.00f, 25, 25);
+    set_trip(12, &t12);
+    Trip t13(114, "MAN", "Krasnodar", "2024-06-07", "09:45", "14:30", 2800.00f, 3, 47);
+    set_trip(13, &t13);
+    Trip t14(115, "Setra", "Sochi", "2024-06-08", "10:00", "18:10", 2900.00f, 16, 34);
+    set_trip(14, &t14);
+    Trip t15(116, "Mercedes", "Sochi", "2024-06-08", "11:30", "19:45", 3000.00f, 11, 39);
+    set_trip(15, &t15);
+    Trip t16(117, "Volvo", "Voronezh", "2024-06-09", "12:45", "16:55", 3100.00f, 13, 37);
+    set_trip(16, &t16);
+    Trip t17(118, "Scania", "Voronezh", "2024-06-09", "13:30", "17:40", 3200.00f, 17, 33);
+    set_trip(17, &t17);
+    Trip t18(119, "MAN", "Samara", "2024-06-10", "14:15", "21:30", 3300.00f, 19, 31);
+    set_trip(18, &t18);
+    Trip t19(120, "Setra", "Samara", "2024-06-10", "15:00", "22:20", 3400.00f, 2, 48);
+    set_trip(19, &t19);
+    Trip t20(121, "Mercedes", "Ufa", "2024-06-11", "08:00", "15:30", 3500.00f, 14, 36);
+    set_trip(20, &t20);
+    Trip t21(122, "Volvo", "Yekaterinburg", "2024-06-11", "09:30", "18:00", 3600.00f, 21, 29);
+    set_trip(21, &t21);
+    Trip t22(123, "Scania", "Novosibirsk", "2024-06-12", "10:45", "20:30", 3700.00f, 23, 27);
+    set_trip(22, &t22);
+    Trip t23(124, "MAN", "Vladivostok", "2024-06-12", "11:15", "23:45", 5000.00f, 1, 49);
+    set_trip(23, &t23);
+    Trip t24(125, "Setra", "Chelyabinsk", "2024-06-13", "12:00", "19:15", 3800.00f, 24, 26);
+    set_trip(24, &t24);
 }
 
 int main()
 {
+    initialize_data();
     std::cout << "*************************************************************************************************************************************\n\n";
     std::cout << "                              СИСТЕМА ОТСЛЕЖИВАНИЯ РЕАЛИЗАЦИИ БИЛЕТОВ НА АВТОБУСНЫЕ ПОЕЗДКИ\n\n";
     std::cout << "*************************************************************************************************************************************\n\n";
@@ -520,8 +592,15 @@ int main()
             int race_number = 0;
             std::cin >> race_number;
             Trip *tr = find_by_race_number(race_number);
-            print_trip(tr);
-            delete tr;
+            if (tr)
+            {
+                print_trip(tr);
+                delete tr;
+            }
+            else
+            {
+                std::cout << "Рейс не найден.\n";
+            }
         }
         else if (choise == 6)
         {
@@ -529,9 +608,15 @@ int main()
             char dest[50];
             std::cin >> dest;
             Trip *tr = find_by_destination(dest);
-            print_trip(tr);
-            delete tr;
-            break;
+            if (tr)
+            {
+                print_trip(tr);
+                delete tr;
+            }
+            else
+            {
+                std::cout << "Рейс не найден.\n";
+            }
         }
         else if (choise == 7)
         {
