@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <iomanip>
+#include <filesystem>
 const char *DATA_FILENAME = "data.bin";
 const char *TMP_FILENAME = "tmp.bin";
 
@@ -170,6 +171,10 @@ void set_trip(int ind, Trip *trip, const char *filename = DATA_FILENAME)
     fseek(file, sizeof(Trip) * ind, SEEK_SET);
     fwrite(trip, sizeof(Trip), 1, file);
     fclose(file);
+}
+void delete_last_trip()
+{
+    std::filesystem::resize_file("data.bin", sizeof(Trip) * (get_struct_num() - 1));
 }
 #pragma endregion
 
@@ -442,6 +447,36 @@ void print_by_bus_type(const char *bus_type, const char *min_departure_time)
 }
 #pragma endregion
 
+#pragma region delete update
+void delete_by_num(int number)
+{
+    int j = 0, i = 0;
+    for (; i < get_struct_num(); ++i)
+    {
+        Trip *tr = get_trip(i);
+        set_trip(j, tr);
+        if (tr->number != number)
+            ++j;
+        delete tr;
+    }
+    if (i != j)
+        delete_last_trip();
+}
+void update_by_num(int number, Trip *trip)
+{
+    for (int i = 0; i < get_struct_num(); ++i)
+    {
+        Trip *t = get_trip(i);
+        if (t->number == number)
+        {
+            set_trip(i, trip);
+            delete t;
+            break;
+        }
+        delete t;
+    }
+}
+#pragma endregion
 void print_trips(const char *filename = DATA_FILENAME)
 {
     std::cout << "\n";
@@ -499,7 +534,7 @@ void print_trip(Trip *trip)
 
 void initialize_data()
 {
-    if (get_struct_num() != 25)
+    if (get_struct_num() <= 25)
         remove(DATA_FILENAME);
     else
         return;
@@ -574,7 +609,10 @@ int main()
                   << "6 - Поиск по пункту назначения\n"
                   << "7 - Фильтр по времени прибытия в пункт и оставшимся билетам\n"
                   << "8 - Фильтр по типу автобуса и времени отправления\n"
-                  << "9 - Выйти из программы\n"
+                  << "9 - Добавить рейс\n"
+                  << "10 - Удалить рейс\n"
+                  << "11 - Редактировать рейс\n"
+                  << "12 - Выйти из программы\n"
                   << "-> ";
         int choise = 0;
         std::cin >> choise;
@@ -642,6 +680,82 @@ int main()
             print_by_bus_type(bus_type, min_time);
         }
         else if (choise == 9)
+        {
+            Trip newTrip;
+            std::cout << "Введите номер рейса:\n-> ";
+            std::cin >> newTrip.number;
+            bool exists = false;
+            for (int i = 0; i < get_struct_num(); ++i)
+            {
+                Trip *t = get_trip(i);
+                if (t->number == newTrip.number)
+                {
+                    exists = true;
+                    delete t;
+                    break;
+                }
+                delete t;
+            }
+            if (exists)
+            {
+                std::cout << "Рейс с таким номером уже существует.\n";
+            }
+            else
+            {
+                std::cout << "Введите тип автобуса:\n-> ";
+                std::cin >> newTrip.bus_type;
+                std::cout << "Введите пункт назначения:\n-> ";
+                std::cin >> newTrip.destination;
+                std::cout << "Введите дату отправления (ГГГГ-ММ-ДД):\n-> ";
+                std::cin >> newTrip.date_departure;
+                std::cout << "Введите время отправления (ЧЧ:ММ):\n-> ";
+                std::cin >> newTrip.time_departure;
+                std::cout << "Введите время прибытия (ЧЧ:ММ):\n-> ";
+                std::cin >> newTrip.time_arrival;
+                std::cout << "Введите стоимость билета:\n-> ";
+                std::cin >> newTrip.ticket_cost;
+                std::cout << "Введите количество оставшихся билетов:\n-> ";
+                std::cin >> newTrip.tickets_left;
+                std::cout << "Введите количество проданных билетов:\n-> ";
+                std::cin >> newTrip.tickets_sold;
+                set_trip(get_struct_num(), &newTrip);
+                std::cout << "Рейс добавлен.\n";
+            }
+        }
+        else if (choise == 10)
+        {
+            std::cout << "Введите номер рейса для удаления:\n-> ";
+            int number;
+            std::cin >> number;
+            delete_by_num(number);
+        }
+        else if (choise == 11)
+        {
+            std::cout << "Введите номер рейса для редактирования:\n-> ";
+            int number;
+            std::cin >> number;
+            Trip updatedTrip;
+            updatedTrip.number = number;
+            std::cout << "Введите новый тип автобуса:\n-> ";
+            std::cin >> updatedTrip.bus_type;
+            std::cout << "Введите новый пункт назначения:\n-> ";
+            std::cin >> updatedTrip.destination;
+            std::cout << "Введите новую дату отправления (ГГГГ-ММ-ДД):\n-> ";
+            std::cin >> updatedTrip.date_departure;
+            std::cout << "Введите новое время отправления (ЧЧ:ММ):\n-> ";
+            std::cin >> updatedTrip.time_departure;
+            std::cout << "Введите новое время прибытия (ЧЧ:ММ):\n-> ";
+            std::cin >> updatedTrip.time_arrival;
+            std::cout << "Введите новую стоимость билета:\n-> ";
+            std::cin >> updatedTrip.ticket_cost;
+            std::cout << "Введите новое количество оставшихся билетов:\n-> ";
+            std::cin >> updatedTrip.tickets_left;
+            std::cout << "Введите новое количество проданных билетов:\n-> ";
+            std::cin >> updatedTrip.tickets_sold;
+            update_by_num(number, &updatedTrip);
+            std::cout << "Рейс обновлён.\n";
+        }
+        else if (choise == 12)
             is_app = 0;
         else
             std::cout << "Неверный ввод\n";
