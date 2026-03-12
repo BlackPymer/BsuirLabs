@@ -623,10 +623,10 @@ int main()
             std::cout << "Введите пункт назначения:\n-> ";
             char dest[50];
             std::cin >> dest;
-            std::cout << "Введите максимальное время прибытия (20XX:XX:XX)\n-> ";
+            std::cout << "Введите максимальное время прибытия\n-> ";
             char max_time[10];
             std::cin >> max_time;
-            std::cout << "Введите минимальное число некупленных билетов\n-> ";
+            std::cout << "Введите минимальное число некупленных билетов (XX:XX)\n-> ";
             int min_ticks_left = 0;
             std::cin >> min_ticks_left;
             print_proper_trips(dest, max_time, min_ticks_left);
@@ -636,7 +636,7 @@ int main()
             std::cout << "Введите тип автобусов\n-> ";
             char bus_type[50];
             std::cin >> bus_type;
-            std::cout << "Введите минимальное время отправления (20XX:XX:XX)\n-> ";
+            std::cout << "Введите минимальное время отправления (XX:XX)\n-> ";
             char min_time[10];
             std::cin >> min_time;
             print_by_bus_type(bus_type, min_time);
