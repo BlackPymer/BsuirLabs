@@ -2,6 +2,13 @@
 #include <cstring>
 #include <iomanip>
 #include <filesystem>
+#include <cstddef>
+#ifdef _WIN32
+#include <io.h>
+#include <fcntl.h>
+#else
+#include <unistd.h>
+#endif
 const char *DATA_FILENAME = "data.bin";
 const char *TMP_FILENAME = "tmp.bin";
 
@@ -14,8 +21,6 @@ const int COL_COST = 15;
 const int COL_LEFT = 15;
 const int COL_SOLD = 15;
 const int ROW_SIZE = COL_NUMBER + COL_BUS_TYPE + COL_DESTINATION + COL_DATE + COL_TIME + COL_COST + COL_LEFT + COL_SOLD;
-
-void print_trips(const char *filename);
 
 struct Trip
 {
@@ -51,6 +56,9 @@ struct Trip
         strcpy(this->time_arrival, time_arrival);
     }
 };
+
+void print_trip(Trip *trip);
+void print_trips(const char *filename);
 
 #pragma region STACK
 struct StackData
@@ -174,7 +182,20 @@ void set_trip(int ind, Trip *trip, const char *filename = DATA_FILENAME)
 }
 void delete_last_trip()
 {
-    std::filesystem::resize_file("data.bin", sizeof(Trip) * (get_struct_num() - 1));
+    std::size_t count = get_struct_num();
+    if (count == 0)
+        return;
+    std::size_t new_size = sizeof(Trip) * (count - 1);
+#ifdef _WIN32
+    int fd = _open(DATA_FILENAME, _O_WRONLY | _O_BINARY);
+    if (fd != -1)
+    {
+        _chsize(fd, new_size);
+        _close(fd);
+    }
+#else
+    truncate(DATA_FILENAME, new_size);
+#endif
 }
 #pragma endregion
 
@@ -372,26 +393,43 @@ Trip *find_by_race_number(int number)
     return nullptr;
 }
 
-Trip *find_by_destination(const char *destination)
+void find_by_destination(const char *destination)
 {
     quick_sort();
     int l = 0;
     int r = get_struct_num() - 1;
     Trip *tmp = nullptr;
+    int first = -1;
     while (l <= r)
     {
         int mid = (l + r) / 2;
         tmp = get_trip(mid);
         int res = strcmp(tmp->destination, destination);
         if (res == 0)
-            return tmp;
+        {
+            first = mid;
+            r = mid - 1;
+        }
         else if (res < 0)
             l = mid + 1;
         else
             r = mid - 1;
     }
+
     delete tmp;
-    return nullptr;
+    if (first == -1)
+    {
+        std::cout << "Не найдено подходящих записей\n";
+        return;
+    }
+    tmp = get_trip(first++);
+    while (strcmp(tmp->destination, destination) == 0)
+    {
+        print_trip(tmp);
+        delete tmp;
+        tmp = get_trip(first++);
+    }
+    delete tmp;
 }
 void print_proper_trips(const char *dest, const char *max_time, int min_ticks)
 {
@@ -645,16 +683,7 @@ int main()
             std::cout << "Введите пункт назначения:\n-> ";
             char dest[50];
             std::cin >> dest;
-            Trip *tr = find_by_destination(dest);
-            if (tr)
-            {
-                print_trip(tr);
-                delete tr;
-            }
-            else
-            {
-                std::cout << "Рейс не найден.\n";
-            }
+            find_by_destination(dest);
         }
         else if (choise == 7)
         {
