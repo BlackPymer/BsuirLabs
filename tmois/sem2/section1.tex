@@ -1,0 +1,175 @@
+\begin{SCn}
+\begin{small}
+
+\scnheader{Prolog}
+\scnidtf{Декларативный язык логического программирования для создания экспертных систем}
+\scnidtf{PROLOG (PROgrammation en LOGique)}
+\scniselement{язык логического программирования}
+\begin{scnrelfromlist}{разработчик}
+    \scnitem{Ален Колмероэр}
+    \scnitem{Филипп Руссело}
+\end{scnrelfromlist}
+\scnrelfrom{год создания}{1972}
+\scnrelfrom{основная парадигма}{логическое программирование}
+\scntext{описание}{Prolog представляет собой язык программирования, основанный на исчислении предикатов первого порядка. Программа состоит из базы знаний фактов и правил вывода, а выполнение запросов осуществляется через механизм резолюции и унификации с автоматическим поиском с возвратом.}
+\scntext{описание}{Язык поддерживает символьные вычисления, работу с рекурсивными структурами данных, динамическую модификацию базы знаний во время выполнения. Расширения языка включают ограничения (CLP), вероятностное программирование (ProbLog) и параллельное исполнение}
+\scntext{назначение}{Применяется при разработке экспертных систем, систем автоматического доказательства теорем, обработки текстов на естественных языках, создания прототипов систем искусственного интеллекта и решения комбинаторных задач.}
+\begin{scnrelfromset}{основные конструкции}
+    \scnfileitem{факт (fact)}
+    \scnfileitem{правило (rule)}
+    \scnfileitem{цель (goal)}
+    \scnfileitem{предикат (predicate)}
+\end{scnrelfromset}
+\scnrelfrom{стратегия вывода}{резолюция SLD-дерева с поиском в глубину}
+\begin{scnrelfromlist}{поддержка}
+    \scnfileitem{рекурсивные определения}
+    \scnfileitem{составные термы}
+    \scnfileitem{модификация базы знаний}
+    \scnfileitem{отсечение (cut)}
+\end{scnrelfromlist}
+\begin{scnrelfromlist}{применение}
+    \scnitem{экспертные системы}
+    \scnitem{системы принятия решений}
+    \scnitem{лингвистический анализ}
+    \scnitem{синтаксический разбор}
+    \scnitem{базы знаний}
+    \scnitem{верификация программ}
+\end{scnrelfromlist}
+\begin{scnrelfromset}{примеры использования}
+    \scnfileitem{Медицинские диагностические системы (MYCIN-подобные системы)}
+    \scnfileitem{Системы планирования и навигации (робототехника, игровые сценарии)}
+    \scnfileitem{Задачи удовлетворения ограничений (расписания, размещения)}
+    \scnfileitem{Анализ и генерация текстов (грамматики Definite Clause Grammar)}
+    \scnfileitem{Семантические веб-технологии и онтологии}
+    \scnfileitem{Прототипирование систем машинного обучения}
+    \scnfileitem{Вероятностное программирование для неопределенного вывода}
+\end{scnrelfromset}
+\begin{scnrelfromset}{реализации}
+    \scnitem{SWI-Prolog}
+    \scnitem{SICStus Prolog}
+    \scnitem{GNU Prolog}
+    \scnitem{ECLiPSe}
+    \scnitem{YAP Prolog}
+\end{scnrelfromset}
+\begin{scnrelfromset}{особенности}
+    \scnfileitem{декларативность описания}
+    \scnfileitem{мощные средства символьной обработки}
+    \scnfileitem{недетерминированность исполнения}
+    \scnfileitem{возможность метапрограммирования}
+    \scnfileitem{близость к математической логике}
+\end{scnrelfromset}
+\begin{scnrelfromset}{ограничения}
+    \scnfileitem{возможность зацикливания при неправильном порядке правил}
+    \scnfileitem{низкая эффективность при работе с числовыми данными}
+    \scnfileitem{отсутствие встроенных средств параллелизма}
+\end{scnrelfromset}
+\begin{scnrelfromset}{библиографические источники}
+    \scnfileitem{Clocksin W. F., Mellish C. S. Programming in Prolog. – 5th ed. – Berlin : Springer-Verlag, 2003.}
+    \scnfileitem{Sterling L., Shapiro E. The Art of Prolog: Advanced Programming Techniques. – 2nd ed. – Cambridge, Mass. : MIT Press, 1994.}
+    \scnfileitem{Bratko I. PROLOG Programming for Artificial Intelligence. – 4th ed. – Harlow : Addison-Wesley, 2012.}
+    \scnfileitem{Prologue-Framework: документация [Электронный ресурс]. — 2025. — URL: https://prologue-framework.ru/documentation/ (дата обращения: 12.05.2025).}
+\end{scnrelfromset}
+
+\scnheader{LINQ}
+\scnidtf{Язык интегрированных запросов, разработанный Microsoft для платформы .NET}
+\scnidtf{LINQ (Language Integrated Query)}
+\scniselement{язык запросов}
+\begin{scnrelfromlist}{разработчик}
+    \scnitem{Microsoft}
+    \scnitem{Андерс Хейлсберг}
+\end{scnrelfromlist}
+\scnrelfrom{год создания}{2007}
+\scnrelfrom{основная парадигма}{декларативное программирование, функциональное программирование}
+\scntext{описание}{LINQ --- технология платформы .NET, предоставляющая возможности запросов непосредственно в коде языков C\# и VB.NET. LINQ объединяет синтаксис запросов с возможностями типобезопасности и автодополнения в средах разработки.}
+\scntext{описание}{LINQ поддерживает запросы к различным источникам данных: коллекциям в памяти (LINQ to Objects), базам данных (LINQ to SQL, Entity Framework), XML-документам (LINQ to XML), базам данных NoSQL и другим источникам через провайдеры.}
+\scntext{назначение}{LINQ предназначен для упрощения работы с данными, предоставления единого синтаксиса для запросов к различным источникам данных, обеспечения типобезопасности и рефакторинга запросов на этапе компиляции.}
+\begin{scnrelfromset}{основные конструкции}
+    \scnfileitem{выражение запроса (query expression)}
+    \scnfileitem{методы расширения (extension methods)}
+    \scnfileitem{лямбда-выражения}
+    \scnfileitem{анонимные типы}
+\end{scnrelfromset}
+\scnrelfrom{стратегия выполнения}{ленивое вычисление (deferred execution)}
+\begin{scnrelfromlist}{поддержка}
+    \scnfileitem{типобезопасность}
+    \scnfileitem{интеграция с IDE (IntelliSense)}
+    \scnfileitem{композиция запросов}
+    \scnfileitem{параллельное выполнение (PLINQ)}
+\end{scnrelfromlist}
+\begin{scnrelfromlist}{применение}
+    \scnitem{работа с коллекциями объектов}
+    \scnitem{доступ к реляционным базам данных}
+    \scnitem{обработка XML и JSON}
+    \scnitem{фильтрация и преобразование данных}
+    \scnitem{агрегация и группировка данных}
+    \scnitem{построение динамических запросов}
+\end{scnrelfromlist}
+\begin{scnrelfromset}{примеры использования}
+    \scnfileitem{Фильтрация и сортировка коллекций объектов в памяти}
+    \scnfileitem{Выборка данных из баз данных через Entity Framework}
+    \scnfileitem{Преобразование и агрегация данных для отчётности}
+    \scnfileitem{Валидация данных с использованием методов Any, All, Contains}
+    \scnfileitem{Группировка данных по ключам для аналитики}
+    \scnfileitem{Параллельная обработка больших объёмов данных с PLINQ}
+    \scnfileitem{Построение динамических запросов в веб-приложениях}
+\end{scnrelfromset}
+\begin{scnrelfromset}{реализации}
+    \scnitem{LINQ to Objects}
+    \scnitem{LINQ to SQL}
+    \scnitem{LINQ to Entities (Entity Framework)}
+    \scnitem{LINQ to XML}
+    \scnitem{PLINQ (Parallel LINQ)}
+\end{scnrelfromset}
+\begin{scnrelfromset}{особенности}
+    \scnfileitem{интеграция в язык программирования}
+    \scnfileitem{типобезопасность на этапе компиляции}
+    \scnfileitem{поддержка IntelliSense в IDE}
+    \scnfileitem{ленивое выполнение запросов}
+    \scnfileitem{композируемость запросов}
+    \scnfileitem{поддержка параллельного выполнения}
+\end{scnrelfromset}
+\begin{scnrelfromset}{ограничения}
+    \scnfileitem{зависимость от платформы .NET}
+    \scnfileitem{некоторые операции могут быть неэффективны при трансляции в SQL}
+    \scnfileitem{ограниченная поддержка сложных запросов в некоторых провайдерах}
+\end{scnrelfromset}
+\begin{scnrelfromset}{библиографические источники}
+    \scnfileitem{Albahari J., Albahari B. C\# 9.0 in a Nutshell: The Definitive Reference. – 7th ed. – Sebastopol, CA : O'Reilly Media, 2020.}
+    \scnfileitem{Troelsen A., Japikse P. Pro C\# 9 with .NET 5: Foundational Principles and Practices in Programming. – 9th ed. – Berkeley, CA : Apress, 2021.}
+    \scnfileitem{LINQ (Language Integrated Query) [Электронный ресурс] / Microsoft Corporation. — 2025. — URL: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/ (дата обращения: 12.05.2025).}
+    \scnfileitem{Gabay M. LINQ Pocket Reference. – Sebastopol, CA : O'Reilly Media, 2008.}
+\end{scnrelfromset}
+
+\bigskip
+
+\scnheader{Сравнение языков представления информации Prolog и LINQ}
+\begin{scneqtovector}
+    \scnitem{Prolog}
+    \scnitem{LINQ}
+\end{scneqtovector}
+\begin{scnrelfromset}{сходства}
+    \scnfileitem{Оба реализуют декларативный подход к программированию}
+    \scnfileitem{Предназначены для работы с данными и знаниями}
+    \scnfileitem{Обеспечивают высокий уровень абстракции при работе с информацией}
+    \scnfileitem{Поддерживают логические операции фильтрации и выбора}
+    \scnfileitem{Имеют встроенные механизмы вывода результатов на основе заданных условий}
+    \scnfileitem{Применяются для задач обработки данных и интеллектуальных систем}
+\end{scnrelfromset}
+\begin{scnrelfromset}{различия}
+    \scnfileitem{Prolog - язык логического программирования общего назначения, LINQ - технология интегрированных запросов в рамках платформы .NET}
+    \scnfileitem{Prolog основан на логике предикатов первого порядка, LINQ - на реляционной алгебре и функциональном программировании}
+    \scnfileitem{Prolog использует механизм унификации и поиска с возвратом, LINQ - методы расширения и выражения запросов}
+    \scnfileitem{Prolog применяется для логического вывода и экспертных систем, LINQ - для запросов к данным и их преобразования}
+    \scnfileitem{Prolog независим от платформы, LINQ требует платформы .NET}
+    \scnfileitem{Prolog работает с фактами и правилами, LINQ - с коллекциями и источниками данных}
+\end{scnrelfromset}
+\begin{scnrelfromset}{рекомендации по выбору}
+    \scnfileitem{Prolog рекомендуется для задач логического вывода, построения экспертных систем, обработки естественного языка и прототипирования ИИ}
+    \scnfileitem{Prolog подходит для исследований в области логического программирования и символьных вычислений}
+    \scnfileitem{LINQ целесообразно использовать для приложений на платформе .NET, требующих работы с данными из различных источников}
+    \scnfileitem{LINQ оптимален для задач фильтрации, преобразования и агрегации данных в корпоративных приложениях}
+    \scnfileitem{LINQ рекомендуется при разработке веб-приложений, работающих с базами данных через Entity Framework}
+\end{scnrelfromset}
+
+\end{small}
+\end{SCn}

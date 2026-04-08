@@ -1,0 +1,237 @@
+\begin{SCn}
+\begin{small}
+
+\scnheader{Protégé}
+\scnidtf{Инструмент для разработки OWL-онтологий, разработанный Стэнфордским университетом}
+\scnidtf{Редактор онтологий, разработанный в Стэнфорде}
+\scniselement{инструмент для разработки онтологий}
+\begin{scnindent}
+    \scnidtf{редактор онтологий}
+\end{scnindent}
+\scniselement{семантическое программное обеспечение}
+\scnrelfrom{разработчик}{Стэнфордский центр биомедицинской информатики}
+\scnrelfrom{год создания}{1987}
+\scntext{текущая стабильная версия}{5.6.5}
+\scntext{дата выпуска текущей версии}{28 октября 2024}
+\scnrelfrom{лицензия}{BSD 2-clause}
+\scnrelfrom{язык разработки}{Java}
+\scntext{назначение}{Создание и управление сложными семантическими моделями для задач искусственного интеллекта и систем принятия решения}
+\begin{scnrelfromset}{варианты исполнения}
+    \scnitem{Protégé Desktop}
+    \begin{scnindent}
+        \scnidtf{Настольный вариант реализации Protégé}
+        \scnnote{Распространяется как ZIP-архив с встроенной JRE, требует 1.5 ГБ дискового пространства}
+    \end{scnindent}
+    \scnitem{WebProtégé}
+    \begin{scnindent}
+        \scnidtf{Облачный вариант реализации Protégé}
+        \scnnote{Реализовано как клиент-серверное решение с REST API и WebSocket для реального взаимодействия. Более 68,000 проектов и 50,000 пользователей, включая команды из MIT и NASA}
+    \end{scnindent}
+\end{scnrelfromset}
+\begin{scnrelfromset}{функциональные возможности}
+    \scnfileitem{редактирование онтологий}
+    \begin{scnindent}
+        \scnidtf{создание и модификация элементов онтологий}
+        \scntext{пример использования}{Создание иерархии медицинских диагнозов с указанием отношений "is-a" и "part-of"}
+    \end{scnindent}
+    \scnfileitem{визуализация онтологий}
+    \begin{scnindent}
+        \scnidtf{многорежимное отображение структуры онтологий}
+        \begin{scnindent}
+            \begin{scnrelfromset}{режимы визуализации}
+                \scnfileitem{древовидное представление таксонов}
+                \scnfileitem{графовые диаграммы отношений}
+                \scnfileitem{матрицы свойств}
+                \scnfileitem{интерактивные дендрограммы}
+            \end{scnrelfromset}
+        \end{scnindent}
+        \scntext{пример использования}{Визуальная диагностика циклических зависимостей в онтологии транспортных сетей}
+    \end{scnindent}
+    \scnfileitem{валидация онтологий}
+    \begin{scnindent}
+        \begin{scnrelfromset}{типы проверок}
+            \scnfileitem{синтаксическая корректность OWL}
+            \scnfileitem{логическая противоречивость}
+            \scnfileitem{нарушения constraints}
+            \scnfileitem{соответствие профилям OWL 2 (EL, QL, RL)}
+        \end{scnrelfromset}
+    \end{scnindent}
+    \scnfileitem{поддержка совместной работы}
+    \begin{scnindent}
+        \begin{scnrelfromset}{уточнение}
+            \scnfileitem{отслеживание всех изменений}
+            \scnfileitem{комментирование элементов репозитория}
+            \scnfileitem{чат с другими пользователями}
+            \scnfileitem{голосование по изменениям}
+            \scnfileitem{аннотирование классов и экземпляров}
+        \end{scnrelfromset}
+    \end{scnindent}
+\scnfileitem{поддержка плагинов}
+\begin{scnindent}
+    \scntext{уточнение}{имеет архитектуру, расширяемую за счет плагинов}
+    \begin{scnrelfromset}{категории плагинов}
+        \scnfileitem{плагины для визуализации (OntoGraf, VOWL)}
+        \scnfileitem{плагины для логического вывода (Protege-DL)}
+        \scnfileitem{планины для импорта и экспорта (CSV, JSON-LD)}
+    \end{scnrelfromset}
+    \scnrelfrom{пример}{SHACL4Protege}
+    \begin{scnindent}
+        \scntext{описание}{плагин для валидации ограничений SHACL}
+    \end{scnindent}
+\end{scnindent}
+\end{scnrelfromset}
+\begin{scnrelfromset}{поддерживаемые языки}
+    \scnitem{OWL 2}
+    \scnitem{OWL}
+    \scnitem{RDF}
+    \scnitem{RDFS}
+    \scnitem{OBO}
+    \scnitem{Turtle}
+\end{scnrelfromset}
+\begin{scnrelfromset}{экосистема расширений}
+    \scnitem{OWLViz}
+    \begin{scnindent}
+        \scntext{назначение}{Визуализация таксономических деревьев с экспортом в векторную графику}
+    \end{scnindent}
+    \scnitem{SWRLTab}
+    \begin{scnindent}
+        \scnidtf{Редактор правил Semantic Web Rule Language с синтаксическим анализом}
+    \end{scnindent}
+    \scnitem{RDFSync}
+    \begin{scnindent}
+        \scntext{особенность}{Синхронизация с распределенными RDF-хранилищами через SPARQL 1.1}
+    \end{scnindent}
+\end{scnrelfromset}
+\begin{scnrelfromset}{преимущества}
+    \scnfileitem{открытый исходный код}
+    \begin{scnindent}
+        \scntext{уточнение}{Позволяет адаптировать инструмент под специфические задачи, например, интеграцию с медицинскими базами данных через пользовательские плагины.}
+    \end{scnindent}
+    \scnfileitem{бесплатное использование}
+    \scnfileitem{активное сообщество пользователей и разработчиков}
+    \scnfileitem{полная поддержка стандартов W3C}
+    \scnfileitem{расширяемость через плагины}
+    \scnfileitem{удобный интерфейс для начинающих}
+\end{scnrelfromset}
+\begin{scnrelfromset}{недостатки}
+    \scnfileitem{ограниченные возможности интеграции с базами данных без дополнительных плагинов}
+    \scnfileitem{относительно ограниченные возможности для разработки корпоративных приложений}
+\end{scnrelfromset}
+\begin{scnrelfromset}{библиографические источники}
+    \scnfileitem{Musen M. A. The Protégé Project: A Look Back and a Look Forward // AI Matters. – 2015. – Vol. 1, N 4. – P. 4–12.}
+    \scnfileitem{Noy N. F., Sintek M., Decker S., Crubezy M., Fergerson R. W., Musen M. A. Creating Semantic Web Contents with Protégé-2000 // IEEE Intelligent Systems. – 2001. – Vol. 16, N 2. – P. 60–71.}
+    \scnfileitem{Protégé [Электронный ресурс]. — 2025. — URL: https://protege.stanford.edu (дата обращения: 12.05.2025).}
+    \scnfileitem{WebProtégé: Collaborative Ontology Development for the Semantic Web [Электронный ресурс]. — 2025. — URL: https://webprotege.stanford.edu (дата обращения: 12.05.2025).}
+    \scnfileitem{OWL 2 Web Ontology Language Document Overview [Электронный ресурс]. — 2025. — URL: https://www.w3.org/TR/owl2-overview/ (дата обращения: 12.05.2025).}
+\end{scnrelfromset}
+
+\scnheader{Google Knowledge Graph}
+\scnidtf{База знаний, используемая Google для улучшения результатов поиска семантически связанной информацией}
+\scnidtf{KG (Knowledge Graph)}
+\scniselement{формат представления знаний}
+\scniselement{семантическая платформа}
+\begin{scnrelfromlist}{разработчик}
+    \scnitem{Google Inc.}
+\end{scnrelfromlist}
+\scnrelfrom{год создания}{2012}
+\scnrelfrom{основная парадигма}{граф знаний, семантические сети}
+\scntext{описание}{Google Knowledge Graph --- технология хранения и представления структурированных знаний в виде графа сущностей и отношений между ними. Каждая сущность описывается набором атрибутов и связей с другими сущностями.}
+\scntext{описание}{Knowledge Graph содержит миллиарды фактов о миллионах сущностей: людях, местах, организациях, событиях, продуктах и других объектах реального мира. Данные собираются из различных источников, включая Wikipedia, Wikidata, CIA World Factbook и партнёрские источники.}
+\scntext{назначение}{Предназначен для предоставления пользователям прямой информации в результатах поиска, улучшения релевантности поиска через понимание семантики запросов, связывания связанных сущностей и фактов.}
+\begin{scnrelfromset}{основные конструкции}
+    \scnfileitem{сущность (entity)}
+    \scnfileitem{отношение (relation)}
+    \scnfileitem{атрибут (attribute)}
+    \scnfileitem{триплет (subject-predicate-object)}
+\end{scnrelfromset}
+\scnrelfrom{модель данных}{ориентированный граф знаний}
+\begin{scnrelfromlist}{поддержка}
+    \scnfileitem{мультиязычность}
+    \scnfileitem{связывание сущностей}
+    \scnfileitem{верификация фактов}
+    \scnfileitem{масштабируемость}
+\end{scnrelfromlist}
+\begin{scnrelfromlist}{применение}
+    \scnitem{поисковые системы}
+    \scnitem{семантический поиск}
+    \scnitem{интеллектуальные помощники}
+    \scnitem{рекомендательные системы}
+    \scnitem{обработка естественного языка}
+    \scnitem{извлечение знаний}
+\end{scnrelfromlist}
+\begin{scnrelfromset}{примеры использования}
+    \scnfileitem{Панели знаний (Knowledge Panels) в результатах поиска Google}
+    \scnfileitem{Автозаполнение поисковых запросов с учётом семантики}
+    \scnfileitem{Связывание биографических данных известных личностей}
+    \scnfileitem{Представление информации о фильмах, книгах, музыкальных произведениях}
+    \scnfileitem{Геолокационные данные и информация о местах}
+    \scnfileitem{Интеграция с Google Assistant для ответов на вопросы}
+    \scnfileitem{Улучшение поиска через понимание намерений пользователя}
+\end{scnrelfromset}
+\begin{scnrelfromset}{технологии и стандарты}
+    \scnitem{RDF (Resource Description Framework)}
+    \scnitem{Schema.org}
+    \scnitem{JSON-LD}
+    \scnitem{Microdata}
+    \scnitem{Wikidata}
+\end{scnrelfromset}
+\begin{scnrelfromset}{особенности}
+    \scnfileitem{огромный масштаб (миллиарды фактов)}
+    \scnfileitem{постоянное обновление и расширение}
+    \scnfileitem{мультиязычная поддержка}
+    \scnfileitem{интеграция с поисковыми алгоритмами}
+    \scnfileitem{использование машинного обучения для извлечения знаний}
+    \scnfileitem{поддержка структурированной разметки для веб-мастеров}
+\end{scnrelfromset}
+\begin{scnrelfromset}{ограничения}
+    \scnfileitem{закрытость внутренней структуры и API}
+    \scnfileitem{зависимость от качества источников данных}
+    \scnfileitem{возможные ошибки в автоматически извлечённых данных}
+    \scnfileitem{ограниченный прямой доступ для внешних разработчиков}
+\end{scnrelfromset}
+\begin{scnrelfromset}{библиографические источники}
+    \scnfileitem{Singhal A. Introducing the Knowledge Graph: Things, Not Strings // Official Google Blog. – 2012. – URL: https://blog.google/products/search/introducing-knowledge-graph-things-not/ (дата обращения: 12.05.2025).}
+    \scnfileitem{Noy N. F., Gao Y., Jain A., Narayanan A., Patterson A., Taylor J. Industry-scale Knowledge Graphs: Lessons and Challenges // Communications of the ACM. – 2019. – Vol. 62, N 8. – P. 36–43.}
+    \scnfileitem{Knowledge Graph Search API [Электронный ресурс] / Google LLC. — 2025. — URL: https://developers.google.com/knowledge-graph (дата обращения: 12.05.2025).}
+    \scnfileitem{Schema.org [Электронный ресурс]. — 2025. — URL: https://schema.org (дата обращения: 12.05.2025).}
+    \scnfileitem{Wikidata [Электронный ресурс]. — 2025. — URL: https://www.wikidata.org (дата обращения: 12.05.2025).}
+\end{scnrelfromset}
+
+\bigskip
+
+\scnheader{Сравнение инструментов представления знаний Protégé и Google Knowledge Graph}
+\begin{scneqtovector}
+    \scnitem{Protégé}
+    \scnitem{Google Knowledge Graph}
+\end{scneqtovector}
+\begin{scnrelfromset}{сходства}
+    \scnfileitem{Оба предназначены для представления и управления структурированными знаниями}
+    \scnfileitem{Используют семантические технологии и онтологический подход}
+    \scnfileitem{Работают с сущностями и отношениями между ними}
+    \scnfileitem{Поддерживают стандарты Semantic Web (RDF, OWL)}
+    \scnfileitem{Применяются для организации знаний в машиночитаемом формате}
+    \scnfileitem{Позволяют связывать информацию из различных источников}
+    \scnfileitem{Используются для улучшения поиска и навигации по данным}
+\end{scnrelfromset}
+\begin{scnrelfromset}{различия}
+    \scnfileitem{Protégé --- инструмент для создания и редактирования онтологий, Google Knowledge Graph --- готовая платформа и база знаний}
+    \scnfileitem{Protégé ориентирован на индивидуальных разработчиков и исследователей, Knowledge Graph --- на массовое использование в поисковой системе}
+    \scnfileitem{Protégé имеет открытый исходный код и бесплатен, Knowledge Graph --- проприетарная закрытая система Google}
+    \scnfileitem{Protégé позволяет создавать собственные онтологии с нуля, Knowledge Graph предоставляет готовую базу знаний}
+    \scnfileitem{Protégé работает локально или в веб-версии с ограниченными данными, Knowledge Graph содержит миллиарды фактов о миллионах сущностей}
+    \scnfileitem{Knowledge Graph интегрирован с поисковыми алгоритмами Google, Protégé --- независимый инструмент}
+    \scnfileitem{Protégé поддерживает ручное создание и редактирование онтологий, Knowledge Graph использует автоматическое извлечение знаний из множества источников}
+    \scnfileitem{Knowledge Graph предоставляет публичный API для поиска сущностей, Protégé не имеет аналогичного публичного интерфейса}
+\end{scnrelfromset}
+\begin{scnrelfromset}{рекомендации по выбору}
+    \scnfileitem{Protégé рекомендуется для исследовательских проектов, создания специализированных онтологий и образовательных целей}
+    \scnfileitem{Protégé подходит для разработки предметно-ориентированных баз знаний с полным контролем над структурой}
+    \scnfileitem{Protégé целесообразно использовать при необходимости экспорта онтологий в стандартных форматах (OWL, RDF)}
+    \scnfileitem{Google Knowledge Graph рекомендуется для улучшения видимости контента в поиске Google через структурированную разметку}
+    \scnfileitem{Knowledge Graph API полезен для приложений, требующих доступа к обширной базе общих знаний}
+    \scnfileitem{Для корпоративных проектов с собственными данными целесообразно создание внутренней базы знаний по аналогии с Knowledge Graph}
+    \scnfileitem{Использование Schema.org и JSON-LD рекомендуется для интеграции с Knowledge Graph и другими семантическими платформами}
+\end{scnrelfromset}
+
+\end{small}
+\end{SCn}
