@@ -54,6 +54,7 @@ struct Trip
 void print_trip(Trip trip);
 void print_trips(FILE *file);
 void quick_sort_silent(FILE *file);
+void print_table();
 
 #pragma region STACK
 struct StackData
@@ -120,6 +121,37 @@ struct Stack
 #pragma endregion
 
 #pragma region FILES_WORKING
+bool init_report_file(const char *filename, FILE *&file, const char *open_type)
+{
+    if (file != nullptr)
+    {
+        fclose(file);
+        file = nullptr;
+    }
+    file = fopen(filename, open_type);
+    if (!file)
+    {
+        file = fopen(filename, "w");
+        if (file == nullptr)
+            return false;
+        fclose(file);
+        file = fopen(filename, open_type);
+    }
+    if (!file)
+        return false;
+    fprintf(file, "\n");
+    fprintf(file, "%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s\n",
+            COL_NUMBER, "Trip number",
+            COL_BUS_TYPE, "Bus type",
+            COL_DESTINATION, "Destination",
+            COL_DATE, "Date departure",
+            COL_TIME, "Time departure",
+            COL_TIME, "Time arrival",
+            COL_COST, "Ticket cost",
+            COL_LEFT, "Tickets left",
+            COL_SOLD, "Tickets sold");
+    return true;
+}
 bool init_file(const char *filename, FILE *&file)
 {
     if (file != nullptr)
@@ -311,7 +343,6 @@ void quick_sort(FILE *file)
             st.push(sd2);
         }
     }
-    print_trips(file);
 }
 void sort_by_time_arrival(FILE *file)
 {
@@ -399,7 +430,7 @@ void find_by_destination(const char *destination, FILE *file)
         std::cout << "No matching records found\n";
         return;
     }
-    quick_sort_silent(file);
+    quick_sort(file);
     int l = 0;
     int r = get_struct_num(file) - 1;
     Trip tmp;
@@ -426,58 +457,21 @@ void find_by_destination(const char *destination, FILE *file)
     }
     int idx = first;
     bool found = false;
-
-    FILE *report = fopen("report_destination.txt", "w");
-    if (report)
-    {
-        fprintf(report, "\n");
-        fprintf(report, "%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s\n",
-                COL_NUMBER, "Trip number",
-                COL_BUS_TYPE, "Bus type",
-                COL_DESTINATION, "Destination",
-                COL_DATE, "Date departure",
-                COL_TIME, "Time departure",
-                COL_TIME, "Time arrival",
-                COL_COST, "Ticket cost",
-                COL_LEFT, "Tickets left",
-                COL_SOLD, "Tickets sold");
-    }
-
+    print_table();
     while (idx < n)
     {
         tmp = get_trip(idx, file);
         if (strcmp(tmp.destination, destination) != 0)
             break;
         print_trip(tmp);
-        if (report)
-        {
-            fprintf(report, "%-*d%-*s%-*s%-*s%-*s%-*s%-*.*f%-*d%-*d\n",
-                    COL_NUMBER, tmp.number,
-                    COL_BUS_TYPE, tmp.bus_type,
-                    COL_DESTINATION, tmp.destination,
-                    COL_DATE, tmp.date_departure,
-                    COL_TIME, tmp.time_departure,
-                    COL_TIME, tmp.time_arrival,
-                    COL_COST, 2, tmp.ticket_cost,
-                    COL_LEFT, tmp.tickets_left,
-                    COL_SOLD, tmp.tickets_sold);
-        }
         found = true;
         ++idx;
-    }
-
-    if (report)
-    {
-        for (int i = 0; i < ROW_SIZE; ++i)
-            fputc('-', report);
-        fputc('\n', report);
-        fclose(report);
     }
 
     if (!found)
         std::cout << "No matching records found\n";
 }
-void print_proper_trips(const char *dest, const char *max_time, int min_ticks, FILE *main_file)
+void print_proper_trips(const char *dest, const char *max_time, int min_ticks, FILE *main_file, FILE *&report)
 {
     int n = get_struct_num(main_file);
     if (n == 0)
@@ -485,130 +479,52 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks, F
         std::cout << "\nNo records found matching the criteria\n";
         return;
     }
-    Trip *buffer = new Trip[n];
     int j = 0;
+    bool found = 0;
+
     for (int i = 0; i < n; ++i)
     {
         Trip tr = get_trip(i, main_file);
         if (strcmp(tr.destination, dest) == 0 && strcmp(tr.time_arrival, max_time) <= 0 && tr.tickets_left >= min_ticks)
-            buffer[j++] = tr;
-    }
-    if (j > 0)
-    {
-        FILE *tmp_file = fopen(TMP_FILENAME, "wb");
-        for (int k = 0; k < j; ++k)
-            fwrite(&buffer[k], sizeof(Trip), 1, tmp_file);
-        fclose(tmp_file);
-        tmp_file = fopen(TMP_FILENAME, "r+b");
-        sort_by_time_arrival(tmp_file);
-
-        FILE *report = fopen("report_filter.txt", "w");
-        if (report)
         {
-            fprintf(report, "\n");
-            fprintf(report, "%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s\n",
-                    COL_NUMBER, "Trip number",
-                    COL_BUS_TYPE, "Bus type",
-                    COL_DESTINATION, "Destination",
-                    COL_DATE, "Date departure",
-                    COL_TIME, "Time departure",
-                    COL_TIME, "Time arrival",
-                    COL_COST, "Ticket cost",
-                    COL_LEFT, "Tickets left",
-                    COL_SOLD, "Tickets sold");
-        }
-
-        for (int i = 0; i < get_struct_num(tmp_file); ++i)
-        {
-            Trip trip = get_trip(i, tmp_file);
-            std::cout << std::left << std::setw(COL_NUMBER) << trip.number
-                      << std::left << std::setw(COL_BUS_TYPE) << trip.bus_type
-                      << std::left << std::setw(COL_DESTINATION) << trip.destination
-                      << std::left << std::setw(COL_DATE) << trip.date_departure
-                      << std::left << std::setw(COL_TIME) << trip.time_departure
-                      << std::left << std::setw(COL_TIME) << trip.time_arrival
-                      << std::left << std::setw(COL_COST) << trip.ticket_cost
-                      << std::left << std::setw(COL_LEFT) << trip.tickets_left
-                      << std::left << std::setw(COL_SOLD) << trip.tickets_sold << '\n';
+            if (!found)
+            {
+                print_table();
+                found = 1;
+            }
+            ++j;
+            print_trip(tr);
             if (report)
             {
                 fprintf(report, "%-*d%-*s%-*s%-*s%-*s%-*s%-*.*f%-*d%-*d\n",
-                        COL_NUMBER, trip.number,
-                        COL_BUS_TYPE, trip.bus_type,
-                        COL_DESTINATION, trip.destination,
-                        COL_DATE, trip.date_departure,
-                        COL_TIME, trip.time_departure,
-                        COL_TIME, trip.time_arrival,
-                        COL_COST, 2, trip.ticket_cost,
-                        COL_LEFT, trip.tickets_left,
-                        COL_SOLD, trip.tickets_sold);
+                        COL_NUMBER, tr.number,
+                        COL_BUS_TYPE, tr.bus_type,
+                        COL_DESTINATION, tr.destination,
+                        COL_DATE, tr.date_departure,
+                        COL_TIME, tr.time_departure,
+                        COL_TIME, tr.time_arrival,
+                        COL_COST, 2, tr.ticket_cost,
+                        COL_LEFT, tr.tickets_left,
+                        COL_SOLD, tr.tickets_sold);
             }
         }
-        for (int i = 0; i < ROW_SIZE; ++i)
-            std::cout << "-";
-        std::cout << '\n';
-
-        if (report)
-        {
-            for (int i = 0; i < ROW_SIZE; ++i)
-                fputc('-', report);
-            fputc('\n', report);
-            fclose(report);
-        }
-
-        fclose(tmp_file);
-        remove(TMP_FILENAME);
     }
-    else
+    if (j == 0)
         std::cout << "\nNo records found matching the criteria\n";
-    delete[] buffer;
+    fclose(report);
 }
-void print_by_bus_type(const char *bus_type, const char *min_departure_time, FILE *file)
+void print_by_bus_type(const char *bus_type, const char *min_departure_time, FILE *file, FILE *&report)
 {
     bool found = false;
-    FILE *report = nullptr;
     for (int i = 0; i < get_struct_num(file); ++i)
     {
         Trip trip = get_trip(i, file);
         if (strcmp(bus_type, trip.bus_type) == 0 && strcmp(trip.time_departure, min_departure_time) > 0)
         {
             if (!found)
-            {
-                std::cout << "\n"
-                          << std::left << std::setw(COL_NUMBER) << "Trip number"
-                          << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
-                          << std::left << std::setw(COL_DESTINATION) << "Destination"
-                          << std::left << std::setw(COL_DATE) << "Date departure"
-                          << std::left << std::setw(COL_TIME) << "Time departure"
-                          << std::left << std::setw(COL_TIME) << "Time arrival"
-                          << std::left << std::setw(COL_COST) << "Ticket cost"
-                          << std::left << std::setw(COL_LEFT) << "Tickets left"
-                          << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
-                report = fopen("report_bus_type.txt", "w");
-                if (report)
-                {
-                    fprintf(report, "\n");
-                    fprintf(report, "%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s%-*s\n",
-                            COL_NUMBER, "Trip number",
-                            COL_BUS_TYPE, "Bus type",
-                            COL_DESTINATION, "Destination",
-                            COL_DATE, "Date departure",
-                            COL_TIME, "Time departure",
-                            COL_TIME, "Time arrival",
-                            COL_COST, "Ticket cost",
-                            COL_LEFT, "Tickets left",
-                            COL_SOLD, "Tickets sold");
-                }
-            }
-            std::cout << std::left << std::setw(COL_NUMBER) << trip.number
-                      << std::left << std::setw(COL_BUS_TYPE) << trip.bus_type
-                      << std::left << std::setw(COL_DESTINATION) << trip.destination
-                      << std::left << std::setw(COL_DATE) << trip.date_departure
-                      << std::left << std::setw(COL_TIME) << trip.time_departure
-                      << std::left << std::setw(COL_TIME) << trip.time_arrival
-                      << std::left << std::setw(COL_COST) << trip.ticket_cost
-                      << std::left << std::setw(COL_LEFT) << trip.tickets_left
-                      << std::left << std::setw(COL_SOLD) << trip.tickets_sold << '\n';
+                print_table();
+
+            print_trip(trip);
             if (report)
             {
                 fprintf(report, "%-*d%-*s%-*s%-*s%-*s%-*s%-*.*f%-*d%-*d\n",
@@ -671,92 +587,17 @@ void update_by_num(int number, Trip trip, FILE *file)
         }
     }
     if (!found)
-        std::cout << "\n[NOT FOUND] Рейс не найден\n";
+        std::cout << "\n[NOT FOUND] Trip not found\n";
 }
 #pragma endregion
 
-void quick_sort_silent(FILE *file)
-{
-    int n = get_struct_num(file);
-    if (n < 2)
-        return;
-    Stack st;
-    StackData sd(0, n - 1);
-    st.push(sd);
-    while (st.top() != nullptr)
-    {
-        StackData qsd = st.pop();
-        int l = qsd.l, r = qsd.r;
-        int mid = (l + r) >> 1;
-        Trip m = get_trip(mid, file);
-        char mid_dest[50];
-        strncpy(mid_dest, m.destination, 49);
-        mid_dest[49] = '\0';
-        int i = l, j = r;
-        while (i <= j)
-        {
-            while (i <= r)
-            {
-                Trip tmp = get_trip(i, file);
-                if (strcmp(tmp.destination, mid_dest) >= 0)
-                    break;
-                ++i;
-            }
-            while (j >= l)
-            {
-                Trip tmp = get_trip(j, file);
-                if (strcmp(tmp.destination, mid_dest) <= 0)
-                    break;
-                --j;
-            }
-            if (i <= j)
-            {
-                Trip t1 = get_trip(i, file);
-                Trip t2 = get_trip(j, file);
-                set_trip(i, &t2, file);
-                set_trip(j, &t1, file);
-                ++i;
-                --j;
-            }
-        }
-        if (l < j)
-        {
-            StackData sd2(l, j);
-            st.push(sd2);
-        }
-        if (i < r)
-        {
-            StackData sd2(i, r);
-            st.push(sd2);
-        }
-    }
-}
-
 void print_trips(FILE *file)
 {
-    std::cout << "\n";
-    std::cout << "\n"
-              << std::left << std::setw(COL_NUMBER) << "Trip number"
-              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
-              << std::left << std::setw(COL_DESTINATION) << "Destination"
-              << std::left << std::setw(COL_DATE) << "Date departure"
-              << std::left << std::setw(COL_TIME) << "Time departure"
-              << std::left << std::setw(COL_TIME) << "Time arrival"
-              << std::left << std::setw(COL_COST) << "Ticket cost"
-              << std::left << std::setw(COL_LEFT) << "Tickets left"
-              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
+    print_table();
     for (int i = 0; i < get_struct_num(file); ++i)
     {
         Trip trip = get_trip(i, file);
-        std::cout << std::left << std::setw(COL_NUMBER) << trip.number
-                  << std::left << std::setw(COL_BUS_TYPE) << trip.bus_type
-                  << std::left << std::setw(COL_DESTINATION) << trip.destination
-                  << std::left << std::setw(COL_DATE) << trip.date_departure
-                  << std::left << std::setw(COL_TIME) << trip.time_departure
-                  << std::left << std::setw(COL_TIME) << trip.time_arrival
-                  << std::left << std::setw(COL_COST) << trip.ticket_cost
-                  << std::left << std::setw(COL_LEFT) << trip.tickets_left
-                  << std::left << std::setw(COL_SOLD) << trip.tickets_sold << '\n';
+        print_trip(trip);
     }
     for (int i = 0; i < ROW_SIZE; ++i)
         std::cout << "-";
@@ -765,17 +606,6 @@ void print_trips(FILE *file)
 
 void print_trip(Trip trip)
 {
-    std::cout << "\n";
-    std::cout << "\n"
-              << std::left << std::setw(COL_NUMBER) << "Trip number"
-              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
-              << std::left << std::setw(COL_DESTINATION) << "Destination"
-              << std::left << std::setw(COL_DATE) << "Date departure"
-              << std::left << std::setw(COL_TIME) << "Time departure"
-              << std::left << std::setw(COL_TIME) << "Time arrival"
-              << std::left << std::setw(COL_COST) << "Ticket cost"
-              << std::left << std::setw(COL_LEFT) << "Tickets left"
-              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
     std::cout << std::left << std::setw(COL_NUMBER) << trip.number
               << std::left << std::setw(COL_BUS_TYPE) << trip.bus_type
               << std::left << std::setw(COL_DESTINATION) << trip.destination
@@ -785,6 +615,20 @@ void print_trip(Trip trip)
               << std::left << std::setw(COL_COST) << trip.ticket_cost
               << std::left << std::setw(COL_LEFT) << trip.tickets_left
               << std::left << std::setw(COL_SOLD) << trip.tickets_sold << '\n';
+}
+void print_table()
+{
+    std::cout << '\n';
+    std::cout << "\n"
+              << std::left << std::setw(COL_NUMBER) << "Trip number"
+              << std::left << std::setw(COL_BUS_TYPE) << "Bus type"
+              << std::left << std::setw(COL_DESTINATION) << "Destination"
+              << std::left << std::setw(COL_DATE) << "Date departure"
+              << std::left << std::setw(COL_TIME) << "Time departure"
+              << std::left << std::setw(COL_TIME) << "Time arrival"
+              << std::left << std::setw(COL_COST) << "Ticket cost"
+              << std::left << std::setw(COL_LEFT) << "Tickets left"
+              << std::left << std::setw(COL_SOLD) << "Tickets sold" << '\n';
 }
 
 void initialize_data(FILE *file)
@@ -840,11 +684,10 @@ void initialize_data(FILE *file)
     Trip t24(125, "Setra", "Chelyabinsk", "2024-06-13", "12:00", "19:15", 3800.00f, 24, 26);
     set_trip(24, &t24, file);
 }
-
 int main()
 {
     std::cout << "*************************************************************************************************************************************\n\n";
-    std::cout << "                              СИСТЕМА ОТСЛЕЖИВАНИЯ РЕАЛИЗАЦИИ БИЛЕТОВ НА АВТОБУСНЫЕ ПОЕЗДКИ\n\n";
+    std::cout << "                              BUS TICKET SALES TRACKING SYSTEM\n\n";
     std::cout << "*************************************************************************************************************************************\n\n";
 
     char current_file[100] = "";
@@ -857,20 +700,20 @@ int main()
         while (!file_selected)
         {
             std::cout << "\n+-------------------------------------+\n";
-            std::cout << "|       МЕНЮ ВЫБОРА ФАЙЛА             |\n";
+            std::cout << "|       FILE SELECTION MENU           |\n";
             std::cout << "+-------------------------------------+\n";
-            std::cout << "  1 -> Создать новый файл\n";
-            std::cout << "  2 -> Удалить файл\n";
-            std::cout << "  3 -> Очистить файл\n";
-            std::cout << "  4 -> Задать файл по умолчанию\n";
-            std::cout << "  5 -> Открыть файл\n";
-            std::cout << "  6 -> Выйти из программы\n";
-            std::cout << "\n-> Выбор: ";
+            std::cout << "  1 -> Create new file\n";
+            std::cout << "  2 -> Delete file\n";
+            std::cout << "  3 -> Clear file\n";
+            std::cout << "  4 -> Set default file\n";
+            std::cout << "  5 -> Open file\n";
+            std::cout << "  6 -> Exit program\n";
+            std::cout << "\n-> Choice: ";
             int choice = 0;
             std::cin >> choice;
             if (std::cin.fail())
             {
-                std::cout << "\n[ERROR] Неверный ввод\n";
+                std::cout << "\nError: Invalid input\n";
                 std::cin.clear();
                 std::cin.ignore(9999, '\n');
                 continue;
@@ -880,42 +723,42 @@ int main()
             {
             case 1:
             {
-                std::cout << "\n-> Введите имя нового файла: ";
+                std::cout << "\n-> Enter new file name: ";
                 std::cin >> std::setw(99) >> current_file;
                 if (init_file(current_file, file))
                 {
                     initialize_data(file);
-                    std::cout << "\n[OK] Файл создан успешно\n";
+                    std::cout << "\nSuccess: File created successfully\n";
                     file_selected = true;
                 }
                 else
-                    std::cout << "\n[ERROR] Не удалось создать файл\n";
+                    std::cout << "\nError: Failed to create file\n";
                 break;
             }
             case 2:
             {
-                std::cout << "\n-> Введите имя файла для удаления: ";
+                std::cout << "\n-> Enter file name to delete: ";
                 std::cin >> std::setw(99) >> current_file;
                 if (remove(current_file) == 0)
-                    std::cout << "\n[OK] Файл удалён успешно\n";
+                    std::cout << "\nSuccess: File deleted successfully\n";
                 else
-                    std::cout << "\n[ERROR] Не удалось удалить файл\n";
+                    std::cout << "\nError: Failed to delete file\n";
                 break;
             }
             case 3:
             {
-                std::cout << "\n-> Введите имя файла для очистки: ";
+                std::cout << "\n-> Enter file name to clear: ";
                 std::cin >> std::setw(99) >> current_file;
                 if (clear_file(current_file))
-                    std::cout << "\n[OK] Файл очищен успешно\n";
+                    std::cout << "\nSuccess: File cleared successfully\n";
                 else
-                    std::cout << "\n[ERROR] Не удалось очистить файл\n";
+                    std::cout << "\nError: Failed to clear file\n";
                 break;
             }
             case 4:
             {
                 std::strcpy(current_file, "data.bin");
-                std::cout << "\n[OK] Файл по умолчанию установлен: " << current_file << "\n";
+                std::cout << "\nSuccess: Default file set: " << current_file << "\n";
                 if (init_file(current_file, file))
                 {
                     if (get_struct_num(file) == 0)
@@ -926,15 +769,15 @@ int main()
             }
             case 5:
             {
-                std::cout << "\n-> Введите имя файла для открытия: ";
+                std::cout << "\n-> Enter file name to open: ";
                 std::cin >> std::setw(99) >> current_file;
                 if (init_file(current_file, file))
                 {
-                    std::cout << "\n[OK] Файл открыт: " << current_file << "\n";
+                    std::cout << "\nSuccess: File opened: " << current_file << "\n";
                     file_selected = true;
                 }
                 else
-                    std::cout << "\n[ERROR] Не удалось открыть файл\n";
+                    std::cout << "\nError: Failed to open file\n";
                 break;
             }
             case 6:
@@ -943,7 +786,7 @@ int main()
                 file_selected = true;
                 break;
             default:
-                std::cout << "\n[ERROR] Неверный ввод\n";
+                std::cout << "\nError: Invalid choice\n";
             }
         }
 
@@ -951,27 +794,27 @@ int main()
         while (working_with_file)
         {
             std::cout << "\n+---------------------------------------------------------+\n";
-            std::cout << "|  РАБОТА С ФАЙЛОМ: " << std::left << std::setw(38) << current_file << " |\n";
+            std::cout << "|  WORKING WITH FILE: " << std::left << std::setw(38) << current_file << " |\n";
             std::cout << "+---------------------------------------------------------+\n";
-            std::cout << "\n  1 -> Вывести все рейсы\n";
-            std::cout << "  2 -> Сортировать по пункту назначения\n";
-            std::cout << "  3 -> Сортировать по дате отправления\n";
-            std::cout << "  4 -> Сортировать по времени прибытия\n";
-            std::cout << "  5 -> Поиск рейса по номеру\n";
-            std::cout << "  6 -> Поиск по пункту назначения\n";
-            std::cout << "  7 -> Фильтр по времени прибытия и билетам\n";
-            std::cout << "  8 -> Фильтр по типу автобуса и времени\n";
-            std::cout << "  9 -> Добавить рейс\n";
-            std::cout << "  10 -> Удалить рейс\n";
-            std::cout << "  11 -> Редактировать рейс\n";
-            std::cout << "  12 -> Вернуться в меню выбора файла\n";
-            std::cout << "  13 -> Выйти из программы\n";
-            std::cout << "\n-> Выбор: ";
+            std::cout << "\n  1 -> Display all trips\n";
+            std::cout << "  2 -> Sort by destination\n";
+            std::cout << "  3 -> Sort by departure date\n";
+            std::cout << "  4 -> Sort by arrival time\n";
+            std::cout << "  5 -> Search trip by number\n";
+            std::cout << "  6 -> Search by destination\n";
+            std::cout << "  7 -> Filter by arrival time and tickets\n";
+            std::cout << "  8 -> Filter by bus type and time\n";
+            std::cout << "  9 -> Add trip\n";
+            std::cout << "  10 -> Delete trip\n";
+            std::cout << "  11 -> Edit trip\n";
+            std::cout << "  12 -> Return to file selection menu\n";
+            std::cout << "  13 -> Exit program\n";
+            std::cout << "\n-> Choice: ";
             int choise = 0;
             std::cin >> choise;
             if (std::cin.fail())
             {
-                std::cout << "\n[ERROR] Неверный ввод\n";
+                std::cout << "\nError: Invalid input\n";
                 std::cin.clear();
                 std::cin.ignore(9999, '\n');
                 continue;
@@ -980,71 +823,93 @@ int main()
             if (choise == 1)
                 print_trips(file);
             else if (choise == 2)
+            {
                 quick_sort(file);
+                print_trips(file);
+            }
             else if (choise == 3)
                 selection_sort(file);
             else if (choise == 4)
                 insertion_sort(file);
             else if (choise == 5)
             {
-                std::cout << "\n-> Vvedite nomer reysa: ";
+                std::cout << "\n-> Enter trip number: ";
                 int race_number = 0;
                 std::cin >> race_number;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
                 bool success = false;
                 Trip tr = find_by_race_number(race_number, file, &success);
                 if (success)
+                {
+                    print_table();
                     print_trip(tr);
+                }
                 else
-                    std::cout << "\n[NOT FOUND] Рейс не найден\n";
+                    std::cout << "\nNot found: Trip not found\n";
             }
             else if (choise == 6)
             {
-                std::cout << "\n-> Введите пункт назначения: ";
+                std::cout << "\n-> Enter destination: ";
                 char dest[50];
                 std::cin >> std::setw(49) >> dest;
                 find_by_destination(dest, file);
             }
             else if (choise == 7)
             {
-                std::cout << "\n-> Введите пункт назначения: ";
+                std::cout << "\n-> Enter destination: ";
                 char dest[50];
                 std::cin >> std::setw(49) >> dest;
-                std::cout << "\n-> Введите максимальное время прибытия (ЧЧ:ММ): ";
+                std::cout << "\n-> Enter maximum arrival time (HH:MM): ";
                 char max_time[10];
                 std::cin >> std::setw(9) >> max_time;
-                std::cout << "\n-> Введите минимальное число некупленных билетов: ";
+                std::cout << "\n-> Enter minimum number of unsold tickets: ";
                 int min_ticks_left = 0;
                 std::cin >> min_ticks_left;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
-                print_proper_trips(dest, max_time, min_ticks_left, file);
+                std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+                int ans = 0;
+                std::cin >> ans;
+                FILE *report = NULL;
+                if (ans == 1)
+                    init_report_file("report.txt", report, "a");
+                else if (ans == 2)
+                    init_report_file("report.txt", report, "w");
+                print_proper_trips(dest, max_time, min_ticks_left, file, report);
             }
             else if (choise == 8)
             {
-                std::cout << "\n-> Введите тип автобусов: ";
+                std::cout << "\n-> Enter bus type: ";
                 char bus_type[50];
                 std::cin >> std::setw(49) >> bus_type;
-                std::cout << "\n-> Введите минимальное время отправления (ЧЧ:ММ): ";
+                std::cout << "\n-> Enter minimum departure time (HH:MM): ";
                 char min_time[10];
                 std::cin >> std::setw(9) >> min_time;
-                print_by_bus_type(bus_type, min_time, file);
+                std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+                int ans = 0;
+                std::cin >> ans;
+                FILE *report = NULL;
+                if (ans == 1)
+                    init_report_file("report.txt", report, "a");
+                else if (ans == 2)
+                    init_report_file("report.txt", report, "w");
+                print_by_bus_type(bus_type, min_time, file, report);
             }
             else if (choise == 9)
             {
                 Trip newTrip;
-                std::cout << "\n-> Введите номер рейса: ";
+                std::cout << "\n-> Enter trip number: ";
                 std::cin >> newTrip.number;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
                 bool exists = false;
@@ -1058,56 +923,54 @@ int main()
                     }
                 }
                 if (exists)
-                {
-                    std::cout << "\n[ERROR] Рейс с таким номером уже существует\n";
-                }
+                    std::cout << "\nError: Trip with this number already exists\n";
                 else
                 {
-                    std::cout << "\n-> Введите тип автобуса: ";
+                    std::cout << "\n-> Enter bus type: ";
                     std::cin >> std::setw(49) >> newTrip.bus_type;
-                    std::cout << "\n-> Введите пункт назначения: ";
+                    std::cout << "\n-> Enter destination: ";
                     std::cin >> std::setw(49) >> newTrip.destination;
-                    std::cout << "\n-> Введите дату отправления (ГГГГ-ММ-ДД): ";
+                    std::cout << "\n-> Enter departure date (YYYY-MM-DD): ";
                     std::cin >> std::setw(19) >> newTrip.date_departure;
-                    std::cout << "\n-> Введите время отправления (ЧЧ:ММ): ";
+                    std::cout << "\n-> Enter departure time (HH:MM): ";
                     std::cin >> std::setw(9) >> newTrip.time_departure;
-                    std::cout << "\n-> Введите время прибытия (ЧЧ:ММ): ";
+                    std::cout << "\n-> Enter arrival time (HH:MM): ";
                     std::cin >> std::setw(9) >> newTrip.time_arrival;
-                    std::cout << "\n-> Введите стоимость билета: ";
+                    std::cout << "\n-> Enter ticket cost: ";
                     std::cin >> newTrip.ticket_cost;
-                    std::cout << "\n-> Введите количество оставшихся билетов: ";
+                    std::cout << "\n-> Enter number of tickets left: ";
                     std::cin >> newTrip.tickets_left;
-                    std::cout << "\n-> Введите количество проданных билетов: ";
+                    std::cout << "\n-> Enter number of tickets sold: ";
                     std::cin >> newTrip.tickets_sold;
                     if (std::cin.fail())
                     {
-                        std::cout << "\n[ERROR] Неверный ввод\n";
+                        std::cout << "\nError: Invalid input\n";
                         continue;
                     }
                     set_trip(get_struct_num(file), &newTrip, file);
-                    std::cout << "\n[OK] Рейс добавлен\n";
+                    std::cout << "\nSuccess: Trip added\n";
                 }
             }
             else if (choise == 10)
             {
-                std::cout << "\n-> Введите номер рейса для удаления: ";
+                std::cout << "\n-> Enter trip number to delete: ";
                 int number;
                 std::cin >> number;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
                 delete_by_num(number, file, current_file);
             }
             else if (choise == 11)
             {
-                std::cout << "\n-> Введите номер рейса для редактирования: ";
+                std::cout << "\n-> Enter trip number to edit: ";
                 int number;
                 std::cin >> number;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
                 bool found = false;
@@ -1122,34 +985,34 @@ int main()
                 }
                 if (!found)
                 {
-                    std::cout << "\n[NOT FOUND] Рейс не найден\n";
+                    std::cout << "\nNot found: Trip not found\n";
                     continue;
                 }
                 Trip updatedTrip;
                 updatedTrip.number = number;
-                std::cout << "\n-> Введите новый тип автобуса: ";
+                std::cout << "\n-> Enter new bus type: ";
                 std::cin >> std::setw(49) >> updatedTrip.bus_type;
-                std::cout << "\n-> Введите новый пункт назначения: ";
+                std::cout << "\n-> Enter new destination: ";
                 std::cin >> std::setw(49) >> updatedTrip.destination;
-                std::cout << "\n-> Введите новую дату отправления (ГГГГ-ММ-ДД): ";
+                std::cout << "\n-> Enter new departure date (YYYY-MM-DD): ";
                 std::cin >> std::setw(19) >> updatedTrip.date_departure;
-                std::cout << "\n-> Введите новое время отправления (ЧЧ:ММ): ";
+                std::cout << "\n-> Enter new departure time (HH:MM): ";
                 std::cin >> std::setw(9) >> updatedTrip.time_departure;
-                std::cout << "\n-> Введите новое время прибытия (ЧЧ:ММ): ";
+                std::cout << "\n-> Enter new arrival time (HH:MM): ";
                 std::cin >> std::setw(9) >> updatedTrip.time_arrival;
-                std::cout << "\n-> Введите новую стоимость билета: ";
+                std::cout << "\n-> Enter new ticket cost: ";
                 std::cin >> updatedTrip.ticket_cost;
-                std::cout << "\n-> Введите новое количество оставшихся билетов: ";
+                std::cout << "\n-> Enter new number of tickets left: ";
                 std::cin >> updatedTrip.tickets_left;
-                std::cout << "\n-> Введите новое количество проданных билетов: ";
+                std::cout << "\n-> Enter new number of tickets sold: ";
                 std::cin >> updatedTrip.tickets_sold;
                 if (std::cin.fail())
                 {
-                    std::cout << "\n[ERROR] Неверный ввод\n";
+                    std::cout << "\nError: Invalid input\n";
                     continue;
                 }
                 update_by_num(number, updatedTrip, file);
-                std::cout << "\n[OK] Рейс обновлён\n";
+                std::cout << "\nSuccess: Trip updated\n";
             }
             else if (choise == 12)
             {
@@ -1162,9 +1025,12 @@ int main()
                 break;
             }
             else if (choise == 13)
+            {
                 working_with_file = false;
+                return 0;
+            }
             else
-                std::cout << "\n[ERROR] Неверный ввод\n";
+                std::cout << "\nError: Invalid choice\n";
 
             std::cout << "\n=========================================================================\n";
         }

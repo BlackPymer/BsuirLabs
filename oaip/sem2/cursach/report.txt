@@ -1,0 +1,5 @@
+
+Trip number    Bus type            Destination                        Date departure Time departure Time arrival   Ticket cost    Tickets left   Tickets sold   
+103            Scania              Moscow                             2024-06-02     10:15          15:20          1700.00        20             30             
+101            Mercedes            Moscow                             2024-06-01     08:00          13:30          1500.50        10             40             
+102            Volvo               Moscow                             2024-06-01     09:30          14:45          1600.00        5              45             
