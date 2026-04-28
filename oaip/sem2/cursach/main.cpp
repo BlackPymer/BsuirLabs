@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cstring>
 #include <iomanip>
-#include <filesystem>
-#include <cstddef>
 #include "constants.hpp"
 #ifdef _WIN32
 #include <io.h>
@@ -53,8 +51,8 @@ struct Trip
 
 void print_trip(Trip trip);
 void print_trips(FILE *file);
-void quick_sort_silent(FILE *file);
 void print_table();
+long get_struct_num(FILE *file);
 
 #pragma region STACK
 struct StackData
@@ -121,6 +119,7 @@ struct Stack
 #pragma endregion
 
 #pragma region FILES_WORKING
+long file_struct_num = 0;
 bool init_report_file(const char *filename, FILE *&file, const char *open_type)
 {
     if (file != nullptr)
@@ -168,6 +167,7 @@ bool init_file(const char *filename, FILE *&file)
         fclose(file);
         file = fopen(filename, "r+b");
     }
+    file_struct_num = get_struct_num(file);
     return file != nullptr;
 }
 long get_struct_num(FILE *file)
@@ -180,9 +180,8 @@ Trip get_trip(int ind, FILE *file, bool *success = nullptr)
 {
     if (success)
         *success = true;
-    long size = get_struct_num(file);
     Trip tr;
-    if (ind < 0 || ind >= size)
+    if (ind < 0 || ind >= file_struct_num)
     {
         if (success)
             *success = false;
@@ -196,8 +195,7 @@ Trip get_trip(int ind, FILE *file, bool *success = nullptr)
 
 void set_trip(int ind, Trip *trip, FILE *file)
 {
-    long count = get_struct_num(file);
-    if (ind < 0 || ind > count)
+    if (ind < 0 || ind > file_struct_num)
     {
         std::cout << "index was out of the bounds of array\n";
         return;
@@ -206,13 +204,14 @@ void set_trip(int ind, Trip *trip, FILE *file)
     fseek(file, sizeof(Trip) * ind, SEEK_SET);
     fwrite(trip, sizeof(Trip), 1, file);
     fflush(file);
+    if (ind == file_struct_num)
+        file_struct_num = get_struct_num(file);
 }
 void delete_last_trip(FILE *file, const char *filename)
 {
-    std::size_t count = get_struct_num(file);
-    if (count == 0)
+    if (file_struct_num == 0)
         return;
-    std::size_t new_size = sizeof(Trip) * (count - 1);
+    int new_size = sizeof(Trip) * (file_struct_num - 1);
 #ifdef _WIN32
     int fd = _open(filename, _O_WRONLY | _O_BINARY);
     if (fd != -1)
@@ -223,6 +222,7 @@ void delete_last_trip(FILE *file, const char *filename)
 #else
     truncate(filename, new_size);
 #endif
+    file_struct_num = get_struct_num(file);
 }
 
 bool clear_file(const char *filename)
@@ -238,7 +238,7 @@ bool clear_file(const char *filename)
 #pragma region SORTINGS
 void insertion_sort(FILE *file)
 {
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     if (n < 2)
         return;
     for (int i = 1; i < n; ++i)
@@ -253,14 +253,13 @@ void insertion_sort(FILE *file)
             set_trip(j + 1, &t, file);
             --j;
         }
-        if (j + 1 != i)
-            set_trip(j + 1, &key, file);
+        set_trip(j + 1, &key, file);
     }
     print_trips(file);
 }
 void selection_sort(FILE *file)
 {
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     if (n < 2)
     {
         print_trips(file);
@@ -290,7 +289,7 @@ void selection_sort(FILE *file)
 }
 void quick_sort(FILE *file)
 {
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     if (n < 2)
         return;
     Stack st;
@@ -346,7 +345,7 @@ void quick_sort(FILE *file)
 }
 void sort_by_time_arrival(FILE *file)
 {
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     if (n < 2)
         return;
     Stack st;
@@ -407,7 +406,7 @@ Trip find_by_race_number(int number, FILE *file, bool *success = nullptr)
 {
     if (success)
         *success = false;
-    long size = get_struct_num(file);
+    long size = file_struct_num;
     Trip tmp;
     for (long i = 0; i < size; ++i)
     {
@@ -424,7 +423,7 @@ Trip find_by_race_number(int number, FILE *file, bool *success = nullptr)
 
 void find_by_destination(const char *destination, FILE *file)
 {
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     if (n == 0)
     {
         std::cout << "No matching records found\n";
@@ -432,7 +431,7 @@ void find_by_destination(const char *destination, FILE *file)
     }
     quick_sort(file);
     int l = 0;
-    int r = get_struct_num(file) - 1;
+    int r = file_struct_num - 1;
     Trip tmp;
     int first = -1;
     while (l <= r)
@@ -473,7 +472,7 @@ void find_by_destination(const char *destination, FILE *file)
 }
 void print_proper_trips(const char *dest, const char *max_time, int min_ticks, FILE *main_file, FILE *&report)
 {
-    int n = get_struct_num(main_file);
+    int n = file_struct_num;
     if (n == 0)
     {
         std::cout << "\nNo records found matching the criteria\n";
@@ -511,12 +510,13 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks, F
     }
     if (j == 0)
         std::cout << "\nNo records found matching the criteria\n";
-    fclose(report);
+    if (report)
+        fclose(report);
 }
 void print_by_bus_type(const char *bus_type, const char *min_departure_time, FILE *file, FILE *&report)
 {
     bool found = false;
-    for (int i = 0; i < get_struct_num(file); ++i)
+    for (int i = 0; i < file_struct_num; ++i)
     {
         Trip trip = get_trip(i, file);
         if (strcmp(bus_type, trip.bus_type) == 0 && strcmp(trip.time_departure, min_departure_time) > 0)
@@ -558,7 +558,7 @@ void delete_by_num(int number, FILE *file, const char *filename)
 {
     bool found = false;
     int j = 0;
-    int n = get_struct_num(file);
+    int n = file_struct_num;
     for (int i = 0; i < n; ++i)
     {
         Trip tr = get_trip(i, file);
@@ -576,7 +576,7 @@ void delete_by_num(int number, FILE *file, const char *filename)
 void update_by_num(int number, Trip trip, FILE *file)
 {
     bool found = false;
-    for (int i = 0; i < get_struct_num(file); ++i)
+    for (int i = 0; i < file_struct_num; ++i)
     {
         Trip t = get_trip(i, file);
         if (t.number == number)
@@ -594,7 +594,7 @@ void update_by_num(int number, Trip trip, FILE *file)
 void print_trips(FILE *file)
 {
     print_table();
-    for (int i = 0; i < get_struct_num(file); ++i)
+    for (int i = 0; i < file_struct_num; ++i)
     {
         Trip trip = get_trip(i, file);
         print_trip(trip);
@@ -761,7 +761,7 @@ int main()
                 std::cout << "\nSuccess: Default file set: " << current_file << "\n";
                 if (init_file(current_file, file))
                 {
-                    if (get_struct_num(file) == 0)
+                    if (file_struct_num == 0)
                         initialize_data(file);
                     file_selected = true;
                 }
@@ -913,7 +913,7 @@ int main()
                     continue;
                 }
                 bool exists = false;
-                for (int i = 0; i < get_struct_num(file); ++i)
+                for (int i = 0; i < file_struct_num; ++i)
                 {
                     Trip t = get_trip(i, file);
                     if (t.number == newTrip.number)
@@ -947,7 +947,7 @@ int main()
                         std::cout << "\nError: Invalid input\n";
                         continue;
                     }
-                    set_trip(get_struct_num(file), &newTrip, file);
+                    set_trip(file_struct_num, &newTrip, file);
                     std::cout << "\nSuccess: Trip added\n";
                 }
             }
@@ -974,7 +974,7 @@ int main()
                     continue;
                 }
                 bool found = false;
-                for (int i = 0; i < get_struct_num(file); ++i)
+                for (int i = 0; i < file_struct_num; ++i)
                 {
                     Trip t = get_trip(i, file);
                     if (t.number == number)
