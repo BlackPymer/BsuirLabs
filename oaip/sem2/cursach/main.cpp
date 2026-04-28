@@ -973,11 +973,12 @@ int main()
                     std::cout << "\nError: Invalid input\n";
                     continue;
                 }
+                Trip updatedTrip;
                 bool found = false;
                 for (int i = 0; i < file_struct_num; ++i)
                 {
-                    Trip t = get_trip(i, file);
-                    if (t.number == number)
+                    updatedTrip = get_trip(i, file);
+                    if (updatedTrip.number == number)
                     {
                         found = true;
                         break;
@@ -986,26 +987,31 @@ int main()
                 if (!found)
                 {
                     std::cout << "\nNot found: Trip not found\n";
-                    continue;
+                    continue;   
                 }
-                Trip updatedTrip;
-                updatedTrip.number = number;
+                std::cout << "\n-> What do you want to update? (1 - bus type, 2 - destination, 3 - departure date, 4 - departure time, 5 - arrival time, 6 - ticket cost, 7 - tickets left, 8 - tickets sold\n-> ");
+                int c = 0;
+std::cin>>c;
+if(c<1||c>8){std::cout << "\nError: Invalid input\n";
+                    continue;}
+if(c==1){
                 std::cout << "\n-> Enter new bus type: ";
-                std::cin >> std::setw(49) >> updatedTrip.bus_type;
+                std::cin >> std::setw(49) >> updatedTrip.bus_type;}if(c==2){
                 std::cout << "\n-> Enter new destination: ";
-                std::cin >> std::setw(49) >> updatedTrip.destination;
+
+                std::cin >> std::setw(49) >> updatedTrip.destination;}if(c==3){
                 std::cout << "\n-> Enter new departure date (YYYY-MM-DD): ";
-                std::cin >> std::setw(19) >> updatedTrip.date_departure;
+                std::cin >> std::setw(19) >> updatedTrip.date_departure;}if(c==4){
                 std::cout << "\n-> Enter new departure time (HH:MM): ";
-                std::cin >> std::setw(9) >> updatedTrip.time_departure;
+                std::cin >> std::setw(9) >> updatedTrip.time_departure;}if(c==5){
                 std::cout << "\n-> Enter new arrival time (HH:MM): ";
-                std::cin >> std::setw(9) >> updatedTrip.time_arrival;
+                std::cin >> std::setw(9) >> updatedTrip.time_arrival;}if(c==6){
                 std::cout << "\n-> Enter new ticket cost: ";
-                std::cin >> updatedTrip.ticket_cost;
+                std::cin >> updatedTrip.ticket_cost;}if(c==7){
                 std::cout << "\n-> Enter new number of tickets left: ";
-                std::cin >> updatedTrip.tickets_left;
+                std::cin >> updatedTrip.tickets_left;}if(c==8){
                 std::cout << "\n-> Enter new number of tickets sold: ";
-                std::cin >> updatedTrip.tickets_sold;
+                std::cin >> updatedTrip.tickets_sold;}
                 if (std::cin.fail())
                 {
                     std::cout << "\nError: Invalid input\n";
