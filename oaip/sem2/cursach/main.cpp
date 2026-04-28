@@ -231,6 +231,7 @@ bool clear_file(const char *filename)
     if (f == nullptr)
         return 0;
     fclose(f);
+    file_struct_num = 0;
     return 1;
 }
 #pragma endregion
@@ -268,10 +269,15 @@ void selection_sort(FILE *file)
     for (int i = 0; i < n - 1; ++i)
     {
         int l = i;
-        Trip min = get_trip(i, file);
+        fseek(file, sizeof(Trip) * i, SEEK_SET);
+        Trip cur;
+        Trip min;
+        fread(&min, sizeof(Trip), 1, file);
+        cur = min;
         for (int j = i + 1; j < n; ++j)
         {
-            Trip tmp = get_trip(j, file);
+            Trip tmp;
+            fread(&tmp, sizeof(Trip), 1, file);
             if (strcmp(tmp.date_departure, min.date_departure) < 0)
             {
                 l = j;
@@ -280,7 +286,6 @@ void selection_sort(FILE *file)
         }
         if (i != l)
         {
-            Trip cur = get_trip(i, file);
             set_trip(i, &min, file);
             set_trip(l, &cur, file);
         }
@@ -307,24 +312,25 @@ void quick_sort(FILE *file)
         int i = l, j = r;
         while (i <= j)
         {
+            fseek(file, sizeof(Trip) * i, SEEK_SET);
+            Trip t1;
             while (i <= r)
             {
-                Trip tmp = get_trip(i, file);
-                if (strcmp(tmp.destination, mid_dest) >= 0)
+                fread(&t1, sizeof(Trip), 1, file);
+                if (strcmp(t1.destination, mid_dest) >= 0)
                     break;
                 ++i;
             }
+            Trip t2;
             while (j >= l)
             {
-                Trip tmp = get_trip(j, file);
-                if (strcmp(tmp.destination, mid_dest) <= 0)
+                t2 = get_trip(j, file);
+                if (strcmp(t2.destination, mid_dest) <= 0)
                     break;
                 --j;
             }
             if (i <= j)
             {
-                Trip t1 = get_trip(i, file);
-                Trip t2 = get_trip(j, file);
                 set_trip(i, &t2, file);
                 set_trip(j, &t1, file);
                 ++i;
@@ -363,24 +369,25 @@ void sort_by_time_arrival(FILE *file)
         int i = l, j = r;
         while (i <= j)
         {
+            fseek(file, sizeof(Trip) * i, SEEK_SET);
+            Trip t1;
             while (i <= r)
             {
-                Trip tmp = get_trip(i, file);
-                if (strcmp(tmp.time_arrival, mid_time) >= 0)
+                fread(&t1, sizeof(Trip), 1, file);
+                if (strcmp(t1.time_arrival, mid_time) >= 0)
                     break;
                 ++i;
             }
+            Trip t2;
             while (j >= l)
             {
-                Trip tmp = get_trip(j, file);
-                if (strcmp(tmp.time_arrival, mid_time) <= 0)
+                t2 = get_trip(j, file);
+                if (strcmp(t2.time_arrival, mid_time) <= 0)
                     break;
                 --j;
             }
             if (i <= j)
             {
-                Trip t1 = get_trip(i, file);
-                Trip t2 = get_trip(j, file);
                 set_trip(i, &t2, file);
                 set_trip(j, &t1, file);
                 ++i;
@@ -408,9 +415,10 @@ Trip find_by_race_number(int number, FILE *file, bool *success = nullptr)
         *success = false;
     long size = file_struct_num;
     Trip tmp;
+    fseek(file, 0, SEEK_SET);
     for (long i = 0; i < size; ++i)
     {
-        tmp = get_trip(i, file);
+        fread(&tmp, sizeof(Trip), 1, file);
         if (tmp.number == number)
         {
             if (success)
@@ -457,9 +465,10 @@ void find_by_destination(const char *destination, FILE *file)
     int idx = first;
     bool found = false;
     print_table();
+    fseek(file, sizeof(Trip) * idx, SEEK_SET);
     while (idx < n)
     {
-        tmp = get_trip(idx, file);
+        fread(&tmp, sizeof(Trip), 1, file);
         if (strcmp(tmp.destination, destination) != 0)
             break;
         print_trip(tmp);
@@ -480,10 +489,11 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks, F
     }
     int j = 0;
     bool found = 0;
-
+    fseek(main_file, 0, SEEK_SET);
     for (int i = 0; i < n; ++i)
     {
-        Trip tr = get_trip(i, main_file);
+        Trip tr;
+        fread(&tr, sizeof(Trip), 1, main_file);
         if (strcmp(tr.destination, dest) == 0 && strcmp(tr.time_arrival, max_time) <= 0 && tr.tickets_left >= min_ticks)
         {
             if (!found)
@@ -516,9 +526,11 @@ void print_proper_trips(const char *dest, const char *max_time, int min_ticks, F
 void print_by_bus_type(const char *bus_type, const char *min_departure_time, FILE *file, FILE *&report)
 {
     bool found = false;
+    fseek(file, 0, SEEK_SET);
     for (int i = 0; i < file_struct_num; ++i)
     {
-        Trip trip = get_trip(i, file);
+        Trip trip;
+        fread(&trip, sizeof(Trip), 1, file);
         if (strcmp(bus_type, trip.bus_type) == 0 && strcmp(trip.time_departure, min_departure_time) > 0)
         {
             if (!found)
@@ -558,17 +570,17 @@ void delete_by_num(int number, FILE *file, const char *filename)
 {
     bool found = false;
     int j = 0;
-    int n = file_struct_num;
-    for (int i = 0; i < n; ++i)
+    fseek(file, 0, SEEK_SET);
+    for (int i = 0; i < file_struct_num; ++i)
     {
-        Trip tr = get_trip(i, file);
+        Trip tr;
+        fread(&tr, sizeof(Trip), 1, file);
         if (tr.number == number)
         {
             found = true;
             continue;
         }
-        set_trip(j, &tr, file);
-        ++j;
+        set_trip(j++, &tr, file);
     }
     if (found)
         delete_last_trip(file, filename);
@@ -594,9 +606,11 @@ void update_by_num(int number, Trip trip, FILE *file)
 void print_trips(FILE *file)
 {
     print_table();
+    fseek(file, 0, SEEK_SET);
     for (int i = 0; i < file_struct_num; ++i)
     {
-        Trip trip = get_trip(i, file);
+        Trip trip;
+        fread(&trip, sizeof(Trip), 1, file);
         print_trip(trip);
     }
     for (int i = 0; i < ROW_SIZE; ++i)
@@ -793,6 +807,7 @@ int main()
         bool working_with_file = true;
         while (working_with_file)
         {
+            fseek(file, 0, SEEK_SET);
             std::cout << "\n+---------------------------------------------------------+\n";
             std::cout << "|  WORKING WITH FILE: " << std::left << std::setw(38) << current_file << " |\n";
             std::cout << "+---------------------------------------------------------+\n";
@@ -913,9 +928,11 @@ int main()
                     continue;
                 }
                 bool exists = false;
+
                 for (int i = 0; i < file_struct_num; ++i)
                 {
-                    Trip t = get_trip(i, file);
+                    Trip t;
+                    fread(&t, sizeof(Trip), 11, file);
                     if (t.number == newTrip.number)
                     {
                         exists = true;
@@ -977,7 +994,7 @@ int main()
                 bool found = false;
                 for (int i = 0; i < file_struct_num; ++i)
                 {
-                    updatedTrip = get_trip(i, file);
+                    fread(&update_by_num, sizeof(Trip), 1, file);
                     if (updatedTrip.number == number)
                     {
                         found = true;
@@ -987,31 +1004,57 @@ int main()
                 if (!found)
                 {
                     std::cout << "\nNot found: Trip not found\n";
-                    continue;   
+                    continue;
                 }
-                std::cout << "\n-> What do you want to update? (1 - bus type, 2 - destination, 3 - departure date, 4 - departure time, 5 - arrival time, 6 - ticket cost, 7 - tickets left, 8 - tickets sold\n-> ");
+                std::cout << "\n-> What do you want to update? (1 - bus type, 2 - destination, 3 - departure date, 4 - departure time, 5 - arrival time, 6 - ticket cost, 7 - tickets left, 8 - tickets sold\n-> ";
                 int c = 0;
-std::cin>>c;
-if(c<1||c>8){std::cout << "\nError: Invalid input\n";
-                    continue;}
-if(c==1){
-                std::cout << "\n-> Enter new bus type: ";
-                std::cin >> std::setw(49) >> updatedTrip.bus_type;}if(c==2){
-                std::cout << "\n-> Enter new destination: ";
+                std::cin >> c;
+                if (c < 1 || c > 8)
+                {
+                    std::cout << "\nError: Invalid input\n";
+                    continue;
+                }
+                else if (c == 1)
+                {
+                    std::cout << "\n-> Enter new bus type: ";
+                    std::cin >> std::setw(49) >> updatedTrip.bus_type;
+                }
+                else if (c == 2)
+                {
+                    std::cout << "\n-> Enter new destination: ";
 
-                std::cin >> std::setw(49) >> updatedTrip.destination;}if(c==3){
-                std::cout << "\n-> Enter new departure date (YYYY-MM-DD): ";
-                std::cin >> std::setw(19) >> updatedTrip.date_departure;}if(c==4){
-                std::cout << "\n-> Enter new departure time (HH:MM): ";
-                std::cin >> std::setw(9) >> updatedTrip.time_departure;}if(c==5){
-                std::cout << "\n-> Enter new arrival time (HH:MM): ";
-                std::cin >> std::setw(9) >> updatedTrip.time_arrival;}if(c==6){
-                std::cout << "\n-> Enter new ticket cost: ";
-                std::cin >> updatedTrip.ticket_cost;}if(c==7){
-                std::cout << "\n-> Enter new number of tickets left: ";
-                std::cin >> updatedTrip.tickets_left;}if(c==8){
-                std::cout << "\n-> Enter new number of tickets sold: ";
-                std::cin >> updatedTrip.tickets_sold;}
+                    std::cin >> std::setw(49) >> updatedTrip.destination;
+                }
+                else if (c == 3)
+                {
+                    std::cout << "\n-> Enter new departure date (YYYY-MM-DD): ";
+                    std::cin >> std::setw(19) >> updatedTrip.date_departure;
+                }
+                else if (c == 4)
+                {
+                    std::cout << "\n-> Enter new departure time (HH:MM): ";
+                    std::cin >> std::setw(9) >> updatedTrip.time_departure;
+                }
+                else if (c == 5)
+                {
+                    std::cout << "\n-> Enter new arrival time (HH:MM): ";
+                    std::cin >> std::setw(9) >> updatedTrip.time_arrival;
+                }
+                else if (c == 6)
+                {
+                    std::cout << "\n-> Enter new ticket cost: ";
+                    std::cin >> updatedTrip.ticket_cost;
+                }
+                else if (c == 7)
+                {
+                    std::cout << "\n-> Enter new number of tickets left: ";
+                    std::cin >> updatedTrip.tickets_left;
+                }
+                else
+                {
+                    std::cout << "\n-> Enter new number of tickets sold: ";
+                    std::cin >> updatedTrip.tickets_sold;
+                }
                 if (std::cin.fail())
                 {
                     std::cout << "\nError: Invalid input\n";
