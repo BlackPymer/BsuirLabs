@@ -38,16 +38,13 @@ struct StackNode
 struct Stack
 {
     StackNode *root;
-
     Stack() : root(nullptr) {}
-
     void push(int l, int r)
     {
         StackNode *node = new StackNode(l, r);
         node->next = root;
         root = node;
     }
-
     bool pop(int &l, int &r)
     {
         if (!root)
@@ -59,9 +56,7 @@ struct Stack
         delete tmp;
         return true;
     }
-
     bool empty() { return root == nullptr; }
-
     ~Stack()
     {
         while (root)
@@ -73,78 +68,13 @@ struct Stack
     }
 };
 
-bool open_file(const char *filename, FILE *&file)
-{
-    if (file)
-        fclose(file);
-    file = std::fopen(filename, "r+b");
-    if (!file)
-    {
-        file = std::fopen(filename, "wb");
-        if (file)
-        {
-            std::fclose(file);
-            file = std::fopen(filename, "r+b");
-        }
-    }
-    return file != nullptr;
-}
+long g_record_count = 0;
 
-long count_records(FILE *file)
+long get_file_count(FILE *file)
 {
-    std::fseek(file, 0, SEEK_END);
-    long size = std::ftell(file);
+    fseek(file, 0, SEEK_END);
+    long size = ftell(file);
     return size / sizeof(RentalRecord);
-}
-
-RentalRecord read_record(int index, FILE *file, bool *ok = nullptr)
-{
-    RentalRecord rec;
-    if (ok)
-        *ok = true;
-    long cnt = count_records(file);
-    if (index >= cnt)
-    {
-        if (ok)
-            *ok = false;
-        return rec;
-    }
-    std::fseek(file, sizeof(RentalRecord) * index, SEEK_SET);
-    std::fread(&rec, sizeof(RentalRecord), 1, file);
-    return rec;
-}
-
-void write_record(int index, RentalRecord *rec, FILE *file)
-{
-    long cnt = count_records(file);
-    if (index >= cnt)
-        return;
-    std::fseek(file, sizeof(RentalRecord) * index, SEEK_SET);
-    std::fwrite(rec, sizeof(RentalRecord), 1, file);
-}
-
-void append_record(RentalRecord *rec, FILE *file)
-{
-    std::fseek(file, 0, SEEK_END);
-    std::fwrite(rec, sizeof(RentalRecord), 1, file);
-}
-
-void remove_last(FILE *file, const char *filename)
-{
-    long cnt = count_records(file);
-    if (cnt == 0)
-        return;
-    std::size_t new_size = sizeof(RentalRecord) * (cnt - 1);
-#ifdef _WIN32
-    int fd = _open(filename, _O_WRONLY | _O_BINARY);
-    if (fd != -1)
-    {
-        _chsize(fd, new_size);
-        _close(fd);
-    }
-#else
-    truncate(filename, new_size);
-#endif
 }
 
 bool init_file(const char *filename, FILE *&file)
@@ -160,6 +90,8 @@ bool init_file(const char *filename, FILE *&file)
         fclose(file);
         file = fopen(filename, "r+b");
     }
+    if (file)
+        g_record_count = get_file_count(file);
     return file != nullptr;
 }
 
@@ -169,22 +101,65 @@ bool clear_file_data(const char *filename)
     if (!f)
         return false;
     fclose(f);
+    g_record_count = 0;
     return true;
 }
 
-void print_record(const RentalRecord &rec)
+RentalRecord read_record_at(int index, FILE *file, bool *ok = nullptr)
 {
-    std::cout << std::left << std::setw(20) << rec.item_name
-              << std::left << std::setw(25) << rec.renter_name
-              << std::left << std::setw(15) << rec.rental_date
-              << std::left << std::setw(10) << rec.rental_days
-              << std::left << std::setw(12) << (rec.status == 0 ? "Available" : "Rented")
-              << '\n';
+    RentalRecord rec;
+    if (ok)
+        *ok = true;
+    if (index < 0 || index >= g_record_count)
+    {
+        if (ok)
+            *ok = false;
+        return rec;
+    }
+    fseek(file, sizeof(RentalRecord) * index, SEEK_SET);
+    fread(&rec, sizeof(RentalRecord), 1, file);
+    return rec;
+}
+
+void write_record_at(int index, RentalRecord *rec, FILE *file)
+{
+    if (index < 0 || index > g_record_count)
+        return;
+    fseek(file, sizeof(RentalRecord) * index, SEEK_SET);
+    fwrite(rec, sizeof(RentalRecord), 1, file);
+    fflush(file);
+    if (index == g_record_count)
+        g_record_count = get_file_count(file);
+}
+
+void append_record(RentalRecord *rec, FILE *file)
+{
+    fseek(file, 0, SEEK_END);
+    fwrite(rec, sizeof(RentalRecord), 1, file);
+    g_record_count++;
+}
+
+void remove_last(FILE *file, const char *filename)
+{
+    if (g_record_count == 0)
+        return;
+    long new_size = sizeof(RentalRecord) * (g_record_count - 1);
+#ifdef _WIN32
+    int fd = _open(filename, _O_WRONLY | _O_BINARY);
+    if (fd != -1)
+    {
+        _chsize(fd, new_size);
+        _close(fd);
+    }
+#else
+    truncate(filename, new_size);
+#endif
+    g_record_count = get_file_count(file);
 }
 
 bool init_report_file(const char *filename, FILE *&file, const char *open_type)
 {
-    if (file != nullptr)
+    if (file)
     {
         fclose(file);
         file = nullptr;
@@ -193,15 +168,14 @@ bool init_report_file(const char *filename, FILE *&file, const char *open_type)
     if (!file)
     {
         file = fopen(filename, "w");
-        if (file == nullptr)
+        if (!file)
             return false;
         fclose(file);
         file = fopen(filename, open_type);
     }
     if (!file)
         return false;
-    fprintf(file, "\n");
-    fprintf(file, "%-20s%-25s%-15s%-10s%-12s\n",
+    fprintf(file, "\n%-20s%-25s%-15s%-10s%-12s\n",
             "Item Name", "Renter Name", "Rental Date", "Days", "Status");
     return true;
 }
@@ -219,10 +193,18 @@ void write_record_to_report(FILE *report, const RentalRecord &rec)
             rec.rental_days, (rec.status == 0 ? "Available" : "Rented"));
 }
 
+void print_record(const RentalRecord &rec)
+{
+    std::cout << std::left << std::setw(20) << rec.item_name
+              << std::left << std::setw(25) << rec.renter_name
+              << std::left << std::setw(15) << rec.rental_date
+              << std::left << std::setw(10) << rec.rental_days
+              << std::left << std::setw(12) << (rec.status == 0 ? "Available" : "Rented")
+              << '\n';
+}
+
 void print_all(FILE *file)
 {
-    long cnt = count_records(file);
-
     std::cout << "\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(25) << "Renter Name"
@@ -231,23 +213,24 @@ void print_all(FILE *file)
               << std::left << std::setw(12) << "Status" << '\n';
 
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
-    int ans = 0;
+    int ans;
     std::cin >> ans;
-    FILE *report = NULL;
+    FILE *report = nullptr;
     if (ans == 1)
         init_report_file("report.txt", report, "a");
     else if (ans == 2)
         init_report_file("report.txt", report, "w");
 
-    for (int i = 0; i < cnt; ++i)
+    fseek(file, 0, SEEK_SET);
+    for (long i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i, file);
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
         print_record(rec);
         if (report)
             write_record_to_report(report, rec);
     }
     std::cout << '\n';
-
     if (report)
     {
         fclose(report);
@@ -257,86 +240,89 @@ void print_all(FILE *file)
 
 void insertion_sort(FILE *file)
 {
-    long n = count_records(file);
+    long n = g_record_count;
     for (int i = 1; i < n; ++i)
     {
-        RentalRecord key = read_record(i, file);
+        RentalRecord key = read_record_at(i, file);
         int j = i - 1;
         while (j >= 0)
         {
-            RentalRecord t = read_record(j, file);
+            RentalRecord t = read_record_at(j, file);
             if (std::strcmp(t.item_name, key.item_name) <= 0)
                 break;
-            write_record(j + 1, &t, file);
+            write_record_at(j + 1, &t, file);
             --j;
         }
-        write_record(j + 1, &key, file);
+        write_record_at(j + 1, &key, file);
     }
 }
 
 void selection_sort(FILE *file)
 {
-    long n = count_records(file);
+    long n = g_record_count;
+    if (n < 2)
+        return;
     for (int i = 0; i < n - 1; ++i)
     {
-        RentalRecord minRec = read_record(i, file);
+        fseek(file, sizeof(RentalRecord) * i, SEEK_SET);
+        RentalRecord cur, min;
+        fread(&min, sizeof(RentalRecord), 1, file);
+        cur = min;
         int minIdx = i;
         for (int j = i + 1; j < n; ++j)
         {
-            RentalRecord tmp = read_record(j, file);
-            if (tmp.rental_days < minRec.rental_days)
+            RentalRecord tmp;
+            fread(&tmp, sizeof(RentalRecord), 1, file);
+            if (tmp.rental_days < min.rental_days)
             {
-                minRec = tmp;
+                min = tmp;
                 minIdx = j;
             }
         }
         if (minIdx != i)
         {
-            RentalRecord cur = read_record(i, file);
-            write_record(minIdx, &cur, file);
-            write_record(i, &minRec, file);
+            write_record_at(i, &min, file);
+            write_record_at(minIdx, &cur, file);
         }
     }
 }
 
 void quick_sort(FILE *file)
 {
-    long n = count_records(file);
+    long n = g_record_count;
     if (n < 2)
         return;
-
     Stack st;
     st.push(0, n - 1);
-
     int l, r;
     while (st.pop(l, r))
     {
         int mid = (l + r) / 2;
-        RentalRecord pivot = read_record(mid, file);
-
+        RentalRecord pivot = read_record_at(mid, file);
         int i = l, j = r;
         while (i <= j)
         {
-            while (true)
+            fseek(file, sizeof(RentalRecord) * i, SEEK_SET);
+            RentalRecord t1;
+            while (i <= r)
             {
-                RentalRecord tmp = read_record(i, file);
-                if (std::strcmp(tmp.rental_date, pivot.rental_date) >= 0)
+                fread(&t1, sizeof(RentalRecord), 1, file);
+                if (std::strcmp(t1.rental_date, pivot.rental_date) >= 0)
                     break;
                 ++i;
             }
-            while (true)
+            RentalRecord t2;
+            while (j >= l)
             {
-                RentalRecord tmp = read_record(j, file);
-                if (std::strcmp(tmp.rental_date, pivot.rental_date) <= 0)
+                t2 = read_record_at(j, file);
+                if (std::strcmp(t2.rental_date, pivot.rental_date) <= 0)
                     break;
                 --j;
             }
             if (i <= j)
             {
-                RentalRecord ti = read_record(i, file);
-                RentalRecord tj = read_record(j, file);
-                write_record(i, &tj, file);
-                write_record(j, &ti, file);
+                write_record_at(i, &t2, file);
+                write_record_at(j, &t1, file);
                 ++i;
                 --j;
             }
@@ -350,55 +336,49 @@ void quick_sort(FILE *file)
 
 RentalRecord linear_search(FILE *file, const char *renter)
 {
-    RentalRecord result;
-    long cnt = count_records(file);
-    for (int i = 0; i < cnt; ++i)
+    fseek(file, 0, SEEK_SET);
+    RentalRecord rec;
+    for (long i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i, file);
+        fread(&rec, sizeof(RentalRecord), 1, file);
         if (std::strcmp(rec.renter_name, renter) == 0)
-        {
             return rec;
-        }
     }
-    return result;
+    return RentalRecord();
 }
 
 void binary_search_and_print(FILE *file, const char *name)
 {
     insertion_sort(file);
-
-    long cnt = count_records(file);
+    long cnt = g_record_count;
     if (cnt == 0)
     {
         std::cout << "\nNo records.\n";
         return;
     }
-
-    int l = 0, r = cnt - 1;
-    int foundIndex = -1;
+    int l = 0, r = cnt - 1, foundIndex = -1;
     while (l <= r)
     {
         int mid = (l + r) / 2;
-        RentalRecord rec = read_record(mid, file);
+        RentalRecord rec = read_record_at(mid, file);
         int cmp = std::strcmp(rec.item_name, name);
         if (cmp == 0)
         {
             foundIndex = mid;
             break;
         }
-        if (cmp < 0)
+        else if (cmp < 0)
             l = mid + 1;
         else
             r = mid - 1;
     }
-
     if (foundIndex == -1)
     {
         std::cout << "\nNo records found for item: " << name << "\n";
         std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
-        int ans = 0;
+        int ans;
         std::cin >> ans;
-        FILE *report = NULL;
+        FILE *report = nullptr;
         if (ans == 1)
             init_report_file("report.txt", report, "a");
         else if (ans == 2)
@@ -411,25 +391,12 @@ void binary_search_and_print(FILE *file, const char *name)
         }
         return;
     }
-
     int left = foundIndex;
-    while (left > 0)
-    {
-        RentalRecord rec = read_record(left - 1, file);
-        if (std::strcmp(rec.item_name, name) == 0)
-            left--;
-        else
-            break;
-    }
+    while (left > 0 && std::strcmp(read_record_at(left - 1, file).item_name, name) == 0)
+        left--;
     int right = foundIndex;
-    while (right < cnt - 1)
-    {
-        RentalRecord rec = read_record(right + 1, file);
-        if (std::strcmp(rec.item_name, name) == 0)
-            right++;
-        else
-            break;
-    }
+    while (right < cnt - 1 && std::strcmp(read_record_at(right + 1, file).item_name, name) == 0)
+        right++;
 
     std::cout << "\nFound " << (right - left + 1) << " record(s):\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
@@ -439,22 +406,23 @@ void binary_search_and_print(FILE *file, const char *name)
               << std::left << std::setw(12) << "Status" << '\n';
 
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
-    int ans = 0;
+    int ans;
     std::cin >> ans;
-    FILE *report = NULL;
+    FILE *report = nullptr;
     if (ans == 1)
         init_report_file("report.txt", report, "a");
     else if (ans == 2)
         init_report_file("report.txt", report, "w");
 
+    fseek(file, sizeof(RentalRecord) * left, SEEK_SET);
     for (int i = left; i <= right; ++i)
     {
-        RentalRecord rec = read_record(i, file);
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
         print_record(rec);
         if (report)
             write_record_to_report(report, rec);
     }
-
     if (report)
     {
         fclose(report);
@@ -464,9 +432,7 @@ void binary_search_and_print(FILE *file, const char *name)
 
 void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
 {
-    long cnt = count_records(file);
     bool found = false;
-
     std::cout << "\nRenters of '" << itemName << "' after " << date << ":\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(25) << "Renter Name"
@@ -475,25 +441,25 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
               << std::left << std::setw(12) << "Status" << '\n';
 
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
-    int ans = 0;
+    int ans;
     std::cin >> ans;
-    FILE *report = NULL;
+    FILE *report = nullptr;
     if (ans == 1)
         init_report_file("report.txt", report, "a");
     else if (ans == 2)
         init_report_file("report.txt", report, "w");
-
     if (report)
     {
         fprintf(report, "Renters of '%s' after %s:\n\n", itemName, date);
         write_report_header(report);
     }
 
-    for (int i = 0; i < cnt; ++i)
+    fseek(file, 0, SEEK_SET);
+    for (long i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i, file);
-        if (std::strcmp(rec.item_name, itemName) == 0 &&
-            std::strcmp(rec.rental_date, date) > 0)
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (std::strcmp(rec.item_name, itemName) == 0 && std::strcmp(rec.rental_date, date) > 0)
         {
             print_record(rec);
             if (report)
@@ -501,14 +467,12 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
             found = true;
         }
     }
-
     if (!found)
     {
         std::cout << "No matching records found.\n";
         if (report)
             fprintf(report, "No matching records found.\n");
     }
-
     if (report)
     {
         fclose(report);
@@ -518,7 +482,6 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
 
 void find_by_date(FILE *file, const char *date)
 {
-    long cnt = count_records(file);
     bool found = false;
     std::cout << "\nRecords with date " << date << ":\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
@@ -534,9 +497,11 @@ void find_by_date(FILE *file, const char *date)
         write_report_header(report);
     }
 
-    for (int i = 0; i < cnt; ++i)
+    fseek(file, 0, SEEK_SET);
+    for (long i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i, file);
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
         if (std::strcmp(rec.rental_date, date) == 0)
         {
             print_record(rec);
@@ -551,7 +516,6 @@ void find_by_date(FILE *file, const char *date)
         if (report)
             fprintf(report, "No records found.\n");
     }
-
     if (report)
     {
         fclose(report);
@@ -561,13 +525,11 @@ void find_by_date(FILE *file, const char *date)
 
 void statistics(FILE *file)
 {
-    long cnt = count_records(file);
-    if (cnt == 0)
+    if (g_record_count == 0)
     {
         std::cout << "\nNo records.\n";
         return;
     }
-
     const int MAX_ITEMS = 1000;
     struct ItemStat
     {
@@ -578,9 +540,11 @@ void statistics(FILE *file)
     ItemStat stats[MAX_ITEMS];
     int statCount = 0;
 
-    for (long i = 0; i < cnt; ++i)
+    fseek(file, 0, SEEK_SET);
+    for (long i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i, file);
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
         bool found = false;
         for (int j = 0; j < statCount; ++j)
         {
@@ -608,14 +572,13 @@ void statistics(FILE *file)
               << std::left << std::setw(10) << "Avg Days" << '\n';
 
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
-    int ans = 0;
+    int ans;
     std::cin >> ans;
-    FILE *report = NULL;
+    FILE *report = nullptr;
     if (ans == 1)
         init_report_file("report.txt", report, "a");
     else if (ans == 2)
         init_report_file("report.txt", report, "w");
-
     if (report)
     {
         fprintf(report, "=== Statistics by Item ===\n\n");
@@ -632,25 +595,19 @@ void statistics(FILE *file)
                   << std::left << std::setw(15) << stats[i].total_days
                   << std::left << std::setw(10) << avg << '\n';
         if (report)
-        {
-            fprintf(report, "%-20s%-15d%-15d%-10.2f\n",
-                    stats[i].name, stats[i].count, stats[i].total_days, avg);
-        }
+            fprintf(report, "%-20s%-15d%-15d%-10.2f\n", stats[i].name, stats[i].count, stats[i].total_days, avg);
         if (stats[i].count > maxCount)
         {
             maxCount = stats[i].count;
             std::strcpy(mostPopular, stats[i].name);
         }
     }
-
     if (maxCount > 0)
     {
-        std::cout << "\nMost rented item: " << mostPopular
-                  << " (" << maxCount << " times)\n";
+        std::cout << "\nMost rented item: " << mostPopular << " (" << maxCount << " times)\n";
         if (report)
             fprintf(report, "\nMost rented item: %s (%d times)\n", mostPopular, maxCount);
     }
-
     if (report)
     {
         fclose(report);
@@ -660,19 +617,39 @@ void statistics(FILE *file)
 
 void delete_record_by_index(FILE *file, const char *filename, int index)
 {
-    long cnt = count_records(file);
-    if (index < 0 || index >= cnt)
+    if (index < 0 || index >= g_record_count)
     {
         std::cout << "Invalid index.\n";
         return;
     }
-    for (int i = index; i < cnt - 1; ++i)
+    int writeIdx = 0;
+    fseek(file, 0, SEEK_SET);
+    for (int i = 0; i < g_record_count; ++i)
     {
-        RentalRecord rec = read_record(i + 1, file);
-        write_record(i, &rec, file);
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (i != index)
+            write_record_at(writeIdx++, &rec, file);
     }
     remove_last(file, filename);
     std::cout << "Record deleted.\n";
+}
+
+void delete_records_by_renter(FILE *file, const char *filename, const char *renter)
+{
+    int writeIdx = 0;
+    long original_count = g_record_count;
+    fseek(file, 0, SEEK_SET);
+    for (long i = 0; i < original_count; ++i)
+    {
+        RentalRecord rec;
+        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (std::strcmp(rec.renter_name, renter) != 0)
+            write_record_at(writeIdx++, &rec, file);
+    }
+    while (g_record_count > writeIdx)
+        remove_last(file, filename);
+    std::cout << "\nRecord(s) deleted.\n";
 }
 
 void init_data(FILE *file)
@@ -683,79 +660,70 @@ void init_data(FILE *file)
     std::strcpy(r0.rental_date, "2024-06-01");
     r0.rental_days = 5;
     r0.status = 1;
-    std::fwrite(&r0, sizeof(RentalRecord), 1, file);
-
+    append_record(&r0, file);
     RentalRecord r1;
     std::strcpy(r1.item_name, "Football");
     std::strcpy(r1.renter_name, "Petrov");
     std::strcpy(r1.rental_date, "2024-06-02");
     r1.rental_days = 3;
     r1.status = 1;
-    std::fwrite(&r1, sizeof(RentalRecord), 1, file);
-
+    append_record(&r1, file);
     RentalRecord r2;
     std::strcpy(r2.item_name, "Basketball");
     std::strcpy(r2.renter_name, "Sidorov");
     std::strcpy(r2.rental_date, "2024-06-03");
     r2.rental_days = 7;
     r2.status = 1;
-    std::fwrite(&r2, sizeof(RentalRecord), 1, file);
-
+    append_record(&r2, file);
     RentalRecord r3;
     std::strcpy(r3.item_name, "Tennis Racket");
     std::strcpy(r3.renter_name, "Kuznetsov");
     std::strcpy(r3.rental_date, "2024-06-04");
     r3.rental_days = 2;
     r3.status = 1;
-    std::fwrite(&r3, sizeof(RentalRecord), 1, file);
-
+    append_record(&r3, file);
     RentalRecord r4;
     std::strcpy(r4.item_name, "Volleyball");
     std::strcpy(r4.renter_name, "Ivanov");
     std::strcpy(r4.rental_date, "2024-06-05");
     r4.rental_days = 4;
     r4.status = 1;
-    std::fwrite(&r4, sizeof(RentalRecord), 1, file);
-
+    append_record(&r4, file);
     RentalRecord r5;
     std::strcpy(r5.item_name, "Football");
     std::strcpy(r5.renter_name, "Smirnov");
     std::strcpy(r5.rental_date, "2024-06-06");
     r5.rental_days = 6;
     r5.status = 1;
-    std::fwrite(&r5, sizeof(RentalRecord), 1, file);
-
+    append_record(&r5, file);
     RentalRecord r6;
     std::strcpy(r6.item_name, "Ski Set");
     std::strcpy(r6.renter_name, "Petrov");
     std::strcpy(r6.rental_date, "2024-06-07");
     r6.rental_days = 10;
     r6.status = 1;
-    std::fwrite(&r6, sizeof(RentalRecord), 1, file);
-
+    append_record(&r6, file);
     RentalRecord r7;
     std::strcpy(r7.item_name, "Basketball");
     std::strcpy(r7.renter_name, "Kozlov");
     std::strcpy(r7.rental_date, "2024-06-08");
     r7.rental_days = 3;
     r7.status = 1;
-    std::fwrite(&r7, sizeof(RentalRecord), 1, file);
-
+    append_record(&r7, file);
     RentalRecord r8;
     std::strcpy(r8.item_name, "Tennis Racket");
     std::strcpy(r8.renter_name, "Morozov");
     std::strcpy(r8.rental_date, "2024-06-09");
     r8.rental_days = 5;
     r8.status = 1;
-    std::fwrite(&r8, sizeof(RentalRecord), 1, file);
-
+    append_record(&r8, file);
     RentalRecord r9;
     std::strcpy(r9.item_name, "Football");
     std::strcpy(r9.renter_name, "Ivanov");
     std::strcpy(r9.rental_date, "2024-06-10");
     r9.rental_days = 4;
     r9.status = 1;
-    std::fwrite(&r9, sizeof(RentalRecord), 1, file);
+    append_record(&r9, file);
 }
 
 int main()
@@ -795,7 +763,6 @@ int main()
         switch (choice)
         {
         case 1:
-        {
             std::cout << "\nEnter new filename: ";
             std::cin >> currentFile;
             if (init_file(currentFile, file))
@@ -805,53 +772,35 @@ int main()
                 fileOpen = true;
             }
             else
-            {
                 std::cout << "\nFailed to create file.\n";
-            }
             break;
-        }
         case 2:
-        {
             std::cout << "\nEnter filename to delete: ";
             std::cin >> currentFile;
             if (std::remove(currentFile) == 0)
-            {
                 std::cout << "\nFile deleted.\n";
-            }
             else
-            {
                 std::cout << "\nCannot delete file.\n";
-            }
             break;
-        }
         case 3:
-        {
             std::cout << "\nEnter filename to clear: ";
             std::cin >> currentFile;
             if (clear_file_data(currentFile))
-            {
                 std::cout << "\nFile cleared.\n";
-            }
             else
-            {
                 std::cout << "\nCannot clear file.\n";
-            }
             break;
-        }
         case 4:
-        {
             std::strcpy(currentFile, "rentals.bin");
             std::cout << "\nUsing default file: " << currentFile << "\n";
             if (init_file(currentFile, file))
             {
-                if (count_records(file) == 0)
+                if (g_record_count == 0)
                     init_data(file);
                 fileOpen = true;
             }
             break;
-        }
         case 5:
-        {
             std::cout << "\nEnter filename: ";
             std::cin >> currentFile;
             if (init_file(currentFile, file))
@@ -860,11 +809,8 @@ int main()
                 fileOpen = true;
             }
             else
-            {
                 std::cout << "\nCannot open file.\n";
-            }
             break;
-        }
         case 6:
         {
             bool editing = true;
@@ -877,24 +823,20 @@ int main()
                 std::cout << "  2. Copy file\n";
                 std::cout << "  3. Back\n";
                 std::cout << "\nSelect option: ";
-
                 int subChoice;
                 std::cin >> subChoice;
                 if (std::cin.fail())
                 {
-                    std::cout << "\nInvalid input!\n";
                     std::cin.clear();
                     std::cin.ignore(10000, '\n');
                     continue;
                 }
-
                 if (subChoice == 1)
                 {
+                    char oldName[100], newName[100];
                     std::cout << "\nEnter current filename: ";
-                    char oldName[100];
                     std::cin >> oldName;
                     std::cout << "\nEnter new filename: ";
-                    char newName[100];
                     std::cin >> newName;
                     if (std::rename(oldName, newName) == 0)
                     {
@@ -902,19 +844,15 @@ int main()
                         std::strcpy(currentFile, newName);
                     }
                     else
-                    {
                         std::cout << "\nCannot rename file.\n";
-                    }
                 }
                 else if (subChoice == 2)
                 {
+                    char srcName[100], dstName[100];
                     std::cout << "\nEnter source filename: ";
-                    char srcName[100];
                     std::cin >> srcName;
                     std::cout << "\nEnter destination filename: ";
-                    char dstName[100];
                     std::cin >> dstName;
-
                     FILE *src = fopen(srcName, "rb");
                     if (!src)
                     {
@@ -928,24 +866,17 @@ int main()
                         std::cout << "\nCannot create destination file.\n";
                         continue;
                     }
-
                     RentalRecord rec;
                     while (fread(&rec, sizeof(RentalRecord), 1, src) == 1)
-                    {
                         fwrite(&rec, sizeof(RentalRecord), 1, dst);
-                    }
                     fclose(src);
                     fclose(dst);
                     std::cout << "\nFile copied successfully.\n";
                 }
                 else if (subChoice == 3)
-                {
                     editing = false;
-                }
                 else
-                {
                     std::cout << "\nInvalid option.\n";
-                }
             }
             break;
         }
@@ -990,9 +921,7 @@ int main()
         }
 
         if (opt == 1)
-        {
             print_all(file);
-        }
         else if (opt == 2)
         {
             quick_sort(file);
@@ -1010,15 +939,14 @@ int main()
         }
         else if (opt == 5)
         {
-            std::cout << "\nEnter renter name: ";
             char name[50];
+            std::cout << "\nEnter renter name: ";
             std::cin >> name;
             RentalRecord found = linear_search(file, name);
             if (found.renter_name[0] != '\0')
             {
                 std::cout << "\nFound:\n";
                 print_record(found);
-                // Сохраняем отчёт
                 FILE *report = fopen("report.txt", "w");
                 if (report)
                 {
@@ -1029,38 +957,33 @@ int main()
                 }
             }
             else
-            {
                 std::cout << "\nNot found.\n";
-            }
         }
         else if (opt == 6)
         {
-            std::cout << "\nEnter item name: ";
             char name[50];
+            std::cout << "\nEnter item name: ";
             std::cin >> name;
             binary_search_and_print(file, name);
         }
         else if (opt == 7)
         {
+            char itemName[50], date[20];
             std::cout << "\nEnter item name: ";
-            char itemName[50];
             std::cin >> itemName;
             std::cout << "\nEnter date (YYYY-MM-DD): ";
-            char date[20];
             std::cin >> date;
             find_by_item_and_date(file, itemName, date);
         }
         else if (opt == 8)
         {
-            std::cout << "\nEnter date (YYYY-MM-DD): ";
             char date[20];
+            std::cout << "\nEnter date (YYYY-MM-DD): ";
             std::cin >> date;
             find_by_date(file, date);
         }
         else if (opt == 9)
-        {
             statistics(file);
-        }
         else if (opt == 10)
         {
             RentalRecord newRec;
@@ -1074,50 +997,29 @@ int main()
             std::cin >> newRec.rental_days;
             std::cout << "\nEnter status (0=available, 1=rented): ";
             std::cin >> newRec.status;
-
             if (std::cin.fail())
             {
-                std::cout << "\nInvalid input!\n";
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
                 continue;
             }
-
             append_record(&newRec, file);
             std::cout << "\nRecord added.\n";
         }
         else if (opt == 11)
         {
-            std::cout << "\nEnter renter name to delete: ";
             char name[50];
+            std::cout << "\nEnter renter name to delete: ";
             std::cin >> name;
-
-            long cnt = count_records(file);
-            int writeIdx = 0;
-            for (int i = 0; i < cnt; ++i)
-            {
-                RentalRecord rec = read_record(i, file);
-                if (std::strcmp(rec.renter_name, name) != 0)
-                {
-                    write_record(writeIdx, &rec, file);
-                    writeIdx++;
-                }
-            }
-            while (writeIdx < cnt)
-            {
-                remove_last(file, currentFile);
-                cnt--;
-            }
-            std::cout << "\nRecord(s) deleted.\n";
+            delete_records_by_renter(file, currentFile, name);
         }
         else if (opt == 12)
         {
-            std::cout << "\nEnter index to delete (0-based): ";
             int idx;
+            std::cout << "\nEnter index to delete (0-based): ";
             std::cin >> idx;
             if (std::cin.fail())
             {
-                std::cout << "\nInvalid input!\n";
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
                 continue;
@@ -1126,15 +1028,14 @@ int main()
         }
         else if (opt == 13)
         {
-            std::cout << "\nEnter renter name to update: ";
             char name[50];
+            std::cout << "\nEnter renter name to update: ";
             std::cin >> name;
-
-            long cnt = count_records(file);
+            long cnt = g_record_count;
             bool found = false;
-            for (int i = 0; i < cnt; ++i)
+            for (long i = 0; i < cnt; ++i)
             {
-                RentalRecord rec = read_record(i, file);
+                RentalRecord rec = read_record_at(i, file);
                 if (std::strcmp(rec.renter_name, name) == 0)
                 {
                     std::cout << "\nEnter new item name: ";
@@ -1145,45 +1046,34 @@ int main()
                     std::cin >> rec.rental_days;
                     std::cout << "\nEnter new status (0=available, 1=rented): ";
                     std::cin >> rec.status;
-
                     if (std::cin.fail())
                     {
-                        std::cout << "\nInvalid input!\n";
                         std::cin.clear();
                         std::cin.ignore(10000, '\n');
                         continue;
                     }
-
-                    write_record(i, &rec, file);
+                    write_record_at(i, &rec, file);
                     found = true;
                     std::cout << "\nRecord updated.\n";
                     break;
                 }
             }
             if (!found)
-            {
                 std::cout << "\nNot found.\n";
-            }
         }
         else if (opt == 14)
         {
-            std::fclose(file);
+            fclose(file);
             fileOpen = false;
             break;
         }
         else if (opt == 15)
-        {
             running = false;
-        }
         else
-        {
             std::cout << "\nInvalid option.\n";
-        }
-
         std::cout << "\n======================================================================\n";
     }
-
     if (file)
-        std::fclose(file);
+        fclose(file);
     return 0;
 }
