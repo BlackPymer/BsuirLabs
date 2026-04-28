@@ -182,7 +182,30 @@ void print_record(const RentalRecord &rec)
               << '\n';
 }
 
-// Вспомогательные функции для отчёта
+bool init_report_file(const char *filename, FILE *&file, const char *open_type)
+{
+    if (file != nullptr)
+    {
+        fclose(file);
+        file = nullptr;
+    }
+    file = fopen(filename, open_type);
+    if (!file)
+    {
+        file = fopen(filename, "w");
+        if (file == nullptr)
+            return false;
+        fclose(file);
+        file = fopen(filename, open_type);
+    }
+    if (!file)
+        return false;
+    fprintf(file, "\n");
+    fprintf(file, "%-20s%-25s%-15s%-10s%-12s\n",
+            "Item Name", "Renter Name", "Rental Date", "Days", "Status");
+    return true;
+}
+
 void write_report_header(FILE *report)
 {
     fprintf(report, "%-20s%-25s%-15s%-10s%-12s\n",
@@ -200,7 +223,6 @@ void print_all(FILE *file)
 {
     long cnt = count_records(file);
 
-    // Вывод в консоль
     std::cout << "\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(25) << "Renter Name"
@@ -208,12 +230,14 @@ void print_all(FILE *file)
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
 
-    // Создание отчёта
-    FILE *report = fopen("report.txt", "w");
-    if (report)
-    {
-        write_report_header(report);
-    }
+    std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+    int ans = 0;
+    std::cin >> ans;
+    FILE *report = NULL;
+    if (ans == 1)
+        init_report_file("report.txt", report, "a");
+    else if (ans == 2)
+        init_report_file("report.txt", report, "w");
 
     for (int i = 0; i < cnt; ++i)
     {
@@ -339,11 +363,8 @@ RentalRecord linear_search(FILE *file, const char *renter)
     return result;
 }
 
-// Бинарный поиск без динамических массивов: предварительно сортируем файл,
-// затем ищем все записи с заданным именем.
 void binary_search_and_print(FILE *file, const char *name)
 {
-    // Сортируем файл по item_name
     insertion_sort(file);
 
     long cnt = count_records(file);
@@ -374,8 +395,14 @@ void binary_search_and_print(FILE *file, const char *name)
     if (foundIndex == -1)
     {
         std::cout << "\nNo records found for item: " << name << "\n";
-        // Создаём пустой отчёт
-        FILE *report = fopen("report.txt", "w");
+        std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+        int ans = 0;
+        std::cin >> ans;
+        FILE *report = NULL;
+        if (ans == 1)
+            init_report_file("report.txt", report, "a");
+        else if (ans == 2)
+            init_report_file("report.txt", report, "w");
         if (report)
         {
             fprintf(report, "No records found for item: %s\n", name);
@@ -385,7 +412,6 @@ void binary_search_and_print(FILE *file, const char *name)
         return;
     }
 
-    // Линейно расширяем границы влево и вправо от найденного индекса
     int left = foundIndex;
     while (left > 0)
     {
@@ -405,7 +431,6 @@ void binary_search_and_print(FILE *file, const char *name)
             break;
     }
 
-    // Вывод в консоль
     std::cout << "\nFound " << (right - left + 1) << " record(s):\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(25) << "Renter Name"
@@ -413,11 +438,14 @@ void binary_search_and_print(FILE *file, const char *name)
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
 
-    FILE *report = fopen("report.txt", "w");
-    if (report)
-    {
-        write_report_header(report);
-    }
+    std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+    int ans = 0;
+    std::cin >> ans;
+    FILE *report = NULL;
+    if (ans == 1)
+        init_report_file("report.txt", report, "a");
+    else if (ans == 2)
+        init_report_file("report.txt", report, "w");
 
     for (int i = left; i <= right; ++i)
     {
@@ -446,7 +474,15 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
 
-    FILE *report = fopen("report.txt", "w");
+    std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+    int ans = 0;
+    std::cin >> ans;
+    FILE *report = NULL;
+    if (ans == 1)
+        init_report_file("report.txt", report, "a");
+    else if (ans == 2)
+        init_report_file("report.txt", report, "w");
+
     if (report)
     {
         fprintf(report, "Renters of '%s' after %s:\n\n", itemName, date);
@@ -532,8 +568,6 @@ void statistics(FILE *file)
         return;
     }
 
-    // Сбор статистики без динамических массивов — используем локальные массивы на стеке
-    // Максимальное количество уникальных предметов не превышает cnt, но мы ограничим разумным числом (например 1000)
     const int MAX_ITEMS = 1000;
     struct ItemStat
     {
@@ -567,14 +601,21 @@ void statistics(FILE *file)
         }
     }
 
-    // Вывод в консоль
     std::cout << "\n=== Statistics by Item ===\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(15) << "Rentals"
               << std::left << std::setw(15) << "Total Days"
               << std::left << std::setw(10) << "Avg Days" << '\n';
 
-    FILE *report = fopen("report.txt", "w");
+    std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
+    int ans = 0;
+    std::cin >> ans;
+    FILE *report = NULL;
+    if (ans == 1)
+        init_report_file("report.txt", report, "a");
+    else if (ans == 2)
+        init_report_file("report.txt", report, "w");
+
     if (report)
     {
         fprintf(report, "=== Statistics by Item ===\n\n");
