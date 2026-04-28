@@ -932,7 +932,7 @@ int main()
                 for (int i = 0; i < file_struct_num; ++i)
                 {
                     Trip t;
-                    fread(&t, sizeof(Trip), 11, file);
+                    fread(&t, sizeof(Trip), 1, file);
                     if (t.number == newTrip.number)
                     {
                         exists = true;
@@ -994,7 +994,7 @@ int main()
                 bool found = false;
                 for (int i = 0; i < file_struct_num; ++i)
                 {
-                    fread(&update_by_num, sizeof(Trip), 1, file);
+                    fread(&updatedTrip, sizeof(Trip), 1, file);
                     if (updatedTrip.number == number)
                     {
                         found = true;
