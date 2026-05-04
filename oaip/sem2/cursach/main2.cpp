@@ -68,6 +68,18 @@ struct Stack
     }
 };
 
+struct StatNode
+{
+    char name[50];
+    int count;
+    int total_days;
+    StatNode *next;
+    StatNode(const char *n, int c, int d) : count(c), total_days(d), next(nullptr)
+    {
+        std::strcpy(name, n);
+    }
+};
+
 long g_record_count = 0;
 
 long get_file_count(FILE *file)
@@ -225,7 +237,8 @@ void print_all(FILE *file)
     for (long i = 0; i < g_record_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         print_record(rec);
         if (report)
             write_record_to_report(report, rec);
@@ -266,13 +279,15 @@ void selection_sort(FILE *file)
     {
         fseek(file, sizeof(RentalRecord) * i, SEEK_SET);
         RentalRecord cur, min;
-        fread(&min, sizeof(RentalRecord), 1, file);
+        if (fread(&min, sizeof(RentalRecord), 1, file) != 1)
+            break;
         cur = min;
         int minIdx = i;
         for (int j = i + 1; j < n; ++j)
         {
             RentalRecord tmp;
-            fread(&tmp, sizeof(RentalRecord), 1, file);
+            if (fread(&tmp, sizeof(RentalRecord), 1, file) != 1)
+                break;
             if (tmp.rental_days < min.rental_days)
             {
                 min = tmp;
@@ -306,7 +321,8 @@ void quick_sort(FILE *file)
             RentalRecord t1;
             while (i <= r)
             {
-                fread(&t1, sizeof(RentalRecord), 1, file);
+                if (fread(&t1, sizeof(RentalRecord), 1, file) != 1)
+                    break;
                 if (std::strcmp(t1.rental_date, pivot.rental_date) >= 0)
                     break;
                 ++i;
@@ -340,7 +356,8 @@ RentalRecord linear_search(FILE *file, const char *renter)
     RentalRecord rec;
     for (long i = 0; i < g_record_count; ++i)
     {
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         if (std::strcmp(rec.renter_name, renter) == 0)
             return rec;
     }
@@ -418,7 +435,8 @@ void binary_search_and_print(FILE *file, const char *name)
     for (int i = left; i <= right; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         print_record(rec);
         if (report)
             write_record_to_report(report, rec);
@@ -458,7 +476,8 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
     for (long i = 0; i < g_record_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         if (std::strcmp(rec.item_name, itemName) == 0 && std::strcmp(rec.rental_date, date) > 0)
         {
             print_record(rec);
@@ -501,7 +520,8 @@ void find_by_date(FILE *file, const char *date)
     for (long i = 0; i < g_record_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         if (std::strcmp(rec.rental_date, date) == 0)
         {
             print_record(rec);
@@ -530,42 +550,54 @@ void statistics(FILE *file)
         std::cout << "\nNo records.\n";
         return;
     }
-    const int MAX_ITEMS = 1000;
-    struct ItemStat
-    {
-        char name[50];
-        int count;
-        int total_days;
-    };
-    ItemStat stats[MAX_ITEMS];
-    int statCount = 0;
+    StatNode *head = nullptr;
 
     fseek(file, 0, SEEK_SET);
     for (long i = 0; i < g_record_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
-        bool found = false;
-        for (int j = 0; j < statCount; ++j)
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
+        StatNode *curr = head;
+        StatNode *prev = nullptr;
+        while (curr)
         {
-            if (std::strcmp(stats[j].name, rec.item_name) == 0)
+            if (std::strcmp(curr->name, rec.item_name) == 0)
             {
-                stats[j].count++;
-                stats[j].total_days += rec.rental_days;
-                found = true;
+                curr->count++;
+                curr->total_days += rec.rental_days;
                 break;
             }
+            prev = curr;
+            curr = curr->next;
         }
-        if (!found && statCount < MAX_ITEMS)
+        if (!curr)
         {
-            std::strcpy(stats[statCount].name, rec.item_name);
-            stats[statCount].count = 1;
-            stats[statCount].total_days = rec.rental_days;
-            statCount++;
+            StatNode *newNode = new StatNode(rec.item_name, 1, rec.rental_days);
+            if (!head)
+                head = newNode;
+            else
+                prev->next = newNode;
         }
     }
 
-    std::cout << "\n=== Statistics by Item ===\n\n";
+    for (StatNode *p = head; p; p = p->next)
+    {
+        for (StatNode *q = p->next; q; q = q->next)
+        {
+            if (q->count > p->count)
+            {
+                std::swap(p->count, q->count);
+                std::swap(p->total_days, q->total_days);
+                char tmp[50];
+                std::strcpy(tmp, p->name);
+                std::strcpy(p->name, q->name);
+                std::strcpy(q->name, tmp);
+            }
+        }
+    }
+
+    std::cout << "\n=== Statistics by Item (sorted by popularity) ===\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(15) << "Rentals"
               << std::left << std::setw(15) << "Total Days"
@@ -581,32 +613,33 @@ void statistics(FILE *file)
         init_report_file("report.txt", report, "w");
     if (report)
     {
-        fprintf(report, "=== Statistics by Item ===\n\n");
+        fprintf(report, "=== Statistics by Item (sorted by popularity) ===\n\n");
         fprintf(report, "%-20s%-15s%-15s%-10s\n", "Item Name", "Rentals", "Total Days", "Avg Days");
     }
 
-    int maxCount = 0;
-    char mostPopular[50] = "";
-    for (int i = 0; i < statCount; ++i)
+    for (StatNode *p = head; p; p = p->next)
     {
-        double avg = stats[i].total_days / (double)stats[i].count;
-        std::cout << std::left << std::setw(20) << stats[i].name
-                  << std::left << std::setw(15) << stats[i].count
-                  << std::left << std::setw(15) << stats[i].total_days
+        double avg = p->total_days / (double)p->count;
+        std::cout << std::left << std::setw(20) << p->name
+                  << std::left << std::setw(15) << p->count
+                  << std::left << std::setw(15) << p->total_days
                   << std::left << std::setw(10) << avg << '\n';
         if (report)
-            fprintf(report, "%-20s%-15d%-15d%-10.2f\n", stats[i].name, stats[i].count, stats[i].total_days, avg);
-        if (stats[i].count > maxCount)
-        {
-            maxCount = stats[i].count;
-            std::strcpy(mostPopular, stats[i].name);
-        }
+            fprintf(report, "%-20s%-15d%-15d%-10.2f\n", p->name, p->count, p->total_days, avg);
     }
-    if (maxCount > 0)
+
+    if (head)
     {
-        std::cout << "\nMost rented item: " << mostPopular << " (" << maxCount << " times)\n";
+        std::cout << "\nMost rented item: " << head->name << " (" << head->count << " times)\n";
         if (report)
-            fprintf(report, "\nMost rented item: %s (%d times)\n", mostPopular, maxCount);
+            fprintf(report, "\nMost rented item: %s (%d times)\n", head->name, head->count);
+    }
+
+    while (head)
+    {
+        StatNode *tmp = head;
+        head = head->next;
+        delete tmp;
     }
     if (report)
     {
@@ -627,7 +660,8 @@ void delete_record_by_index(FILE *file, const char *filename, int index)
     for (int i = 0; i < g_record_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         if (i != index)
             write_record_at(writeIdx++, &rec, file);
     }
@@ -643,7 +677,8 @@ void delete_records_by_renter(FILE *file, const char *filename, const char *rent
     for (long i = 0; i < original_count; ++i)
     {
         RentalRecord rec;
-        fread(&rec, sizeof(RentalRecord), 1, file);
+        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+            break;
         if (std::strcmp(rec.renter_name, renter) != 0)
             write_record_at(writeIdx++, &rec, file);
     }
@@ -768,7 +803,17 @@ int main()
             if (init_file(currentFile, file))
             {
                 std::cout << "\nFile created successfully.\n";
-                init_data(file);
+                std::cout << "Fill with default data? (1 - Yes, 0 - No): ";
+                int fill;
+                std::cin >> fill;
+                if (std::cin.fail())
+                {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    fill = 0;
+                }
+                if (fill == 1)
+                    init_data(file);
                 fileOpen = true;
             }
             else
@@ -1031,11 +1076,13 @@ int main()
             char name[50];
             std::cout << "\nEnter renter name to update: ";
             std::cin >> name;
-            long cnt = g_record_count;
             bool found = false;
-            for (long i = 0; i < cnt; ++i)
+            fseek(file, 0, SEEK_SET);
+            for (long i = 0; i < g_record_count; ++i)
             {
-                RentalRecord rec = read_record_at(i, file);
+                RentalRecord rec;
+                if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+                    break;
                 if (std::strcmp(rec.renter_name, name) == 0)
                 {
                     std::cout << "\nEnter new item name: ";
