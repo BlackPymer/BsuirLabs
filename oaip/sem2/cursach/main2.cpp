@@ -1,10 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <iomanip>
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-
 #ifdef _WIN32
+#include <Windows.h>
 #include <io.h>
 #include <fcntl.h>
 #else
@@ -18,7 +19,6 @@ struct RentalRecord
     char rental_date[20];
     int rental_days;
     int status;
-
     RentalRecord() : rental_days(0), status(0)
     {
         item_name[0] = '\0';
@@ -65,18 +65,6 @@ struct Stack
             root = root->next;
             delete tmp;
         }
-    }
-};
-
-struct StatNode
-{
-    char name[50];
-    int count;
-    int total_days;
-    StatNode *next;
-    StatNode(const char *n, int c, int d) : count(c), total_days(d), next(nullptr)
-    {
-        std::strcpy(name, n);
     }
 };
 
@@ -223,7 +211,6 @@ void print_all(FILE *file)
               << std::left << std::setw(15) << "Rental Date"
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
-
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
     int ans;
     std::cin >> ans;
@@ -232,7 +219,6 @@ void print_all(FILE *file)
         init_report_file("report.txt", report, "a");
     else if (ans == 2)
         init_report_file("report.txt", report, "w");
-
     fseek(file, 0, SEEK_SET);
     for (long i = 0; i < g_record_count; ++i)
     {
@@ -296,8 +282,10 @@ void selection_sort(FILE *file)
         }
         if (minIdx != i)
         {
-            write_record_at(i, &min, file);
-            write_record_at(minIdx, &cur, file);
+            fseek(file, sizeof(RentalRecord) * i, SEEK_SET);
+            fwrite(&min, sizeof(RentalRecord), 1, file);
+            fseek(file, sizeof(RentalRecord) * minIdx, SEEK_SET);
+            fwrite(&cur, sizeof(RentalRecord), 1, file);
         }
     }
 }
@@ -414,14 +402,12 @@ void binary_search_and_print(FILE *file, const char *name)
     int right = foundIndex;
     while (right < cnt - 1 && std::strcmp(read_record_at(right + 1, file).item_name, name) == 0)
         right++;
-
     std::cout << "\nFound " << (right - left + 1) << " record(s):\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
               << std::left << std::setw(25) << "Renter Name"
               << std::left << std::setw(15) << "Rental Date"
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
-
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
     int ans;
     std::cin >> ans;
@@ -457,7 +443,6 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
               << std::left << std::setw(15) << "Rental Date"
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
-
     std::cout << "\nSave result to report.txt? (1 - Yes, append. 2 - Yes, overwrite. 3 - No.)\n-> ";
     int ans;
     std::cin >> ans;
@@ -471,7 +456,6 @@ void find_by_item_and_date(FILE *file, const char *itemName, const char *date)
         fprintf(report, "Renters of '%s' after %s:\n\n", itemName, date);
         write_report_header(report);
     }
-
     fseek(file, 0, SEEK_SET);
     for (long i = 0; i < g_record_count; ++i)
     {
@@ -508,14 +492,12 @@ void find_by_date(FILE *file, const char *date)
               << std::left << std::setw(15) << "Rental Date"
               << std::left << std::setw(10) << "Days"
               << std::left << std::setw(12) << "Status" << '\n';
-
     FILE *report = fopen("report.txt", "w");
     if (report)
     {
         fprintf(report, "Records with date %s:\n\n", date);
         write_report_header(report);
     }
-
     fseek(file, 0, SEEK_SET);
     for (long i = 0; i < g_record_count; ++i)
     {
@@ -550,52 +532,8 @@ void statistics(FILE *file)
         std::cout << "\nNo records.\n";
         return;
     }
-    StatNode *head = nullptr;
 
-    fseek(file, 0, SEEK_SET);
-    for (long i = 0; i < g_record_count; ++i)
-    {
-        RentalRecord rec;
-        if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
-            break;
-        StatNode *curr = head;
-        StatNode *prev = nullptr;
-        while (curr)
-        {
-            if (std::strcmp(curr->name, rec.item_name) == 0)
-            {
-                curr->count++;
-                curr->total_days += rec.rental_days;
-                break;
-            }
-            prev = curr;
-            curr = curr->next;
-        }
-        if (!curr)
-        {
-            StatNode *newNode = new StatNode(rec.item_name, 1, rec.rental_days);
-            if (!head)
-                head = newNode;
-            else
-                prev->next = newNode;
-        }
-    }
-
-    for (StatNode *p = head; p; p = p->next)
-    {
-        for (StatNode *q = p->next; q; q = q->next)
-        {
-            if (q->count > p->count)
-            {
-                std::swap(p->count, q->count);
-                std::swap(p->total_days, q->total_days);
-                char tmp[50];
-                std::strcpy(tmp, p->name);
-                std::strcpy(p->name, q->name);
-                std::strcpy(q->name, tmp);
-            }
-        }
-    }
+    insertion_sort(file);
 
     std::cout << "\n=== Statistics by Item (sorted by popularity) ===\n\n";
     std::cout << std::left << std::setw(20) << "Item Name"
@@ -613,34 +551,74 @@ void statistics(FILE *file)
         init_report_file("report.txt", report, "w");
     if (report)
     {
-        fprintf(report, "=== Statistics by Item (sorted by popularity) ===\n\n");
+        fprintf(report, "=== Statistics by Item ===\n\n");
         fprintf(report, "%-20s%-15s%-15s%-10s\n", "Item Name", "Rentals", "Total Days", "Avg Days");
     }
 
-    for (StatNode *p = head; p; p = p->next)
+    fseek(file, 0, SEEK_SET);
+    char current_item[50] = "";
+    int count = 0;
+    int total_days = 0;
+    char most_popular[50] = "";
+    int max_count = 0;
+    RentalRecord rec;
+    long records_read = 0;
+
+    while (records_read < g_record_count && fread(&rec, sizeof(RentalRecord), 1, file) == 1)
     {
-        double avg = p->total_days / (double)p->count;
-        std::cout << std::left << std::setw(20) << p->name
-                  << std::left << std::setw(15) << p->count
-                  << std::left << std::setw(15) << p->total_days
+        ++records_read;
+
+        if (std::strcmp(rec.item_name, current_item) != 0)
+        {
+            if (count > 0)
+            {
+                double avg = total_days / (double)count;
+                std::cout << std::left << std::setw(20) << current_item
+                          << std::left << std::setw(15) << count
+                          << std::left << std::setw(15) << total_days
+                          << std::left << std::setw(10) << avg << '\n';
+                if (report)
+                    fprintf(report, "%-20s%-15d%-15d%-10.2f\n", current_item, count, total_days, avg);
+                if (count > max_count)
+                {
+                    max_count = count;
+                    std::strcpy(most_popular, current_item);
+                }
+            }
+            std::strcpy(current_item, rec.item_name);
+            count = 1;
+            total_days = rec.rental_days;
+        }
+        else
+        {
+            ++count;
+            total_days += rec.rental_days;
+        }
+    }
+
+    if (count > 0)
+    {
+        double avg = total_days / (double)count;
+        std::cout << std::left << std::setw(20) << current_item
+                  << std::left << std::setw(15) << count
+                  << std::left << std::setw(15) << total_days
                   << std::left << std::setw(10) << avg << '\n';
         if (report)
-            fprintf(report, "%-20s%-15d%-15d%-10.2f\n", p->name, p->count, p->total_days, avg);
+            fprintf(report, "%-20s%-15d%-15d%-10.2f\n", current_item, count, total_days, avg);
+        if (count > max_count)
+        {
+            max_count = count;
+            std::strcpy(most_popular, current_item);
+        }
     }
 
-    if (head)
+    if (most_popular[0] != '\0')
     {
-        std::cout << "\nMost rented item: " << head->name << " (" << head->count << " times)\n";
+        std::cout << "\nMost rented item: " << most_popular << " (" << max_count << " times)\n";
         if (report)
-            fprintf(report, "\nMost rented item: %s (%d times)\n", head->name, head->count);
+            fprintf(report, "\nMost rented item: %s (%d times)\n", most_popular, max_count);
     }
 
-    while (head)
-    {
-        StatNode *tmp = head;
-        head = head->next;
-        delete tmp;
-    }
     if (report)
     {
         fclose(report);
@@ -655,15 +633,21 @@ void delete_record_by_index(FILE *file, const char *filename, int index)
         std::cout << "Invalid index.\n";
         return;
     }
-    int writeIdx = 0;
     fseek(file, 0, SEEK_SET);
+    int writeIdx = 0;
     for (int i = 0; i < g_record_count; ++i)
     {
+        long readPos = ftell(file);
         RentalRecord rec;
         if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
             break;
         if (i != index)
-            write_record_at(writeIdx++, &rec, file);
+        {
+            fseek(file, sizeof(RentalRecord) * writeIdx, SEEK_SET);
+            fwrite(&rec, sizeof(RentalRecord), 1, file);
+            fseek(file, readPos + sizeof(RentalRecord), SEEK_SET);
+            ++writeIdx;
+        }
     }
     remove_last(file, filename);
     std::cout << "Record deleted.\n";
@@ -671,16 +655,22 @@ void delete_record_by_index(FILE *file, const char *filename, int index)
 
 void delete_records_by_renter(FILE *file, const char *filename, const char *renter)
 {
+    fseek(file, 0, SEEK_SET);
     int writeIdx = 0;
     long original_count = g_record_count;
-    fseek(file, 0, SEEK_SET);
     for (long i = 0; i < original_count; ++i)
     {
+        long readPos = ftell(file);
         RentalRecord rec;
         if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
             break;
         if (std::strcmp(rec.renter_name, renter) != 0)
-            write_record_at(writeIdx++, &rec, file);
+        {
+            fseek(file, sizeof(RentalRecord) * writeIdx, SEEK_SET);
+            fwrite(&rec, sizeof(RentalRecord), 1, file);
+            fseek(file, readPos + sizeof(RentalRecord), SEEK_SET);
+            ++writeIdx;
+        }
     }
     while (g_record_count > writeIdx)
         remove_last(file, filename);
@@ -763,14 +753,16 @@ void init_data(FILE *file)
 
 int main()
 {
+#ifdef _WIN32
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+#endif
     std::cout << "**********************************************************************\n";
     std::cout << "           SPORTS EQUIPMENT RENTAL MANAGEMENT SYSTEM\n";
     std::cout << "**********************************************************************\n\n";
-
     char currentFile[100] = "";
     bool fileOpen = false;
     FILE *file = nullptr;
-
     while (!fileOpen)
     {
         std::cout << "\n+--------------------------+\n";
@@ -784,7 +776,6 @@ int main()
         std::cout << "  6. Edit file\n";
         std::cout << "  7. Exit\n";
         std::cout << "\nSelect option: ";
-
         int choice;
         std::cin >> choice;
         if (std::cin.fail())
@@ -794,7 +785,6 @@ int main()
             std::cin.ignore(10000, '\n');
             continue;
         }
-
         switch (choice)
         {
         case 1:
@@ -930,195 +920,216 @@ int main()
         default:
             std::cout << "\nInvalid option.\n";
         }
-    }
 
-    bool running = true;
-    while (running)
-    {
-        std::cout << "\n+--------------------------------------------------+\n";
-        std::cout << "| Working with: " << std::left << std::setw(35) << currentFile << " |\n";
-        std::cout << "+--------------------------------------------------+\n";
-        std::cout << "\n  1. Display all rentals\n";
-        std::cout << "  2. Sort by rental date (Quick Sort)\n";
-        std::cout << "  3. Sort by rental days (Selection Sort)\n";
-        std::cout << "  4. Sort by item name (Insertion Sort)\n";
-        std::cout << "  5. Search by renter name (Linear)\n";
-        std::cout << "  6. Search by item name (Binary)\n";
-        std::cout << "  7. Find renters by item and date\n";
-        std::cout << "  8. Find by date\n";
-        std::cout << "  9. Statistics by item type\n";
-        std::cout << "  10. Add rental record\n";
-        std::cout << "  11. Delete rental record by renter\n";
-        std::cout << "  12. Delete rental record by index\n";
-        std::cout << "  13. Update rental record\n";
-        std::cout << "  14. Change file\n";
-        std::cout << "  15. Exit\n";
-        std::cout << "\nSelect option: ";
-
-        int opt;
-        std::cin >> opt;
-        if (std::cin.fail())
+        bool running = true;
+        while (running)
         {
-            std::cout << "\nInvalid input!\n";
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            continue;
-        }
-
-        if (opt == 1)
-            print_all(file);
-        else if (opt == 2)
-        {
-            quick_sort(file);
-            std::cout << "\nSorted by rental date.\n";
-        }
-        else if (opt == 3)
-        {
-            selection_sort(file);
-            std::cout << "\nSorted by rental days.\n";
-        }
-        else if (opt == 4)
-        {
-            insertion_sort(file);
-            std::cout << "\nSorted by item name.\n";
-        }
-        else if (opt == 5)
-        {
-            char name[50];
-            std::cout << "\nEnter renter name: ";
-            std::cin >> name;
-            RentalRecord found = linear_search(file, name);
-            if (found.renter_name[0] != '\0')
+            std::cout << "\n+--------------------------------------------------+\n";
+            std::cout << "| Working with: " << std::left << std::setw(35) << currentFile << " |\n";
+            std::cout << "+--------------------------------------------------+\n";
+            std::cout << "\n  1. Display all rentals\n";
+            std::cout << "  2. Sort by rental date (Quick Sort)\n";
+            std::cout << "  3. Sort by rental days (Selection Sort)\n";
+            std::cout << "  4. Sort by item name (Insertion Sort)\n";
+            std::cout << "  5. Search by renter name (Linear)\n";
+            std::cout << "  6. Search by item name (Binary)\n";
+            std::cout << "  7. Find renters by item and date\n";
+            std::cout << "  8. Find by date\n";
+            std::cout << "  9. Statistics by item type\n";
+            std::cout << "  10. Add rental record\n";
+            std::cout << "  11. Delete rental record by renter\n";
+            std::cout << "  12. Delete rental record by index\n";
+            std::cout << "  13. Update rental record\n";
+            std::cout << "  14. Change file\n";
+            std::cout << "  15. Exit\n";
+            std::cout << "\nSelect option: ";
+            int opt;
+            std::cin >> opt;
+            if (std::cin.fail())
             {
-                std::cout << "\nFound:\n";
-                print_record(found);
+                std::cout << "\nInvalid input!\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                continue;
+            }
+            if (opt == 1)
+                print_all(file);
+            else if (opt == 2)
+            {
+                quick_sort(file);
+                std::cout << "\nSorted by rental date.\n";
+            }
+            else if (opt == 3)
+            {
+                selection_sort(file);
+                std::cout << "\nSorted by rental days.\n";
+            }
+            else if (opt == 4)
+            {
+                insertion_sort(file);
+                std::cout << "\nSorted by item name.\n";
+            }
+            else if (opt == 5)
+            {
+                char renter[50];
+                std::cout << "\nEnter renter name: ";
+                std::cin >> renter;
+                RentalRecord first = linear_search(file, renter);
+                if (first.renter_name[0] == '\0')
+                {
+                    std::cout << "\nNot found.\n";
+                    continue;
+                }
+                std::cout << "\nRecords for renter: " << renter << "\n\n";
+                std::cout << std::left << std::setw(20) << "Item Name"
+                          << std::left << std::setw(25) << "Renter Name"
+                          << std::left << std::setw(15) << "Rental Date"
+                          << std::left << std::setw(10) << "Days"
+                          << std::left << std::setw(12) << "Status" << '\n';
                 FILE *report = fopen("report.txt", "w");
                 if (report)
-                {
                     write_report_header(report);
-                    write_record_to_report(report, found);
-                    fclose(report);
-                    std::cout << "Report saved to report.txt\n";
+                fseek(file, 0, SEEK_SET);
+                for (long i = 0; i < g_record_count; ++i)
+                {
+                    RentalRecord rec;
+                    if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+                        break;
+                    if (std::strcmp(rec.renter_name, renter) == 0)
+                    {
+                        print_record(rec);
+                        if (report)
+                            write_record_to_report(report, rec);
+                    }
                 }
+                if (report)
+                {
+                    fclose(report);
+                    std::cout << "\nReport saved to report.txt\n";
+                }
+            }
+            else if (opt == 6)
+            {
+                char name[50];
+                std::cout << "\nEnter item name: ";
+                std::cin.ignore();
+                std::cin.getline(name, 50);
+                binary_search_and_print(file, name);
+            }
+            else if (opt == 7)
+            {
+                char itemName[50], date[20];
+                std::cout << "\nEnter item name: ";
+                std::cin.ignore();
+                std::cin.getline(itemName, 50);
+                std::cout << "\nEnter date (YYYY-MM-DD): ";
+                std::cin >> date;
+                find_by_item_and_date(file, itemName, date);
+            }
+            else if (opt == 8)
+            {
+                char date[20];
+                std::cout << "\nEnter date (YYYY-MM-DD): ";
+                std::cin >> date;
+                find_by_date(file, date);
+            }
+            else if (opt == 9)
+                statistics(file);
+            else if (opt == 10)
+            {
+                RentalRecord newRec;
+                std::cout << "\nEnter item name: ";
+                std::cin >> newRec.item_name;
+                std::cout << "\nEnter renter name: ";
+                std::cin >> newRec.renter_name;
+                std::cout << "\nEnter rental date (YYYY-MM-DD): ";
+                std::cin >> newRec.rental_date;
+                std::cout << "\nEnter rental days: ";
+                std::cin >> newRec.rental_days;
+                std::cout << "\nEnter status (0=available, 1=rented): ";
+                std::cin >> newRec.status;
+                if (std::cin.fail())
+                {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    continue;
+                }
+                append_record(&newRec, file);
+                std::cout << "\nRecord added.\n";
+            }
+            else if (opt == 11)
+            {
+                char name[50];
+                std::cout << "\nEnter renter name to delete: ";
+                std::cin >> name;
+                delete_records_by_renter(file, currentFile, name);
+            }
+            else if (opt == 12)
+            {
+                int idx;
+                std::cout << "\nEnter index to delete (0-based): ";
+                std::cin >> idx;
+                if (std::cin.fail())
+                {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    continue;
+                }
+                delete_record_by_index(file, currentFile, idx);
+            }
+            else if (opt == 13)
+            {
+                char name[50];
+                std::cout << "\nEnter renter name to update: ";
+                std::cin >> name;
+                bool found = false;
+                fseek(file, 0, SEEK_SET);
+                for (long i = 0; i < g_record_count; ++i)
+                {
+                    RentalRecord rec;
+                    if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
+                        break;
+                    if (std::strcmp(rec.renter_name, name) == 0)
+                    {
+                        std::cout << "\nEnter new item name: ";
+                        std::cin >> rec.item_name;
+                        std::cout << "\nEnter new rental date (YYYY-MM-DD): ";
+                        std::cin >> rec.rental_date;
+                        std::cout << "\nEnter new rental days: ";
+                        std::cin >> rec.rental_days;
+                        std::cout << "\nEnter new status (0=available, 1=rented): ";
+                        std::cin >> rec.status;
+                        if (std::cin.fail())
+                        {
+                            std::cin.clear();
+                            std::cin.ignore(10000, '\n');
+                            continue;
+                        }
+                        write_record_at(i, &rec, file);
+                        found = true;
+                        std::cout << "\nRecord updated.\n";
+                        break;
+                    }
+                }
+                if (!found)
+                    std::cout << "\nNot found.\n";
+            }
+            else if (opt == 14)
+            {
+                fclose(file);
+                file = nullptr;
+                fileOpen = false;
+                break;
+            }
+            else if (opt == 15)
+            {
+                running = false;
+                fileOpen = true;
             }
             else
-                std::cout << "\nNot found.\n";
+                std::cout << "\nInvalid option.\n";
+            std::cout << "\n======================================================================\n";
         }
-        else if (opt == 6)
-        {
-            char name[50];
-            std::cout << "\nEnter item name: ";
-            std::cin >> name;
-            binary_search_and_print(file, name);
-        }
-        else if (opt == 7)
-        {
-            char itemName[50], date[20];
-            std::cout << "\nEnter item name: ";
-            std::cin >> itemName;
-            std::cout << "\nEnter date (YYYY-MM-DD): ";
-            std::cin >> date;
-            find_by_item_and_date(file, itemName, date);
-        }
-        else if (opt == 8)
-        {
-            char date[20];
-            std::cout << "\nEnter date (YYYY-MM-DD): ";
-            std::cin >> date;
-            find_by_date(file, date);
-        }
-        else if (opt == 9)
-            statistics(file);
-        else if (opt == 10)
-        {
-            RentalRecord newRec;
-            std::cout << "\nEnter item name: ";
-            std::cin >> newRec.item_name;
-            std::cout << "\nEnter renter name: ";
-            std::cin >> newRec.renter_name;
-            std::cout << "\nEnter rental date (YYYY-MM-DD): ";
-            std::cin >> newRec.rental_date;
-            std::cout << "\nEnter rental days: ";
-            std::cin >> newRec.rental_days;
-            std::cout << "\nEnter status (0=available, 1=rented): ";
-            std::cin >> newRec.status;
-            if (std::cin.fail())
-            {
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
-                continue;
-            }
-            append_record(&newRec, file);
-            std::cout << "\nRecord added.\n";
-        }
-        else if (opt == 11)
-        {
-            char name[50];
-            std::cout << "\nEnter renter name to delete: ";
-            std::cin >> name;
-            delete_records_by_renter(file, currentFile, name);
-        }
-        else if (opt == 12)
-        {
-            int idx;
-            std::cout << "\nEnter index to delete (0-based): ";
-            std::cin >> idx;
-            if (std::cin.fail())
-            {
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
-                continue;
-            }
-            delete_record_by_index(file, currentFile, idx);
-        }
-        else if (opt == 13)
-        {
-            char name[50];
-            std::cout << "\nEnter renter name to update: ";
-            std::cin >> name;
-            bool found = false;
-            fseek(file, 0, SEEK_SET);
-            for (long i = 0; i < g_record_count; ++i)
-            {
-                RentalRecord rec;
-                if (fread(&rec, sizeof(RentalRecord), 1, file) != 1)
-                    break;
-                if (std::strcmp(rec.renter_name, name) == 0)
-                {
-                    std::cout << "\nEnter new item name: ";
-                    std::cin >> rec.item_name;
-                    std::cout << "\nEnter new rental date (YYYY-MM-DD): ";
-                    std::cin >> rec.rental_date;
-                    std::cout << "\nEnter new rental days: ";
-                    std::cin >> rec.rental_days;
-                    std::cout << "\nEnter new status (0=available, 1=rented): ";
-                    std::cin >> rec.status;
-                    if (std::cin.fail())
-                    {
-                        std::cin.clear();
-                        std::cin.ignore(10000, '\n');
-                        continue;
-                    }
-                    write_record_at(i, &rec, file);
-                    found = true;
-                    std::cout << "\nRecord updated.\n";
-                    break;
-                }
-            }
-            if (!found)
-                std::cout << "\nNot found.\n";
-        }
-        else if (opt == 14)
-        {
-            fclose(file);
-            fileOpen = false;
-            break;
-        }
-        else if (opt == 15)
-            running = false;
-        else
-            std::cout << "\nInvalid option.\n";
-        std::cout << "\n======================================================================\n";
     }
     if (file)
         fclose(file);
