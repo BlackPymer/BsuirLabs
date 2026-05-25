@@ -29,6 +29,11 @@ int main()
     int e = 0;
     std::cout << "Enter number of edges\n-> ";
     std::cin >> e;
+    if (v == 0 || e == 0)
+    {
+        std::cout << "Number of edges or vertex is 0\n";
+        return 0;
+    }
     std::vector<std::vector<int>> graph = std::vector<std::vector<int>>(e, std::vector<int>(3));
     for (int i = 0; i < e; ++i)
     {
@@ -60,8 +65,9 @@ int main()
             {
                 if (weights[i][j] > weights[i][k] + weights[k][j])
                     weights[i][j] = weights[i][k] + weights[k][j];
-            }
+                        }
         }
+        printWeights(weights, v, __INT_MAX__ / 2);
     }
     printWeights(weights, v, __INT_MAX__ / 2);
     return 0;

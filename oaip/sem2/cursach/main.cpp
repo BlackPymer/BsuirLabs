@@ -581,6 +581,7 @@ void delete_by_num(int number, FILE *file, const char *filename)
             continue;
         }
         set_trip(j++, &tr, file);
+        fseek(file, sizeof(Trip) * (i + 1), SEEK_SET);
     }
     if (found)
         delete_last_trip(file, filename);
