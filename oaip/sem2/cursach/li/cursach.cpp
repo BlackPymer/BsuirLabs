@@ -535,10 +535,11 @@ void sortByDurationAscending(FILE *file)
         int minIdx = i;
         Visit minRec;
         read_record(file, minIdx, minRec);
+        fseek(file, sizeof(Visit) * (i + 1), SEEK_SET);
         for (int j = i + 1; j < n; j++)
         {
             Visit cur;
-            read_record(file, j, cur);
+            fread(&cur, sizeof(Visit), 1, file);
             if (cur.duration < minRec.duration)
             {
                 minIdx = j;
@@ -560,10 +561,11 @@ void sortByDurationDescending(FILE *file)
         int maxIdx = i;
         Visit maxRec;
         read_record(file, maxIdx, maxRec);
+        fseek(file, sizeof(Visit) * (i + 1), SEEK_SET);
         for (int j = i + 1; j < n; j++)
         {
             Visit cur;
-            read_record(file, j, cur);
+            fread(&cur, sizeof(Visit), 1, file);
             if (cur.duration > maxRec.duration)
             {
                 maxIdx = j;
@@ -617,20 +619,22 @@ void printAllSameDuration(FILE *file, int index)
             break;
     }
     int right = index;
+    fseek(file, right * sizeof(Visit), SEEK_SET);
     while (right + 1 < n)
     {
         Visit next;
-        read_record(file, right + 1, next);
+        fread(&next, sizeof(Visit), 1, file);
         if (next.duration == target)
             right++;
         else
             break;
     }
     cout << "\nНайдены записи с длительностью " << target << " мин:\n";
+    fseek(file, left * sizeof(Visit), SEEK_SET);
     for (int i = left; i <= right; i++)
     {
         Visit v;
-        read_record(file, i, v);
+        fread(&v, sizeof(Visit), 0, file);
         printVisit(v, i);
     }
 }
@@ -665,10 +669,11 @@ void quickSortMembership(FILE *file)
         int i = left, j = right;
         while (i <= j)
         {
+            fseek(file, 0, SEEK_SET);
             while (i <= right)
             {
                 Visit cur;
-                read_record(file, i, cur);
+                fread(&cur, sizeof(Visit), 1, file);
                 if (strcmp(cur.membershipType, pivotStr) < 0)
                     i++;
                 else
@@ -709,10 +714,11 @@ void selectionSortByDate(FILE *file)
         int minIdx = i;
         Visit minRec;
         read_record(file, minIdx, minRec);
+        fseek(file, (i + 1) * sizeof(Visit), SEEK_SET);
         for (int j = i + 1; j < n; j++)
         {
             Visit cur;
-            read_record(file, j, cur);
+            fread(&cur, sizeof(Visit), 1, file);
             if (dateToNumber(cur.visitDate) < dateToNumber(minRec.visitDate))
             {
                 minIdx = j;
@@ -805,10 +811,11 @@ void analyzeVisitsByPeriod(FILE *file)
 
 bool isFirstOccurrenceOfMembership(FILE *file, int index, const char *membershipType)
 {
+    fseek(file, 0, SEEK_SET);
     for (int i = 0; i < index; i++)
     {
         Visit cur;
-        read_record(file, i, cur);
+        fread(&cur, sizeof(Visit), 1, file);
         if (strcmp(cur.membershipType, membershipType) == 0)
             return false;
     }
