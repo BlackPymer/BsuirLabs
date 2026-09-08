@@ -7,18 +7,30 @@ enum Cell
     X,
     O
 };
+enum GameStatus
+{
+    IsPlaying,
+    XWins,
+    OWins,
+    Draw
+};
 
 class TicTacToe
 {
 public:
-    TicTacToe(int fieldSize)
+    TicTacToe(int fieldSize);
+    void MakeMove(int row, int col);
+    GameStatus CheckGameStatus();
+    class InvalidMoveException : public std::exception
     {
-        _fieldSize = fieldSize;
-        _field = std::vector<std::vector<Cell>>(fieldSize, std::vector<Cell>(fieldSize, Empty));
-    }
+    };
+    class GameNotStartedException : public std::exception
+    {
+    };
 
 private:
     std::vector<std::vector<Cell>> _field;
     bool _playerTurn = 1;
     int _fieldSize;
+    GameStatus _gameStatus = IsPlaying;
 };
