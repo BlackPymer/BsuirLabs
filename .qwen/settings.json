@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(zip *)"
-    ]
-  },
-  "$version": 3
-}

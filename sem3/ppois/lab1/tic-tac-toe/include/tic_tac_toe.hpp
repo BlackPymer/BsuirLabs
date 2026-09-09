@@ -1,36 +1,142 @@
+/**
+ * @file tic_tac_toe.hpp
+ * @brief Заголовочный файл класса игры «Крестики-нолики».
+ *
+ * @mainpage Крестики-нолики (TicTacToe)
+ *
+ * Реализация игры «Крестики-нолики» на квадратном поле NxN.
+ *
+ * Игрок X ходит первым, затем игрок O, ходы чередуются. После каждого
+ * хода проверяется наличие выигрышной линии — полностью заполненной
+ * строки, столбца или одной из диагоналей. Если все клетки заняты,
+ * а победитель не выявлен, объявляется ничья.
+ *
+ * Сборка и запуск тестов:
+ * @code
+ * make tests
+ * ./unit_tests
+ * @endcode
+ *
+ * Генерация документации:
+ * @code
+ * make docs
+ * @endcode
+ */
+
 #include <string>
 #include <vector>
 
+/// Состояние клетки игрового поля.
 enum Cell
 {
-    Empty,
-    X,
-    O
-};
-enum GameStatus
-{
-    IsPlaying,
-    XWins,
-    OWins,
-    Draw
+    Empty, ///< Клетка пуста.
+    X,     ///< Клетка занята игроком X.
+    O      ///< Клетка занята игроком O.
 };
 
+/// Статус игры.
+enum GameStatus
+{
+    IsPlaying, ///< Игра продолжается.
+    XWins,     ///< Победил игрок X.
+    OWins,     ///< Победил игрок O.
+    Draw       ///< Ничья (поле заполнено, победителя нет).
+};
+
+/**
+ * @brief Класс игры «Крестики-нолики».
+ *
+ * Хранит игровое поле NxN, информацию о том, чей сейчас ход,
+ * количество свободных клеток и текущий статус игры.
+ */
 class TicTacToe
 {
 public:
+    /**
+     * @brief Конструктор создаёт пустое поле.
+     * @param fieldSize Размер стороны квадратного поля (N).
+     */
     TicTacToe(int fieldSize);
+
+    /**
+     * @brief Копирующий конструктор.
+     * @param other Копируемая игра.
+     */
+    TicTacToe(const TicTacToe &other);
+
+    /**
+     * @brief Оператор присваивания.
+     * @param other Копируемая игра.
+     * @return Ссылка на текущий объект.
+     */
+    TicTacToe &operator=(const TicTacToe &other);
+
+    /**
+     * @brief Выполняет ход текущим игроком.
+     *
+     * Клетка \p row, \p col должна быть пустой и находиться в пределах поля.
+     * После размещения маркера обновляется статус игры.
+     *
+     * @param row Номер строки (0..N-1).
+     * @param col Номер столбца (0..N-1).
+     * @throw InvalidMoveException Если клетка занята или координаты вне поля.
+     * @throw GameNotStartedException Если игра уже завершена.
+     */
     void MakeMove(int row, int col);
+
+    /**
+     * @brief Возвращает текущий статус игры.
+     * @return Один из значений перечисления @ref GameStatus.
+     */
     GameStatus CheckGameStatus();
+
+    /**
+     * @brief Возвращает форматированное представление поля для вывода.
+     * @return Строка с игровым полем.
+     */
+    std::string GetFieldFormatted() const;
+
+    /**
+     * @brief Проверяет, чей сейчас ход.
+     * @return true — ход игрока X, false — ход игрока O.
+     */
+    bool isKrestikMove();
+
+    /**
+     * @brief Исключение: некорректный ход.
+     *
+     * Выбрасывается при попытке занять занятую клетку или выйти за границы поля.
+     */
     class InvalidMoveException : public std::exception
     {
     };
+
+    /**
+     * @brief Исключение: ход после окончания игры.
+     *
+     * Выбрасывается при попытке сделать ход, когда игра уже завершена
+     * (победой одного из игроков или ничьёй).
+     */
     class GameNotStartedException : public std::exception
     {
     };
 
 private:
-    std::vector<std::vector<Cell>> _field;
-    bool _playerTurn = 1;
-    int _fieldSize;
-    GameStatus _gameStatus = IsPlaying;
+    std::vector<std::vector<Cell>> _field; ///< Игровое поле NxN.
+    bool _playerTurn = 1;                   ///< true — ход X, false — ход O.
+    GameStatus _gameStatus = IsPlaying;     ///< Текущий статус игры.
+    int _fieldSize;                         ///< Размер стороны поля.
+    int _emptyCellsLeft;                    ///< Количество свободных клеток.
+
+    /**
+     * @brief Проверяет, привёл ли последний ход к победе.
+     *
+     * Параметры указывают позицию последнего хода. Проверяется строка,
+     * столбец и, при необходимости, обе диагонали. При заполненном поле
+     * без победителя статус устанавливается в Draw.
+     *
+     * @param row Номер строки последнего хода.
+     * @param col Номер столбца последнего хода.
+     */
+    void CheckWin(int row, int col);
 };
