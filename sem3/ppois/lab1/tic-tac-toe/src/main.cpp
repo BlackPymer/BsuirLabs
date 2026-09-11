@@ -32,6 +32,7 @@ int main()
                 std::cout << "Illegal move! Try again.\n";
                 continue;
             }
+            std::cout << game.GetFieldFormatted() << '\n';
         }
         std::cout << "Game over.\n";
         if (game.CheckGameStatus() == Draw)

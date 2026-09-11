@@ -123,10 +123,10 @@ public:
 
 private:
     std::vector<std::vector<Cell>> _field; ///< Игровое поле NxN.
-    bool _playerTurn = 1;                   ///< true — ход X, false — ход O.
-    GameStatus _gameStatus = IsPlaying;     ///< Текущий статус игры.
-    int _fieldSize;                         ///< Размер стороны поля.
-    int _emptyCellsLeft;                    ///< Количество свободных клеток.
+    bool _playerTurn = 1;                  ///< true — ход X, false — ход O.
+    GameStatus _gameStatus = IsPlaying;    ///< Текущий статус игры.
+    int _fieldSize;                        ///< Размер стороны поля.
+    int _emptyCellsLeft;                   ///< Количество свободных клеток.
 
     /**
      * @brief Проверяет, привёл ли последний ход к победе.
