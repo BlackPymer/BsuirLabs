@@ -1,0 +1,17 @@
+Bank account
+<- rrel_class: Bank;
+<- rrel_class: Bank client;
+<- rrel_is_a: Abstract object;
+<- rrel_is_a: Finance instrument;
+=> nrel_has: account_type;
+=> nrel_has: balance;
+=> nrel_has: account_status;
+=> nrel_has: currency;
+=> nrel_has: account_number;;
+
+Debtor
+<- rrel_is_a: Bank client;
+<- rrel_is_a: Loan agreement participant;
+<- rrel_class: Loan;
+=> nrel_has: debt_amount;
+=> nrel_has: repayment_term;;
