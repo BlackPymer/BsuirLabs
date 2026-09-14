@@ -16,3 +16,18 @@ PizzaDepartment::PizzaDepartment(std::string address, int waiters, int cooks, in
     for (int i = 0; i < interns; i++)
         _cookers.insert(std::make_pair(std::make_shared<PizzeriaCookerIntern>(), false));
 }
+std::string PizzaDepartment::GetAddress()
+{
+    return _address;
+}
+void PizzaDepartment::TakeOrder(Order order, void *onOrderReady)
+{
+    auto least_busy = _waiters.begin();
+    for (auto it = _waiters.begin(); it != _waiters.end(); ++it)
+    {
+        if (it->second < least_busy->second)
+            least_busy = it;
+    }
+    least_busy->first->GetOrder(order, onOrderReady);
+    least_busy->second++;
+}
