@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/maksim/Documents/labs/sem3/ppois/lab2/src/human.cpp" "CMakeFiles/pizzeria.dir/src/human.cpp.o" "gcc" "CMakeFiles/pizzeria.dir/src/human.cpp.o.d"
+  "/home/maksim/Documents/labs/sem3/ppois/lab2/src/intern.cpp" "CMakeFiles/pizzeria.dir/src/intern.cpp.o" "gcc" "CMakeFiles/pizzeria.dir/src/intern.cpp.o.d"
   "/home/maksim/Documents/labs/sem3/ppois/lab2/src/main.cpp" "CMakeFiles/pizzeria.dir/src/main.cpp.o" "gcc" "CMakeFiles/pizzeria.dir/src/main.cpp.o.d"
   "/home/maksim/Documents/labs/sem3/ppois/lab2/src/order.cpp" "CMakeFiles/pizzeria.dir/src/order.cpp.o" "gcc" "CMakeFiles/pizzeria.dir/src/order.cpp.o.d"
   "/home/maksim/Documents/labs/sem3/ppois/lab2/src/pizza.cpp" "CMakeFiles/pizzeria.dir/src/pizza.cpp.o" "gcc" "CMakeFiles/pizzeria.dir/src/pizza.cpp.o.d"

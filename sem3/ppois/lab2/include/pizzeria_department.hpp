@@ -1,20 +1,22 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <map>
 #include <memory>
 #include "pizzeria_cooker.hpp"
+#include "pizzeria_cooker_intern.hpp"
 #include "pizzeria_waiter.hpp"
 
 class PizzaDepartment
 {
 public:
-    PizzaDepartment(std::string address);
+    PizzaDepartment(std::string address, int waiters, int cooks, int interns = 0);
     std::string GetAddress();
+    void TakeOrder(Order order, void *onOrderReady);
+    void GiveOrderToCook(std::shared_ptr<PizzeriaWaiter> waiter, Order order, void *onOrderCooked);
 
 private:
     std::string _address;
-    std::vector<std::shared_ptr<PizzeriaCooker>> _cookers;
-    std::vector<std::shared_ptr<PizzeriaWaiter>> _waiters;
-    std::vector<std::shared_ptr<PizzeriaCooker>> _free_cookers;
-    std::vector<std::shared_ptr<PizzeriaWaiter>> _free_waiters;
+    std::map<std::shared_ptr<PizzeriaWaiter>, int> _waiters;
+    std::map<std::shared_ptr<PizzeriaCooker>, bool> _cookers;
+    std::map<std::shared_ptr<PizzeriaCookerIntern>, bool> _interns;
 };

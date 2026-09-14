@@ -17,4 +17,5 @@ add_executable(pizzeria
     src/pizzeria_waiter.cpp
     src/pizzeria_client.cpp
     src/pizzeria_department.cpp
+    src/intern.cpp
 )

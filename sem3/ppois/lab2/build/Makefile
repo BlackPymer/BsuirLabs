@@ -153,6 +153,30 @@ src/human.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/human.cpp.s
 .PHONY : src/human.cpp.s
 
+src/intern.o: src/intern.cpp.o
+.PHONY : src/intern.o
+
+# target to build an object file
+src/intern.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.o
+.PHONY : src/intern.cpp.o
+
+src/intern.i: src/intern.cpp.i
+.PHONY : src/intern.i
+
+# target to preprocess a source file
+src/intern.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.i
+.PHONY : src/intern.cpp.i
+
+src/intern.s: src/intern.cpp.s
+.PHONY : src/intern.s
+
+# target to generate assembly for a file
+src/intern.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.s
+.PHONY : src/intern.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -381,6 +405,9 @@ help:
 	@echo "... src/human.o"
 	@echo "... src/human.i"
 	@echo "... src/human.s"
+	@echo "... src/intern.o"
+	@echo "... src/intern.i"
+	@echo "... src/intern.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

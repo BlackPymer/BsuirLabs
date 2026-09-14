@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/pizzeria.dir/src/human.cpp.o"
   "CMakeFiles/pizzeria.dir/src/human.cpp.o.d"
+  "CMakeFiles/pizzeria.dir/src/intern.cpp.o"
+  "CMakeFiles/pizzeria.dir/src/intern.cpp.o.d"
   "CMakeFiles/pizzeria.dir/src/main.cpp.o"
   "CMakeFiles/pizzeria.dir/src/main.cpp.o.d"
   "CMakeFiles/pizzeria.dir/src/order.cpp.o"

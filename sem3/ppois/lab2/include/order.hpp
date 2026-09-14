@@ -14,8 +14,11 @@ class Order
 public:
     Order(std::map<Pizza, int> pizzas);
     OrderStatus GetStatus();
-    std::map<Pizza,int> GetOrderComponents();
-    
+    void SetStatus(OrderStatus status);
+    std::map<Pizza, int> GetOrderComponents();
+    int GetPizzaCount();
+    bool operator<(const Order &other) const;
+
 private:
     std::map<Pizza, int> _pizzas;
     OrderStatus _status;
