@@ -1,10 +1,10 @@
 #include "human.hpp"
 
-int Human::GetAge()
+int Human::GetAge() const
 {
     return _age;
 }
-std::string Human::GetName()
+std::string Human::GetName() const
 {
     return _name;
 }

@@ -3,8 +3,8 @@
 class Human
 {
 public:
-    int GetAge();
-    std::string GetName();
+    int GetAge() const;
+    std::string GetName() const;
     Human(int age, std::string name);
 
 private:

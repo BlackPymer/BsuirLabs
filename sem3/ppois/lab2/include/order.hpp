@@ -1,6 +1,7 @@
 #pragma once
 #include "pizza.hpp"
 #include <map>
+#include <vector>
 
 enum OrderStatus
 {
@@ -12,7 +13,7 @@ enum OrderStatus
 class Order
 {
 public:
-    Order(std::map<Pizza, int> pizzas);
+    Order(std::vector<std::pair<Pizza, int>> pizzas);
     OrderStatus GetStatus();
     void SetStatus(OrderStatus status);
     std::map<Pizza, int> GetOrderComponents();

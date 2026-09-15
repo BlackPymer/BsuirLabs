@@ -1,22 +1,20 @@
 #pragma once
 #include "pizzeria_worker.hpp"
 #include "order.hpp"
+#include <functional>
 #include <map>
 #include <memory>
-
-class PizzaDepartment;
+#include <vector>
 
 class PizzeriaWaiter : virtual private PizzeriaWorker
 {
 public:
     PizzeriaWaiter(int age, std::string name);
     using PizzeriaWorker::GetName;
-    void GetOrder(Order order, void *onOrderReady);
+    using PizzeriaWorker::SetDepartment;
+    void GetOrder(std::vector<std::pair<Pizza, int>> order, std::function<void()> onOrderReady);
     int GetActiveOrders();
-    void SetDepartment(std::shared_ptr<PizzaDepartment> department);
-
 private:
     void _onOrderCooked();
-    std::map<Order, void *> orders;
-    std::shared_ptr<PizzaDepartment> _department;
+    std::map<Order, std::function<void()>> orders;
 };

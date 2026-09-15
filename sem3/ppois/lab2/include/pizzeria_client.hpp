@@ -4,12 +4,13 @@
 #include "pizzeria_department.hpp"
 #include <vector>
 #include <memory>
+#include <functional>
 
 class PizzeriaClient : virtual public Human
 {
 public:
     PizzeriaClient(int age, std::string name, std::shared_ptr<PizzaDepartment> department);
-    void OrderPizza(std::vector<Pizza> pizzas, void *onOrderReady);
+    void OrderPizza(std::vector<Pizza> pizzas, std::function<void()> onOrderReady);
 
 private:
     std::vector<Pizza> _order;

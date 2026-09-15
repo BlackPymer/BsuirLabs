@@ -161,13 +161,23 @@ CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o: \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/functional \
+ /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_vector.h \
+ /usr/include/c++/13/bits/stl_bvector.h \
+ /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
+ /usr/include/c++/13/compare /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/algorithmfwd.h \
+ /usr/include/c++/13/bits/stl_heap.h \
+ /usr/include/c++/13/bits/uniform_int_dist.h \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_cooker.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_worker.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/order.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_cooker_intern.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/intern.hpp \
- /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp \
- /usr/include/c++/13/vector /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp
