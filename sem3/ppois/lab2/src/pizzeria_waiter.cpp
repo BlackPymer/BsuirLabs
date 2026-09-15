@@ -1,5 +1,6 @@
 #include "pizzeria_waiter.hpp"
 #include "pizzeria_department.hpp"
+
 PizzeriaWaiter::PizzeriaWaiter(int age, std::string name)
     : Human(age, name), PizzeriaWorker(age, name)
 {
@@ -8,6 +9,7 @@ PizzeriaWaiter::PizzeriaWaiter(int age, std::string name)
 void PizzeriaWaiter::GetOrder(std::vector<std::pair<Pizza, int>> order, std::function<void()> onOrderReady)
 {
     Order o(order);
+    o.SetStatus(OrderStatus::IN_PROGRESS);
     orders[o] = onOrderReady;
     if (_department != nullptr)
     {
@@ -30,5 +32,6 @@ void PizzeriaWaiter::_onOrderCooked(Order order)
         orders.erase(it);
         _department->DeliverFinished(*this);
         onOrderReady();
+        order.SetStatus(OrderStatus::DELIVERED);
     }
 }

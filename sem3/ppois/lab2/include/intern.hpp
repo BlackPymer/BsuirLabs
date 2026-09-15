@@ -14,8 +14,10 @@ public:
     int GetCompletedOrders();
     void IncrementCompletedOrders();
 
-private:
+protected:
     double _time_factor;
+
+private:
     std::shared_ptr<PizzeriaCooker> _mentor;
     int _completed_orders;
 };

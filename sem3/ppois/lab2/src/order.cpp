@@ -8,3 +8,11 @@ Order::Order(std::vector<std::pair<Pizza, int>> pizzas)
     }
     _status = PENDING;
 }
+OrderStatus Order::GetStatus() { return _status; }
+void Order::SetStatus(OrderStatus status) { _status = status; }
+std::map<Pizza, int> Order::GetOrderComponents() { return _pizzas; }
+int Order::GetPizzaCount() { return _pizzas.size(); }
+bool Order::operator<(const Order &order) const
+{
+    return _pizzas.size() < order._pizzas.size();
+}

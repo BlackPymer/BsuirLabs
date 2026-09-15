@@ -8,5 +8,5 @@ class PizzeriaCookerIntern : virtual public PizzeriaCooker, public Intern
 public:
     PizzeriaCookerIntern(int age, std::string name);
     PizzeriaCookerIntern(int age, std::string name, double time_factor);
-    void CookOrder(Order order, std::function<void()> onOrderCooked) override;
+    void CookOrder(Order order, std::function<void(Order)> onOrderCooked) override;
 };
