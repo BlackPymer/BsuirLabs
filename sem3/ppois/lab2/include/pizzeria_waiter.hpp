@@ -15,6 +15,6 @@ public:
     void GetOrder(std::vector<std::pair<Pizza, int>> order, std::function<void()> onOrderReady);
     int GetActiveOrders();
 private:
-    void _onOrderCooked();
+    void _onOrderCooked(Order order);
     std::map<Order, std::function<void()>> orders;
 };

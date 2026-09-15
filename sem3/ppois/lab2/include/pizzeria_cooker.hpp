@@ -7,5 +7,5 @@ class PizzeriaCooker : virtual public PizzeriaWorker
 {
 public:
     PizzeriaCooker(int age, std::string name);
-    virtual void CookOrder(Order order, std::function<void()> onOrderCooked);
+    virtual void CookOrder(Order order, std::function<void(Order)> onOrderCooked);
 };
