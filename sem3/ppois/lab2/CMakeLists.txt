@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(include)
 
-add_executable(pizzeria
-    src/main.cpp
+set(CORE_SOURCES
     src/human.cpp
     src/pizza.cpp
     src/order.cpp
@@ -19,3 +18,22 @@ add_executable(pizzeria
     src/pizzeria_department.cpp
     src/intern.cpp
 )
+
+add_executable(pizzeria
+    src/main.cpp
+    ${CORE_SOURCES}
+)
+
+find_library(UNITTEST_LIB UnitTest++ REQUIRED)
+find_path(UNITTEST_INCLUDE UnitTest++.h PATH_SUFFIXES UnitTest++ REQUIRED)
+
+add_executable(run_tests
+    tests/test_main.cpp
+    tests/tests.cpp
+    ${CORE_SOURCES}
+)
+target_include_directories(run_tests PRIVATE ${UNITTEST_INCLUDE})
+target_link_libraries(run_tests PRIVATE ${UNITTEST_LIB})
+
+target_compile_options(run_tests PRIVATE --coverage)
+target_link_options(run_tests PRIVATE --coverage)

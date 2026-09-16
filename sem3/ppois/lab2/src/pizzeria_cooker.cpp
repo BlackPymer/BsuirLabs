@@ -1,4 +1,5 @@
 #include "pizzeria_cooker.hpp"
+#include "pizzeria_department.hpp"
 #include <chrono>
 #include <thread>
 PizzeriaCooker::PizzeriaCooker(int age, std::string name) : PizzeriaWorker(age, name), Human(age, name)
@@ -7,6 +8,11 @@ PizzeriaCooker::PizzeriaCooker(int age, std::string name) : PizzeriaWorker(age, 
 
 void PizzeriaCooker::CookOrder(Order order, std::function<void(Order)> onOrderCooked)
 {
-    std::this_thread::sleep_for(std::chrono::seconds(order.GetPizzaCount()));
+    auto dept = _department;
+    std::thread([this, dept, order, onOrderCooked]() mutable
+                {
+            std::this_thread::sleep_for(std::chrono::seconds(order.GetPizzaCount()));
     onOrderCooked(order);
+    dept->CookingFinished(*this); })
+        .detach();
 }

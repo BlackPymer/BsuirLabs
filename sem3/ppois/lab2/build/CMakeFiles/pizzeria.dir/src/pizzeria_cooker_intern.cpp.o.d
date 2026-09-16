@@ -178,4 +178,17 @@ CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /home/maksim/Documents/labs/sem3/ppois/lab2/include/intern.hpp
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/intern.hpp \
+ /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono.h \
+ /usr/include/c++/13/ratio /usr/include/c++/13/cstdint \
+ /usr/include/c++/13/limits /usr/include/c++/13/ctime \
+ /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_department.hpp \
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp \
+ /usr/include/c++/13/mutex \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/c++/13/condition_variable

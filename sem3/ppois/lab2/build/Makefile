@@ -129,12 +129,26 @@ pizzeria/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/build
 .PHONY : pizzeria/fast
 
+#=============================================================================
+# Target rules for targets named run_tests
+
+# Build rule for target.
+run_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests
+.PHONY : run_tests
+
+# fast build rule for target.
+run_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+.PHONY : run_tests/fast
+
 src/human.o: src/human.cpp.o
 .PHONY : src/human.o
 
 # target to build an object file
 src/human.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/human.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/human.cpp.o
 .PHONY : src/human.cpp.o
 
 src/human.i: src/human.cpp.i
@@ -143,6 +157,7 @@ src/human.i: src/human.cpp.i
 # target to preprocess a source file
 src/human.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/human.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/human.cpp.i
 .PHONY : src/human.cpp.i
 
 src/human.s: src/human.cpp.s
@@ -151,6 +166,7 @@ src/human.s: src/human.cpp.s
 # target to generate assembly for a file
 src/human.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/human.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/human.cpp.s
 .PHONY : src/human.cpp.s
 
 src/intern.o: src/intern.cpp.o
@@ -159,6 +175,7 @@ src/intern.o: src/intern.cpp.o
 # target to build an object file
 src/intern.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intern.cpp.o
 .PHONY : src/intern.cpp.o
 
 src/intern.i: src/intern.cpp.i
@@ -167,6 +184,7 @@ src/intern.i: src/intern.cpp.i
 # target to preprocess a source file
 src/intern.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intern.cpp.i
 .PHONY : src/intern.cpp.i
 
 src/intern.s: src/intern.cpp.s
@@ -175,6 +193,7 @@ src/intern.s: src/intern.cpp.s
 # target to generate assembly for a file
 src/intern.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/intern.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/intern.cpp.s
 .PHONY : src/intern.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -207,6 +226,7 @@ src/order.o: src/order.cpp.o
 # target to build an object file
 src/order.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/order.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/order.cpp.o
 .PHONY : src/order.cpp.o
 
 src/order.i: src/order.cpp.i
@@ -215,6 +235,7 @@ src/order.i: src/order.cpp.i
 # target to preprocess a source file
 src/order.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/order.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/order.cpp.i
 .PHONY : src/order.cpp.i
 
 src/order.s: src/order.cpp.s
@@ -223,6 +244,7 @@ src/order.s: src/order.cpp.s
 # target to generate assembly for a file
 src/order.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/order.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/order.cpp.s
 .PHONY : src/order.cpp.s
 
 src/pizza.o: src/pizza.cpp.o
@@ -231,6 +253,7 @@ src/pizza.o: src/pizza.cpp.o
 # target to build an object file
 src/pizza.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizza.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizza.cpp.o
 .PHONY : src/pizza.cpp.o
 
 src/pizza.i: src/pizza.cpp.i
@@ -239,6 +262,7 @@ src/pizza.i: src/pizza.cpp.i
 # target to preprocess a source file
 src/pizza.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizza.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizza.cpp.i
 .PHONY : src/pizza.cpp.i
 
 src/pizza.s: src/pizza.cpp.s
@@ -247,6 +271,7 @@ src/pizza.s: src/pizza.cpp.s
 # target to generate assembly for a file
 src/pizza.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizza.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizza.cpp.s
 .PHONY : src/pizza.cpp.s
 
 src/pizzeria_client.o: src/pizzeria_client.cpp.o
@@ -255,6 +280,7 @@ src/pizzeria_client.o: src/pizzeria_client.cpp.o
 # target to build an object file
 src/pizzeria_client.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_client.cpp.o
 .PHONY : src/pizzeria_client.cpp.o
 
 src/pizzeria_client.i: src/pizzeria_client.cpp.i
@@ -263,6 +289,7 @@ src/pizzeria_client.i: src/pizzeria_client.cpp.i
 # target to preprocess a source file
 src/pizzeria_client.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_client.cpp.i
 .PHONY : src/pizzeria_client.cpp.i
 
 src/pizzeria_client.s: src/pizzeria_client.cpp.s
@@ -271,6 +298,7 @@ src/pizzeria_client.s: src/pizzeria_client.cpp.s
 # target to generate assembly for a file
 src/pizzeria_client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_client.cpp.s
 .PHONY : src/pizzeria_client.cpp.s
 
 src/pizzeria_cooker.o: src/pizzeria_cooker.cpp.o
@@ -279,6 +307,7 @@ src/pizzeria_cooker.o: src/pizzeria_cooker.cpp.o
 # target to build an object file
 src/pizzeria_cooker.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker.cpp.o
 .PHONY : src/pizzeria_cooker.cpp.o
 
 src/pizzeria_cooker.i: src/pizzeria_cooker.cpp.i
@@ -287,6 +316,7 @@ src/pizzeria_cooker.i: src/pizzeria_cooker.cpp.i
 # target to preprocess a source file
 src/pizzeria_cooker.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker.cpp.i
 .PHONY : src/pizzeria_cooker.cpp.i
 
 src/pizzeria_cooker.s: src/pizzeria_cooker.cpp.s
@@ -295,6 +325,7 @@ src/pizzeria_cooker.s: src/pizzeria_cooker.cpp.s
 # target to generate assembly for a file
 src/pizzeria_cooker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker.cpp.s
 .PHONY : src/pizzeria_cooker.cpp.s
 
 src/pizzeria_cooker_intern.o: src/pizzeria_cooker_intern.cpp.o
@@ -303,6 +334,7 @@ src/pizzeria_cooker_intern.o: src/pizzeria_cooker_intern.cpp.o
 # target to build an object file
 src/pizzeria_cooker_intern.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker_intern.cpp.o
 .PHONY : src/pizzeria_cooker_intern.cpp.o
 
 src/pizzeria_cooker_intern.i: src/pizzeria_cooker_intern.cpp.i
@@ -311,6 +343,7 @@ src/pizzeria_cooker_intern.i: src/pizzeria_cooker_intern.cpp.i
 # target to preprocess a source file
 src/pizzeria_cooker_intern.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker_intern.cpp.i
 .PHONY : src/pizzeria_cooker_intern.cpp.i
 
 src/pizzeria_cooker_intern.s: src/pizzeria_cooker_intern.cpp.s
@@ -319,6 +352,7 @@ src/pizzeria_cooker_intern.s: src/pizzeria_cooker_intern.cpp.s
 # target to generate assembly for a file
 src/pizzeria_cooker_intern.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_cooker_intern.cpp.s
 .PHONY : src/pizzeria_cooker_intern.cpp.s
 
 src/pizzeria_department.o: src/pizzeria_department.cpp.o
@@ -327,6 +361,7 @@ src/pizzeria_department.o: src/pizzeria_department.cpp.o
 # target to build an object file
 src/pizzeria_department.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_department.cpp.o
 .PHONY : src/pizzeria_department.cpp.o
 
 src/pizzeria_department.i: src/pizzeria_department.cpp.i
@@ -335,6 +370,7 @@ src/pizzeria_department.i: src/pizzeria_department.cpp.i
 # target to preprocess a source file
 src/pizzeria_department.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_department.cpp.i
 .PHONY : src/pizzeria_department.cpp.i
 
 src/pizzeria_department.s: src/pizzeria_department.cpp.s
@@ -343,6 +379,7 @@ src/pizzeria_department.s: src/pizzeria_department.cpp.s
 # target to generate assembly for a file
 src/pizzeria_department.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_department.cpp.s
 .PHONY : src/pizzeria_department.cpp.s
 
 src/pizzeria_waiter.o: src/pizzeria_waiter.cpp.o
@@ -351,6 +388,7 @@ src/pizzeria_waiter.o: src/pizzeria_waiter.cpp.o
 # target to build an object file
 src/pizzeria_waiter.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_waiter.cpp.o
 .PHONY : src/pizzeria_waiter.cpp.o
 
 src/pizzeria_waiter.i: src/pizzeria_waiter.cpp.i
@@ -359,6 +397,7 @@ src/pizzeria_waiter.i: src/pizzeria_waiter.cpp.i
 # target to preprocess a source file
 src/pizzeria_waiter.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_waiter.cpp.i
 .PHONY : src/pizzeria_waiter.cpp.i
 
 src/pizzeria_waiter.s: src/pizzeria_waiter.cpp.s
@@ -367,6 +406,7 @@ src/pizzeria_waiter.s: src/pizzeria_waiter.cpp.s
 # target to generate assembly for a file
 src/pizzeria_waiter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_waiter.cpp.s
 .PHONY : src/pizzeria_waiter.cpp.s
 
 src/pizzeria_worker.o: src/pizzeria_worker.cpp.o
@@ -375,6 +415,7 @@ src/pizzeria_worker.o: src/pizzeria_worker.cpp.o
 # target to build an object file
 src/pizzeria_worker.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_worker.cpp.o
 .PHONY : src/pizzeria_worker.cpp.o
 
 src/pizzeria_worker.i: src/pizzeria_worker.cpp.i
@@ -383,6 +424,7 @@ src/pizzeria_worker.i: src/pizzeria_worker.cpp.i
 # target to preprocess a source file
 src/pizzeria_worker.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_worker.cpp.i
 .PHONY : src/pizzeria_worker.cpp.i
 
 src/pizzeria_worker.s: src/pizzeria_worker.cpp.s
@@ -391,7 +433,56 @@ src/pizzeria_worker.s: src/pizzeria_worker.cpp.s
 # target to generate assembly for a file
 src/pizzeria_worker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/pizzeria.dir/build.make CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/src/pizzeria_worker.cpp.s
 .PHONY : src/pizzeria_worker.cpp.s
+
+tests/test_main.o: tests/test_main.cpp.o
+.PHONY : tests/test_main.o
+
+# target to build an object file
+tests/test_main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_main.cpp.o
+.PHONY : tests/test_main.cpp.o
+
+tests/test_main.i: tests/test_main.cpp.i
+.PHONY : tests/test_main.i
+
+# target to preprocess a source file
+tests/test_main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_main.cpp.i
+.PHONY : tests/test_main.cpp.i
+
+tests/test_main.s: tests/test_main.cpp.s
+.PHONY : tests/test_main.s
+
+# target to generate assembly for a file
+tests/test_main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/test_main.cpp.s
+.PHONY : tests/test_main.cpp.s
+
+tests/tests.o: tests/tests.cpp.o
+.PHONY : tests/tests.o
+
+# target to build an object file
+tests/tests.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/tests.cpp.o
+.PHONY : tests/tests.cpp.o
+
+tests/tests.i: tests/tests.cpp.i
+.PHONY : tests/tests.i
+
+# target to preprocess a source file
+tests/tests.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/tests.cpp.i
+.PHONY : tests/tests.cpp.i
+
+tests/tests.s: tests/tests.cpp.s
+.PHONY : tests/tests.s
+
+# target to generate assembly for a file
+tests/tests.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests/tests.cpp.s
+.PHONY : tests/tests.cpp.s
 
 # Help Target
 help:
@@ -402,6 +493,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... pizzeria"
+	@echo "... run_tests"
 	@echo "... src/human.o"
 	@echo "... src/human.i"
 	@echo "... src/human.s"
@@ -435,6 +527,12 @@ help:
 	@echo "... src/pizzeria_worker.o"
 	@echo "... src/pizzeria_worker.i"
 	@echo "... src/pizzeria_worker.s"
+	@echo "... tests/test_main.o"
+	@echo "... tests/test_main.i"
+	@echo "... tests/test_main.s"
+	@echo "... tests/tests.o"
+	@echo "... tests/tests.i"
+	@echo "... tests/tests.s"
 .PHONY : help
 
 

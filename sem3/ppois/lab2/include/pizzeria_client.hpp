@@ -10,9 +10,10 @@ class PizzeriaClient : virtual public Human
 {
 public:
     PizzeriaClient(int age, std::string name, std::shared_ptr<PizzaDepartment> department);
-    void OrderPizza(std::vector<Pizza> pizzas, std::function<void()> onOrderReady);
+    void OrderPizza(std::vector<Pizza> menu);
 
 private:
     std::vector<Pizza> _order;
     std::shared_ptr<PizzaDepartment> _department;
+    void _OnPizzaDelivered();
 };

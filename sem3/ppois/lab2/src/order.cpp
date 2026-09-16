@@ -14,5 +14,7 @@ std::map<Pizza, int> Order::GetOrderComponents() { return _pizzas; }
 int Order::GetPizzaCount() { return _pizzas.size(); }
 bool Order::operator<(const Order &order) const
 {
-    return _pizzas.size() < order._pizzas.size();
+    if (_pizzas.size() != order._pizzas.size())
+        return _pizzas.size() < order._pizzas.size();
+    return _pizzas < order._pizzas;
 }

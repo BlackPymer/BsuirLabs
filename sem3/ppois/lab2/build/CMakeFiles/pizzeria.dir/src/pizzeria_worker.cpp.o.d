@@ -179,4 +179,12 @@ CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o: \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizza.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_cooker_intern.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/intern.hpp \
- /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp \
+ /usr/include/c++/13/mutex /usr/include/c++/13/bits/chrono.h \
+ /usr/include/c++/13/ratio /usr/include/c++/13/cstdint \
+ /usr/include/c++/13/limits /usr/include/c++/13/ctime \
+ /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/c++/13/condition_variable

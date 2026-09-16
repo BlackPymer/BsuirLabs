@@ -180,4 +180,28 @@ CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o: \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/order.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_cooker_intern.hpp \
  /home/maksim/Documents/labs/sem3/ppois/lab2/include/intern.hpp \
- /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp
+ /home/maksim/Documents/labs/sem3/ppois/lab2/include/pizzeria_waiter.hpp \
+ /usr/include/c++/13/mutex /usr/include/c++/13/bits/chrono.h \
+ /usr/include/c++/13/ratio /usr/include/c++/13/cstdint \
+ /usr/include/c++/13/limits /usr/include/c++/13/ctime \
+ /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/c++/13/condition_variable /usr/include/c++/13/iostream \
+ /usr/include/c++/13/ostream /usr/include/c++/13/ios \
+ /usr/include/c++/13/bits/ios_base.h \
+ /usr/include/c++/13/bits/locale_classes.h \
+ /usr/include/c++/13/bits/locale_classes.tcc \
+ /usr/include/c++/13/system_error /usr/include/c++/13/stdexcept \
+ /usr/include/c++/13/streambuf /usr/include/c++/13/bits/streambuf.tcc \
+ /usr/include/c++/13/bits/basic_ios.h \
+ /usr/include/c++/13/bits/locale_facets.h /usr/include/c++/13/cwctype \
+ /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h \
+ /usr/include/c++/13/bits/streambuf_iterator.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h \
+ /usr/include/c++/13/bits/locale_facets.tcc \
+ /usr/include/c++/13/bits/basic_ios.tcc \
+ /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
+ /usr/include/c++/13/bits/istream.tcc

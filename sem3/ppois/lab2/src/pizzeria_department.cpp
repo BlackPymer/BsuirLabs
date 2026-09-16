@@ -1,129 +1,178 @@
 #include "pizzeria_department.hpp"
 #include <type_traits>
+#include <thread>
+#include <mutex>
 
 template <typename T>
 std::shared_ptr<T> PizzaDepartment::Hire(const Human &human)
 {
-    auto worker = std::make_shared<T>(human.GetAge(), human.GetName());
-    worker->SetDepartment(shared_from_this());
-    if constexpr (std::is_same_v<T, PizzeriaWaiter>)
     {
-        _waiters.insert(std::make_pair(worker, 0));
+        std::lock_guard<std::mutex> lock(mtx);
+        auto worker = std::make_shared<T>(human.GetAge(), human.GetName());
+        worker->SetDepartment(shared_from_this());
+        if constexpr (std::is_same_v<T, PizzeriaWaiter>)
+        {
+            _waiters.insert(std::make_pair(worker, 0));
+        }
+        else if constexpr (std::is_same_v<T, PizzeriaCooker>)
+        {
+            _cookers.insert(std::make_pair(worker, false));
+            _free_cookers++;
+        }
+        else
+        {
+            static_assert(std::is_same_v<T, PizzeriaCookerIntern>, "Unsupported employee type");
+            _interns.insert(std::make_pair(worker, false));
+            _free_cookers++;
+        }
+        return worker;
     }
-    else if constexpr (std::is_same_v<T, PizzeriaCooker>)
-    {
-        _cookers.insert(std::make_pair(worker, false));
-        _free_cookers++;
-    }
-    else
-    {
-        static_assert(std::is_same_v<T, PizzeriaCookerIntern>, "Unsupported employee type");
-        _interns.insert(std::make_pair(worker, false));
-        _free_cookers++;
-    }
-    return worker;
 }
 
 template std::shared_ptr<PizzeriaWaiter> PizzaDepartment::Hire<PizzeriaWaiter>(const Human &);
 template std::shared_ptr<PizzeriaCooker> PizzaDepartment::Hire<PizzeriaCooker>(const Human &);
 template std::shared_ptr<PizzeriaCookerIntern> PizzaDepartment::Hire<PizzeriaCookerIntern>(const Human &);
 
-PizzaDepartment::PizzaDepartment(std::string address, int waiters, int cooks, int interns)
-    : _address(address), _free_cookers(0)
+PizzaDepartment::PizzaDepartment(std::string address)
+    : _address(address), _free_cookers(0),
+      _menu({Pizza("Margherita"), Pizza("Pepperoni"), Pizza("Vegetarian")})
 {
-    for (int i = 0; i < waiters; i++)
-        Hire<PizzeriaWaiter>(Human(20, "Mike"));
-
-    for (int i = 0; i < cooks; i++)
-        Hire<PizzeriaCooker>(Human(20, "Mike"));
-
-    for (int i = 0; i < interns; i++)
-        Hire<PizzeriaCookerIntern>(Human(20, "Mike"));
 }
 std::string PizzaDepartment::GetAddress()
 {
     return _address;
 }
+const std::vector<Pizza> &PizzaDepartment::GetMenu() const
+{
+    return _menu;
+}
 void PizzaDepartment::TakeOrder(std::vector<std::pair<Pizza, int>> order, std::function<void()> onOrderReady)
 {
-    if (_free_cookers == 0)
-        throw AllCooksAreBusyException();
-    auto least_busy = _waiters.begin();
-    for (auto it = _waiters.begin(); it != _waiters.end(); ++it)
+    std::shared_ptr<PizzeriaWaiter> waiter;
     {
-        if (it->second < least_busy->second)
-            least_busy = it;
-    }
-    least_busy->first->GetOrder(order, onOrderReady);
-    least_busy->second++;
-}
-void PizzaDepartment::GiveOrderToCook(Order order, std::function<void()> onOrderCooked)
-{
-    auto free_cooker = _cookers.end();
-    for (auto it = _cookers.begin(); it != _cookers.end(); ++it)
-    {
-        if (!it->second)
+        std::lock_guard<std::mutex> lock(mtx);
+        if (_free_cookers == 0)
+            throw AllCooksAreBusyException();
+        auto least_busy = _waiters.begin();
+        for (auto it = _waiters.begin(); it != _waiters.end(); ++it)
         {
-            free_cooker = it;
-            break;
+            if (it->second < least_busy->second)
+                least_busy = it;
+        }
+
+        waiter = least_busy->first;
+        least_busy->second++;
+    }
+    {
+        std::lock_guard<std::mutex> lock(_order_mtx);
+        _active_orders++;
+    }
+    waiter->GetOrder(order, onOrderReady);
+}
+void PizzaDepartment::GiveOrderToCook(Order order, std::function<void(Order)> onOrderCooked)
+{
+    std::shared_ptr<PizzeriaCooker> cooker;
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        auto free_cooker = _cookers.end();
+        for (auto it = _cookers.begin(); it != _cookers.end(); ++it)
+        {
+            if (!it->second)
+            {
+                free_cooker = it;
+                break;
+            }
+        }
+        if (free_cooker != _cookers.end())
+        {
+            free_cooker->second = true;
+            _free_cookers--;
+            cooker = free_cooker->first;
         }
     }
-    if (free_cooker != _cookers.end())
+    if (cooker)
     {
-        free_cooker->second = true;
-        _free_cookers--;
-        free_cooker->first->CookOrder(order, onOrderCooked);
+        cooker->CookOrder(order, onOrderCooked);
         return;
     }
-    auto free_intern = _interns.end();
-    for (auto it = _interns.begin(); it != _interns.end(); ++it)
+    std::shared_ptr<PizzeriaCookerIntern> intern;
     {
-        if (!it->second)
+        std::lock_guard<std::mutex> lock(mtx);
+        auto free_intern = _interns.end();
+        for (auto it = _interns.begin(); it != _interns.end(); ++it)
         {
-            free_intern = it;
-            break;
+            if (!it->second)
+            {
+                free_intern = it;
+                break;
+            }
+        }
+        if (free_intern != _interns.end())
+        {
+            free_intern->second = true;
+            _free_cookers--;
+            intern = free_intern->first;
         }
     }
-    if (free_intern != _interns.end())
+    if(intern)
     {
-        free_intern->second = true;
-        _free_cookers--;
-        free_intern->first->CookOrder(order, onOrderCooked);
+        intern->CookOrder(order, onOrderCooked);
         return;
     }
 }
 void PizzaDepartment::CookingFinished(PizzeriaCookerIntern &intern)
 {
-    for (auto it = _interns.begin(); it != _interns.end(); ++it)
     {
-        if (it->first.get() == &intern)
+        std::lock_guard<std::mutex> lock(mtx);
+        for (auto it = _interns.begin(); it != _interns.end(); ++it)
         {
-            it->second = false;
-            _free_cookers++;
-            return;
+            if (it->first.get() == &intern)
+            {
+                it->second = false;
+                _free_cookers++;
+                return;
+            }
         }
     }
 }
 void PizzaDepartment::CookingFinished(PizzeriaCooker &cooker)
 {
-    for (auto it = _cookers.begin(); it != _cookers.end(); ++it)
     {
-        if (it->first.get() == &cooker)
+        std::lock_guard<std::mutex> lock(mtx);
+        for (auto it = _cookers.begin(); it != _cookers.end(); ++it)
         {
-            it->second = false;
-            _free_cookers++;
-            return;
+            if (it->first.get() == &cooker)
+            {
+                it->second = false;
+                _free_cookers++;
+                return;
+            }
         }
     }
 }
 void PizzaDepartment::DeliverFinished(PizzeriaWaiter &waiter)
 {
-    for (auto it = _waiters.begin(); it != _waiters.end(); ++it)
     {
-        if (it->first.get() == &waiter)
+        std::lock_guard<std::mutex> lock(mtx);
+        for (auto it = _waiters.begin(); it != _waiters.end(); ++it)
         {
-            it->second--;
-            return;
+            if (it->first.get() == &waiter)
+            {
+                it->second--;
+                return;
+            }
         }
     }
+}
+void PizzaDepartment::OrderFinished()
+{
+    std::lock_guard<std::mutex> lock(_order_mtx);
+    _active_orders--;
+    if (_active_orders == 0)
+        _order_cv.notify_all();
+}
+void PizzaDepartment::WaitForAllOrders()
+{
+    std::unique_lock<std::mutex> lock(_order_mtx);
+    _order_cv.wait(lock, [this] { return _active_orders == 0; });
 }
