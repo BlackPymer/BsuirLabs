@@ -1,0 +1,544 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.bank_system/ontologies/bank/"
+     xml:base="http://www.bank_system/ontologies/bank/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:bank="http://www.bank_system/ontologies/bank#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.bank_system/ontologies/bank"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#belongsToBank -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#belongsToBank">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.bank_system/ontologies/bank#hasFilial"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#Bank"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasCurrency -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#hasCurrency">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#Currency"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasDebtor -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#hasDebtor">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.bank_system/ontologies/bank#isDebtorOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#Loan"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasFilial -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#hasFilial">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#Bank"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasOwner -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#hasOwner">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.bank_system/ontologies/bank#ownsAccount"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#isDebtorOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#isDebtorOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#Loan"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#ownsAccount -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#ownsAccount">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#worksAt -->
+
+    <owl:ObjectProperty rdf:about="http://www.bank_system/ontologies/bank#worksAt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+        <rdfs:range rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasAccountNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasAccountNumber">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasAccountStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasAccountStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasAdress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasAdress">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasBalance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasBalance">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasDebtAmount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasDebtAmount">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasEmployeePosition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasEmployeePosition">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasFilialAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasFilialAddress">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasRepaymentTerm -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasRepaymentTerm">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#hasSalary -->
+
+    <owl:DatatypeProperty rdf:about="http://www.bank_system/ontologies/bank#hasSalary">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#AccountType -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#AccountType">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#ReferenceData"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Bank -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Bank">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#Organisation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BankAccount -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#BankAccount">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#FinancialObject"/>
+        <owl:disjointWith rdf:resource="http://www.bank_system/ontologies/bank#Loan"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BankClient -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#BankClient">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#Participant"/>
+        <owl:disjointWith rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BankEmployee -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#BankEmployee">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#Participant"/>
+        <owl:disjointWith rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BankFilial -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#BankFilial">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#Organisation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BankingEntity -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#BankingEntity"/>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Currency -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Currency">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#ReferenceData"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Debtor -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Debtor">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#FinancialObject -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#FinancialObject">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#BankingEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Loan -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Loan">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#FinancialObject"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Organisation -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Organisation">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#BankingEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Participant -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#Participant">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#BankingEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#ReferenceData -->
+
+    <owl:Class rdf:about="http://www.bank_system/ontologies/bank#ReferenceData">
+        <rdfs:subClassOf rdf:resource="http://www.bank_system/ontologies/bank#BankingEntity"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Account_40817_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Account_40817_1">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <bank:hasCurrency rdf:resource="http://www.bank_system/ontologies/bank#BYN"/>
+        <bank:hasOwner rdf:resource="http://www.bank_system/ontologies/bank#Ivanov"/>
+        <bank:hasAccountNumber>BY1234567890</bank:hasAccountNumber>
+        <bank:hasAccountStatus>Active</bank:hasAccountStatus>
+        <bank:hasBalance rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1500.05</bank:hasBalance>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Account_40817_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Account_40817_2">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <bank:hasCurrency rdf:resource="http://www.bank_system/ontologies/bank#BYN"/>
+        <bank:hasOwner rdf:resource="http://www.bank_system/ontologies/bank#Petrov"/>
+        <bank:hasAccountNumber>BY0987654321</bank:hasAccountNumber>
+        <bank:hasAccountStatus>Active</bank:hasAccountStatus>
+        <bank:hasBalance rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5000</bank:hasBalance>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Account_40817_3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Account_40817_3">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankAccount"/>
+        <bank:hasCurrency rdf:resource="http://www.bank_system/ontologies/bank#USD"/>
+        <bank:hasOwner rdf:resource="http://www.bank_system/ontologies/bank#Sidorov"/>
+        <bank:hasAccountNumber>BY1112223334</bank:hasAccountNumber>
+        <bank:hasAccountStatus>Frozen</bank:hasAccountStatus>
+        <bank:hasBalance rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">250.75</bank:hasBalance>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#BYN -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#BYN">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Currency"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Belarusbank -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Belarusbank">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Bank"/>
+        <bank:hasFilial rdf:resource="http://www.bank_system/ontologies/bank#Filial_Gomel"/>
+        <bank:hasFilial rdf:resource="http://www.bank_system/ontologies/bank#Filial_Main"/>
+        <bank:hasName>ОАО Беларусбанк</bank:hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Debtor_Ivanov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Debtor_Ivanov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+        <bank:hasDebtAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50000</bank:hasDebtAmount>
+        <bank:hasRepaymentTerm>2027-12-31</bank:hasRepaymentTerm>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Debtor_Petrov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Debtor_Petrov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
+        <bank:hasDebtAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120000</bank:hasDebtAmount>
+        <bank:hasRepaymentTerm>2028-06-30</bank:hasRepaymentTerm>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Employee_Kozlov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Employee_Kozlov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+        <bank:worksAt rdf:resource="http://www.bank_system/ontologies/bank#Filial_Gomel"/>
+        <bank:hasEmployeePosition>Cashier</bank:hasEmployeePosition>
+        <bank:hasSalary rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1500</bank:hasSalary>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Employee_Smirnov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Employee_Smirnov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
+        <bank:worksAt rdf:resource="http://www.bank_system/ontologies/bank#Filial_Main"/>
+        <bank:hasEmployeePosition>Manager</bank:hasEmployeePosition>
+        <bank:hasSalary rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2500</bank:hasSalary>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Filial_Gomel -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Filial_Gomel">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+        <bank:belongsToBank rdf:resource="http://www.bank_system/ontologies/bank#Belarusbank"/>
+        <bank:hasFilialAddress>Гомель, ул. Советская 50</bank:hasFilialAddress>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Filial_Main -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Filial_Main">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankFilial"/>
+        <bank:belongsToBank rdf:resource="http://www.bank_system/ontologies/bank#Belarusbank"/>
+        <bank:hasFilialAddress>Минск, пр. Независимости 1</bank:hasFilialAddress>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Ivanov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Ivanov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <bank:ownsAccount rdf:resource="http://www.bank_system/ontologies/bank#Account_40817_1"/>
+        <bank:hasAdress>Минск, ул. Ленина 10</bank:hasAdress>
+        <bank:hasName>Иван Иванов</bank:hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Loan_Credit_01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Loan_Credit_01">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Loan"/>
+        <bank:hasDebtor rdf:resource="http://www.bank_system/ontologies/bank#Sidorov"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Petrov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Petrov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <bank:ownsAccount rdf:resource="http://www.bank_system/ontologies/bank#Account_40817_2"/>
+        <bank:hasAdress>Минск, ул. Пушкина 5</bank:hasAdress>
+        <bank:hasName>Пётр Петров</bank:hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#Sidorov -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Sidorov">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankClient"/>
+        <bank:isDebtorOf rdf:resource="http://www.bank_system/ontologies/bank#Loan_Credit_01"/>
+        <bank:ownsAccount rdf:resource="http://www.bank_system/ontologies/bank#Account_40817_3"/>
+        <bank:hasAdress>Гомель, ул. Советская 17</bank:hasAdress>
+        <bank:hasName>Сидор Сидоров</bank:hasName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.bank_system/ontologies/bank#USD -->
+
+    <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#USD">
+        <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Currency"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
