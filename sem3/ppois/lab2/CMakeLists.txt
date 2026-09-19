@@ -7,16 +7,46 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(include)
 
 set(CORE_SOURCES
-    src/human.cpp
-    src/pizza.cpp
-    src/order.cpp
-    src/pizzeria_worker.cpp
-    src/pizzeria_cooker.cpp
-    src/pizzeria_cooker_intern.cpp
-    src/pizzeria_waiter.cpp
-    src/pizzeria_client.cpp
-    src/pizzeria_department.cpp
-    src/intern.cpp
+    src/common/pizzeria_exceptions.cpp
+    src/human/human.cpp
+    src/human/intern.cpp
+    src/menu/menu_item.cpp
+    src/menu/pizza.cpp
+    src/menu/ingredient.cpp
+    src/menu/recipe.cpp
+    src/menu/combo_set.cpp
+    src/menu/menu_catalog.cpp
+    src/order/order.cpp
+    src/staff/pizzeria_worker.cpp
+    src/staff/pizzeria_cooker.cpp
+    src/staff/pizzeria_cooker_intern.cpp
+    src/staff/pizzeria_waiter.cpp
+    src/staff/cashier.cpp
+    src/staff/call_center_operator.cpp
+    src/staff/pizzeria_manager.cpp
+    src/staff/accountant.cpp
+    src/staff/hostess.cpp
+    src/staff/courier.cpp
+    src/delivery/delivery_address.cpp
+    src/delivery/delivery_zone.cpp
+    src/delivery/delivery_route.cpp
+    src/delivery/delivery_tracker.cpp
+    src/delivery/delivery_fee_calculator.cpp
+    src/payment/payment.cpp
+    src/payment/cash_payment.cpp
+    src/payment/card_payment.cpp
+    src/payment/mobile_payment.cpp
+    src/payment/receipt.cpp
+    src/payment/coupon.cpp
+    src/payment/loyalty_program.cpp
+    src/kitchen/kitchen.cpp
+    src/kitchen/oven.cpp
+    src/kitchen/refrigerator.cpp
+    src/kitchen/warehouse.cpp
+    src/kitchen/supplier.cpp
+    src/kitchen/quality_controller.cpp
+    src/pizzeria/pizzeria_department.cpp
+    src/pizzeria/pizzeria_client.cpp
 )
 
 add_executable(pizzeria

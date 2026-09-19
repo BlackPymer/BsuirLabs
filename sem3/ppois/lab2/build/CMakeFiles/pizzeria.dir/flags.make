@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/maksim/Documents/labs/sem3/ppois/lab2/include
 
-CXX_FLAGS = -g -std=gnu++17
+CXX_FLAGS = -std=gnu++17
 

@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/maksim/Documents/labs/sem3/ppois/lab2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/maksim/Documents/labs/sem3/ppois/lab2/build
+CMAKE_BINARY_DIR = /home/maksim/Documents/labs/sem3/ppois/lab2
 
 # Include any dependencies generated for this target.
 include CMakeFiles/pizzeria.dir/depend.make
@@ -70,9 +70,9 @@ include CMakeFiles/pizzeria.dir/progress.make
 include CMakeFiles/pizzeria.dir/flags.make
 
 CMakeFiles/pizzeria.dir/src/main.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/main.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/main.cpp
+CMakeFiles/pizzeria.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/pizzeria.dir/src/main.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pizzeria.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pizzeria.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/main.cpp.o -MF CMakeFiles/pizzeria.dir/src/main.cpp.o.d -o CMakeFiles/pizzeria.dir/src/main.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/main.cpp
 
 CMakeFiles/pizzeria.dir/src/main.cpp.i: cmake_force
@@ -83,177 +83,657 @@ CMakeFiles/pizzeria.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/main.cpp -o CMakeFiles/pizzeria.dir/src/main.cpp.s
 
-CMakeFiles/pizzeria.dir/src/human.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/human.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/human.cpp
-CMakeFiles/pizzeria.dir/src/human.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pizzeria.dir/src/human.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/human.cpp.o -MF CMakeFiles/pizzeria.dir/src/human.cpp.o.d -o CMakeFiles/pizzeria.dir/src/human.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/human.cpp
+CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o: src/common/pizzeria_exceptions.cpp
+CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o -MF CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o.d -o CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/common/pizzeria_exceptions.cpp
 
-CMakeFiles/pizzeria.dir/src/human.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/human.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/human.cpp > CMakeFiles/pizzeria.dir/src/human.cpp.i
+CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/common/pizzeria_exceptions.cpp > CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.i
 
-CMakeFiles/pizzeria.dir/src/human.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/human.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/human.cpp -o CMakeFiles/pizzeria.dir/src/human.cpp.s
+CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/common/pizzeria_exceptions.cpp -o CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizza.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizza.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizza.cpp
-CMakeFiles/pizzeria.dir/src/pizza.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pizzeria.dir/src/pizza.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizza.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizza.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizza.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizza.cpp
+CMakeFiles/pizzeria.dir/src/human/human.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/human/human.cpp.o: src/human/human.cpp
+CMakeFiles/pizzeria.dir/src/human/human.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pizzeria.dir/src/human/human.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/human/human.cpp.o -MF CMakeFiles/pizzeria.dir/src/human/human.cpp.o.d -o CMakeFiles/pizzeria.dir/src/human/human.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/human.cpp
 
-CMakeFiles/pizzeria.dir/src/pizza.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizza.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizza.cpp > CMakeFiles/pizzeria.dir/src/pizza.cpp.i
+CMakeFiles/pizzeria.dir/src/human/human.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/human/human.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/human.cpp > CMakeFiles/pizzeria.dir/src/human/human.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizza.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizza.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizza.cpp -o CMakeFiles/pizzeria.dir/src/pizza.cpp.s
+CMakeFiles/pizzeria.dir/src/human/human.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/human/human.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/human.cpp -o CMakeFiles/pizzeria.dir/src/human/human.cpp.s
 
-CMakeFiles/pizzeria.dir/src/order.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/order.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/order.cpp
-CMakeFiles/pizzeria.dir/src/order.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pizzeria.dir/src/order.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/order.cpp.o -MF CMakeFiles/pizzeria.dir/src/order.cpp.o.d -o CMakeFiles/pizzeria.dir/src/order.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/order.cpp
+CMakeFiles/pizzeria.dir/src/human/intern.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/human/intern.cpp.o: src/human/intern.cpp
+CMakeFiles/pizzeria.dir/src/human/intern.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pizzeria.dir/src/human/intern.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/human/intern.cpp.o -MF CMakeFiles/pizzeria.dir/src/human/intern.cpp.o.d -o CMakeFiles/pizzeria.dir/src/human/intern.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/intern.cpp
 
-CMakeFiles/pizzeria.dir/src/order.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/order.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/order.cpp > CMakeFiles/pizzeria.dir/src/order.cpp.i
+CMakeFiles/pizzeria.dir/src/human/intern.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/human/intern.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/intern.cpp > CMakeFiles/pizzeria.dir/src/human/intern.cpp.i
 
-CMakeFiles/pizzeria.dir/src/order.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/order.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/order.cpp -o CMakeFiles/pizzeria.dir/src/order.cpp.s
+CMakeFiles/pizzeria.dir/src/human/intern.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/human/intern.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/human/intern.cpp -o CMakeFiles/pizzeria.dir/src/human/intern.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_worker.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_worker.cpp
+CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o: src/menu/menu_item.cpp
+CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_item.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_worker.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_item.cpp > CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_worker.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_item.cpp -o CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker.cpp
+CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o: src/menu/pizza.cpp
+CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/pizza.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/pizza.cpp > CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/pizza.cpp -o CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker_intern.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker_intern.cpp
+CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o: src/menu/ingredient.cpp
+CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/ingredient.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker_intern.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/ingredient.cpp > CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_cooker_intern.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/ingredient.cpp -o CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_waiter.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_waiter.cpp
+CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o: src/menu/recipe.cpp
+CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/recipe.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_waiter.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/recipe.cpp > CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_waiter.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/recipe.cpp -o CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_client.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_client.cpp
+CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o: src/menu/combo_set.cpp
+CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/combo_set.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_client.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/combo_set.cpp > CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_client.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/combo_set.cpp -o CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.s
 
-CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_department.cpp
-CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_department.cpp
+CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o: src/menu/menu_catalog.cpp
+CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o -MF CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o.d -o CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_catalog.cpp
 
-CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_department.cpp > CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.i
+CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_catalog.cpp > CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.i
 
-CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria_department.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.s
+CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/menu/menu_catalog.cpp -o CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.s
 
-CMakeFiles/pizzeria.dir/src/intern.cpp.o: CMakeFiles/pizzeria.dir/flags.make
-CMakeFiles/pizzeria.dir/src/intern.cpp.o: /home/maksim/Documents/labs/sem3/ppois/lab2/src/intern.cpp
-CMakeFiles/pizzeria.dir/src/intern.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/pizzeria.dir/src/intern.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/intern.cpp.o -MF CMakeFiles/pizzeria.dir/src/intern.cpp.o.d -o CMakeFiles/pizzeria.dir/src/intern.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/intern.cpp
+CMakeFiles/pizzeria.dir/src/order/order.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/order/order.cpp.o: src/order/order.cpp
+CMakeFiles/pizzeria.dir/src/order/order.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/pizzeria.dir/src/order/order.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/order/order.cpp.o -MF CMakeFiles/pizzeria.dir/src/order/order.cpp.o.d -o CMakeFiles/pizzeria.dir/src/order/order.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/order/order.cpp
 
-CMakeFiles/pizzeria.dir/src/intern.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/intern.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/intern.cpp > CMakeFiles/pizzeria.dir/src/intern.cpp.i
+CMakeFiles/pizzeria.dir/src/order/order.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/order/order.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/order/order.cpp > CMakeFiles/pizzeria.dir/src/order/order.cpp.i
 
-CMakeFiles/pizzeria.dir/src/intern.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/intern.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/intern.cpp -o CMakeFiles/pizzeria.dir/src/intern.cpp.s
+CMakeFiles/pizzeria.dir/src/order/order.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/order/order.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/order/order.cpp -o CMakeFiles/pizzeria.dir/src/order/order.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o: src/staff/pizzeria_worker.cpp
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_worker.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_worker.cpp > CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_worker.cpp -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o: src/staff/pizzeria_cooker.cpp
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker.cpp > CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker.cpp -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o: src/staff/pizzeria_cooker_intern.cpp
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker_intern.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker_intern.cpp > CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_cooker_intern.cpp -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o: src/staff/pizzeria_waiter.cpp
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_waiter.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_waiter.cpp > CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_waiter.cpp -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o: src/staff/cashier.cpp
+CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/cashier.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/cashier.cpp > CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/cashier.cpp -o CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o: src/staff/call_center_operator.cpp
+CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/call_center_operator.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/call_center_operator.cpp > CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/call_center_operator.cpp -o CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o: src/staff/pizzeria_manager.cpp
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_manager.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_manager.cpp > CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/pizzeria_manager.cpp -o CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o: src/staff/accountant.cpp
+CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/accountant.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/accountant.cpp > CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/accountant.cpp -o CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o: src/staff/hostess.cpp
+CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/hostess.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/hostess.cpp > CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/hostess.cpp -o CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.s
+
+CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o: src/staff/courier.cpp
+CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o -MF CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o.d -o CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/courier.cpp
+
+CMakeFiles/pizzeria.dir/src/staff/courier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/staff/courier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/courier.cpp > CMakeFiles/pizzeria.dir/src/staff/courier.cpp.i
+
+CMakeFiles/pizzeria.dir/src/staff/courier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/staff/courier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/staff/courier.cpp -o CMakeFiles/pizzeria.dir/src/staff/courier.cpp.s
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o: src/delivery/delivery_address.cpp
+CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o -MF CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o.d -o CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_address.cpp
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_address.cpp > CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.i
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_address.cpp -o CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.s
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o: src/delivery/delivery_zone.cpp
+CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o -MF CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o.d -o CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_zone.cpp
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_zone.cpp > CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.i
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_zone.cpp -o CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.s
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o: src/delivery/delivery_route.cpp
+CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o -MF CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o.d -o CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_route.cpp
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_route.cpp > CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.i
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_route.cpp -o CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.s
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o: src/delivery/delivery_tracker.cpp
+CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o -MF CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o.d -o CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_tracker.cpp
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_tracker.cpp > CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.i
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_tracker.cpp -o CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.s
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o: src/delivery/delivery_fee_calculator.cpp
+CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o -MF CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o.d -o CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_fee_calculator.cpp
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_fee_calculator.cpp > CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.i
+
+CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/delivery/delivery_fee_calculator.cpp -o CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o: src/payment/payment.cpp
+CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/payment.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/payment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/payment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/payment.cpp > CMakeFiles/pizzeria.dir/src/payment/payment.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/payment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/payment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/payment.cpp -o CMakeFiles/pizzeria.dir/src/payment/payment.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o: src/payment/cash_payment.cpp
+CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/cash_payment.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/cash_payment.cpp > CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/cash_payment.cpp -o CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o: src/payment/card_payment.cpp
+CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/card_payment.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/card_payment.cpp > CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/card_payment.cpp -o CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o: src/payment/mobile_payment.cpp
+CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/mobile_payment.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/mobile_payment.cpp > CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/mobile_payment.cpp -o CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o: src/payment/receipt.cpp
+CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/receipt.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/receipt.cpp > CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/receipt.cpp -o CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o: src/payment/coupon.cpp
+CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/coupon.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/coupon.cpp > CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/coupon.cpp -o CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.s
+
+CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o: src/payment/loyalty_program.cpp
+CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o -MF CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o.d -o CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/loyalty_program.cpp
+
+CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/loyalty_program.cpp > CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.i
+
+CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/payment/loyalty_program.cpp -o CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o: src/kitchen/kitchen.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/kitchen.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/kitchen.cpp > CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/kitchen.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o: src/kitchen/oven.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/oven.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/oven.cpp > CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/oven.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o: src/kitchen/refrigerator.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/refrigerator.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/refrigerator.cpp > CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/refrigerator.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o: src/kitchen/warehouse.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/warehouse.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/warehouse.cpp > CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/warehouse.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o: src/kitchen/supplier.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/supplier.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/supplier.cpp > CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/supplier.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.s
+
+CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o: src/kitchen/quality_controller.cpp
+CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o -MF CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o.d -o CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/quality_controller.cpp
+
+CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/quality_controller.cpp > CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.i
+
+CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/kitchen/quality_controller.cpp -o CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.s
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o: src/pizzeria/pizzeria_department.cpp
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_department.cpp
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_department.cpp > CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.i
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_department.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.s
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o: CMakeFiles/pizzeria.dir/flags.make
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o: src/pizzeria/pizzeria_client.cpp
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o: CMakeFiles/pizzeria.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o -MF CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o.d -o CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o -c /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_client.cpp
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_client.cpp > CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.i
+
+CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/Documents/labs/sem3/ppois/lab2/src/pizzeria/pizzeria_client.cpp -o CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.s
 
 # Object files for target pizzeria
 pizzeria_OBJECTS = \
 "CMakeFiles/pizzeria.dir/src/main.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/human.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizza.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/order.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o" \
-"CMakeFiles/pizzeria.dir/src/intern.cpp.o"
+"CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/human/human.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/human/intern.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/order/order.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o" \
+"CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o"
 
 # External object files for target pizzeria
 pizzeria_EXTERNAL_OBJECTS =
 
 pizzeria: CMakeFiles/pizzeria.dir/src/main.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/human.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizza.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/order.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_worker.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_cooker.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_cooker_intern.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_waiter.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_client.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria_department.cpp.o
-pizzeria: CMakeFiles/pizzeria.dir/src/intern.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/common/pizzeria_exceptions.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/human/human.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/human/intern.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/menu_item.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/pizza.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/ingredient.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/recipe.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/combo_set.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/menu/menu_catalog.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/order/order.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/pizzeria_worker.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/pizzeria_cooker_intern.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/pizzeria_waiter.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/cashier.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/call_center_operator.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/pizzeria_manager.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/accountant.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/hostess.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/staff/courier.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/delivery/delivery_address.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/delivery/delivery_zone.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/delivery/delivery_route.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/delivery/delivery_tracker.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/delivery/delivery_fee_calculator.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/payment.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/cash_payment.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/card_payment.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/mobile_payment.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/receipt.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/coupon.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/payment/loyalty_program.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/kitchen.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/oven.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/refrigerator.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/warehouse.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/supplier.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/kitchen/quality_controller.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_department.cpp.o
+pizzeria: CMakeFiles/pizzeria.dir/src/pizzeria/pizzeria_client.cpp.o
 pizzeria: CMakeFiles/pizzeria.dir/build.make
 pizzeria: CMakeFiles/pizzeria.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable pizzeria"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Linking CXX executable pizzeria"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pizzeria.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -265,6 +745,6 @@ CMakeFiles/pizzeria.dir/clean:
 .PHONY : CMakeFiles/pizzeria.dir/clean
 
 CMakeFiles/pizzeria.dir/depend:
-	cd /home/maksim/Documents/labs/sem3/ppois/lab2/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2/build /home/maksim/Documents/labs/sem3/ppois/lab2/build /home/maksim/Documents/labs/sem3/ppois/lab2/build/CMakeFiles/pizzeria.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/maksim/Documents/labs/sem3/ppois/lab2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2 /home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles/pizzeria.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/pizzeria.dir/depend
 
