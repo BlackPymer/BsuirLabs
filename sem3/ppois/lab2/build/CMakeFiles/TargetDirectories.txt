@@ -1,4 +1,0 @@
-/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles/pizzeria.dir
-/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles/run_tests.dir
-/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles/edit_cache.dir
-/home/maksim/Documents/labs/sem3/ppois/lab2/CMakeFiles/rebuild_cache.dir
