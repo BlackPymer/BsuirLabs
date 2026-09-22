@@ -8,7 +8,8 @@ int generate_random(int max)
 
 void init_memory_manager(MemoryManager *manager, size_t total_size)
 {
-    manager->start_addr = mmap(NULL, total_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    manager->start_addr = mmap(NULL, total_size, PROT_READ | PROT_WRITE,
+                               MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
     if (manager->start_addr == MAP_FAILED)
     {
         perror("mmap");

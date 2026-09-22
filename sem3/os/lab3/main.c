@@ -22,11 +22,11 @@ static void check(bool cond, const char *name)
 static void test_init(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
+    init_memory_manager(&m, 4096);
     check(m.start_addr != NULL, "init: mmap ok");
-    check(m.total_size == 1024, "init: total_size == 1024");
+    check(m.total_size == 4096, "init: total_size == 4096");
     check(m.head == (MemoryBlock *)m.start_addr, "init: head at start_addr");
-    check(m.head->size == 1024 - sizeof(MemoryBlock), "init: head size correct");
+    check(m.head->size == 4096 - sizeof(MemoryBlock), "init: head size correct");
     check(m.head->isFree == true, "init: head is free");
     check(m.head->next == NULL, "init: head next is NULL");
     clear(&m);
@@ -36,7 +36,7 @@ static void test_init(void)
 static void test_fragmentation(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
+    init_memory_manager(&m, 4096);
     run_fragmentation(&m);
 
     size_t used = 0;
@@ -62,7 +62,7 @@ static void test_fragmentation(void)
 static void test_allocate(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
+    init_memory_manager(&m, 4096);
 
     void *p = allocate_memory(&m, 16);
     check(p != NULL, "alloc: small block ok");
@@ -83,8 +83,8 @@ static void test_allocate(void)
 static void test_allocate_too_big(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
-    void *p = allocate_memory(&m, 2000);
+    init_memory_manager(&m, 4096);
+    void *p = allocate_memory(&m, 6000);
     check(p == NULL, "alloc: too big returns NULL");
     clear(&m);
 }
@@ -92,7 +92,7 @@ static void test_allocate_too_big(void)
 static void test_safe_read_write(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
+    init_memory_manager(&m, 4096);
     void *p = allocate_memory(&m, 32);
     safe_write(p, 32, "hello");
     check(strcmp(safe_read(p, 32), "hello") == 0, "rw: roundtrip ok");
@@ -102,11 +102,11 @@ static void test_safe_read_write(void)
 static void test_out_of_bounds(void)
 {
     MemoryManager m;
-    init_memory_manager(&m, 1024);
+    init_memory_manager(&m, 4096);
 
     void *p = allocate_memory(&m, 16);
-    check(safe_read(p, 2000) == NULL, "oob: read beyond block returns NULL");
-    safe_write(p, 2000, "too long");
+    check(safe_read(p, 6000) == NULL, "oob: read beyond block returns NULL");
+    safe_write(p, 6000, "too long");
     check(safe_read(p, 32) != NULL, "oob: write refused, data intact");
 
     free_memory(p);
