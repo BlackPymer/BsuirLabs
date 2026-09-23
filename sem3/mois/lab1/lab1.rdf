@@ -431,6 +431,7 @@
     <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Debtor_Ivanov">
         <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
         <bank:hasDebtAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50000</bank:hasDebtAmount>
+        <bank:hasName>Ivanov</bank:hasName>
         <bank:hasRepaymentTerm>2027-12-31</bank:hasRepaymentTerm>
     </owl:NamedIndividual>
     
@@ -441,6 +442,7 @@
     <owl:NamedIndividual rdf:about="http://www.bank_system/ontologies/bank#Debtor_Petrov">
         <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#Debtor"/>
         <bank:hasDebtAmount rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120000</bank:hasDebtAmount>
+        <bank:hasName>Petrov</bank:hasName>
         <bank:hasRepaymentTerm>2028-06-30</bank:hasRepaymentTerm>
     </owl:NamedIndividual>
     
@@ -452,6 +454,7 @@
         <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
         <bank:worksAt rdf:resource="http://www.bank_system/ontologies/bank#Filial_Gomel"/>
         <bank:hasEmployeePosition>Cashier</bank:hasEmployeePosition>
+        <bank:hasName>Kozlov</bank:hasName>
         <bank:hasSalary rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1500</bank:hasSalary>
     </owl:NamedIndividual>
     
@@ -463,6 +466,7 @@
         <rdf:type rdf:resource="http://www.bank_system/ontologies/bank#BankEmployee"/>
         <bank:worksAt rdf:resource="http://www.bank_system/ontologies/bank#Filial_Main"/>
         <bank:hasEmployeePosition>Manager</bank:hasEmployeePosition>
+        <bank:hasName>Smirnov</bank:hasName>
         <bank:hasSalary rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2500</bank:hasSalary>
     </owl:NamedIndividual>
     
