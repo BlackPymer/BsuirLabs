@@ -1,0 +1,43 @@
+concept_credit_agreement
+=> nrel_main_idtf:
+    [кредитный договор]
+    (*
+        <- lang_ru;;
+    *);
+
+=> nrel_main_idtf:
+    [credit agreement]
+    (*
+        <- lang_en;;
+    *);
+
+<- rrel_explored_concept:
+    subject_domain_of_banks_and_banking_systems
+
+=> nrel_inclusion:
+    concept_agreement_sum;
+    concept_repayment_term;
+    concept_interest_rate;
+
+=> nrel_definitional_domain:
+(*
+    <= nrel_set_union: {
+        concept_debtor;
+        concept_creditor
+    };;
+*);
+
+=> nrel_first_domain:
+    concept_debtor;
+
+=> nrel_second_domain:
+    concept_creditor;
+
+-> rrel_example:
+    (debtor_Ivan -> creditor_Belarusbank);
+
+=> nrel_definition:
+    [Кредитный договор — это соглашение, по которому банк (кредитор) обязуется предоставить денежные средства заемщику, а заемщик обязуется возвратить полученную сумму и уплатить проценты за пользование ими.]
+    (*
+        <- lang_ru;;
+    *)

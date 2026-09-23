@@ -1,0 +1,434 @@
+concept_financial_object
+<- sc_node_class;
+=> nrel_main_idtf:
+[финансовый объект]
+(*
+<- lang_ru;;
+*);;
+
+concept_bank_account
+<- sc_node_class;
+=> nrel_main_idtf:
+[банковский счёт]
+(*
+<- lang_ru;;
+*);;
+
+concept_bank
+<- sc_node_class;
+=> nrel_main_idtf:
+[банк]
+(*
+<- lang_ru;;
+*);;
+
+concept_bank_branch
+<- sc_node_class;
+=> nrel_main_idtf:
+[филиал банка]
+(*
+<- lang_ru;;
+*);;
+
+concept_currency
+<- sc_node_class;
+=> nrel_main_idtf:
+[валюта]
+(*
+<- lang_ru;;
+*);;
+
+concept_credit
+<- sc_node_class;
+=> nrel_main_idtf:
+[кредит]
+(*
+<- lang_ru;;
+*);;
+
+concept_borrower
+<- sc_node_class;
+=> nrel_main_idtf:
+[заемщик]
+(*
+<- lang_ru;;
+*);;
+
+concept_bank_client
+<- sc_node_class;
+=> nrel_main_idtf:
+[клиент банка]
+(*
+<- lang_ru;;
+*);;
+
+concept_bank_employee
+<- sc_node_class;
+=> nrel_main_idtf:
+[сотрудник банка]
+(*
+<- lang_ru;;
+*);;
+
+concept_system_participant
+<- sc_node_class;
+=> nrel_main_idtf:
+[участник системы]
+(*
+<- lang_ru;;
+*);;
+
+concept_account_type
+<- sc_node_class;
+=> nrel_main_idtf:
+[тип аккаунта]
+(*
+<- lang_ru;;
+*);;
+
+nrel_owns_account
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[владеет аккаунтом*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_system_participant;
+=> nrel_second_domain:
+concept_bank_account;;
+
+nrel_has_owner
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[имеет владельца*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank_account;
+=> nrel_second_domain:
+concept_system_participant;;
+
+nrel_belongs_to_bank
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[принадлежит банку*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank_account;
+=> nrel_second_domain:
+concept_bank;;
+
+nrel_has_branch
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[имеет филиал*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank;
+=> nrel_second_domain:
+concept_bank_branch;;
+
+nrel_has_currency
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[имеет валюту*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank_account;
+=> nrel_second_domain:
+concept_currency;;
+
+nrel_works_in
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[работает в*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank_employee;
+=> nrel_second_domain:
+concept_bank_branch;;
+
+nrel_is_borrower
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[является заемщиком*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_bank_account;
+=> nrel_second_domain:
+concept_borrower;;
+
+nrel_has_borrower
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[имеет заемщика*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_credit;
+=> nrel_second_domain:
+concept_borrower;;
+
+nrel_private_subject_domain
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+[частная предметная область*]
+(*
+<- lang_ru;;
+*);
+=> nrel_first_domain:
+concept_subject_domain;
+=> nrel_second_domain:
+concept_subject_domain;;
+
+USD
+<- concept_currency;
+=> nrel_main_idtf:
+[USD]
+(*
+<- lang_en;;
+*);;
+
+RUB
+<- concept_currency;
+=> nrel_main_idtf:
+[RUB]
+(*
+<- lang_en;;
+*);;
+
+BYN
+<- concept_currency;
+=> nrel_main_idtf:
+[BYN]
+(*
+<- lang_en;;
+*);;
+
+bank_Belarusbank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО Беларусьбанк]
+(*
+<- lang_ru;;
+*);;
+
+bank_BelInvestBank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО БелИнвестБанк]
+(*
+<- lang_ru;;
+*);;
+
+checking_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[расчетный счёт]
+(*
+<- lang_ru;;
+*);;
+
+deposit_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[депозитный счёт]
+(*
+<- lang_ru;;
+*);;
+
+subject_domain_of_finance_and_financial_services
+<- concept_subject_domain;
+=> nrel_main_idtf:
+[Предметная область финансов и финансовых услуг]
+(*
+<- lang_ru;;
+*);;
+
+subject_domain_of_bank_and_banking_products
+=> nrel_main_idtf:
+[Предметная область банка и банковских продуктов]
+(*
+<- lang_ru;;
+*);
+<- concept_subject_domain;
+=> nrel_ontology:
+structural_specification_of_bank_and_banking_products
+set_theoretic_ontology_of_bank_and_banking_products;;
+
+subject_domain_of_bank_and_banking_products
+<= nrel_private_subject_domain:
+subject_domain_of_finance_and_financial_services;;
+
+structural_specification_of_bank_and_banking_products = [*
+<- concept_structural_specification_of_subject_domain;;
+subject_domain_of_bank_and_banking_products = [*
+-> rrel_maximum_studied_object_class:
+concept_financial_object;
+concept_bank_account;
+concept_bank;
+concept_system_participant;
+-> rrel_not_maximum_studied_object_class:
+concept_bank_branch;
+concept_currency;
+concept_credit;
+concept_borrower;
+concept_bank_client;
+concept_bank_employee;
+concept_account_type;
+-> rrel_explored_relation:
+nrel_owns_account;
+nrel_has_owner;
+nrel_belongs_to_bank;
+nrel_has_branch;
+nrel_has_currency;
+nrel_works_in;
+nrel_is_borrower;
+nrel_has_borrower;;
+*];;
+*];;
+
+subject_domain_of_bank_and_banking_products = [*
+client_Igor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[клиент Игорь]
+(*
+<- lang_ru;;
+*);
+=> nrel_owns_account:
+credit_1234567;;
+
+credit_1234567
+<- concept_credit;
+=> nrel_main_idtf:
+[кредит №1234567]
+(*
+<- lang_ru;;
+*);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_is_borrower:
+client_Igor;;
+
+client_Egor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[клиент Егор]
+(*
+<- lang_ru;;
+*);
+=> nrel_owns_account:
+account_98765;;
+
+account_98765
+<- concept_bank_account;
+=> nrel_main_idtf:
+[банковский счет №98765]
+(*
+<- lang_ru;;
+*);
+=> nrel_has_owner:
+client_Egor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;;
+
+employee_Ivanov
+<- concept_bank_employee;
+=> nrel_main_idtf:
+[сотрудник Иванов]
+(*
+<- lang_ru;;
+*);
+=> nrel_works_in:
+main_branch_Belarusbank;;
+
+main_branch_Belarusbank
+<- concept_bank_branch;
+=> nrel_main_idtf:
+[главное отделение Беларусьбанка Проспект Независимости, 1]
+(*
+<- lang_ru;;
+*);
+=> nrel_belongs_to_bank:
+bank_Belarusbank;;
+
+account_13579
+<- concept_bank_account;
+=> nrel_main_idtf:
+[банковский счёт №13579]
+(*
+<- lang_ru;;
+*);
+=> nrel_has_currency:
+BYN;;
+*];;
+
+set_theoretic_ontology_of_bank_and_banking_products = [*
+<- concept_set_theoretic_ontology_of_subject_domain;;
+concept_system_participant
+=> nrel_subdividing: {
+concept_bank_employee;
+concept_bank_client
+};;
+concept_bank
+=> nrel_subdividing: {
+concept_bank_branch
+};;
+concept_financial_object
+=> nrel_subdividing: {
+concept_bank_account;
+concept_credit
+};;
+concept_bank_branch
+<= nrel_inclusion:
+concept_bank;;
+concept_bank_client
+<= nrel_inclusion:
+concept_system_participant;;
+concept_bank_employee
+<= nrel_inclusion:
+concept_system_participant;;
+concept_borrower
+<= nrel_inclusion:
+concept_bank_client;;
+concept_bank_account
+<= nrel_inclusion:
+concept_financial_object;;
+concept_credit
+<= nrel_inclusion:
+concept_financial_object;;
+*];;
+
+subject_domain_of_banks_and_banking_services_Russia
+<- concept_subject_domain;
+=> nrel_main_idtf:
+[Предметная область банков и банковских услуг России]
+(*
+<- lang_ru;;
+*);
+<= nrel_private_subject_domain:
+subject_domain_of_bank_and_banking_products;;
+
+subject_domain_of_banks_and_banking_services_Belarus
+<- concept_subject_domain;
+=> nrel_main_idtf:
+[Предметная область банков и банковских услуг Беларуси]
+(*
+<- lang_ru;;
+*);
+<= nrel_private_subject_domain:
+subject_domain_of_bank_and_banking_products;;
