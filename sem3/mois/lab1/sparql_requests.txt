@@ -1,0 +1,53 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+SELECT ?clientName ?accountNumber
+WHERE {
+  ?client rdf:type :BankClient .
+  ?client :hasName ?clientName .
+  ?client :ownsAccount ?account .
+  ?account :hasAccountNumber ?accountNumber .
+}
+
+
+SELECT ?debtorName ?debtAmount
+WHERE {
+  ?debtor rdf:type :Debtor .
+  ?debtor :hasName ?debtorName .
+  ?debtor :hasDebtAmount ?debtAmount .
+  FILTER(?debtAmount > 500000)
+}
+
+SELECT ?employeeName ?salary
+WHERE {
+  ?employee rdf:type :BankEmployee .
+  ?employee :hasName ?employeeName .
+  OPTIONAL { 
+    ?employee :hasSalary ?salary . 
+  }
+}
+
+SELECT ?accountNumber ?balance
+WHERE {
+  ?account rdf:type :BankAccount .
+  ?account :hasAccountNumber ?accountNumber .
+  ?account :hasBalance ?balance .
+}
+ORDER BY DESC(?balance)
+LIMIT 3
+
+ASK {
+  ?client rdf:type :BankClient .
+  ?client :ownsAccount ?account .
+  ?account :hasCurrency :Currency_USD .
+}
+
+DESCRIBE ?account
+WHERE {
+  ?account rdf:type :BankAccount .
+  ?account :hasBalance ?balance .
+  FILTER(?balance > 1000)
+}
