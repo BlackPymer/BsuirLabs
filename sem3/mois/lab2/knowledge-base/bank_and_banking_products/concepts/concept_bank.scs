@@ -1,0 +1,28 @@
+concept_bank
+<- sc_node_class;
+=> nrel_main_idtf:
+[банк]
+(*
+<- lang_ru;;
+*);
+[bank]
+(*
+<- lang_en;;
+*);
+
+<= nrel_inclusion:
+concept_financial_object;;
+
+=>nrel_definition:
+[Банк — это организация, которая осуществляет банковские услуги и проводит банковские операции.]
+(*
+<- lang_ru;;
+*);
+[bank — this organization provides banking services and conducts banking operations.]
+(*
+<- lang_en;;
+*);
+
+-> rrel_example:
+    bank_Belarusbank;;
+

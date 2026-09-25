@@ -1,0 +1,20 @@
+concept_bank_account
+<- sc_node_class;
+=> nrel_main_idtf:
+    [банковский счёт]
+    (* <- lang_ru;; *)
+    [bank account]
+    (* <- lang_en;; *);
+    
+<= nrel_inclusion:
+    concept_financial_object;;
+
+=> nrel_definition:
+    [Банковский счёт — счёт, открываемый банком юридическим или физическим лицам для их участия в безналичном денежном обороте и аккумулирования на счёте безналичных денежных средств.]
+    (* <- lang_ru;; *);
+    [Banking account — an account opened by a bank for its legal or physical entities to participate in non-cash transactions and accumulation on the account without cash.]
+    (* <- lang_en;; *);
+    
+
+-> rrel_example:
+    account_98765;;
