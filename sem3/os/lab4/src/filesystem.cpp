@@ -78,7 +78,33 @@ void FileSystem::freeBlocks_(int block_index, int blocks_count)
     }
 }
 
-int FileSystem::optimaze_(){
-    //через массив с парами индексов
+int FileSystem::optimaze_()
+{
+    std::vector<int> idx_moves;
+    int i = 0;
+    for (int j = 0; j < BLOCK_COUNT; ++j)
+    {
+        blocks_[i] = blocks_[j];
+        if (!blocks_[j].isFree)
+        {
+            ++i;
+            continue;
+        }
+        idx_moves.push_back(j);
+    }
+    for (int k = i; k < BLOCK_COUNT; ++k)
+        blocks_[k] = Block(BLOCK_SIZE);
 
+    for (int j = 0; j < table_files_.size(); ++j)
+    {
+        int k = 0;
+        for (; k < idx_moves.size(); ++k)
+        {
+            if (idx_moves[k] > table_files_[j].firstBlockIndex)
+                break;
+        }
+        table_files_[j].firstBlockIndex = table_files_[j].firstBlockIndex - k;
+    }
+
+    return i + 1;
 }
