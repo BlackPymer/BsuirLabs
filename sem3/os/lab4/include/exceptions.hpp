@@ -10,3 +10,9 @@ class NotEnoughtSpaceException : public std::exception
 public:
     NotEnoughtSpaceException() : std::exception() {}
 };
+
+class FileNotFoundException : public std::exception
+{
+public:
+    FileNotFoundException() : std::exception() {}
+};

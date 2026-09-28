@@ -1,5 +1,6 @@
 #include "include/filesystem.hpp"
 #include "include/exceptions.hpp"
+#include <cmath>
 
 FileSystem::FileSystem()
 {
@@ -71,12 +72,30 @@ void FileSystem::WriteToFile(const std::string &name, const std::string &data)
 
 void FileSystem::AppendToFile(const std::string &name, const std::string &data)
 {
-    int blocks_count = (data.size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
-    if (free_blocks_ < blocks_count)
+    int i;
+    for (i = 0; i < table_files_.size(); ++i)
     {
-        throw NotEnoughtSpaceException();
+        if (table_files_[i].name == name)
+            break;
+    }
+    if (i == table_files_.size())
+    {
+        throw FileNotFoundException();
     }
 
+    int required_blocks = std::ceil((table_files_[i].size + data.size()) / (double)BLOCK_SIZE);
+    int cur_blocks = std::ceil((table_files_[i].size / (double)BLOCK_SIZE));
+    if (required_blocks == cur_blocks)
+    {
+        Block *current_block = &blocks_[table_files_[i].firstBlockIndex + cur_blocks];
+        int last = current_block->data.find_last_not_of(' ');
+        current_block->data.replace(last, data.size(), data);
+        table_files_[i].size += data.size();
+        return;
+    }
+    std::string all_data = ReadFromFile(name) + data;
+    DeleteFile(name);
+    WriteToFile(name, all_data);
 }
 
 void FileSystem::freeBlocks_(int block_index, int blocks_count)
@@ -117,4 +136,14 @@ int FileSystem::optimaze_()
     }
 
     return i + 1;
+}
+
+void FileSystem::CopyFile(std::string new_name, const std::string &old_name)
+{
+    if (!IsFileExists(old_name))
+        throw FileNotFoundException();
+    if (new_name == old_name)
+        new_name += "(1)";
+
+    WriteToFile(new_name, ReadFromFile(old_name));
 }

@@ -17,6 +17,7 @@ public:
     std::string ReadFromFile(const std::string &name);
     bool IsFileExists(const std::string &name);
     void DeleteFile(const std::string &name);
+    void CopyFile(std::string new_name, const std::string &old_name);
     void Damp();
 
 private:
