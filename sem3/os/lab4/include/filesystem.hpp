@@ -27,4 +27,5 @@ private:
 
     void freeBlocks_(int block_index, int blocks_count);
     int optimaze_();
+    int blocksCount_(int size) const;
 };
