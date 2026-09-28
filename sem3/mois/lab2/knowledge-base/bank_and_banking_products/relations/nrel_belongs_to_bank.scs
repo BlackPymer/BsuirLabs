@@ -1,0 +1,20 @@
+nrel_belongs_to_bank
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [принадлежит банку*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [belongs to bank*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_account;
+=> nrel_second_domain:
+    concept_bank;
+=> nrel_definition:
+    [Отношение принадлежности банковского счёта конкретному банку, в котором открыт данный счёт.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Relation of a bank account belonging to the specific bank where this account is opened.]
+    (* <- lang_en;; *);;

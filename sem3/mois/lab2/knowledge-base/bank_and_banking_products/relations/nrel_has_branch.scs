@@ -1,0 +1,20 @@
+nrel_has_branch
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет филиал*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has branch*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank;
+=> nrel_second_domain:
+    concept_bank_branch;
+=> nrel_definition:
+    [имеет филиал* — отношение между банком и его филиалом, обособленным подразделением этого банка, осуществляющим банковские операции и услуги в зоне своего обслуживания.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has branch* — a relation between a bank and its branch, a separate structural unit of that bank that conducts banking operations and provides banking services within the area it serves.]
+    (* <- lang_en;; *);;

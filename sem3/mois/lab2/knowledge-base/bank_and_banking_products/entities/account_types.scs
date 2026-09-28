@@ -1,0 +1,21 @@
+subject_domain_of_bank_and_banking_products = [*
+
+checking_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[Расчётный счёт]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Checking account]
+(* <- lang_en;; *);;
+
+deposit_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[Депозитный счёт]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Deposit account]
+(* <- lang_en;; *);;
+
+*];;

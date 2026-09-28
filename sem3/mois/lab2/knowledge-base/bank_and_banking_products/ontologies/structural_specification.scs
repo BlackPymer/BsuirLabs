@@ -1,0 +1,27 @@
+structural_specification_of_bank_and_banking_products = [*
+<- concept_structural_specification_of_subject_domain;;
+subject_domain_of_bank_and_banking_products = [*
+-> rrel_maximum_studied_object_class:
+concept_financial_object;
+concept_bank;
+concept_system_participant;
+concept_currency;
+concept_account_type;
+-> rrel_not_maximum_studied_object_class:
+concept_bank_account;
+concept_credit;
+concept_bank_branch;
+concept_borrower;
+concept_bank_client;
+concept_bank_employee;
+concept_bank_card;
+-> rrel_explored_relation:
+nrel_owns_account;
+nrel_has_owner;
+nrel_belongs_to_bank;
+nrel_has_branch;
+nrel_has_currency;
+nrel_works_in;
+nrel_has_borrower;;
+*];;
+*];;

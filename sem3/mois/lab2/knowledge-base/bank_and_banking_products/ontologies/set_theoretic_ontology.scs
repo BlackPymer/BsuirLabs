@@ -1,0 +1,35 @@
+set_theoretic_ontology_of_bank_and_banking_products = [*
+<- concept_set_theoretic_ontology_of_subject_domain;;
+concept_system_participant
+=> nrel_subdividing: {
+concept_bank_employee;
+concept_bank_client
+};;
+concept_financial_object
+=> nrel_subdividing: {
+concept_bank_account;
+concept_credit;
+concept_bank_card
+};;
+concept_bank_branch
+<= nrel_inclusion:
+concept_bank;;
+concept_bank_client
+<= nrel_inclusion:
+concept_system_participant;;
+concept_bank_employee
+<= nrel_inclusion:
+concept_system_participant;;
+concept_borrower
+<= nrel_inclusion:
+concept_bank_client;;
+concept_bank_account
+<= nrel_inclusion:
+concept_financial_object;;
+concept_credit
+<= nrel_inclusion:
+concept_financial_object;;
+concept_bank_card
+<= nrel_inclusion:
+concept_financial_object;;
+*];;

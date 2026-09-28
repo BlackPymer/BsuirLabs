@@ -1,0 +1,22 @@
+@search_role_attribute_template = {
+    rrel_init_template:{
+        rrel_template:[*
+            @input_param1=(.._relation <-_ sc_node_non_role_relation);;
+            @output_param1=(nrel_first_domain _-> (.._relation _=> .._first));;
+            @output_param2=(nrel_second_domain _-> (.._relation _=> .._second));;
+        *];
+        rrel_template_input_params:{
+            @input_param1
+        };
+        rrel_template_output_params:{
+            @output_param1;
+            @output_param2
+        }
+    }(*<- nrel_search_template;;*)
+};;
+
+@search_role_attribute_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска ролей заданного отношения по его первому и второму доменам]
+    (* <- lang_ru;; *);;

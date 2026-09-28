@@ -1,0 +1,25 @@
+subject_domain_of_bank_and_banking_products = [*
+
+client_Igor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[Клиент Игорь]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Igor]
+(* <- lang_en;; *);
+=> nrel_owns_account:
+account_13579;;
+
+client_Egor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[Клиент Егор]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Egor]
+(* <- lang_en;; *);
+=> nrel_owns_account:
+account_98765;;
+
+*];;

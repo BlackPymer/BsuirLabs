@@ -1,0 +1,16 @@
+concept_bank_client
+<- sc_node_class;
+=> nrel_main_idtf:
+    [клиент банка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank client]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Клиент банка — физическое или юридическое лицо, пользующееся или желающее воспользоваться банковскими услугами: открытием и ведением банковского счёта, получением кредита, расчётами и другими операциями.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank client — a physical or legal entity that uses or intends to use banking services: opening and maintaining a bank account, obtaining a credit, making settlements and other transactions.]
+    (* <- lang_en;; *);;

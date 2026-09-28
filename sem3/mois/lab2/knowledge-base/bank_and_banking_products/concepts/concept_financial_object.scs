@@ -1,0 +1,16 @@
+concept_financial_object
+<- sc_node_class;
+=> nrel_main_idtf:
+    [финансовый объект]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [financial object]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Финансовый объект — объект, имеющий денежную стоимость и способный участвовать в финансовых отношениях: приносить или требовать доход, а также служить средством накопления, платежа или обеспечения.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Financial object — an object that has monetary value and is able to participate in financial relations: generate or require income, and also serve as a means of accumulation, payment or collateral.]
+    (* <- lang_en;; *);;

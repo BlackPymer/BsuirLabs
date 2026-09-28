@@ -1,0 +1,14 @@
+subject_domain_of_bank_and_banking_products = [*
+
+credit_1234567
+<- concept_credit;
+=> nrel_main_idtf:
+[Кредит №1234567]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Credit No. 1234567]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;;
+
+*];;

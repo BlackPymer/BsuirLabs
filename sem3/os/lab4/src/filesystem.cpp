@@ -34,7 +34,7 @@ void FileSystem::WriteToFile(const std::string &name, const std::string &data)
                 table_files_[i].size = 0;
                 free_blocks_ += table_files_[i].size / BLOCK_SIZE;
             }
-            int blocks_count = data.size() / BLOCK_SIZE;
+            int blocks_count = (data.size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
             if (free_blocks_ > blocks_count)
                 throw NotEnoughtSpaceException();
             int row = 0, l = 0;
@@ -67,6 +67,16 @@ void FileSystem::WriteToFile(const std::string &name, const std::string &data)
             free_blocks_ -= blocks_count;
         }
     }
+}
+
+void FileSystem::AppendToFile(const std::string &name, const std::string &data)
+{
+    int blocks_count = (data.size() + BLOCK_SIZE - 1) / BLOCK_SIZE;
+    if (free_blocks_ < blocks_count)
+    {
+        throw NotEnoughtSpaceException();
+    }
+
 }
 
 void FileSystem::freeBlocks_(int block_index, int blocks_count)

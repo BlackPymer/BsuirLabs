@@ -1,0 +1,20 @@
+nrel_works_in
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [работает в*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [works in*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_employee;
+=> nrel_second_domain:
+    concept_bank_branch;
+=> nrel_definition:
+    [работает в* — отношение между сотрудником банка и филиалом банка, в котором этот сотрудник выполняет свои служебные обязанности.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [works in* — a relation between a bank employee and the bank branch where this employee performs his official duties.]
+    (* <- lang_en;; *);;

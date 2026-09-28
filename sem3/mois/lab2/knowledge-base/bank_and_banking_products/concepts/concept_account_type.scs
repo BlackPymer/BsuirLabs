@@ -1,0 +1,16 @@
+concept_account_type
+<- sc_node_class;
+=> nrel_main_idtf:
+    [тип банковского счёта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank account type]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Тип банковского счёта — разновидность банковского счёта, выделяемая по своему назначению, порядку открытия и начисления процентов, например расчётный или депозитный счёт.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank account type — a variety of a bank account distinguished by its purpose, opening procedure and interest accrual, for example a checking account or a deposit account.]
+    (* <- lang_en;; *);;

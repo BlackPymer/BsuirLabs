@@ -1,0 +1,42 @@
+subject_domain_of_bank_and_banking_products = [*
+
+account_98765
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №98765]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 98765]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Egor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;;
+
+account_24680
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №24680]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 24680]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_13579
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №13579]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 13579]
+(* <- lang_en;; *);
+=> nrel_has_currency:
+BYN;;
+
+*];;

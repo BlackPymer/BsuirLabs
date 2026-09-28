@@ -1,0 +1,16 @@
+concept_bank_card
+<- sc_node_class;
+=> nrel_main_idtf:
+    [банковская карта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank card]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Банковская карта — платёжный инструмент, выпускаемый банком и содержащий реквизиты банковского счёта, с помощью которого клиент совершает безналичные операции со своими денежными средствами.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank card — a payment instrument issued by a bank that contains the details of a bank account and allows the client to perform non-cash transactions with their funds.]
+    (* <- lang_en;; *);;

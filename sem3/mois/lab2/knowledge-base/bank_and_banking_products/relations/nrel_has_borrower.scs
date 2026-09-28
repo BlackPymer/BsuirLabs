@@ -1,0 +1,20 @@
+nrel_has_borrower
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет заемщика*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has borrower*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_credit;
+=> nrel_second_domain:
+    concept_borrower;
+=> nrel_definition:
+    [имеет заемщика* — отношение между кредитом и заёмщиком, получившим этот кредит на условиях возврата и уплаты процентов.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has borrower* — a relation between a credit and the borrower who received this credit on terms of repayment with interest.]
+    (* <- lang_en;; *);;

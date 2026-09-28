@@ -1,0 +1,20 @@
+nrel_has_owner
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет владельца*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has owner*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_financial_object;
+=> nrel_second_domain:
+    concept_system_participant;
+=> nrel_definition:
+    [имеет владельца* — отношение между финансовым объектом (банковским счётом или кредитом) и участником банковской системы, который является его владельцем.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has owner* — a relation between a financial object (a bank account or a credit) and the banking system participant who is its owner.]
+    (* <- lang_en;; *);;

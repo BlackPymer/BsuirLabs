@@ -1,0 +1,30 @@
+subject_domain_of_bank_and_banking_products = [*
+
+BYN
+<- concept_currency;
+=> nrel_main_idtf:
+[Белорусский рубль]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BYN]
+(* <- lang_en;; *);;
+
+USD
+<- concept_currency;
+=> nrel_main_idtf:
+[Доллар США]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[USD]
+(* <- lang_en;; *);;
+
+RUB
+<- concept_currency;
+=> nrel_main_idtf:
+[Российский рубль]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[RUB]
+(* <- lang_en;; *);;
+
+*];;

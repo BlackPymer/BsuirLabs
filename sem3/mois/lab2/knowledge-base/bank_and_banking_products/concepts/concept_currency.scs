@@ -1,0 +1,16 @@
+concept_currency
+<- sc_node_class;
+=> nrel_main_idtf:
+    [валюта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [currency]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Валюта — денежная единица, признанная законодательством соответствующего государства (или общим рынком) и используемая в качестве средства платежа, меры стоимости и хранения денежных средств.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Currency — a monetary unit recognized by the legislation of the corresponding state (or by a common market) and used as a means of payment, a measure of value and a store of value.]
+    (* <- lang_en;; *);;

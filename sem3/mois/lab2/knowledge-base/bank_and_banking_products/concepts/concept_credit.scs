@@ -1,0 +1,16 @@
+concept_credit
+<- sc_node_class;
+=> nrel_main_idtf:
+    [кредит]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [credit]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Кредит — денежные средства, предоставляемые банком заёмщику на определённый срок, как правило под проценты, с обязательным возвратом; выступают одновременно требованием банка к заёмщику и его долгом.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Credit — funds provided by a bank to a borrower for a certain period, usually for a fee, with mandatory repayment; they act both as the bank's claim against the borrower and as the borrower's debt.]
+    (* <- lang_en;; *);;

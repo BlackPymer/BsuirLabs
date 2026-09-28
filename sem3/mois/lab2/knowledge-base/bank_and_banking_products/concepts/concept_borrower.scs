@@ -1,0 +1,16 @@
+concept_borrower
+<- sc_node_class;
+=> nrel_main_idtf:
+    [заёмщик]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [borrower]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Заёмщик — клиент банка, получающий или получивший кредит на условиях возврата и уплаты процентов и выступающий по отношению к банку должником по этому кредиту.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Borrower — a bank client who receives or has received a credit on terms of repayment with interest and acts as a debtor to the bank with respect to this credit.]
+    (* <- lang_en;; *);;

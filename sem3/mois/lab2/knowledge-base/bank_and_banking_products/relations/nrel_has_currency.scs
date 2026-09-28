@@ -1,0 +1,20 @@
+nrel_has_currency
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет валюту*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has currency*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_account;
+=> nrel_second_domain:
+    concept_currency;
+=> nrel_definition:
+    [имеет валюту* — отношение между банковским счётом и валютой, в которой выражены денежные средства, учитываемые на этом счёте.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has currency* — a relation between a bank account and the currency in which the funds recorded on that account are denominated.]
+    (* <- lang_en;; *);;

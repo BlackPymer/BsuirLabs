@@ -1,0 +1,16 @@
+concept_bank_branch
+<- sc_node_class;
+=> nrel_main_idtf:
+    [филиал банка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank branch]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Филиал банка — обособленное структурное подразделение банка, расположенное вне его головного офиса и осуществляющее банковские операции и услуги на территории обслуживаемой им зоны.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank branch — a separate structural unit of a bank located outside its head office, which conducts banking operations and provides banking services within the area it serves.]
+    (* <- lang_en;; *);;

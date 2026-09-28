@@ -1,0 +1,23 @@
+subject_domain_of_bank_and_banking_products = [*
+
+bank_Belarusbank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО Беларусьбанк]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Belarusbank LLC]
+(* <- lang_en;; *);
+=> nrel_has_branch:
+main_branch_Belarusbank;;
+
+bank_BelInvestBank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО БелИнвестБанк]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BelInvestBank LLC]
+(* <- lang_en;; *);;
+
+*];;
