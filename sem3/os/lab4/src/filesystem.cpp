@@ -31,91 +31,83 @@ void FileSystem::CreateFile(const std::string &name)
 
 void FileSystem::WriteToFile(const std::string &name, const std::string &data)
 {
-    if (!IsFileExists(name))
-        CreateFile(name);
-
-    for (int i = 0; i < table_files_.size(); i++)
+    int file_index = -1;
+    for (size_t i = 0; i < table_files_.size(); ++i)
     {
         if (table_files_[i].name == name)
         {
-            if (table_files_[i].size != 0)
-            {
-                int old_blocks = blocksCount_(table_files_[i].size);
-                freeBlocks_(table_files_[i].firstBlockIndex, old_blocks);
-                table_files_[i].firstBlockIndex = 0;
-                table_files_[i].size = 0;
-                free_blocks_ += old_blocks;
-            }
-            int blocks_count = blocksCount_(static_cast<int>(data.size()));
-            if (free_blocks_ < blocks_count)
-                throw NotEnoughtSpaceException();
-            int row = 0, l = 0;
-            for (l = 0; l < BLOCK_COUNT; ++l)
-            {
-                if (row == blocks_count)
-                    break;
-                if (blocks_[l].isFree)
-                {
-                    row++;
-                }
-                else
-                    row = 0;
-            }
-            int block_to_write = 0;
-            if (row != blocks_count)
-            {
-                block_to_write = optimaze_();
-            }
-            else
-                block_to_write = l - row;
-
-            for (int j = 0; j < blocks_count; ++j)
-            {
-                std::string chunk = data.substr(j * BLOCK_SIZE, BLOCK_SIZE);
-                blocks_[block_to_write + j].data = std::string(BLOCK_SIZE, ' ');
-                blocks_[block_to_write + j].data.replace(0, chunk.size(), chunk);
-                blocks_[block_to_write + j].isFree = false;
-            }
-            table_files_[i].firstBlockIndex = block_to_write;
-            table_files_[i].size = static_cast<int>(data.size());
-            free_blocks_ -= blocks_count;
+            file_index = static_cast<int>(i);
+            break;
         }
     }
+
+    int old_blocks = 0;
+    if (file_index != -1)
+        old_blocks = blocksCount_(table_files_[file_index].size);
+    int blocks_count = blocksCount_(static_cast<int>(data.size()));
+
+    if (free_blocks_ + old_blocks < blocks_count)
+        throw NotEnoughtSpaceException();
+
+    if (old_blocks != 0)
+    {
+        freeBlocks_(table_files_[file_index].firstBlockIndex, old_blocks);
+        free_blocks_ += old_blocks;
+    }
+
+    int block_to_write = findFreeBlocks_(blocks_count);
+
+    for (int j = 0; j < blocks_count; ++j)
+    {
+        std::string chunk = data.substr(j * BLOCK_SIZE, BLOCK_SIZE);
+        blocks_[block_to_write + j].data = std::string(BLOCK_SIZE, ' ');
+        blocks_[block_to_write + j].data.replace(0, chunk.size(), chunk);
+        blocks_[block_to_write + j].isFree = false;
+    }
+    free_blocks_ -= blocks_count;
+
+    if (file_index == -1)
+    {
+        File file;
+        file.name = name;
+        file.size = static_cast<int>(data.size());
+        file.firstBlockIndex = block_to_write;
+        table_files_.push_back(file);
+        return;
+    }
+
+    table_files_[file_index].firstBlockIndex = block_to_write;
+    table_files_[file_index].size = static_cast<int>(data.size());
 }
 
 void FileSystem::AppendToFile(const std::string &name, const std::string &data)
 {
     int i;
-    for (i = 0; i < table_files_.size(); ++i)
+    for (i = 0; static_cast<size_t>(i) < table_files_.size(); ++i)
     {
         if (table_files_[i].name == name)
             break;
     }
-    if (i == table_files_.size())
+    if (static_cast<size_t>(i) == table_files_.size())
     {
         throw FileNotFoundException();
     }
+    if (data.empty())
+        return;
 
     int required_blocks = blocksCount_(table_files_[i].size + static_cast<int>(data.size()));
     int cur_blocks = blocksCount_(table_files_[i].size);
     if (required_blocks == cur_blocks)
     {
-        if (data.empty())
-            return;
-        Block *current_block = &blocks_[table_files_[i].firstBlockIndex + cur_blocks - 1];
-        size_t last = current_block->data.find_last_not_of(' ');
-        if (last == std::string::npos)
-            last = 0;
-        else
-            ++last;
-        current_block->data.replace(last, data.size(), data);
+        Block &current_block = blocks_[table_files_[i].firstBlockIndex + cur_blocks - 1];
+        int offset = table_files_[i].size % BLOCK_SIZE;
+        current_block.data.replace(offset, data.size(), data);
         table_files_[i].size += static_cast<int>(data.size());
         return;
     }
     else
     {
         std::string all_data = ReadFromFile(name) + data;
-        DeleteFile(name);
         WriteToFile(name, all_data);
     }
 }
@@ -127,6 +119,26 @@ void FileSystem::freeBlocks_(int block_index, int blocks_count)
         blocks_[i].isFree = true;
         blocks_[i].data = std::string(BLOCK_SIZE, ' ');
     }
+}
+
+int FileSystem::findFreeBlocks_(int blocks_count)
+{
+    if (blocks_count == 0)
+        return 0;
+
+    int run = 0;
+    for (int l = 0; l < BLOCK_COUNT; ++l)
+    {
+        if (!blocks_[l].isFree)
+        {
+            run = 0;
+            continue;
+        }
+        ++run;
+        if (run == blocks_count)
+            return l - blocks_count + 1;
+    }
+    return optimaze_();
 }
 
 int FileSystem::optimaze_()
@@ -146,15 +158,15 @@ int FileSystem::optimaze_()
     for (int k = i; k < BLOCK_COUNT; ++k)
         blocks_[k] = Block(BLOCK_SIZE);
 
-    for (int j = 0; j < table_files_.size(); ++j)
+    for (size_t j = 0; j < table_files_.size(); ++j)
     {
-        int k = 0;
+        size_t k = 0;
         for (; k < idx_moves.size(); ++k)
         {
             if (idx_moves[k] > table_files_[j].firstBlockIndex)
                 break;
         }
-        table_files_[j].firstBlockIndex = table_files_[j].firstBlockIndex - k;
+        table_files_[j].firstBlockIndex -= static_cast<int>(k);
     }
 
     return i;
@@ -172,31 +184,29 @@ void FileSystem::CopyFile(std::string new_name, const std::string &old_name)
 
 std::string FileSystem::ReadFromFile(const std::string &name)
 {
-    int i;
-    std::string data;
-    for (i = 0; i < table_files_.size(); ++i)
+    for (size_t i = 0; i < table_files_.size(); ++i)
     {
-        if (table_files_[i].name == name)
+        if (table_files_[i].name != name)
+            continue;
+
+        std::string data;
+        int total_blocks = blocksCount_(table_files_[i].size);
+        int last_block_size = table_files_[i].size % BLOCK_SIZE;
+        for (int j = 0; j < total_blocks; ++j)
         {
-            int total_blocks = blocksCount_(table_files_[i].size);
-            int last_block_size = table_files_[i].size % BLOCK_SIZE;
-            for (int j = 0; j < total_blocks; ++j)
-            {
-                if (j == total_blocks - 1 && last_block_size != 0)
-                    data.append(blocks_[table_files_[i].firstBlockIndex + j].data.substr(0, last_block_size));
-                else
-                    data.append(blocks_[table_files_[i].firstBlockIndex + j].data);
-            }
-            return data;
+            if (j == total_blocks - 1 && last_block_size != 0)
+                data.append(blocks_[table_files_[i].firstBlockIndex + j].data.substr(0, last_block_size));
+            else
+                data.append(blocks_[table_files_[i].firstBlockIndex + j].data);
         }
+        return data;
     }
-    if (i == table_files_.size())
-        throw FileNotFoundException();
+    throw FileNotFoundException();
 }
 
 bool FileSystem::IsFileExists(const std::string &name)
 {
-    for (int i = 0; i < table_files_.size(); ++i)
+    for (size_t i = 0; i < table_files_.size(); ++i)
     {
         if (table_files_[i].name == name)
             return true;
@@ -206,16 +216,36 @@ bool FileSystem::IsFileExists(const std::string &name)
 
 void FileSystem::DeleteFile(const std::string &name)
 {
-    int i;
-    for (i = 0; i < table_files_.size(); ++i)
+    for (size_t i = 0; i < table_files_.size(); ++i)
     {
-        if (table_files_[i].name == name)
-        {
-            int freed = blocksCount_(table_files_[i].size);
-            freeBlocks_(table_files_[i].firstBlockIndex, freed);
-            free_blocks_ += freed;
-            table_files_.erase(table_files_.begin() + i);
-            break;
-        }
+        if (table_files_[i].name != name)
+            continue;
+
+        int freed = blocksCount_(table_files_[i].size);
+        freeBlocks_(table_files_[i].firstBlockIndex, freed);
+        free_blocks_ += freed;
+        table_files_.erase(table_files_.begin() + i);
+        return;
     }
+}
+
+std::string FileSystem::Dump()
+{
+    std::string result;
+    for (size_t i = 0; i < table_files_.size(); ++i)
+    {
+        result += "Name:" + table_files_[i].name + "\tsize: " + std::to_string(table_files_[i].size) + "\n";
+        result += "Content:\n";
+        int total_blocks = blocksCount_(table_files_[i].size);
+        int last_block_size = table_files_[i].size % BLOCK_SIZE;
+        for (int j = 0; j < total_blocks; ++j)
+        {
+            if (j == total_blocks - 1 && last_block_size != 0)
+                result += blocks_[table_files_[i].firstBlockIndex + j].data.substr(0, last_block_size);
+            else
+                result += blocks_[table_files_[i].firstBlockIndex + j].data;
+        }
+        result += "\n";
+    }
+    return result;
 }

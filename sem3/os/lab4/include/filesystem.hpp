@@ -1,12 +1,15 @@
+#pragma once
+
 #include "block.hpp"
 #include "file.hpp"
+#include <string>
 #include <vector>
 
 class FileSystem
 {
 public:
-    const int BLOCK_SIZE = 4096;
-    const int BLOCK_COUNT = 100;
+    static constexpr int BLOCK_SIZE = 4096;
+    static constexpr int BLOCK_COUNT = 100;
 
     FileSystem();
     ~FileSystem();
@@ -18,7 +21,7 @@ public:
     bool IsFileExists(const std::string &name);
     void DeleteFile(const std::string &name);
     void CopyFile(std::string new_name, const std::string &old_name);
-    void Damp();
+    std::string Dump();
 
 private:
     std::vector<Block> blocks_;
@@ -28,4 +31,5 @@ private:
     void freeBlocks_(int block_index, int blocks_count);
     int optimaze_();
     int blocksCount_(int size) const;
+    int findFreeBlocks_(int blocks_count);
 };
