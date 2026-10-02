@@ -1,0 +1,38 @@
+@search_employee_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._bank  <-_ concept_bank);;
+            nrel_has_branch _-> (.._bank _=> .._branch);;
+            @output_param1 = (.._branch <-_ concept_bank_branch);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_set_template;; *);
+    rrel_next_template: {
+        rrel_init_template:{
+            rrel_template: [*
+                @input_param1 = (.._branch <-_ concept_bank_branch);;
+                nrel_works_in _-> (.._employee _=> .._branch);;
+                @output_param1 = (.._employee <-_ concept_bank_employee);;
+            *];
+            rrel_template_input_params: {
+                @input_param1
+            };
+            rrel_template_output_params: {
+                @output_param1
+            }
+        }(* <- nrel_search_set_template;; *)
+    }(* <- nrel_fixed_search_strategy_template;; *)
+};;
+
+@search_employee_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска сотрудника банка]
+    (*
+        <- lang_ru;;
+    *);;

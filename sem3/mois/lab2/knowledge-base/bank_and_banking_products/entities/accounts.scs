@@ -11,7 +11,9 @@ account_98765
 => nrel_has_owner:
 client_Egor;
 => nrel_belongs_to_bank:
-bank_Belarusbank;;
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
 
 account_24680
 <- concept_bank_account;
