@@ -1,0 +1,53 @@
+@search_borrowers_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._bank <-_ concept_bank);;
+            nrel_belongs_to_bank _-> (.._bank <=_ .._account);;
+            @output_param1 = (.._account <-_ concept_bank_account);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_set_template;; *);
+    rrel_next_template: {
+        rrel_init_template: {
+            rrel_template: [*
+                @input_param1 = (.._account <-_ concept_bank_account);;
+                nrel_owns_account _-> (.._client _=> .._account);;
+                @output_param1 = (.._client <-_ concept_bank_client);;
+            *];
+            rrel_template_input_params: {
+                @input_param1
+            };
+            rrel_template_output_params: {
+                @output_param1
+            }
+        } (* <- nrel_search_set_template;; *);
+        rrel_next_template: {
+            rrel_init_template: {
+                rrel_template: [*
+                    @input_param1 = (.._client <-_ concept_bank_client);;
+                    //.._client <-_ concept_borrower;;
+                    @output_param1 = (.._client <-_ concept_borrower);;
+                *];
+                rrel_template_input_params: {
+                    @input_param1
+                };
+                rrel_template_output_params: {
+                    @output_param1
+                }
+            } (* <- nrel_search_set_template;; *)
+        } (* <- nrel_fixed_search_strategy_template;; *)
+    } (* <- nrel_fixed_search_strategy_template;; *)
+};;
+
+@search_borrowers_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска заемщиков банка]
+    (*
+        <- lang_ru;;
+    *);;

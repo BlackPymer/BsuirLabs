@@ -22,4 +22,53 @@ client_Egor
 => nrel_owns_account:
 account_98765;;
 
+
+
+client_Anna
+<- concept_bank_client;
+=> nrel_owns_account:
+account_11111;
+=> nrel_main_idtf:
+[Клиент Анна]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Anna]
+(* <- lang_en;; *);;
+
+client_Mikhail
+<- concept_bank_client;
+=> nrel_owns_account:
+account_22222;
+=> nrel_main_idtf:
+[Клиент Михаил]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Mikhail]
+(* <- lang_en;; *);;
+
+client_Viktoria
+<- concept_bank_client;
+<- concept_borrower;
+=> nrel_owns_account:
+account_33333;
+=> nrel_main_idtf:
+[Клиент Виктория]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Viktoria]
+(* <- lang_en;; *);;
+
+client_Alexander
+<- concept_bank_client;
+=> nrel_owns_account:
+account_44444;
+=> nrel_main_idtf:
+[Клиент Александр]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Alexander]
+(* <- lang_en;; *);;
+
+client_Igor <- concept_borrower;;
+client_Anna <- concept_borrower;;
 *];;

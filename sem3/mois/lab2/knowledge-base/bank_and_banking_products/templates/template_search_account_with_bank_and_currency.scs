@@ -2,18 +2,14 @@
     rrel_init_template: {
         rrel_template: [*
             @input_param1 = (.._bank <-_ concept_bank);;
-            @input_param2 = (.._currency <-_ concept_currency);;
             nrel_belongs_to_bank _-> (.._bank <=_ .._account);;
             @output_param1 = (.._account <-_ concept_bank_account);;
-            @output_param2 = (.._currency <-_ concept_currency);;
         *];
         rrel_template_input_params: {
-            @input_param1;
-            @input_param2
+            @input_param1
         };
         rrel_template_output_params: {
-            @output_param1;
-            @output_param2
+            @output_param1
         }
     } (* <- nrel_search_set_template;; *);
     rrel_next_template: {

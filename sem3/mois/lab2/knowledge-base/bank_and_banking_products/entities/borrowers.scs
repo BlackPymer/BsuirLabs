@@ -1,0 +1,5 @@
+sc_node_class
+-> concept_borrower;;
+
+concept_borrower
+<= concept_bank_client;;
