@@ -9,7 +9,7 @@ credit_1234567
 [Credit No. 1234567]
 (* <- lang_en;; *);
 => nrel_has_owner:
-client_Igor;
+bank_Belarusbank;
 => nrel_has_borrower:
 client_Igor;;
 
@@ -17,28 +17,28 @@ client_Igor;;
 credit_1001
 <- concept_credit;
 => nrel_main_idtf: [Кредит №1001] (* <- lang_ru;; *);
-=> nrel_has_owner: client_Anna;
+=> nrel_has_owner: bank_Belarusbank;
 => nrel_has_borrower: client_Anna;;
 
 credit_1002
 <- concept_credit;
 => nrel_main_idtf: [Кредит №1002] (* <- lang_ru;; *);
-=> nrel_has_owner: client_Igor;
+=> nrel_has_owner: bank_Belarusbank;
 => nrel_has_borrower: client_Igor;;
 
 credit_1003
 <- concept_credit;
 => nrel_main_idtf: [Кредит №1003] (* <- lang_ru;; *);
-=> nrel_has_owner: client_Mikhail;;
+=> nrel_has_owner: bank_Belarusbank;;
 
 credit_2001
 <- concept_credit;
 => nrel_main_idtf: [Кредит №2001] (* <- lang_ru;; *);
-=> nrel_has_owner: client_Viktoria;
+=> nrel_has_owner: bank_Belarusbank;
 => nrel_has_borrower: client_Viktoria;;
 
 credit_2002
 <- concept_credit;
 => nrel_main_idtf: [Кредит №2002] (* <- lang_ru;; *);
-=> nrel_has_owner: client_Alexander;;
+=> nrel_has_owner: bank_Belarusbank;;
 *];;

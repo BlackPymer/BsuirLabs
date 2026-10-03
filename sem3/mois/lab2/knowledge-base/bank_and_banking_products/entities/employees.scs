@@ -11,4 +11,26 @@ employee_Ivanov
 => nrel_works_in:
 main_branch_Belarusbank;;
 
+employee_Petrov
+<- concept_bank_employee;
+=> nrel_main_idtf:
+[Сотрудник Петров]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Employee Petrov]
+(* <- lang_en;; *);
+=> nrel_works_in:
+main_branch_BelInvestBank;;
+
+employee_Sidorova
+<- concept_bank_employee;
+=> nrel_main_idtf:
+[Сотрудник Сидорова]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Employee Sidorova]
+(* <- lang_en;; *);
+=> nrel_works_in:
+north_branch_BelInvestBank;;
+
 *];;

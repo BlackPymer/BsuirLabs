@@ -1,0 +1,175 @@
+===============================================================
+ TEMPLATES (шаблоны поиска)
+ Источник: /home/maksim/Documents/labs/sem3/mois/lab2/knowledge-base/bank_and_banking_products/templates
+ Файлов: 4
+===============================================================
+
+---------------------------------------------------------------
+FILE: templates/template_search_account_with_bank_and_currency.scs
+---------------------------------------------------------------
+@search_account_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._bank <-_ concept_bank);;
+            nrel_belongs_to_bank _-> (.._bank <=_ .._account);;
+            @output_param1 = (.._account <-_ concept_bank_account);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_set_template;; *);
+    rrel_next_template: {
+        rrel_init_template: {
+            rrel_template: [*
+                @input_param1 = (.._account <-_ concept_bank_account);;
+                @input_param2 = (.._currency <-_ concept_currency);;
+                nrel_has_currency _-> (.._account _=> .._currency);;
+                @output_param1 = (.._account <-_ concept_bank_account);;
+            *];
+            rrel_template_input_params: {
+                @input_param1;
+                @input_param2
+            };
+            rrel_template_output_params: {
+                @output_param1
+            }
+        } (* <- nrel_search_set_template;; *)
+    } (* <- nrel_fixed_search_strategy_template;; *)
+};;
+
+@search_account_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска банковского счета по банку и валюте]
+    (*
+        <- lang_ru;;
+    *);;
+---------------------------------------------------------------
+FILE: templates/template_search_borrower_with_bank.scs
+---------------------------------------------------------------
+@search_borrowers_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._bank <-_ concept_bank);;
+            nrel_belongs_to_bank _-> (.._bank <=_ .._account);;
+            @output_param1 = (.._account <-_ concept_bank_account);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_set_template;; *);
+    rrel_next_template: {
+        rrel_init_template: {
+            rrel_template: [*
+                @input_param1 = (.._account <-_ concept_bank_account);;
+                nrel_owns_account _-> (.._client _=> .._account);;
+                @output_param1 = (.._client <-_ concept_bank_client);;
+            *];
+            rrel_template_input_params: {
+                @input_param1
+            };
+            rrel_template_output_params: {
+                @output_param1
+            }
+        } (* <- nrel_search_set_template;; *);
+        rrel_next_template: {
+            rrel_init_template: {
+                rrel_template: [*
+                    @input_param1 = (.._client <-_ concept_bank_client);;
+                    //.._client <-_ concept_borrower;;
+                    @output_param1 = (.._client <-_ concept_borrower);;
+                *];
+                rrel_template_input_params: {
+                    @input_param1
+                };
+                rrel_template_output_params: {
+                    @output_param1
+                }
+            } (* <- nrel_search_set_template;; *)
+        } (* <- nrel_fixed_search_strategy_template;; *)
+    } (* <- nrel_fixed_search_strategy_template;; *)
+};;
+
+@search_borrowers_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска заемщиков банка]
+    (*
+        <- lang_ru;;
+    *);;
+
+---------------------------------------------------------------
+FILE: templates/template_search_client_with_account.scs
+---------------------------------------------------------------
+@search_client_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._account <-_ concept_bank_account);;
+            nrel_owns_account _-> (.._client _=> .._account);;
+            @output_param1 = (.._client <-_ concept_bank_client);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_template;; *)
+};;
+
+@search_client_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска клиента с заданным банковским счетом]
+    (*
+        <- lang_ru;;
+    *);;
+
+---------------------------------------------------------------
+FILE: templates/template_search_employee_with_bank.scs
+---------------------------------------------------------------
+@search_employee_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._bank  <-_ concept_bank);;
+            nrel_has_branch _-> (.._bank _=> .._branch);;
+            @output_param1 = (.._branch <-_ concept_bank_branch);;
+        *];
+        rrel_template_input_params: {
+            @input_param1
+        };
+        rrel_template_output_params: {
+            @output_param1
+        }
+    } (* <- nrel_search_set_template;; *);
+    rrel_next_template: {
+        rrel_init_template:{
+            rrel_template: [*
+                @input_param1 = (.._branch <-_ concept_bank_branch);;
+                nrel_works_in _-> (.._employee _=> .._branch);;
+                @output_param1 = (.._employee <-_ concept_bank_employee);;
+            *];
+            rrel_template_input_params: {
+                @input_param1
+            };
+            rrel_template_output_params: {
+                @output_param1
+            }
+        }(* <- nrel_search_set_template;; *)
+    }(* <- nrel_fixed_search_strategy_template;; *)
+};;
+
+@search_employee_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска сотрудника банка]
+    (*
+        <- lang_ru;;
+    *);;
+

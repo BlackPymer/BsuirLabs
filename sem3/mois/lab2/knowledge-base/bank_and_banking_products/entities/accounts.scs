@@ -105,4 +105,64 @@ client_Alexander;
 bank_Belarusbank;
 => nrel_has_currency:
 BYN;;
+
+account_55555
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №55555]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 55555]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_belongs_to_bank:
+bank_BelInvestBank;
+=> nrel_has_currency:
+USD;;
+
+account_66666
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №66666]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 66666]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Anna;
+=> nrel_belongs_to_bank:
+bank_BelInvestBank;
+=> nrel_has_currency:
+USD;;
+
+account_77777
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №77777]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 77777]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Viktoria;
+=> nrel_belongs_to_bank:
+bank_BelInvestBank;
+=> nrel_has_currency:
+USD;;
+
+account_88888
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №88888]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 88888]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Alexander;
+=> nrel_belongs_to_bank:
+bank_BelInvestBank;
+=> nrel_has_currency:
+RUB;;
 *];;

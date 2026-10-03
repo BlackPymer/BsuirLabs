@@ -1,0 +1,246 @@
+===============================================================
+ CONCEPTS (концепты)
+ Источник: /home/maksim/Documents/labs/sem3/mois/lab2/knowledge-base/bank_and_banking_products/concepts
+ Файлов: 12
+===============================================================
+
+---------------------------------------------------------------
+FILE: concepts/concept_account_type.scs
+---------------------------------------------------------------
+concept_account_type
+<- sc_node_class;
+=> nrel_main_idtf:
+    [тип банковского счёта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank account type]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Тип банковского счёта — разновидность банковского счёта, выделяемая по своему назначению, порядку открытия и начисления процентов, например расчётный или депозитный счёт.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank account type — a variety of a bank account distinguished by its purpose, opening procedure and interest accrual, for example a checking account or a deposit account.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank_account.scs
+---------------------------------------------------------------
+concept_bank_account
+<- sc_node_class;
+=> nrel_main_idtf:
+    [банковский счёт]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank account]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Банковский счёт — счёт, открываемый банком юридическим или физическим лицам для их участия в безналичном денежном обороте и аккумулирования на счёте безналичных денежных средств.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Banking account — an account opened by a bank for its legal or physical entities to participate in non-cash transactions and accumulation on the account without cash.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank_branch.scs
+---------------------------------------------------------------
+concept_bank_branch
+<- sc_node_class;
+=> nrel_main_idtf:
+    [филиал банка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank branch]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Филиал банка — обособленное структурное подразделение банка, расположенное вне его головного офиса и осуществляющее банковские операции и услуги на территории обслуживаемой им зоны.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank branch — a separate structural unit of a bank located outside its head office, which conducts banking operations and provides banking services within the area it serves.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank_card.scs
+---------------------------------------------------------------
+concept_bank_card
+<- sc_node_class;
+=> nrel_main_idtf:
+    [банковская карта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank card]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Банковская карта — платёжный инструмент, выпускаемый банком и содержащий реквизиты банковского счёта, с помощью которого клиент совершает безналичные операции со своими денежными средствами.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank card — a payment instrument issued by a bank that contains the details of a bank account and allows the client to perform non-cash transactions with their funds.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank_client.scs
+---------------------------------------------------------------
+concept_bank_client
+<- sc_node_class;
+=> nrel_main_idtf:
+    [клиент банка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank client]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Клиент банка — физическое или юридическое лицо, пользующееся или желающее воспользоваться банковскими услугами: открытием и ведением банковского счёта, получением кредита, расчётами и другими операциями.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank client — a physical or legal entity that uses or intends to use banking services: opening and maintaining a bank account, obtaining a credit, making settlements and other transactions.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank_employee.scs
+---------------------------------------------------------------
+concept_bank_employee
+<- sc_node_class;
+=> nrel_main_idtf:
+    [сотрудник банка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank employee]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Сотрудник банка — работник банка, состоящий с ним в трудовых отношениях и выполняющий его функции: обслуживание клиентов, проведение банковских операций и предоставление банковских услуг.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank employee — a bank employee who is in an employment relationship with the bank and performs its functions: serving clients, conducting banking transactions and providing banking services.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_bank.scs
+---------------------------------------------------------------
+concept_bank
+<- sc_node_class;
+=> nrel_main_idtf:
+    [банк]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [bank]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Банк — это организация, которая осуществляет банковские услуги и проводит банковские операции.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Bank — this organization provides banking services and conducts banking operations.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_borrower.scs
+---------------------------------------------------------------
+concept_borrower
+<- sc_node_class;
+=> nrel_main_idtf:
+    [заёмщик]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [borrower]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Заёмщик — клиент банка, получающий или получивший кредит на условиях возврата и уплаты процентов и выступающий по отношению к банку должником по этому кредиту.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Borrower — a bank client who receives or has received a credit on terms of repayment with interest and acts as a debtor to the bank with respect to this credit.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_credit.scs
+---------------------------------------------------------------
+concept_credit
+<- sc_node_class;
+=> nrel_main_idtf:
+    [кредит]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [credit]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Кредит — денежные средства, предоставляемые банком заёмщику на определённый срок, как правило под проценты, с обязательным возвратом; выступают одновременно требованием банка к заёмщику и его долгом.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Credit — funds provided by a bank to a borrower for a certain period, usually for a fee, with mandatory repayment; they act both as the bank's claim against the borrower and as the borrower's debt.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_currency.scs
+---------------------------------------------------------------
+concept_currency
+<- sc_node_class;
+=> nrel_main_idtf:
+    [валюта]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [currency]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Валюта — денежная единица, признанная законодательством соответствующего государства (или общим рынком) и используемая в качестве средства платежа, меры стоимости и хранения денежных средств.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Currency — a monetary unit recognized by the legislation of the corresponding state (or by a common market) and used as a means of payment, a measure of value and a store of value.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_financial_object.scs
+---------------------------------------------------------------
+concept_financial_object
+<- sc_node_class;
+=> nrel_main_idtf:
+    [финансовый объект]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [financial object]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Финансовый объект — объект, имеющий денежную стоимость и способный участвовать в финансовых отношениях: приносить или требовать доход, а также служить средством накопления, платежа или обеспечения.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Financial object — an object that has monetary value and is able to participate in financial relations: generate or require income, and also serve as a means of accumulation, payment or collateral.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: concepts/concept_system_participant.scs
+---------------------------------------------------------------
+concept_system_participant
+<- sc_node_class;
+=> nrel_main_idtf:
+    [участник системы]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [system participant]
+    (* <- lang_en;; *);
+<- rrel_explored_concept:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_definition:
+    [Участник системы — субъект, задействованный в функционировании банковской системы, который либо получает банковские продукты и услуги (клиент банка), либо обеспечивает их оказание (сотрудник банка).]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [System participant — an actor involved in the functioning of the banking system, which either receives banking products and services (bank client) or provides them (bank employee).]
+    (* <- lang_en;; *);;
+

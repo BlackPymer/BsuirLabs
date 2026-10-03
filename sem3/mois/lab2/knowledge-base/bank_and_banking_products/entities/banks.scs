@@ -18,6 +18,10 @@ bank_BelInvestBank
 (* <- lang_ru;; *);
 => nrel_main_idtf:
 [BelInvestBank LLC]
-(* <- lang_en;; *);;
+(* <- lang_en;; *);
+=> nrel_has_branch:
+main_branch_BelInvestBank;
+=> nrel_has_branch:
+north_branch_BelInvestBank;;
 
 *];;

@@ -9,4 +9,22 @@ main_branch_Belarusbank
 [Belarusbank Main Branch, 1 Independence Avenue]
 (* <- lang_en;; *);;
 
+main_branch_BelInvestBank
+<- concept_bank_branch;
+=> nrel_main_idtf:
+[Главное отделение БелИнвестБанка, проспект Победителей, 11]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BelInvestBank Main Branch, 11 Winners Avenue]
+(* <- lang_en;; *);;
+
+north_branch_BelInvestBank
+<- concept_bank_branch;
+=> nrel_main_idtf:
+[Северное отделение БелИнвестБанка, улица Янки Купалы, 27]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BelInvestBank North Branch, 27 Yanka Kupala Street]
+(* <- lang_en;; *);;
+
 *];;

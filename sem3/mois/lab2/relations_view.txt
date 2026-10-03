@@ -1,0 +1,190 @@
+===============================================================
+ RELATIONS (отношения)
+ Источник: /home/maksim/Documents/labs/sem3/mois/lab2/knowledge-base/bank_and_banking_products/relations
+ Файлов: 8
+===============================================================
+
+---------------------------------------------------------------
+FILE: relations/nrel_belongs_to_bank.scs
+---------------------------------------------------------------
+nrel_belongs_to_bank
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [принадлежит банку*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [belongs to bank*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_account;
+=> nrel_second_domain:
+    concept_bank;
+=> nrel_definition:
+    [Отношение принадлежности банковского счёта конкретному банку, в котором открыт данный счёт.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [Relation of a bank account belonging to the specific bank where this account is opened.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_has_borrower.scs
+---------------------------------------------------------------
+nrel_has_borrower
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет заемщика*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has borrower*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_credit;
+=> nrel_second_domain:
+    concept_borrower;
+=> nrel_definition:
+    [имеет заемщика* — отношение между кредитом и заёмщиком, получившим этот кредит на условиях возврата и уплаты процентов.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has borrower* — a relation between a credit and the borrower who received this credit on terms of repayment with interest.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_has_branch.scs
+---------------------------------------------------------------
+nrel_has_branch
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет филиал*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has branch*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank;
+=> nrel_second_domain:
+    concept_bank_branch;
+=> nrel_definition:
+    [имеет филиал* — отношение между банком и его филиалом, обособленным подразделением этого банка, осуществляющим банковские операции и услуги в зоне своего обслуживания.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has branch* — a relation between a bank and its branch, a separate structural unit of that bank that conducts banking operations and provides banking services within the area it serves.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_has_currency.scs
+---------------------------------------------------------------
+nrel_has_currency
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет валюту*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has currency*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_account;
+=> nrel_second_domain:
+    concept_currency;
+=> nrel_definition:
+    [имеет валюту* — отношение между банковским счётом и валютой, в которой выражены денежные средства, учитываемые на этом счёте.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has currency* — a relation between a bank account and the currency in which the funds recorded on that account are denominated.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_has_owner.scs
+---------------------------------------------------------------
+nrel_has_owner
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет владельца*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [has owner*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_financial_object;
+=> nrel_second_domain:
+    concept_system_participant;
+=> nrel_definition:
+    [имеет владельца* — отношение между финансовым объектом (банковским счётом или кредитом) и участником банковской системы, который является его владельцем.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [has owner* — a relation between a financial object (a bank account or a credit) and the banking system participant who is its owner.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_owns_account.scs
+---------------------------------------------------------------
+nrel_owns_account
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [владеет банковским счётом*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [owns bank account*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_system_participant;
+=> nrel_second_domain:
+    concept_bank_account;
+=> nrel_definition:
+    [владеет банковским счётом* — отношение между участником банковской системы и банковским счётом, принадлежащим ему и обслуживаемым в его интересах.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [owns bank account* — a relation between a banking system participant and a bank account that belongs to them and is maintained in their interests.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/nrel_works_in.scs
+---------------------------------------------------------------
+nrel_works_in
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [работает в*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [works in*]
+    (* <- lang_en;; *);
+<- rrel_explored_relation:
+    subject_domain_of_bank_and_banking_products;
+=> nrel_first_domain:
+    concept_bank_employee;
+=> nrel_second_domain:
+    concept_bank_branch;
+=> nrel_definition:
+    [работает в* — отношение между сотрудником банка и филиалом банка, в котором этот сотрудник выполняет свои служебные обязанности.]
+    (* <- lang_ru;; *);
+=> nrel_definition:
+    [works in* — a relation between a bank employee and the bank branch where this employee performs his official duties.]
+    (* <- lang_en;; *);;
+
+---------------------------------------------------------------
+FILE: relations/subject_domain.scs
+---------------------------------------------------------------
+nrel_private_subject_domain
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [частная предметная область*]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [private subject domain*]
+    (* <- lang_en;; *);
+=> nrel_first_domain:
+    concept_subject_domain;
+=> nrel_second_domain:
+    concept_subject_domain;;
+

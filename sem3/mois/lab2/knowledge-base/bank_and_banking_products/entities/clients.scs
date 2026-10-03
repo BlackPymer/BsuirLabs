@@ -9,7 +9,9 @@ client_Igor
 [Client Igor]
 (* <- lang_en;; *);
 => nrel_owns_account:
-account_13579;;
+account_13579;
+=> nrel_owns_account:
+account_55555;;
 
 client_Egor
 <- concept_bank_client;
@@ -28,6 +30,8 @@ client_Anna
 <- concept_bank_client;
 => nrel_owns_account:
 account_11111;
+=> nrel_owns_account:
+account_66666;
 => nrel_main_idtf:
 [Клиент Анна]
 (* <- lang_ru;; *);
@@ -51,6 +55,8 @@ client_Viktoria
 <- concept_borrower;
 => nrel_owns_account:
 account_33333;
+=> nrel_owns_account:
+account_77777;
 => nrel_main_idtf:
 [Клиент Виктория]
 (* <- lang_ru;; *);
@@ -62,6 +68,8 @@ client_Alexander
 <- concept_bank_client;
 => nrel_owns_account:
 account_44444;
+=> nrel_owns_account:
+account_88888;
 => nrel_main_idtf:
 [Клиент Александр]
 (* <- lang_ru;; *);

@@ -1,0 +1,372 @@
+===============================================================
+ ENTITIES (сущности/экземпляры)
+ Источник: /home/maksim/Documents/labs/sem3/mois/lab2/knowledge-base/bank_and_banking_products/entities
+ Файлов: 9
+===============================================================
+
+---------------------------------------------------------------
+FILE: entities/accounts.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+account_98765
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №98765]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 98765]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Egor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_24680
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №24680]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 24680]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_13579
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №13579]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 13579]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+
+account_11111
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №11111]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 11111]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Anna;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_22222
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №22222]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 22222]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Mikhail;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_33333
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №33333]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 33333]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Viktoria;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+
+account_44444
+<- concept_bank_account;
+=> nrel_main_idtf:
+[Банковский счёт №44444]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Bank account No. 44444]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Alexander;
+=> nrel_belongs_to_bank:
+bank_Belarusbank;
+=> nrel_has_currency:
+BYN;;
+*];;
+
+---------------------------------------------------------------
+FILE: entities/account_types.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+checking_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[Расчётный счёт]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Checking account]
+(* <- lang_en;; *);;
+
+deposit_account
+<- concept_account_type;
+=> nrel_main_idtf:
+[Депозитный счёт]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Deposit account]
+(* <- lang_en;; *);;
+
+*];;
+
+---------------------------------------------------------------
+FILE: entities/banks.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+bank_Belarusbank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО Беларусьбанк]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Belarusbank LLC]
+(* <- lang_en;; *);
+=> nrel_has_branch:
+main_branch_Belarusbank;;
+
+bank_BelInvestBank
+<- concept_bank;
+=> nrel_main_idtf:
+[ООО БелИнвестБанк]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BelInvestBank LLC]
+(* <- lang_en;; *);;
+
+*];;
+
+---------------------------------------------------------------
+FILE: entities/borrowers.scs
+---------------------------------------------------------------
+sc_node_class
+-> concept_borrower;;
+
+concept_borrower
+<= concept_bank_client;;
+
+---------------------------------------------------------------
+FILE: entities/branches.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+main_branch_Belarusbank
+<- concept_bank_branch;
+=> nrel_main_idtf:
+[Главное отделение Беларусьбанка Проспект Независимости, 1]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Belarusbank Main Branch, 1 Independence Avenue]
+(* <- lang_en;; *);;
+
+*];;
+
+---------------------------------------------------------------
+FILE: entities/clients.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+client_Igor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[Клиент Игорь]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Igor]
+(* <- lang_en;; *);
+=> nrel_owns_account:
+account_13579;;
+
+client_Egor
+<- concept_bank_client;
+=> nrel_main_idtf:
+[Клиент Егор]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Egor]
+(* <- lang_en;; *);
+=> nrel_owns_account:
+account_98765;;
+
+
+
+client_Anna
+<- concept_bank_client;
+=> nrel_owns_account:
+account_11111;
+=> nrel_main_idtf:
+[Клиент Анна]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Anna]
+(* <- lang_en;; *);;
+
+client_Mikhail
+<- concept_bank_client;
+=> nrel_owns_account:
+account_22222;
+=> nrel_main_idtf:
+[Клиент Михаил]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Mikhail]
+(* <- lang_en;; *);;
+
+client_Viktoria
+<- concept_bank_client;
+<- concept_borrower;
+=> nrel_owns_account:
+account_33333;
+=> nrel_main_idtf:
+[Клиент Виктория]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Viktoria]
+(* <- lang_en;; *);;
+
+client_Alexander
+<- concept_bank_client;
+=> nrel_owns_account:
+account_44444;
+=> nrel_main_idtf:
+[Клиент Александр]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Client Alexander]
+(* <- lang_en;; *);;
+
+client_Igor <- concept_borrower;;
+client_Anna <- concept_borrower;;
+*];;
+---------------------------------------------------------------
+FILE: entities/credits.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+credit_1234567
+<- concept_credit;
+=> nrel_main_idtf:
+[Кредит №1234567]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Credit No. 1234567]
+(* <- lang_en;; *);
+=> nrel_has_owner:
+client_Igor;
+=> nrel_has_borrower:
+client_Igor;;
+
+
+credit_1001
+<- concept_credit;
+=> nrel_main_idtf: [Кредит №1001] (* <- lang_ru;; *);
+=> nrel_has_owner: client_Anna;
+=> nrel_has_borrower: client_Anna;;
+
+credit_1002
+<- concept_credit;
+=> nrel_main_idtf: [Кредит №1002] (* <- lang_ru;; *);
+=> nrel_has_owner: client_Igor;
+=> nrel_has_borrower: client_Igor;;
+
+credit_1003
+<- concept_credit;
+=> nrel_main_idtf: [Кредит №1003] (* <- lang_ru;; *);
+=> nrel_has_owner: client_Mikhail;;
+
+credit_2001
+<- concept_credit;
+=> nrel_main_idtf: [Кредит №2001] (* <- lang_ru;; *);
+=> nrel_has_owner: client_Viktoria;
+=> nrel_has_borrower: client_Viktoria;;
+
+credit_2002
+<- concept_credit;
+=> nrel_main_idtf: [Кредит №2002] (* <- lang_ru;; *);
+=> nrel_has_owner: client_Alexander;;
+*];;
+
+---------------------------------------------------------------
+FILE: entities/currencies.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+BYN
+<- concept_currency;
+=> nrel_main_idtf:
+[Белорусский рубль]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[BYN]
+(* <- lang_en;; *);;
+
+USD
+<- concept_currency;
+=> nrel_main_idtf:
+[Доллар США]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[USD]
+(* <- lang_en;; *);;
+
+RUB
+<- concept_currency;
+=> nrel_main_idtf:
+[Российский рубль]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[RUB]
+(* <- lang_en;; *);;
+
+*];;
+
+---------------------------------------------------------------
+FILE: entities/employees.scs
+---------------------------------------------------------------
+subject_domain_of_bank_and_banking_products = [*
+
+employee_Ivanov
+<- concept_bank_employee;
+=> nrel_main_idtf:
+[Сотрудник Иванов]
+(* <- lang_ru;; *);
+=> nrel_main_idtf:
+[Employee Ivanov]
+(* <- lang_en;; *);
+=> nrel_works_in:
+main_branch_Belarusbank;;
+
+*];;
+
