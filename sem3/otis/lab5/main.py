@@ -1,8 +1,78 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from tkinter import font as tkfont
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 import networkx as nx
+
+
+# --- Цветовая схема ---------------------------------------------------------
+# Интерфейс
+BG_APP = "#0F172A"          # общий фон окна
+BG_SURFACE = "#1E293B"      # фон полей ввода и кнопок
+BG_SURFACE_ALT = "#334155"  # фон недоступных (диагональных) полей
+BORDER = "#475569"          # рамки полей и кнопок
+TEXT = "#F8FAFC"            # основной текст
+TEXT_MUTED = "#94A3B8"      # приглушённый текст
+ACCENT = "#3B82F6"          # акцент: активные кнопки, выделение
+ACCENT_ACTIVE = "#60A5FA"   # акцент при наведении
+HEADER_COL = "#2563EB"      # заголовки столбцов (Z1…Zn)
+HEADER_ROW = "#7C3AED"      # заголовки строк (Z1…Zn)
+
+# Граф
+GRAPH_NODE = "#1E293B"
+GRAPH_NODE_TEXT = "#F8FAFC"
+GRAPH_EDGE = "#64748B"
+
+# Диаграмма весов
+BAR_BEST = "#16A34A"        # лучшая цель
+BAR_OTHER = "#64748B"       # остальные цели
+BAR_TOTAL = "#EA580C"       # сумма весов
+
+
+def apply_theme(root: tk.Tk) -> None:
+    """Настраивает ttk-стили: у ttk-виджетов цвета задаются только через них."""
+    style = ttk.Style(root)
+    style.theme_use("clam")
+
+    header_font = tkfont.nametofont("TkDefaultFont").copy()
+    header_font.configure(size=10, weight="bold")
+
+    style.configure(".", background=BG_APP, foreground=TEXT,
+                    fieldbackground=BG_SURFACE, bordercolor=BORDER,
+                    lightcolor=BORDER, darkcolor=BORDER,
+                    troughcolor=BG_SURFACE, focuscolor=ACCENT)
+
+    style.configure("TLabel", background=BG_APP, foreground=TEXT)
+    style.configure("ColHeader.TLabel", background=HEADER_COL, foreground=TEXT,
+                    padding=(8, 3), font=header_font)
+    style.configure("RowHeader.TLabel", background=HEADER_ROW, foreground=TEXT,
+                    padding=(8, 3), font=header_font)
+
+    style.configure("TEntry", fieldbackground=BG_SURFACE, foreground=TEXT,
+                    insertcolor=TEXT, selectbackground=ACCENT, selectforeground=TEXT,
+                    padding=3)
+    style.map("TEntry",
+              fieldbackground=[("disabled", BG_SURFACE_ALT)],
+              foreground=[("disabled", TEXT_MUTED)])
+
+    style.configure("TButton", background=BG_SURFACE, foreground=TEXT,
+                    bordercolor=BORDER, padding=(10, 5))
+    style.map("TButton",
+              background=[("pressed", ACCENT_ACTIVE), ("active", ACCENT)],
+              foreground=[("active", TEXT)])
+
+    style.configure("Accent.TButton", background=ACCENT, foreground=TEXT,
+                    bordercolor=ACCENT, padding=(14, 5), font=header_font)
+    style.map("Accent.TButton",
+              background=[("pressed", ACCENT_ACTIVE), ("active", ACCENT_ACTIVE)])
+
+    style.configure("TRadiobutton", background=BG_APP, foreground=TEXT,
+                    indicatorcolor=BG_SURFACE, indicatorrelief="flat")
+    style.map("TRadiobutton",
+              background=[("active", BG_APP)],
+              foreground=[("active", ACCENT_ACTIVE)],
+              indicatorcolor=[("selected", ACCENT), ("active", ACCENT)])
 
 
 class GUI:
@@ -46,14 +116,17 @@ class GUI:
         self.root = tk.Tk()
         self.root.geometry(f"{self.screen_width}x{self.screen_height}")
         self.root.title("Main meny")
-        self.root.configure(bg="#4E528A")
+        self.root.configure(bg=BG_APP)
+        apply_theme(self.root)
 
         n = self.num_variants
         for i in range(n):
-            ttk.Label(self.root, text=f"Z{i + 1}", background="#4E528A",
-                      foreground="white").place(x=self.screen_width * i / n + 50, y=20, anchor="center")
-            ttk.Label(self.root, text=f"Z{i + 1}", background="#4E528A",
-                      foreground="white").place(x=20, y=self.screen_height * i / n + 50, anchor="center")
+            ttk.Label(self.root, text=f"Z{i + 1}",
+                      style="ColHeader.TLabel").place(x=self.screen_width * i / n + 50, y=20,
+                                                      anchor="center")
+            ttk.Label(self.root, text=f"Z{i + 1}",
+                      style="RowHeader.TLabel").place(x=20, y=self.screen_height * i / n + 50,
+                                                      anchor="center")
             for j in range(n):
                 entry = ttk.Entry(self.root, width=5)
                 if i == j:
@@ -71,8 +144,9 @@ class GUI:
             ttk.Button(self.root, text=example["name"],
                        command=lambda e=example: load_example(e)).place(x=50 + 110 * k, y=565, anchor="w")
 
-        self.btn = ttk.Button(self.root, text="Solve", command=solve)
-        self.btn.place(x=690, y=565, anchor="w")
+        self.btn = ttk.Button(self.root, text="Solve", command=solve,
+                              style="Accent.TButton")
+        self.btn.place(x=self.screen_width - 20, y=565, anchor="e")
 
         self.root.mainloop()
 
@@ -175,15 +249,17 @@ class Graph:
 
     def draw(self) -> None:
         pos = nx.spring_layout(self.graph, seed=42, weight=None)
-        nx.draw(self.graph, pos, with_labels=True, node_color="#4E528A",
-                font_color="white", edge_color="black", arrowsize=15)
+        nx.draw(self.graph, pos, with_labels=True, node_color=GRAPH_NODE,
+                font_color=GRAPH_NODE_TEXT, edge_color=GRAPH_EDGE, arrowsize=15,
+                node_size=900, font_size=11)
 
     def draw_stats(self, weights, method) -> None:
         total = sum(weights)
         best = self.best_index(weights)
         labels = [f"Z{i + 1}" for i in range(len(weights))] + ["Итого"]
         values = list(weights) + [total]
-        colors = ["#2E9E4F" if i == best else "#4E528A" for i in range(len(weights))] + ["#E0A526"]
+        colors = [BAR_BEST if i == best else BAR_OTHER for i in range(len(weights))]
+        colors.append(BAR_TOTAL)
         title = "Метод парных сравнений" if method == "pairwise" else "Метод последовательных сравнений"
 
         fig, ax = plt.subplots(figsize=(7, 5))
@@ -195,9 +271,9 @@ class Graph:
         ax.set_ylim(0, max(values) + 0.1)
         ax.yaxis.grid(True, linestyle="--", alpha=0.4)
         ax.legend(handles=[
-            Patch(color="#2E9E4F", label="Лучшая цель"),
-            Patch(color="#4E528A", label="Остальные цели"),
-            Patch(color="#E0A526", label="Сумма весов (проверка: = 1)"),
+            Patch(color=BAR_BEST, label="Лучшая цель"),
+            Patch(color=BAR_OTHER, label="Остальные цели"),
+            Patch(color=BAR_TOTAL, label="Сумма весов (проверка: = 1)"),
         ], loc="upper left")
         fig.tight_layout()
 
