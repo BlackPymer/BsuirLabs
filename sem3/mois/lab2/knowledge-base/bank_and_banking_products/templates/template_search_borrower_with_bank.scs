@@ -25,7 +25,7 @@
             rrel_template_output_params: {
                 @output_param1
             }
-        } (* <- nrel_search_set_template;; *);
+        } (* <- nrel_search_template;; *);
         rrel_next_template: {
             rrel_init_template: {
                 rrel_template: [*
