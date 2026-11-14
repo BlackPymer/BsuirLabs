@@ -1,0 +1,60 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+SELECT ?clientName ?accountNumber
+WHERE {
+  ?client rdf:type :BankClient .
+  ?client :hasName ?clientName .
+  ?client :ownsAccount ?account .
+  ?account :hasAccountNumber ?accountNumber .
+}
+\
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+SELECT ?debtorName ?debtAmount
+WHERE {
+  ?debtor rdf:type :Debtor .
+  ?debtor :hasName ?debtorName .
+  ?debtor :hasDebtAmount ?debtAmount .
+  FILTER(?debtAmount > 100000)
+}
+\
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+SELECT ?employeeName ?salary
+WHERE {
+  ?employee rdf:type :BankEmployee .
+  ?employee :hasName ?employeeName .
+  OPTIONAL { 
+    ?employee :hasSalary ?salary . 
+  }
+}
+\
+
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+SELECT ?clientName (COUNT(?account) AS ?accountCount)
+WHERE {
+  ?client rdf:type :BankClient .
+  ?client :hasName ?clientName .
+  ?client :ownsAccount ?account .
+}
+GROUP BY ?clientName
+ORDER BY DESC(?accountCount)
+\
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://www.bank_system/ontologies/bank#>
+
+ASK {
+  ?person rdf:type :Debtor .
+  ?person :hasName ?name .
+  FILTER(REGEX(?name, "Ivanov", "i"))
+}
