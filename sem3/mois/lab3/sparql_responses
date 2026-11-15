@@ -1,0 +1,64 @@
+{
+  "type": "select",
+  "rows": [
+    {
+      "clientName": "Иван Иванов",
+      "accountNumber": "BY1234567890"
+    },
+    {
+      "clientName": "Пётр Петров",
+      "accountNumber": "BY0987654321"
+    },
+    {
+      "clientName": "Сидор Сидоров",
+      "accountNumber": "BY1112223334"
+    }
+  ]
+}
+
+{
+  "type": "select",
+  "rows": [
+    {
+      "debtorName": "Petrov",
+      "debtAmount": 120000.0
+    }
+  ]
+}
+
+{
+  "type": "select",
+  "rows": [
+    {
+      "employeeName": "Kozlov",
+      "salary": 1500.0
+    },
+    {
+      "employeeName": "Smirnov",
+      "salary": 2500.0
+    }
+  ]
+}
+
+{
+  "type": "select",
+  "rows": [
+    {
+      "clientName": "Иван Иванов",
+      "accountCount": 1.0
+    },
+    {
+      "clientName": "Пётр Петров",
+      "accountCount": 1.0
+    },
+    {
+      "clientName": "Сидор Сидоров",
+      "accountCount": 1.0
+    }
+  ]
+}
+
+{
+  "type": "ask",
+  "boolean": true
+}
