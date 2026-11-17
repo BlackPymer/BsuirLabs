@@ -1,0 +1,215 @@
+program_for_searching_bank_borrowers
+=> nrel_main_idtf:
+[Программа для поиска заемщиков банка]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_main_idtf:
+[Program for searching bank borrowers]
+    (*
+        <- lang_en;;
+    *);
+<- scp_program;
+-> rrel_key_sc_element:
+    .._process;;
+
+program_for_searching_bank_borrowers = [*
+    .._process
+    <-_ scp_process;
+
+    _-> rrel_1:: rrel_in:: .._bank;
+    _-> rrel_2:: rrel_out:: .._result_borrowers;
+
+    <=_ nrel_decomposition_of_action:: _...
+    (*
+        //проверка аргументов
+        _-> .._check_bank
+        (*
+            <-_ searchElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_bank;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_class_to_bank;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
+
+            _=> nrel_then:: .._print_that_specified_argument_is_bank;;
+            _=> nrel_else:: .._print_that_specified_argument_is_not_bank;;
+        *);;
+
+        _-> .._print_that_specified_argument_is_bank
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is bank];;
+
+            _=> nrel_goto:: .._generate_result_set_of_borrowers;;
+        *);;
+
+        //пустая структура для ответа
+        _-> .._generate_result_set_of_borrowers
+        (*
+            <-_ genElStr3;;
+
+            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_structure:: .._result_borrowers;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_borrowers_to_class;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: concept_bank_client;;
+
+            _=> nrel_goto:: .._search_credits_of_bank;;
+        *);;
+
+        //поиск кредитов выбранного банка
+        _-> .._search_credits_of_bank
+        (*
+            <-_ searchSetStr5;;
+
+            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._credit;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_credit_bank;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
+            _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_bank_relation;;
+            _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_owner;;
+
+            _-> rrel_set_1:: rrel_assign:: rrel_scp_var:: .._credits;;
+
+            _=> nrel_then:: .._get_next_credit;;
+            _=> nrel_else:: .._return_empty_result;;
+        *);;
+
+        //выбрать кредит из множества найденных кредитов
+        _-> .._get_next_credit
+        (*
+            <-_ searchElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._credits;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_credit_set_to_credit;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._credit;;
+
+            _=> nrel_then:: .._pop_credit_from_set;;
+            _=> nrel_else:: .._print_that_all_credits_were_iterated;;
+        *);;
+
+        //удалить выбранный кредит из найденных
+        _-> .._pop_credit_from_set
+        (*
+            <-_ eraseEl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_credit_set_to_credit;;
+
+            _=> nrel_goto:: .._print_that_credit_was_found;;
+        *);;
+
+        _-> .._print_that_credit_was_found
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Credit was found in specified bank];;
+
+            _=> nrel_goto:: .._search_credit_borrower;;
+        *);;
+
+        //поиск заемщика текущего кредита
+        _-> .._search_credit_borrower
+        (*
+            <-_ searchElStr5;;
+
+            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._borrower;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_credit_borrower;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._credit;;
+            _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_borrower_relation;;
+            _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_borrower;;
+
+            _=> nrel_then:: .._check_borrower_not_in_result;;
+            _=> nrel_else:: .._print_that_credit_has_no_borrower;;
+        *);;
+
+        _-> .._print_that_credit_has_no_borrower
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified credit has no borrower];;
+
+            _=> nrel_goto:: .._get_next_credit;;
+        *);;
+
+        //проверка, что заемщик еще не добавлен в результат
+        _-> .._check_borrower_not_in_result
+        (*
+            <-_ searchElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_borrower;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._borrower;;
+
+            _=> nrel_then:: .._print_that_borrower_already_added;;
+            _=> nrel_else:: .._add_borrower_to_result;;
+        *);;
+
+        _-> .._print_that_borrower_already_added
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Borrower is already added to result set];;
+
+            _=> nrel_goto:: .._get_next_credit;;
+        *);;
+
+        //добавить заемщика в результирующее множество
+        _-> .._add_borrower_to_result
+        (*
+            <-_ genElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_borrower;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._borrower;;
+
+            _=> nrel_goto:: .._print_that_borrower_was_added;;
+        *);;
+
+        _-> .._print_that_borrower_was_added
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Borrower was added to result set];;
+
+            _=> nrel_goto:: .._get_next_credit;;
+        *);;
+
+        //завершение программы
+        _-> .._print_that_all_credits_were_iterated
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All credits were iterated];;
+
+            _=> nrel_goto:: .._return_result;;
+        *);;
+
+        _-> .._return_result
+        (*
+            <-_ return;;
+        *);;
+
+        //у банка не нашлось кредитов — корректный пустой результат
+        _-> .._return_empty_result
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified bank has no credits];;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        //некорректный аргумент
+        _-> .._print_that_specified_argument_is_not_bank
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is not bank];;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        _-> .._return
+        (*
+            <-_ return;;
+        *);;
+    *);;
+*];;

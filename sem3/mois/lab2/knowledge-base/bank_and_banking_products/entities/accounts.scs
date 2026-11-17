@@ -1,5 +1,4 @@
 subject_domain_of_bank_and_banking_products = [*
-/*
 account_98765
 <- concept_bank_account;
 => nrel_main_idtf:
@@ -14,7 +13,6 @@ client_Egor;
 bank_Belarusbank;
 => nrel_has_currency:
 BYN;;
-*/
 account_24680
 <- concept_bank_account;
 => nrel_main_idtf:
@@ -29,7 +27,6 @@ client_Igor;
 bank_Belarusbank;
 => nrel_has_currency:
 BYN;;
-/*
 account_13579
 <- concept_bank_account;
 => nrel_main_idtf:
@@ -164,5 +161,5 @@ client_Alexander;
 => nrel_belongs_to_bank:
 bank_BelInvestBank;
 => nrel_has_currency:
-RUB;;*/
+RUB;;
 *];;

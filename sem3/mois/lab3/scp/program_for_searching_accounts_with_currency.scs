@@ -1,0 +1,167 @@
+program_for_searching_accounts_with_currency
+=> nrel_main_idtf:
+[Программа для поиска счетов банка в заданной валюте]
+(*
+    <-lang_ru;;
+*);
+=> nrel_main_idtf:
+[Program for searching banking accounts with currency]
+(*
+    <-lang_en;;
+*);
+<-scp_program;
+->rrel_key_sc_element:
+    .._process;;
+
+program_for_searching_accounts_with_currency = [*
+    .._process
+    <-_ scp_process;
+
+    _->rrel_1:: rrel_in:: .._bank;
+    _->rrel_2:: rrel_in:: .._currency;
+
+    <=_ nrel_decomposition_of_action:: _...
+    (*
+        //проверка аргументов
+        _-> .._check_bank
+        (*
+            <-_ searchElStr3;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_bank;;
+            _-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_class_to_bank;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
+
+            _=> nrel_then:: .._print_that_specified_argument_is_bank;;
+            _=> nrel_else:: .._print_that_specified_argument_is_not_bank;;
+        *);;
+        _-> .._print_that_specified_argument_is_bank
+        (*
+            <-_ printNl;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is bank];;
+            _=> nrel_goto:: .._check_currency;;
+        *);;
+        _-> .._check_currency
+        (*
+            <-_ searchElStr3;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_currency;;
+            _-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_class_to_currency;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._currency;;
+
+            _=> nrel_then:: .._print_that_specified_argument_is_currency;;
+            _=> nrel_else:: .._print_that_specified_argument_is_not_currency;;
+        *);;
+        _-> .._print_that_specified_argument_is_currency
+        (*
+            <-_ printNl;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is currency];;
+            _=> nrel_goto:: .._generate_result_set_of_banking_accounts_with_currency;;
+        *);;
+
+        //пустая структура для ответа
+        _-> .._generate_result_set_of_banking_accounts_with_currency
+        (*
+            <-_ genElStr3;;
+
+            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_structure:: .._result_bank_accounts;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_bank_accounts_to_class;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: concept_bank_account;;
+
+            _=> nrel_goto:: .._search_all_accounts_belong_to_bank;;
+        *);;
+
+        //поиск счетов выбранного банка
+        _-> .._search_all_accounts_belong_to_bank
+        (*
+            <-_ searchSetStr5;;
+
+            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._account;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_account_bank;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
+            _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_bank_relation;;
+            _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_belongs_to_bank;;
+
+            _-> rrel_set_1:: rrel_assign:: rrel_scp_var:: .._accounts;;
+
+            _=> nrel_then:: .._get_next_account;;
+            _=> nrel_else:: .._return_empty_result;;
+        *);;
+
+        //выбрать счет из множества счетовф
+        _-> .._get_next_account
+        (*
+            <-_ searchElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._accounts;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_account_set_to_account;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._account;;
+
+            _=> nrel_then:: .._pop_account_from_set;;
+            _=> nrel_else:: .._print_that_all_accounts_were_iterated;;
+        *);;
+
+        //удалить выбранный счет из найденных
+        _-> .._pop_account_from_set
+        (*
+            <-_ eraseEl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_account_set_to_account;;
+            _=> nrel_goto:: .._print_that_account_was_found;;
+        *);;
+
+        _-> .._print_that_account_was_found
+        (*
+            <-_ printNl;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Account was found in bank];;
+            _=> nrel_goto:: .._search_all_accounts_with_currency;;
+        *);;
+        _-> .._search_all_accounts_with_currency
+        (*
+            <-_ searchElStr5;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._account;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_account_currency;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._currency;;
+            _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_currency_relation;;
+            _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_currency;;
+
+            _=> nrel_then:: .._add_account_to_result;;
+            _=> nrel_else:: .._get_next_account;;
+        *);;
+
+        //добавить счет в результирующее множество
+        _-> .._add_account_to_result
+        (*
+            <-_ genElStr3;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_bank_accounts;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_account;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._account;;
+
+            _=> nrel_goto:: .._get_next_account;;
+        *);;
+
+        //если нет счетов
+        _-> .._return_empty_result
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified bank has no accounts];;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        //все счета пройдены
+        _-> .._print_that_all_accounts_were_iterated
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All accounts were iterated];;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        _-> .._return
+        (*
+            <-_ return;;
+        *);;
+    *);;
+*];;
