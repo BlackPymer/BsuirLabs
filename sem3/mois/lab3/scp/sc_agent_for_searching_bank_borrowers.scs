@@ -1,0 +1,49 @@
+sc_agent_for_searching_bank_borrowers
+=> nrel_main_idtf:
+	[sc-агент поиска заемщиков банка]
+    (*
+        <- lang_ru;;
+    *);
+	[sc-agent for searching bank borrowers]
+    (* 
+        <- lang_en;;
+    *);
+<- abstract_sc_agent;
+=> nrel_primary_initiation_condition: 
+	(sc_event_after_generate_outgoing_arc => action_initiated);
+=> nrel_initiation_condition_and_result: 
+	(..sc_agent_for_searching_bank_borrowers_condition => ..sc_agent_for_searching_bank_borrowers_result);
+=> nrel_sc_agent_action_class:
+	action_search_bank_borrowers;
+<= nrel_sc_agent_key_sc_elements: 
+{
+	action_initiated;
+	action_search_bank_borrowers
+};
+=> nrel_inclusion: 
+	.platform_independent_implementation_of_sc_agent_for_searching_bank_borrowers
+	(*
+		<- platform_independent_abstract_sc_agent;;
+		<= nrel_sc_agent_program: 
+		{
+			agent_program_for_searching_bank_borrowers;
+			program_for_searching_bank_borrowers
+		};;
+
+		-> scp_agent_for_searching_bank_borrowers
+		(*
+			<- active_sc_agent;;
+		*);;  
+	*);;
+
+..sc_agent_for_searching_bank_borrowers_condition
+= [*
+	action_search_bank_borrowers _-> .._action;;
+	action_initiated _-> .._action;;
+	.._action _-> rrel_1:: .._bank;;
+*];;
+
+..sc_agent_for_searching_bank_borrowers_result
+= [*
+	concept_bank_client _-> .._borrower;;
+*];;

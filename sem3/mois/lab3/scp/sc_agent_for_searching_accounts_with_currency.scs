@@ -1,0 +1,50 @@
+sc_agent_for_searching_accounts_with_currency
+=> nrel_main_idtf:
+	[sc-агент поиска банковских счетов с указанной валютой]
+    (*
+        <- lang_ru;;
+    *);
+	[sc-agent for searching bank accounts with currency]
+    (* 
+        <- lang_en;;
+    *);
+<- abstract_sc_agent;
+=> nrel_primary_initiation_condition: 
+	(sc_event_after_generate_outgoing_arc => action_initiated);
+=> nrel_initiation_condition_and_result: 
+	(..sc_agent_for_searching_accounts_with_currency_condition => ..sc_agent_for_searching_accounts_with_currency_result);
+=> nrel_sc_agent_action_class:
+	action_search_accounts_with_currency;
+<= nrel_sc_agent_key_sc_elements: 
+{
+	action_initiated;
+	action_search_accounts_with_currency
+};
+=> nrel_inclusion: 
+	.platform_independent_implementation_of_sc_agent_for_searching_accounts_with_currency
+	(*
+		<- platform_independent_abstract_sc_agent;;
+		<= nrel_sc_agent_program: 
+		{
+			agent_program_for_searching_accounts_with_currency;
+			program_for_searching_accounts_with_currency
+		};;
+
+		-> scp_agent_for_searching_accounts_with_currency
+		(*
+			<- active_sc_agent;;
+		*);;  
+	*);;
+
+..sc_agent_for_searching_accounts_with_currency_condition
+= [*
+	action_search_accounts_with_currency _-> .._action;;
+	action_initiated _-> .._action;;
+	.._action _-> rrel_1:: .._bank;;
+    .._action _-> rrel_2:: .._currency;;
+*];;
+
+..sc_agent_for_searching_accounts_with_currency_result
+= [*
+	concept_bank_account _-> .._account;;
+*];;

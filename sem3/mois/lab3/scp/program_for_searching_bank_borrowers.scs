@@ -23,7 +23,7 @@ program_for_searching_bank_borrowers = [*
     <=_ nrel_decomposition_of_action:: _...
     (*
         //проверка аргументов
-        _-> .._check_bank
+        _-> rrel_1:: .._check_bank
         (*
             <-_ searchElStr3;;
 
@@ -62,7 +62,7 @@ program_for_searching_bank_borrowers = [*
             <-_ searchSetStr5;;
 
             _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._credit;;
-            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_credit_bank;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_common_arc:: .._arc_credit_bank;;
             _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
             _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_bank_relation;;
             _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_owner;;
@@ -110,9 +110,9 @@ program_for_searching_bank_borrowers = [*
         (*
             <-_ searchElStr5;;
 
-            _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._borrower;;
-            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_credit_borrower;;
-            _-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._credit;;
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._credit;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_common_arc:: .._arc_credit_borrower;;
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._borrower;;
             _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_borrower_relation;;
             _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_borrower;;
 
@@ -129,14 +129,14 @@ program_for_searching_bank_borrowers = [*
             _=> nrel_goto:: .._get_next_credit;;
         *);;
 
-        //проверка, что заемщик еще не добавлен в результат
+        //проверка что заемщик еще не добавлен в результат
         _-> .._check_borrower_not_in_result
         (*
             <-_ searchElStr3;;
 
             _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
             _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_borrower;;
-            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._borrower;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._borrower;;
 
             _=> nrel_then:: .._print_that_borrower_already_added;;
             _=> nrel_else:: .._add_borrower_to_result;;
@@ -158,7 +158,7 @@ program_for_searching_bank_borrowers = [*
 
             _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
             _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_borrower;;
-            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._borrower;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._borrower;;
 
             _=> nrel_goto:: .._print_that_borrower_was_added;;
         *);;
@@ -187,7 +187,7 @@ program_for_searching_bank_borrowers = [*
             <-_ return;;
         *);;
 
-        //у банка не нашлось кредитов — корректный пустой результат
+        //пустой результат
         _-> .._return_empty_result
         (*
             <-_ printNl;;

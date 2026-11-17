@@ -1,0 +1,13 @@
+action_search_accounts_with_currency
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. поиск банковских счетов с указанной валютой]
+    (*
+        <- lang_ru;;
+    *);
+    [action. search bank accounts with specified currency]
+    (*
+        <- lang_en;;
+    *);
+<= nrel_inclusion:
+    information_action;;

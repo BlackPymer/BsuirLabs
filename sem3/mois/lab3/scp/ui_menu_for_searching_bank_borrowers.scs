@@ -1,0 +1,29 @@
+ui_menu_for_searching_bank_borrowers
+<- ui_user_command_class_atom;
+<- ui_user_command_class_view_kb;
+=> nrel_main_idtf:
+	[Найти заемщиков банка]
+	(*
+		<- lang_ru;;
+	*);
+	[Search bank borrowers]
+	(*
+		<- lang_en;;
+	*);
+=> ui_nrel_command_template:
+	[*
+		action_search_bank_borrowers _-> .._action
+		(*
+			_-> rrel_1:: ui_arg_1;;
+		*);;
+		.._action <-_ action;;
+	*];
+=> ui_nrel_command_lang_template:
+	[Найти заемщиков банка $ui_arg_1]
+	(*
+		<- lang_ru;;
+	*);
+	[Search borrowers of $ui_arg_1 bank]
+	(*
+		<- lang_en;;
+	*);;

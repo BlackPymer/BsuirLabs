@@ -19,11 +19,12 @@ program_for_searching_accounts_with_currency = [*
 
     _->rrel_1:: rrel_in:: .._bank;
     _->rrel_2:: rrel_in:: .._currency;
+    _->rrel_3:: rrel_out:: .._result_bank_accounts;
 
     <=_ nrel_decomposition_of_action:: _...
     (*
         //проверка аргументов
-        _-> .._check_bank
+        _-> rrel_1:: .._check_bank
         (*
             <-_ searchElStr3;;
             _-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_bank;;
@@ -74,7 +75,7 @@ program_for_searching_accounts_with_currency = [*
             <-_ searchSetStr5;;
 
             _-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._account;;
-            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_account_bank;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_common_arc:: .._arc_account_bank;;
             _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._bank;;
             _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_bank_relation;;
             _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_belongs_to_bank;;
@@ -118,7 +119,7 @@ program_for_searching_accounts_with_currency = [*
             <-_ searchElStr5;;
 
             _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._account;;
-            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_account_currency;;
+            _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_common_arc:: .._arc_account_currency;;
             _-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._currency;;
             _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_currency_relation;;
             _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_has_currency;;
@@ -134,7 +135,7 @@ program_for_searching_accounts_with_currency = [*
 
             _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_bank_accounts;;
             _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_set_to_account;;
-            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._account;;
+            _-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._account;;
 
             _=> nrel_goto:: .._get_next_account;;
         *);;

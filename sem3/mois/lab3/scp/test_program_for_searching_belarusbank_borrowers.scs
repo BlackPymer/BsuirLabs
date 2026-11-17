@@ -1,0 +1,81 @@
+test_program_for_searching_belarusbank_borrowers
+=> nrel_main_idtf:
+[Тестовая программа поиска заемщиков Беларусьбанка]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_main_idtf:
+[Test program for searching Belarusbank borrowers]
+    (*
+        <- lang_en;;
+    *);
+<- scp_program;
+-> rrel_key_sc_element:
+    .._process;;
+
+test_program_for_searching_belarusbank_borrowers = [*
+    .._process
+    <-_ scp_process;
+
+    <=_ nrel_decomposition_of_action:: _...
+    (*
+        _-> rrel_1:: .._call_program_for_searching_bank_borrowers
+        (*
+            <-_ call;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: program_for_searching_bank_borrowers;;
+
+            _-> rrel_2:: rrel_fixed:: rrel_scp_const:: .._params
+            (*
+                _-> rrel_1:: rrel_fixed:: rrel_scp_const:: bank_Belarusbank;;
+                _-> rrel_2:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
+            *);;
+
+            _-> rrel_3:: rrel_assign:: rrel_scp_var:: .._descriptor;;
+
+            _=> nrel_goto:: .._wait_for_result;;
+        *);;
+
+        _-> .._wait_for_result
+        (*
+            <-_ waitReturn;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._descriptor;;
+
+            _=> nrel_goto:: .._check_result;;
+        *);;
+
+        _-> .._check_result
+        (*
+            <-_ ifVarAssign;;
+
+            _-> rrel_1:: rrel_scp_var:: .._result_borrowers;;
+
+            _=> nrel_then:: .._print_result;;
+            _=> nrel_else:: .._print_no_result;;
+        *);;
+
+        _-> .._print_no_result
+        (*
+            <-_ printNl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Result set has no value];;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        _-> .._print_result
+        (*
+            <-_ printEl;;
+
+            _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_borrowers;;
+
+            _=> nrel_goto:: .._return;;
+        *);;
+
+        _-> .._return
+        (*
+            <-_ return;;
+        *);;
+    *);;
+*];;
