@@ -1,0 +1,19 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "Linux",
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/problem-solver/build/Release/compile_commands.json",
+            "includePath": [
+                "${workspaceFolder}/problem-solver/bank-processing-module",
+                "${workspaceFolder}/problem-solver/bank-processing-module/**",
+                "/home/maksim/Documents/labs/tools/sc-machine-0.10.5-dev/include",
+                "/home/maksim/Documents/labs/tools/sc-machine-0.10.5-dev/include/**"
+            ]
+        }
+    ]
+}

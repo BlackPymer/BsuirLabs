@@ -1,0 +1,13 @@
+# OSTIS-AI remote (HTTPS on conan.ostis.net is broken, HTTP:8081 works):
+# conan remote add ostis-ai http://conan.ostis.net:8081/artifactory/api/conan/ostis-ai-library
+
+[requires]
+sc-machine/0.10.5
+gtest/1.14.0
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout
