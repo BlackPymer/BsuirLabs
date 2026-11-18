@@ -1,509 +1,306 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include <map>
+#include <string>
 #include <memory>
-#include <algorithm>
 #include <exception>
-class Creation
+
+namespace Warehouse
 {
-public:
-    Creation(std::string title, std::string publishment_name, uint year_of_creation, std::string text)
-    {
-        title_ = title;
-        publishment_name_ = publishment_name;
-        year_of_creation_ = year_of_creation;
-        text_ = text;
-    }
-    std::string getTitle() { return title_; }
-    std::string getPublishmentName() { return publishment_name_; }
-    uint getYear() { return year_of_creation_; }
-    std::string getText() { return text_; }
-    virtual ~Creation() {}
 
-protected:
-    std::string title_, publishment_name_, text_;
-    uint year_of_creation_;
-};
-
-class Magazine : public Creation
-{
-public:
-    Magazine(std::string title, std::string publishment_name, uint year_of_creation, std::string text, uint month,
-             std::map<std::string, std::string> topics, std::string topic)
-        : Creation(title, publishment_name, year_of_creation, text)
+    class Good
     {
-        month_ = month;
-        book_topics_ = topics;
-        topic_ = topic;
-    }
-
-    uint getMonth() { return month_; }
-    std::map<std::string, std::string> getTopics() { return book_topics_; }
-    std::string getTopic() { return topic_; }
-
-private:
-    uint month_;
-    std::map<std::string, std::string> book_topics_;
-    std::string topic_;
-};
-struct Author
-{
-    std::string name;
-    int birthYear;
-    int deathYear;
-};
-class Book : public Creation
-{
-public:
-    Book(std::string title, std::string publishment_name, uint year_of_creation, std::string text, std::vector<Author> authors)
-        : Creation(title, publishment_name, year_of_creation, text)
-    {
-        authors_ = authors;
-    }
-
-    std::vector<Author> getAuthors()
-    {
-        return authors_;
-    }
-
-private:
-    std::vector<Author> authors_;
-};
-
-class Polka
-{
-public:
-    Polka(int max_creations)
-    {
-        max_creations_ = max_creations;
-    }
-    bool addCreation(std::shared_ptr<Creation> cr)
-    {
-        if (things_on_polka_.size() == max_creations_)
-            return false;
-        things_on_polka_.push_back(cr);
-    }
-    std::shared_ptr<Creation> takeCreation(std::string title, std::string text)
-    {
-        for (int i = 0; i < things_on_polka_.size(); ++i)
+    public:
+        Good(std::string name)
         {
-            if (things_on_polka_[i]->getText() == text && things_on_polka_[i]->getTitle() == title)
-            {
-                auto chosen = things_on_polka_[i];
-                things_on_polka_.erase(things_on_polka_.begin() + i);
-                return chosen;
-            }
+            name_ = name;
+            id_ = last_id++;
         }
-        return things_on_polka_[0];
-    }
-    std::vector<std::shared_ptr<Creation>> getByFilters(std::vector<Author> wantedAuthors, int year, int year_of_living)
-    {
-        std::vector<std::shared_ptr<Creation>> result;
-        for (auto cr : things_on_polka_)
+        std::string getName() const
         {
-            if (wantedAuthors.size() != 0)
+            return name_;
+        }
+        int getId() const { return id_; }
+
+    private:
+        inline static int last_id = 1;
+        std::string name_;
+        int id_;
+    };
+
+    class Box
+    {
+    public:
+        Box(std::shared_ptr<Good> good, int quantity) : good_(good), quantity_(quantity) {};
+        int getQuantity() { return quantity_; }
+        std::shared_ptr<Good> getGood() const { return good_; }
+        void decreaseQuantity(int quantity)
+        {
+            if (quantity_ < quantity)
+                throw std::invalid_argument("Quantity is too large");
+            quantity_ -= quantity;
+        }
+        void increaseQuantity(int quantity)
+        {
+            quantity_ += quantity;
+        }
+
+    private:
+        std::shared_ptr<Good> good_;
+        int quantity_;
+    };
+
+    class Rack
+    {
+    public:
+        Rack(int id, int capacity) : id_(id), capacity_(capacity) {};
+        bool AddBoxOnRack(std::shared_ptr<Box> bx)
+        {
+            if (bx->getQuantity() < capacity_ - curr_fill_)
             {
-                std::shared_ptr<Book> book = std::dynamic_pointer_cast<Book>(cr);
-                if (book == nullptr)
-                    continue;
-                if (year != -1 && book->getYear() != year)
-                    continue;
-                std::vector<Author> a = book->getAuthors();
-                for (Author author : a)
-                {
-
-                    if ((year_of_living == -1 ||
-                         (year_of_living > author.birthYear && year_of_living < author.deathYear)) &&
-                        std::find(wantedAuthors.begin(), wantedAuthors.end(), author) != wantedAuthors.end())
-
-                    {
-                        result.push_back(cr);
-                        break;
-                    }
-                }
+                box_on_rack_.push_back(*bx.get());
+                curr_fill_ += bx->getQuantity();
+                return true;
             }
             else
             {
-                if (year == -1)
-                {
-                    return getAllThings();
-                }
-                else
-                {
-                    if (cr->getYear() != year)
-                    {
-                        result.push_back(cr);
-                    }
-                }
-            }
-        }
-        return result;
-    }
-    std::vector<std::shared_ptr<Creation>> getAllThings()
-    {
-        return things_on_polka_;
-    }
-
-private:
-    std::vector<std::shared_ptr<Creation>> things_on_polka_;
-    int max_creations_;
-};
-
-class Skaf
-{
-public:
-    Skaf(int amount_of_polks)
-    {
-        max_polks_amount_ = amount_of_polks;
-    }
-    std::vector<std::vector<std::shared_ptr<Creation>>> getAllCreationsByFilters(std::vector<Author> wantedAuthors, int year, int year_of_living)
-    {
-        std::vector<std::vector<std::shared_ptr<Creation>>> result;
-        for (auto polk : polks_)
-        {
-            result.push_back(polk->getByFilters(wantedAuthors, year, year_of_living));
-        }
-        return result;
-    }
-    std::vector<std::vector<std::shared_ptr<Creation>>> getAllCreations()
-    {
-        std::vector<std::vector<std::shared_ptr<Creation>>> result;
-        for (auto polk : polks_)
-        {
-            result.push_back(polk->getAllThings());
-        }
-        return result;
-    }
-    virtual bool addCreation(std::shared_ptr<Creation> cr)
-    {
-        for (auto &polk : polks_)
-        {
-            if (polk->addCreation(cr))
-            {
-                min_year_of_creation = std::min(min_year_of_creation, cr->getYear());
-                max_year_of_creation = std::max(max_year_of_creation, cr->getYear());
-                return true;
-            }
-        }
-        return false;
-    }
-    std::shared_ptr<Creation> takeCreation(int polk_index, std::string text, std::string title)
-    {
-        if (polk_index < 0 || polk_index >= polks_.size())
-            return nullptr;
-        return polks_[polk_index]->takeCreation(title, text);
-    }
-
-protected:
-    int max_polks_amount_;
-    std::vector<std::shared_ptr<Polka>> polks_;
-    uint min_year_of_creation;
-    uint max_year_of_creation;
-
-private:
-    std::vector<Author> authors_;
-};
-
-class SkafMagazine : public Skaf
-{
-public:
-    SkafMagazine(int amount_of_polks) : Skaf(amount_of_polks) {};
-    std::string getMagazineTopic()
-    {
-        return magazine_topic_;
-    }
-    bool addCreation(std::shared_ptr<Creation> cr) override
-    {
-        std::shared_ptr<Magazine> m = std::dynamic_pointer_cast<Magazine>(cr);
-        if (m == nullptr)
-            return false;
-        if (m->getTopic() != magazine_topic_)
-        {
-            return false;
-        }
-        return Skaf::addCreation(cr);
-    }
-
-private:
-    std::string magazine_topic_;
-};
-
-class SkafAuthors : public Skaf
-{
-public:
-    SkafAuthors(int amount_of_polks) : Skaf(amount_of_polks) {};
-
-    Author getAuthor() { return author_; }
-    bool addCreation(std::shared_ptr<Creation> cr) override
-    {
-        std::shared_ptr<Book> book = std::dynamic_pointer_cast<Book>(cr);
-        if (book == nullptr)
-            return false;
-        return Skaf::addCreation(cr);
-    }
-
-private:
-    Author author_;
-};
-
-class Library
-{
-public:
-    Library(std::string name, std::string address)
-    {
-        name_ = name;
-        address_ = address;
-    }
-    const std::vector<std::shared_ptr<Skaf>> &getSkafs() { return skafs_; }
-
-    void addSkaf(std::shared_ptr<Skaf> sk) { skafs_.push_back(sk); }
-
-    bool hasSkaf()
-    {
-        if (skafs_.size() == 0)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < skafs_.size(); ++i)
-        {
-            std::shared_ptr<Skaf> sk = std::dynamic_pointer_cast<Skaf>(skafs_[i]);
-            if (sk != nullptr)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    bool hasSkafAuthors(std::vector<Author> authors)
-    {
-        if (skafs_.size() == 0)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < skafs_.size(); ++i)
-        {
-            std::shared_ptr<SkafAuthors> sk = std::dynamic_pointer_cast<SkafAuthors>(skafs_[i]);
-            if (sk != nullptr)
-            {
-                for (int j = 0; j < authors.size(); ++j)
-                {
-                    if (authors[j].name == sk->getAuthor().name)
-                    {
-                        return true;
-                    }
-                }
                 return false;
             }
         }
 
-        return false;
-    }
-
-    bool hasSkafMagazin(std::string topic)
-    {
-        if (skafs_.size() == 0)
+        bool AddInBox(std::shared_ptr<Box> bx, int quanty)
         {
+            if (bx->getQuantity() < capacity_ - curr_fill_)
+            {
+                bx->increaseQuantity(quanty);
+                curr_fill_ += bx->getQuantity();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        std::shared_ptr<Box> findBox(int good_id) const
+        {
+            for (int i = 0; i < box_on_rack_.size(); ++i)
+            {
+                if (box_on_rack_[i].getGood()->getId() == good_id)
+                {
+                    return std::make_shared<Box>(box_on_rack_[i]);
+                }
+            }
+            return nullptr;
+        }
+
+        void deleteBox(int good_id)
+        {
+            for (int i = 0; i < box_on_rack_.size(); ++i)
+            {
+                if (box_on_rack_[i].getGood()->getId() == good_id)
+                {
+                    box_on_rack_.erase(box_on_rack_.begin() + i);
+                }
+            }
+        }
+
+        std::vector<Box> &getAllBoxFromRack() { return box_on_rack_; }
+
+    private:
+        int id_;
+        int capacity_;
+        int curr_fill_ = 0;
+        std::vector<Box> box_on_rack_;
+    };
+
+    class Waybill
+    {
+    public:
+        Waybill(std::vector<Good> goods, std::vector<int> total_number) : goods_(goods), total_number_(total_number) {};
+        std::vector<Good> &getGoodsList()
+        {
+            return goods_;
+        }
+        std::vector<int> &getTotalNumber() { return total_number_; }
+
+    private:
+        std::vector<Good> goods_;
+        std::vector<int> total_number_;
+    };
+
+    class Sklad
+    {
+    public:
+        Sklad()
+        {
+            racks_ = std::vector<Rack>();
+        }
+
+        std::vector<Rack> getAllRacks() { return racks_; }
+
+        void addRack(int id, int capacity)
+        {
+            Rack rk(id, capacity);
+            racks_.push_back(rk);
+        }
+
+        int getGoodCount(int id) const
+        {
+            for (const Rack &rack : racks_)
+            {
+                auto get = rack.findBox(id);
+                if (get != nullptr)
+                {
+                    return get->getQuantity();
+                }
+            }
+            return 0;
+        }
+
+        std::shared_ptr<Box> getGood(int id, int quantity)
+        {
+            for (Rack &rack : racks_)
+            {
+                auto get = rack.findBox(id);
+                if (get == nullptr)
+                    continue;
+                if (get->getQuantity() > quantity)
+                {
+                    get->decreaseQuantity(quantity);
+                    std::shared_ptr<Box> box = std::make_shared<Box>(Box(get->getGood(), quantity));
+                    return box;
+                }
+                else if (get->getQuantity() == quantity)
+                {
+                    rack.deleteBox(id);
+                    return get;
+                }
+                else
+                {
+                    return nullptr;
+                }
+            }
+            return nullptr;
+        }
+
+        bool addGood(std::shared_ptr<Box> box)
+        {
+            for (Rack &rack : racks_)
+            {
+                std::shared_ptr<Box> get = rack.findBox(box->getGood()->getId());
+                if (get != nullptr)
+                {
+                    bool check = rack.AddInBox(get, box->getQuantity());
+                    if (check)
+                        return true;
+                    else
+                    {
+                        box->increaseQuantity(get->getQuantity());
+                        rack.deleteBox(get->getGood()->getId());
+                    }
+                }
+                else
+                {
+                    bool check = rack.AddBoxOnRack(box);
+                    if (check)
+                        return true;
+                }
+            }
             return false;
         }
 
-        for (int i = 0; i < skafs_.size(); ++i)
+    private:
+        std::vector<Rack> racks_;
+    };
+
+    class StoreKeeper
+    {
+    public:
+        StoreKeeper(std::shared_ptr<Sklad> input, std::shared_ptr<Sklad> output) : input_(input), output_(output) {};
+
+        bool deliver(Waybill delivery)
         {
-            std::shared_ptr<SkafMagazine> sk = std::dynamic_pointer_cast<SkafMagazine>(skafs_[i]);
-            if (sk != nullptr && topic == sk->getMagazineTopic())
+            // ни при каких условиях эта хуета не должна оказаться в продакшен коде! не дай бог нахуй
+            //  так как это не является частью основной бизнес-логики и может привести к утечкам и ошибкам в работе системы
+            //  временное решение  на демо версии 18.11.2026(полная хуета)
+            auto list = delivery.getGoodsList();
+            for (int i = 0; i < list.size(); ++i)
             {
+                auto box = input_->getGood(list[i].getId(), delivery.getTotalNumber()[i]);
+                if (box == nullptr)
+                {
+                    std::cout << "SOSITE HUY CHERTI!!!!!!!" << "\n";
+                    return false;
+                }
+                auto answer = output_->addGood(box);
+                if (!answer) {
+                    std::cout << "I NEED MORE SPACE PIDARASY!!!!!!!!!!!!!!!" << "\n";
+                    return false;
+                }
                 return true;
             }
         }
 
-        return false;
-    }
+    private:
+        std::shared_ptr<Sklad> input_;
+        std::shared_ptr<Sklad> output_;
+    };
 
-    const std::shared_ptr<SkafMagazine> getSkafMagazin(std::string topic)
+    class Manager
     {
-        for (int i = 0; i < skafs_.size(); ++i)
+    public:
+        Manager(std::shared_ptr<Sklad> warehouse, std::shared_ptr<Sklad> input_zone, std::shared_ptr<Sklad> out_put_zone) : warehouse_(warehouse), input_zone_(input_zone), output_zone_(out_put_zone) {};
+        void print_report()
         {
-            std::shared_ptr<SkafMagazine> sk = std::dynamic_pointer_cast<SkafMagazine>(skafs_[i]);
-            if (sk != nullptr && topic == sk->getMagazineTopic())
+            if (warehouse_ != nullptr)
             {
-                return sk;
-            }
-        }
-    }
-
-    const std::shared_ptr<Skaf> getSkafAuthors(std::vector<Author> authors)
-    {
-        for (int i = 0; i < skafs_.size(); ++i)
-        {
-            std::shared_ptr<SkafAuthors> sk = std::dynamic_pointer_cast<SkafAuthors>(skafs_[i]);
-            if (sk != nullptr)
-            {
-                for (int j = 0; j < authors.size(); ++j)
+                std::cout << "Зона склада" << std::endl;
+                for (int i = 0; i < warehouse_->getAllRacks().size(); ++i)
                 {
-                    if (authors[j].name == sk->getAuthor().name)
+                    Rack rc = warehouse_->getAllRacks()[i];
+                    for (int j = 0; j < rc.getAllBoxFromRack().size(); ++j)
                     {
-                        return skafs_[i];
+                        std::cout << rc.getAllBoxFromRack()[j].getGood()->getName() << ": " << rc.getAllBoxFromRack()[j].getQuantity() << std::endl;
+                    }
+                }
+            }
+
+            if (input_zone_ != nullptr)
+            {
+                std::cout << "Зона загрузки" << std::endl;
+                for (int i = 0; i < input_zone_->getAllRacks().size(); ++i)
+                {
+                    Rack rc = input_zone_->getAllRacks()[i];
+                    for (int j = 0; j < rc.getAllBoxFromRack().size(); ++j)
+                    {
+                        std::cout << rc.getAllBoxFromRack()[j].getGood()->getName() << ": " << rc.getAllBoxFromRack()[j].getQuantity() << std::endl;
+                    }
+                }
+            }
+
+            if (output_zone_ != nullptr)
+            {
+                std::cout << "Зона выгрузки" << std::endl;
+                for (int i = 0; i < output_zone_->getAllRacks().size(); ++i)
+                {
+                    Rack rc = output_zone_->getAllRacks()[i];
+                    for (int j = 0; j < rc.getAllBoxFromRack().size(); ++j)
+                    {
+                        std::cout << rc.getAllBoxFromRack()[j].getGood()->getName() << ": " << rc.getAllBoxFromRack()[j].getQuantity() << std::endl;
                     }
                 }
             }
         }
-    }
-    std::string getName() { return name_; }
-    std::string getAddress() { return address_; }
 
-private:
-    std::vector<std::shared_ptr<Skaf>> skafs_;
-    std::string address_;
-    std::string name_;
-};
-class NoFreeSkafsException : std::exception
+    private:
+        std::shared_ptr<Sklad> warehouse_;
+        std::shared_ptr<Sklad> input_zone_;
+        std::shared_ptr<Sklad> output_zone_;
+    };
+}
+
+int main()
 {
-};
-class BookKeeper
-{
-public:
-    BookKeeper(Library *lib) : home_lib_(lib) {};
-
-    void addLib(Library *lib) { home_lib_ = lib; }
-
-    void deleteLib() { home_lib_ = nullptr; }
-
-    bool isLibness()
-    {
-        if (home_lib_ == nullptr)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    void addCreation(std::shared_ptr<Creation> cr)
-    {
-        std::shared_ptr<Book> book = std::dynamic_pointer_cast<Book>(cr);
-        std::shared_ptr<Magazine> magaz = std::dynamic_pointer_cast<Magazine>(cr);
-
-        if (book != nullptr)
-        {
-            if (home_lib_->hasSkafAuthors(book->getAuthors()))
-            {
-                std::shared_ptr<Skaf> skf = home_lib_->getSkafAuthors(book->getAuthors());
-                bool a = skf->addCreation(cr);
-                if (a)
-                    return;
-            }
-        }
-
-        if (magaz != nullptr)
-        {
-            if (home_lib_->hasSkafMagazin(magaz->getTopic()))
-            {
-                std::shared_ptr<Skaf> skf = home_lib_->getSkafMagazin(magaz->getTopic());
-                bool a = skf->addCreation(cr);
-                if (a)
-                    return;
-            }
-        }
-
-        for (auto skf : home_lib_->getSkafs())
-        {
-            if (skf->addCreation(cr))
-                return;
-        }
-        throw NoFreeSkafsException();
-    }
-
-    std::shared_ptr<Creation> giveBook() {}
-
-private:
-    Library *home_lib_;
-};
-
-class Admin
-{
-public:
-    Admin(Library *lib) : home_lib_(lib) {};
-
-    Library *tellLibrary()
-    {
-        return home_lib_;
-    }
-
-    BookKeeper *tellBookKeeper()
-    {
-        return keeper_;
-    }
-
-    bool makeSkaf(int polks_amount)
-    {
-        auto skf = std::make_shared<Skaf>(polks_amount);
-        home_lib_->addSkaf(skf);
-    }
-
-    bool makeSkafAuthor(int polks_amount)
-    {
-        auto skf = std::make_shared<SkafAuthors>(polks_amount);
-        home_lib_->addSkaf(skf);
-    }
-
-    bool makeSkafMagazine(int polks_amount)
-    {
-        auto skf = std::make_shared<SkafMagazine>(polks_amount);
-        home_lib_->addSkaf(skf);
-    }
-
-    void hireBookKeaper(BookKeeper *ded)
-    {
-        ded->addLib(home_lib_);
-        if (keeper_ != nullptr)
-            fireBookKeaper();
-        keeper_ = ded;
-    }
-    void fireBookKeaper()
-    {
-        keeper_->deleteLib();
-        keeper_ = nullptr;
-    }
-
-    void addCreation(std::shared_ptr<Creation> cr)
-    {
-        if (keeper_ != nullptr)
-        {
-            keeper_->addCreation(cr);
-        }
-    }
-
-private:
-    Library *home_lib_;
-    BookKeeper *keeper_;
-};
-
-class Reader
-{
-public:
-    Reader(Admin *adm, int max_creations)
-    {
-        adm_ = adm;
-        max_creations_ = max_creations;
-        keeper_ = adm->tellBookKeeper();
-        sks_ = adm_->tellLibrary()->getSkafs();
-    }
-
-    void takeCreation(){
-        
-    }
-    
-
-private:
-    Admin *adm_;
-    BookKeeper *keeper_;
-    std::vector<std::shared_ptr<Skaf>> sks_;
-    std::vector<std::shared_ptr<Creation>> have_creations_;
-    int max_creations_;
-};
+    using namespace Warehouse;
+    return 0;
+}
