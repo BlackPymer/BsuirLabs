@@ -13,7 +13,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(SC_EXTENSIONS_DIRECTORY ${CMAKE_BINARY_DIR}/extensions)
 
-    option(SC_BUILD_TESTS "Build module tests" OFF)
+    option(SC_BUILD_TESTS "Build module tests" ON)
     if(SC_BUILD_TESTS)
         include(GoogleTest)
         find_package(GTest REQUIRED)
